@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="73" id="KGk-i7-Jjw" customClass="ContactCell" customModule="iOS_combine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Fhu-Ly-YYv">
+                        <rect key="frame" x="16" y="12" width="133" height="24"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="Xa7-oA-Ied">
+                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jason Bailey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDT-8i-Yrw">
+                                <rect key="frame" x="38" y="0.0" width="95" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aU1-rh-NJP">
+                        <rect key="frame" x="194" y="9" width="110" height="30"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFm-A3-Tde">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MKZ-xt-eft"/>
+                                    <constraint firstAttribute="width" constant="30" id="OaQ-F0-pzs"/>
+                                </constraints>
+                                <state key="normal" image="phone-receiver"/>
+                                <connections>
+                                    <action selector="didTapAudio:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cQ1-qs-NKD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDH-La-14U">
+                                <rect key="frame" x="40" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="WQR-Qp-Bcc"/>
+                                    <constraint firstAttribute="height" constant="30" id="nTy-5f-RqP"/>
+                                </constraints>
+                                <state key="normal" image="videoCall"/>
+                                <connections>
+                                    <action selector="didTapVideo:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ieg-8y-SpP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFu-rX-cGe">
+                                <rect key="frame" x="80" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ngi-le-JIe"/>
+                                    <constraint firstAttribute="width" constant="30" id="SCy-zL-SR0"/>
+                                </constraints>
+                                <state key="normal" image="message-circle"/>
+                                <connections>
+                                    <action selector="didTapChat:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zh5-0W-j1Z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1m-xj-m4W">
+                        <rect key="frame" x="16" y="52" width="288" height="1"/>
+                        <color key="backgroundColor" name="AppDarkGreenColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="HjX-63-VkC"/>
+                            <constraint firstAttribute="height" constant="1" id="zqE-5Z-av3"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Fhu-Ly-YYv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="0hd-2R-wDC"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Y1m-xj-m4W" secondAttribute="bottom" priority="250" constant="23" id="7Cs-x3-8DI"/>
+                    <constraint firstItem="aU1-rh-NJP" firstAttribute="centerY" secondItem="xDT-8i-Yrw" secondAttribute="centerY" id="Bj9-rz-lXC"/>
+                    <constraint firstItem="Fhu-Ly-YYv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="D38-ja-rNJ"/>
+                    <constraint firstItem="Y1m-xj-m4W" firstAttribute="top" secondItem="Fhu-Ly-YYv" secondAttribute="bottom" constant="16" id="EgH-cz-4pA"/>
+                    <constraint firstItem="Y1m-xj-m4W" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="T7i-gv-SHp"/>
+                    <constraint firstAttribute="trailing" secondItem="aU1-rh-NJP" secondAttribute="trailing" constant="16" id="eTx-sj-2X8"/>
+                    <constraint firstItem="Y1m-xj-m4W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="i6A-kl-HXw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="userName" destination="xDT-8i-Yrw" id="Lmv-Mz-oWH"/>
+            </connections>
+            <point key="canvasLocation" x="40.579710144927539" y="65.959821428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="User" width="24" height="24"/>
+        <image name="message-circle" width="26.5" height="29"/>
+        <image name="phone-receiver" width="20" height="20"/>
+        <image name="videoCall" width="23.5" height="14"/>
+        <namedColor name="AppDarkGreenColor">
+            <color red="0.396078431372549" green="0.60784313725490191" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
