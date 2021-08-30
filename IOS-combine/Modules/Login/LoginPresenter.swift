@@ -40,14 +40,21 @@ extension LoginPresenter: LoginPresenterInterface {
     
     func login(with email: String, password: String) {
         let request = LoginRequest(email: email , password: password)
-        interactor.login(with: request) { result in
+        interactor.login(with: request) { [weak self] result in
+            guard let self = self else {return}
             switch result {
             case .success(let response):
-                break
+                DispatchQueue.main.async {
+                    self.wireframe.navigate(to: .channel)
+                }
             case .failure(let error):
                 break
             }
         }
+    }
+    
+    func signup() {
+        wireframe.navigate(to: .signup)
     }
     
 }

@@ -30,10 +30,17 @@ final class LoginViewController: UIViewController {
         guard let email = emailTF.text, let password = passwordTF.text else {return}
         presenter.login(with: email, password: password)
     }
+    
+    @IBAction func didTapSignup(_ sender: UIButton) {
+        presenter.signup()
+    }
 
 }
 
 // MARK: - Extensions -
 
 extension LoginViewController: LoginViewInterface {
+    func moveToChat() {
+    }
+    
 }

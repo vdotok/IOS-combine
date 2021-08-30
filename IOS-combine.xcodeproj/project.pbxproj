@@ -33,6 +33,12 @@
 		5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199FC26DCCDB300B37B72 /* LoginEntity.swift */; };
 		5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199FE26DCCDE300B37B72 /* LoginRequest.swift */; };
 		5D819A0226DCCE6A00B37B72 /* ObjectTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0126DCCE6A00B37B72 /* ObjectTranslation.swift */; };
+		5D819A0E26DCE7E700B37B72 /* Channel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D819A0826DCE7E700B37B72 /* Channel.storyboard */; };
+		5D819A0F26DCE7E700B37B72 /* ChannelInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0926DCE7E700B37B72 /* ChannelInterfaces.swift */; };
+		5D819A1026DCE7E700B37B72 /* ChannelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0A26DCE7E700B37B72 /* ChannelPresenter.swift */; };
+		5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0B26DCE7E700B37B72 /* ChannelViewController.swift */; };
+		5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0C26DCE7E700B37B72 /* ChannelInteractor.swift */; };
+		5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0D26DCE7E700B37B72 /* ChannelWireframe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +70,12 @@
 		5D8199FC26DCCDB300B37B72 /* LoginEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEntity.swift; sourceTree = "<group>"; };
 		5D8199FE26DCCDE300B37B72 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		5D819A0126DCCE6A00B37B72 /* ObjectTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTranslation.swift; sourceTree = "<group>"; };
+		5D819A0826DCE7E700B37B72 /* Channel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Channel.storyboard; sourceTree = "<group>"; };
+		5D819A0926DCE7E700B37B72 /* ChannelInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInterfaces.swift; sourceTree = "<group>"; };
+		5D819A0A26DCE7E700B37B72 /* ChannelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPresenter.swift; sourceTree = "<group>"; };
+		5D819A0B26DCE7E700B37B72 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
+		5D819A0C26DCE7E700B37B72 /* ChannelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInteractor.swift; sourceTree = "<group>"; };
+		5D819A0D26DCE7E700B37B72 /* ChannelWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelWireframe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +126,8 @@
 		5D8199CA26DCC17700B37B72 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5D819A1526DCF02A00B37B72 /* New Group */,
+				5D819A0426DCE6DF00B37B72 /* Channel */,
 				5D8199D926DCC39A00B37B72 /* Login */,
 			);
 			path = Modules;
@@ -191,6 +205,26 @@
 			path = Translation;
 			sourceTree = "<group>";
 		};
+		5D819A0426DCE6DF00B37B72 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				5D819A0826DCE7E700B37B72 /* Channel.storyboard */,
+				5D819A0926DCE7E700B37B72 /* ChannelInterfaces.swift */,
+				5D819A0A26DCE7E700B37B72 /* ChannelPresenter.swift */,
+				5D819A0B26DCE7E700B37B72 /* ChannelViewController.swift */,
+				5D819A0C26DCE7E700B37B72 /* ChannelInteractor.swift */,
+				5D819A0D26DCE7E700B37B72 /* ChannelWireframe.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		5D819A1526DCF02A00B37B72 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -248,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D819A0E26DCE7E700B37B72 /* Channel.storyboard in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
@@ -263,13 +298,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
 				5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */,
 				5D8199E426DCC3B900B37B72 /* LoginInteractor.swift in Sources */,
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
 				5D8199E826DCC48000B37B72 /* BaseWireframe.swift in Sources */,
+				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
+				5D819A1026DCE7E700B37B72 /* ChannelPresenter.swift in Sources */,
+				5D819A0F26DCE7E700B37B72 /* ChannelInterfaces.swift in Sources */,
 				5D8199D226DCC29C00B37B72 /* BaseDataStore.swift in Sources */,
 				5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */,
 				5D8199EC26DCC4AD00B37B72 /* InteractorInterface.swift in Sources */,
@@ -283,6 +322,7 @@
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
+				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,
 				5D8199D426DCC2AF00B37B72 /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

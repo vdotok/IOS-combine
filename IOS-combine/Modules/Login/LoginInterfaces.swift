@@ -13,7 +13,13 @@ import UIKit
 typealias loginComplition = ((Result<UserResponse, Error>) -> Void)
 
 
+enum LoginNavigationOption {
+    case signup
+    case channel
+}
+
 protocol LoginWireframeInterface: WireframeInterface {
+    func navigate(to option: LoginNavigationOption)
 }
 
 protocol LoginViewInterface: ViewInterface {
@@ -23,9 +29,10 @@ protocol LoginPresenterInterface: PresenterInterface {
     
     func viewDidLoad()
     func login(with email: String, password: String)
-    
+    func signup()
 }
 
 protocol LoginInteractorInterface: InteractorInterface {
     func login(with request: LoginRequest, complition: @escaping loginComplition)
+    
 }

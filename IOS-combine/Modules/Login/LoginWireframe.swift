@@ -32,4 +32,16 @@ final class LoginWireframe: BaseWireframe<LoginViewController> {
 // MARK: - Extensions -
 
 extension LoginWireframe: LoginWireframeInterface {
+    func navigate(to option: LoginNavigationOption) {
+        switch option {
+        case .channel:
+            break
+        case .signup:
+            break
+        break
+        }
+    }
+    
+    
+    
 }
