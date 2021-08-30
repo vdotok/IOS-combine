@@ -108,7 +108,7 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
-                                              callType: .manytomany)
+                                              callType: .manytomany, connectedUsers: [])
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
         callHangupHandling()
@@ -197,9 +197,9 @@ extension CallingViewModelImpl: SessionDelegate {
         case .ringing:
             output?(.updateView(session: session))
         case .connected:
-          didConnect()
+            didConnect()
         case .rejected:
-          sessionReject()
+            sessionReject()
         case .missedCall:
             sessionMissed()
         case .hangup:
@@ -211,7 +211,9 @@ extension CallingViewModelImpl: SessionDelegate {
         }
     }
     
-    
+    func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
+        
+    }
 }
 
 extension CallingViewModelImpl {

@@ -8,9 +8,9 @@ target 'iOS-combine' do
   # Pods for iOS-combine
     pod 'KRProgressHUD'
     pod 'IQKeyboardManagerSwift'
-    pod 'CocoaMQTT'
-    pod 'SocketRocket'
-    pod 'GoogleWebRTC'
+ # pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
+  pod 'InternalStrategy', :path => '../internal_strategy'
+ pod 'VdoTokConnect' , :git => 'https://github.com/vdotok/VdoTokConnect.git'
 
 
 end

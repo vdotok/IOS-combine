@@ -300,7 +300,7 @@ extension GroupsViewModelImpl {
                                       referenceID: user.refID!,
                                       authorizationToken: user.authorizationToken!,
                                       requestID: getRequestId(),
-                                      tenantID: AuthenticationConstants.PROJECTID)
+                                      projectID: AuthenticationConstants.PROJECTID)
         self.vtokSdk = VTokSDK(url: authResponse.mediaServerMap.completeAddress, registerRequest: request, connectionDelegate: self)
         
     }
