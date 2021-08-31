@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D4B579426DE34E5005185AE /* iOSSDKConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B579026DE34DA005185AE /* iOSSDKConnect.framework */; };
+		5D4B579526DE34E5005185AE /* iOSSDKConnect.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B579026DE34DA005185AE /* iOSSDKConnect.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -39,9 +41,53 @@
 		5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0B26DCE7E700B37B72 /* ChannelViewController.swift */; };
 		5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0C26DCE7E700B37B72 /* ChannelInteractor.swift */; };
 		5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0D26DCE7E700B37B72 /* ChannelWireframe.swift */; };
+		5D819A1C26DCF22B00B37B72 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D819A1626DCF22B00B37B72 /* Signup.storyboard */; };
+		5D819A1D26DCF22B00B37B72 /* SignupInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A1726DCF22B00B37B72 /* SignupInterfaces.swift */; };
+		5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A1826DCF22B00B37B72 /* SignupPresenter.swift */; };
+		5D819A1F26DCF22B00B37B72 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A1926DCF22B00B37B72 /* SignupViewController.swift */; };
+		5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A1A26DCF22B00B37B72 /* SignupInteractor.swift */; };
+		5D819A2126DCF22B00B37B72 /* SignupWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A1B26DCF22B00B37B72 /* SignupWireframe.swift */; };
+		5D819A2326DCF34600B37B72 /* SignupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2226DCF34600B37B72 /* SignupRequest.swift */; };
+		5D819A2826DE125700B37B72 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2726DE125700B37B72 /* Color+Extension.swift */; };
+		5D819A2A26DE1A0F00B37B72 /* ChannelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2926DE1A0F00B37B72 /* ChannelEntity.swift */; };
+		5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */; };
+		5D819A3026DE2E8400B37B72 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */; };
+		5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5D4B578F26DE34DA005185AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D4B578A26DE34DA005185AE /* iOSSDKConnect.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0080171725482C730094136E;
+			remoteInfo = iOSSDKConnect;
+		};
+		5D4B579126DE34DA005185AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D4B578A26DE34DA005185AE /* iOSSDKConnect.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0080172025482C730094136E;
+			remoteInfo = iOSSDKConnectTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5D4B579626DE34E5005185AE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5D4B579526DE34E5005185AE /* iOSSDKConnect.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5D4B578A26DE34DA005185AE /* iOSSDKConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKConnect.xcodeproj; path = "../../../ios-sdk-connect/iOSSDKConnect.xcodeproj"; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +122,18 @@
 		5D819A0B26DCE7E700B37B72 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		5D819A0C26DCE7E700B37B72 /* ChannelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInteractor.swift; sourceTree = "<group>"; };
 		5D819A0D26DCE7E700B37B72 /* ChannelWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelWireframe.swift; sourceTree = "<group>"; };
+		5D819A1626DCF22B00B37B72 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
+		5D819A1726DCF22B00B37B72 /* SignupInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupInterfaces.swift; sourceTree = "<group>"; };
+		5D819A1826DCF22B00B37B72 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
+		5D819A1926DCF22B00B37B72 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		5D819A1A26DCF22B00B37B72 /* SignupInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupInteractor.swift; sourceTree = "<group>"; };
+		5D819A1B26DCF22B00B37B72 /* SignupWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupWireframe.swift; sourceTree = "<group>"; };
+		5D819A2226DCF34600B37B72 /* SignupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRequest.swift; sourceTree = "<group>"; };
+		5D819A2726DE125700B37B72 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		5D819A2926DE1A0F00B37B72 /* ChannelEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEntity.swift; sourceTree = "<group>"; };
+		5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChannelRequest.swift; sourceTree = "<group>"; };
+		5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
+		5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,17 +141,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D4B579426DE34E5005185AE /* iOSSDKConnect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D4B578026DE34B0005185AE /* Connect */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B578A26DE34DA005185AE /* iOSSDKConnect.xcodeproj */,
+			);
+			path = Connect;
+			sourceTree = "<group>";
+		};
+		5D4B578B26DE34DA005185AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B579026DE34DA005185AE /* iOSSDKConnect.framework */,
+				5D4B579226DE34DA005185AE /* iOSSDKConnectTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5D4B579326DE34E5005185AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5D8199AA26DCC10100B37B72 = {
 			isa = PBXGroup;
 			children = (
 				5D8199B526DCC10100B37B72 /* IOS-combine */,
 				5D8199B426DCC10100B37B72 /* Products */,
+				5D4B579326DE34E5005185AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +192,7 @@
 		5D8199B526DCC10100B37B72 /* IOS-combine */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B578026DE34B0005185AE /* Connect */,
 				5D8199D526DCC2DB00B37B72 /* Common */,
 				5D8199CE26DCC25800B37B72 /* Service */,
 				5D8199CA26DCC17700B37B72 /* Modules */,
@@ -126,7 +211,7 @@
 		5D8199CA26DCC17700B37B72 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				5D819A1526DCF02A00B37B72 /* New Group */,
+				5D819A1526DCF02A00B37B72 /* Signup */,
 				5D819A0426DCE6DF00B37B72 /* Channel */,
 				5D8199D926DCC39A00B37B72 /* Login */,
 			);
@@ -193,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				5D8199F126DCC62F00B37B72 /* UIStoryboard+Extension.swift */,
+				5D819A2726DE125700B37B72 /* Color+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -208,21 +294,40 @@
 		5D819A0426DCE6DF00B37B72 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				5D819A2D26DE2E4B00B37B72 /* Cell */,
 				5D819A0826DCE7E700B37B72 /* Channel.storyboard */,
 				5D819A0926DCE7E700B37B72 /* ChannelInterfaces.swift */,
 				5D819A0A26DCE7E700B37B72 /* ChannelPresenter.swift */,
 				5D819A0B26DCE7E700B37B72 /* ChannelViewController.swift */,
 				5D819A0C26DCE7E700B37B72 /* ChannelInteractor.swift */,
 				5D819A0D26DCE7E700B37B72 /* ChannelWireframe.swift */,
+				5D819A2926DE1A0F00B37B72 /* ChannelEntity.swift */,
+				5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
 		};
-		5D819A1526DCF02A00B37B72 /* New Group */ = {
+		5D819A1526DCF02A00B37B72 /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				5D819A1626DCF22B00B37B72 /* Signup.storyboard */,
+				5D819A1726DCF22B00B37B72 /* SignupInterfaces.swift */,
+				5D819A1826DCF22B00B37B72 /* SignupPresenter.swift */,
+				5D819A1926DCF22B00B37B72 /* SignupViewController.swift */,
+				5D819A1A26DCF22B00B37B72 /* SignupInteractor.swift */,
+				5D819A1B26DCF22B00B37B72 /* SignupWireframe.swift */,
+				5D819A2226DCF34600B37B72 /* SignupRequest.swift */,
 			);
-			path = "New Group";
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		5D819A2D26DE2E4B00B37B72 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */,
+				5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +340,7 @@
 				5D8199AF26DCC10100B37B72 /* Sources */,
 				5D8199B026DCC10100B37B72 /* Frameworks */,
 				5D8199B126DCC10100B37B72 /* Resources */,
+				5D4B579626DE34E5005185AE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +376,12 @@
 			mainGroup = 5D8199AA26DCC10100B37B72;
 			productRefGroup = 5D8199B426DCC10100B37B72 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5D4B578B26DE34DA005185AE /* Products */;
+					ProjectRef = 5D4B578A26DE34DA005185AE /* iOSSDKConnect.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5D8199B226DCC10100B37B72 /* IOS-combine */,
@@ -277,11 +389,30 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		5D4B579026DE34DA005185AE /* iOSSDKConnect.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = iOSSDKConnect.framework;
+			remoteRef = 5D4B578F26DE34DA005185AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5D4B579226DE34DA005185AE /* iOSSDKConnectTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = iOSSDKConnectTests.xctest;
+			remoteRef = 5D4B579126DE34DA005185AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		5D8199B126DCC10100B37B72 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D819A1C26DCF22B00B37B72 /* Signup.storyboard in Resources */,
+				5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */,
 				5D819A0E26DCE7E700B37B72 /* Channel.storyboard in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
@@ -299,20 +430,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
+				5D819A3026DE2E8400B37B72 /* ChannelCell.swift in Sources */,
 				5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */,
 				5D8199E426DCC3B900B37B72 /* LoginInteractor.swift in Sources */,
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
 				5D8199E826DCC48000B37B72 /* BaseWireframe.swift in Sources */,
+				5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
+				5D819A2126DCF22B00B37B72 /* SignupWireframe.swift in Sources */,
 				5D819A1026DCE7E700B37B72 /* ChannelPresenter.swift in Sources */,
+				5D819A2A26DE1A0F00B37B72 /* ChannelEntity.swift in Sources */,
 				5D819A0F26DCE7E700B37B72 /* ChannelInterfaces.swift in Sources */,
+				5D819A2326DCF34600B37B72 /* SignupRequest.swift in Sources */,
 				5D8199D226DCC29C00B37B72 /* BaseDataStore.swift in Sources */,
 				5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */,
 				5D8199EC26DCC4AD00B37B72 /* InteractorInterface.swift in Sources */,
 				5D8199E226DCC3B900B37B72 /* LoginPresenter.swift in Sources */,
+				5D819A1D26DCF22B00B37B72 /* SignupInterfaces.swift in Sources */,
 				5D819A0226DCCE6A00B37B72 /* ObjectTranslation.swift in Sources */,
 				5D8199D026DCC27100B37B72 /* ApiRequest.swift in Sources */,
 				5D8199F226DCC62F00B37B72 /* UIStoryboard+Extension.swift in Sources */,
@@ -320,9 +457,13 @@
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
+				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
+				5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */,
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,
+				5D819A1F26DCF22B00B37B72 /* SignupViewController.swift in Sources */,
+				5D819A2826DE125700B37B72 /* Color+Extension.swift in Sources */,
 				5D8199D426DCC2AF00B37B72 /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

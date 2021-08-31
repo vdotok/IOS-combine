@@ -1,5 +1,5 @@
 //
-//  LoginInteractor.swift
+//  SignupInteractor.swift
 //  IOS-combine
 //
 //  Created by usama farooq on 30/08/2021.
@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class LoginInteractor: BaseDataStore {
+final class SignupInteractor : BaseDataStore {
     
     let translator: ObjectTranslator
     
@@ -23,18 +23,19 @@ final class LoginInteractor: BaseDataStore {
 
 // MARK: - Extensions -
 
-extension LoginInteractor: LoginInteractorInterface {
-    func login(with request: LoginRequest, complition: @escaping loginComplition) {
-        service.get(request: request) { [weak self] result in
-            guard let self = self else {return}
+extension SignupInteractor: SignupInteractorInterface {
+    
+    func singup(with request: SignupRequest, complition: @escaping SignupComplition) {
+        service.post(request: request) { result in
             switch result {
             case .success(let data):
                 self.translate(data: data, complition: complition)
             case .failure(let error):
-                print(error)
+                complition(.failure(error))
             }
         }
     }
+    
     private func translate(data: Data, complition: loginComplition) {
         do {
             let response: UserResponse = try translator.decodeObject(data: data)
@@ -47,12 +48,9 @@ extension LoginInteractor: LoginInteractorInterface {
                 break
             }
             complition(.success(response))
-            
         }
         catch {
             complition(.failure(error))
         }
     }
-
-    
 }

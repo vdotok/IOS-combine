@@ -10,6 +10,10 @@
 
 import UIKit
 
+typealias ChannelOutput = (ChannelPresenter.Output) -> Void
+
+typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
+
 protocol ChannelWireframeInterface: WireframeInterface {
 }
 
@@ -17,7 +21,17 @@ protocol ChannelViewInterface: ViewInterface {
 }
 
 protocol ChannelPresenterInterface: PresenterInterface {
+    var channelOutput: ChannelOutput? {get set}
+    func fetchGroups()
+    func viewDidLoad()
+    func viewWillAppear()
+    func itemAt(row: Int) -> TempGroup?
+    func channelsCount() -> Int
+    var isSearching: Bool {get set }
+    
 }
 
 protocol ChannelInteractorInterface: InteractorInterface {
+    
+    func fetchGroups(complition: @escaping ChannelComplition)
 }

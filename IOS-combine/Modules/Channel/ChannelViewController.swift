@@ -11,6 +11,42 @@
 import UIKit
 
 final class ChannelViewController: UIViewController {
+    
+    
+    // MARK: - Outlets
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var emptyViewUserName: UILabel!
+    @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var emptyViewStatus: UIView! {
+        didSet {
+            emptyViewStatus.layer.cornerRadius = emptyViewStatus.frame.height/2
+        }
+    }
+    @IBOutlet weak var emptyViewStatusVideoStream: UIView! {
+        didSet {
+            emptyViewStatusVideoStream.layer.cornerRadius = emptyViewStatusVideoStream.frame.height/2
+        }
+    }
+    @IBOutlet weak var viewStatusVideoStream: UIView! {
+        didSet {
+            viewStatusVideoStream.layer.cornerRadius = viewStatusVideoStream.frame.height/2
+        }
+    }
+    @IBOutlet weak var viewStatus: UIView! {
+        didSet {
+            viewStatus.layer.cornerRadius = viewStatus.frame.height/2
+        }
+    }
+    lazy var refreshControl = UIRefreshControl()
+    
+    private var selectedGroupId: Int? = nil
+    let navigationTitle = UILabel()
 
     // MARK: - Public properties -
 
@@ -20,11 +56,133 @@ final class ChannelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
+    }
+    
+    @IBAction func didTapReferesh(_ sender: UIButton) {
+        presenter.fetchGroups()
+    }
+    
+    @IBAction func didTapNewChat(_ sender: UIButton) {
+//        didTappedAdd()
+    }
+    
+    @IBAction func didTapLogout(_ sender: UIButton) {
+//        UserDefaults.standard.removeObject(forKey: "UserResponse")
+//        let viewController = LoginBuilder().build(with: self.navigationController)
+//        viewController.modalPresentationStyle = .fullScreen
+//        viewModel.logout()
+//        self.navigationController?.present(viewController, animated: true, completion: nil)
+    }
+    
+    private func bindPresenter() {
+        presenter.channelOutput = { output in
+            switch output {
+
+            case .reload:
+                self.tableView.reloadData()
+            case .showProgress:
+                break
+            case .hideProgress:
+                break
+            case .failure(message: let message):
+                break
+            }
+        }
     }
 
 }
 
 // MARK: - Extensions -
+
+extension ChannelViewController {
+    func configureAppearance() {
+        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        userName.text = user.fullName
+        emptyViewUserName.text = user.fullName
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "ChannelCell", bundle: nil), forCellReuseIdentifier: "ChannelCell")
+    //    tableView(isHidden: viewModel.groups.count > 0 ? false : true)
+        configureEmptyView()
+        navigationTitle.text = "Chat Rooms"
+        navigationTitle.font = UIFont(name: "Manrope-Medium", size: 20)
+        navigationTitle.textColor = .appDarkGreenColor
+        navigationTitle.sizeToFit()
+        let leftItem = UIBarButtonItem(customView: navigationTitle)
+        self.navigationItem.leftBarButtonItem = leftItem
+        let image = UIImage(named: "plus")?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(didTappedAdd)
+        )
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func refresh() {
+//        viewModel.fetchGroups()
+    }
+    
+    @objc func didTappedAdd() {
+//        guard let client = viewModel.mqttClient else {return}
+//        let vc = ContactBuilder()
+//            .build(with: self.navigationController, client: client)
+//        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func configureEmptyView() {
+        titleLabel.textColor = .appDarkGreenColor
+        titleLabel.font = UIFont(name: "Inter-Regular", size: 21)
+        subTitle.textColor = .appLightIndigoColor
+        subTitle.font = UIFont(name: "Poppins-Regular", size: 14)
+        logoutButton.tintColor = .appIndigoColor
+        logoutButton.titleLabel?.font = UIFont.init(name: "Manrope-Bold", size: 14)
+    }
+    private func tableView(isHidden: Bool) {
+        if isHidden {
+            tableView.isHidden = isHidden
+            emptyView.isHidden = !isHidden
+        } else {
+            tableView.isHidden = isHidden
+            emptyView.isHidden = !isHidden
+        }
+        
+    }
+}
+
+extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if presenter.isSearching {
+            // return pre.searchGroup.count
+            return 0
+        }
+        return presenter.channelsCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChannelCell", for: indexPath) as! ChannelCell
+        cell.selectionStyle = .none
+        guard let item = presenter.itemAt(row: indexPath.row) else {return UITableViewCell()}
+        cell.configure(with: item.group,
+                       online: item.presentParticipant + 1,
+                       lastMessage: item.lastMessage,
+                       unreadCount: item.unReadMessageCount)
+        return cell
+    }
+    
+    
+}
 
 extension ChannelViewController: ChannelViewInterface {
 }

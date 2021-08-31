@@ -79,6 +79,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LR9-b7-upS">
                                                         <rect key="frame" x="0.0" y="86" width="160" height="30"/>
                                                         <state key="normal" title="SIGN UP"/>
+                                                        <connections>
+                                                            <action selector="didTapSignup:" destination="ab8-6G-di8" eventType="touchUpInside" id="f4G-h2-c7W"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

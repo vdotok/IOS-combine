@@ -35,10 +35,12 @@ extension LoginWireframe: LoginWireframeInterface {
     func navigate(to option: LoginNavigationOption) {
         switch option {
         case .channel:
-            break
+            navigationController?.pushWireframe(ChannelWireframe())
         case .signup:
-            break
-        break
+            let frame = SignupWireframe()
+            frame.viewController.modalPresentationStyle = .fullScreen
+            frame.viewController.modalTransitionStyle = .crossDissolve
+            self.viewController.present(frame.viewController, animated: true, completion: nil)
         }
     }
     

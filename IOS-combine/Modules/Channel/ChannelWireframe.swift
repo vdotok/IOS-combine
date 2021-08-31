@@ -22,7 +22,7 @@ final class ChannelWireframe: BaseWireframe<ChannelViewController> {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChannelViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = ChannelInteractor()
+        let interactor = ChannelInteractor(service: NetworkService())
         let presenter = ChannelPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
     }
