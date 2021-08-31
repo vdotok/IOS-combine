@@ -22,12 +22,15 @@ protocol ChannelViewInterface: ViewInterface {
 
 protocol ChannelPresenterInterface: PresenterInterface {
     var channelOutput: ChannelOutput? {get set}
+    var isSearching: Bool {get set }
     func fetchGroups()
     func viewDidLoad()
     func viewWillAppear()
     func itemAt(row: Int) -> TempGroup?
     func channelsCount() -> Int
-    var isSearching: Bool {get set }
+    func logout()
+   
+
     
 }
 

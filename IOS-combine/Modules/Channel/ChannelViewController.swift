@@ -56,7 +56,10 @@ final class ChannelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureAppearance()
+        bindPresenter()
         presenter.viewDidLoad()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,25 +76,43 @@ final class ChannelViewController: UIViewController {
     }
     
     @IBAction func didTapLogout(_ sender: UIButton) {
-//        UserDefaults.standard.removeObject(forKey: "UserResponse")
-//        let viewController = LoginBuilder().build(with: self.navigationController)
-//        viewController.modalPresentationStyle = .fullScreen
-//        viewModel.logout()
-//        self.navigationController?.present(viewController, animated: true, completion: nil)
+        UserDefaults.standard.removeObject(forKey: "UserResponse")
+        navigationController?.presentWireframe(LoginWireframe())
+        presenter.logout()
     }
     
     private func bindPresenter() {
-        presenter.channelOutput = { output in
+        presenter.channelOutput = { [unowned self]  output in
             switch output {
-
             case .reload:
-                self.tableView.reloadData()
+                refreshControl.endRefreshing()
+                tableView(isHidden: presenter.channelsCount() > 0 ? false : true)
+                tableView.reloadData()
+                
             case .showProgress:
-                break
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    ProgressHud.show(viewController: self)
+                }
             case .hideProgress:
-                break
+                ProgressHud.hide()
             case .failure(message: let message):
-                break
+                ProgressHud.showError(message: message, viewController: self)
+            case .connected(let sdkType):
+                if sdkType == SDKType.chat {
+                    emptyViewStatus.backgroundColor = .green
+                    viewStatus.backgroundColor = .green
+                } else if sdkType == .stream {
+                    emptyViewStatusVideoStream.backgroundColor = .green
+                    viewStatusVideoStream.backgroundColor = .green
+                }
+            case .disconnected(let sdkType):
+                if sdkType == SDKType.chat {
+                    emptyViewStatus.backgroundColor = .red
+                    viewStatus.backgroundColor = .red
+                } else if sdkType == .stream {
+                    emptyViewStatusVideoStream.backgroundColor = .red
+                    viewStatusVideoStream.backgroundColor = .red
+                }
             }
         }
     }
@@ -130,7 +151,7 @@ extension ChannelViewController {
     }
     
     @objc func refresh() {
-//        viewModel.fetchGroups()
+        presenter.fetchGroups()
     }
     
     @objc func didTappedAdd() {
@@ -183,6 +204,8 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     
     
 }
+
+
 
 extension ChannelViewController: ChannelViewInterface {
 }

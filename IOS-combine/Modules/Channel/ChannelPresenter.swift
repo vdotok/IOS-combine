@@ -9,83 +9,9 @@
 //
 
 import Foundation
-enum CellType {
-    case incomingText
-    case outGoingText
-    case incomingAttachment
-    case outgoingAttachment
-    case incomingAudio
-    case outgoingAudio
-    case incomingImage
-    case outGoingImage
-}
+import iOSSDKConnect
 
-enum MediaType: Int {
-    case image
-    case audio
-    case video
-    case file
-}
 
-class ReceiptModel: Receipt,Codable {
-    var receiptType: Int
-    var key: String
-    var date: Double
-    var messageId: String
-    var from: String
-    var to: String
-    
-    init(type: Int, key: String, date: Double, messageId: String, from: String, topic: String) {
-        self.receiptType = type
-        self.key = key
-        self.date = date
-        self.messageId = messageId
-        self.from = from
-        self.to = topic
-    }
-}
-
-extension ReceiptType {
-    func toImage() -> String? {
-        switch self {
-        case .sent:
-            return ""
-        case .delivered:
-            return ""
-        case .seen:
-            return "Read"
-        }
-    }
-}
-
-struct TempGroup {
-    let group: Group
-    let unReadMessageCount: Int
-    let lastMessage: String
-    let presentParticipant: Int
-}
-
-class ChatMessage {
-    let id: String
-    let sender: String
-    let content: String
-    var status: ReceiptType
-    var fileType: URL?
-    var mediaType: MediaType?
-    var date: UInt64
-    
-    
-    init(id: String, sender: String, content: String, status: ReceiptType, fileType: URL? = nil, mediaType: MediaType? = nil, date: UInt64) {
-        self.id = id
-        self.sender = sender
-        self.content = content
-        self.status = status
-        self.fileType = fileType
-        self.mediaType = mediaType
-        self.date = date
-
-    }
-}
 
 final class ChannelPresenter {
 
@@ -96,7 +22,9 @@ final class ChannelPresenter {
     private let wireframe: ChannelWireframeInterface
     private var channels: GroupResponse?
     var channelOutput: ChannelOutput?
+    var mqttClient: ChatClient?
     var isSearching: Bool = false
+    var groups: [Group] = []
     
     var presentCandidates: [String: [String]] = [:]
     var messages: [String: [ChatMessage]] = [:]
@@ -120,8 +48,8 @@ final class ChannelPresenter {
         case reload
         case showProgress
         case hideProgress
-//        case connected(_ sdkType: SDKType)
-//        case disconnected(_ sdkType: SDKType)
+        case connected(_ sdkType: SDKType)
+        case disconnected(_ sdkType: SDKType)
         case failure(message: String)
     }
     
@@ -140,13 +68,12 @@ extension ChannelPresenter: ChannelPresenterInterface {
     }
     
     func channelsCount() -> Int {
-        return channels?.groups?.count ?? 0
+        return groups.count
     }
      
     func itemAt(row: Int) -> TempGroup? {
-        guard let channels = channels, let groups = channels.groups else {return  nil}
         
-        guard let channel = channels.groups?[row].channelName else {return nil}
+         let channel = groups[row].channelName
         let present = presentCandidates[channel]
         let topic =  messages[channel]
         let unReadmessages = unreadMessages[channel]
@@ -161,7 +88,6 @@ extension ChannelPresenter: ChannelPresenterInterface {
             if let _ = topic?.last?.fileType {
                 lastMessage = "Attachment"
             }
-               
         }
         
         let group = TempGroup(group: groups[row], unReadMessageCount: unReadmessages?.count ?? 0, lastMessage: lastMessage, presentParticipant: present?.count ?? 0)
@@ -178,14 +104,315 @@ extension ChannelPresenter: ChannelPresenterInterface {
             guard let self = self else {return}
             switch result {
             case .success(let response):
-                self.channels = response
-                output(.reload)
+                switch response.status {
+                case 503:
+                    self.channelOutput?(.failure(message: response.message ))
+                case 500:
+                    self.channelOutput?(.failure(message: response.message))
+                case 401:
+                    self.channelOutput?(.failure(message: response.message))
+                case 200:
+                    if self.mqttClient?.isConnected() ?? false {
+                        if response.groups?.count == self.groups.count {
+                            
+                        }
+                        else {
+                            guard let fetchedGroups = response.groups else { return }
+                            let channelKeys = self.groups.map({$0.channelKey})
+                            let newGroups = fetchedGroups.filter({!channelKeys.contains($0.channelKey)})
+                            self.subscribe(groups: newGroups)
+                            self.groups = response.groups ?? []
+                        }
+                        DispatchQueue.main.async {
+                            self.channelOutput?(.reload)
+                        }
+                       
+                        
+                    }else {
+                        self.conncectMqtt()
+                        self.groups = response.groups ?? []
+                        DispatchQueue.main.async {
+                            self.channelOutput?(.reload)
+                        }
+                    }
+                    
+                default:
+                    break
+                }
+               
             case .failure(let error):
                 break
             }
         }
     }
     
-
     
+    func logout() {
+//        mqttClient?.disConnect()
+//        self.vtokSdk?.closeConnection()
+    }
+    
+}
+
+// MARK: Streaming
+
+extension ChannelPresenter {
+  
+}
+
+// MARK: Connect
+extension ChannelPresenter {
+    func conncectMqtt() {
+         
+        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        let host = user.messagingServerMap.host
+        guard let port = UInt16(user.messagingServerMap.port) else {return}
+        let userName = user.refID
+        let password = user.authorizationToken
+        
+        let client = Client(port: port,
+                            host: host,
+                            userName: userName!,
+                            password: password!,
+                            reConnectivity: true)
+      mqttClient = ChatClient(client: client, presense: self, connectivity: self, messageDelegate: self, customPacketDelegate: self)
+        mqttClient?.connect()
+        setDelegate()
+    }
+    
+    func setDelegate(){
+        mqttClient?.setFileDelegate(fileDelegate: self)
+    }
+    
+    func send(receipt: Receipt, status: ReceiptType, isMyMessage: Bool) {
+        guard !isMyMessage else {return}
+        mqttClient?.publish(receipt: receipt)
+        print("send receipt \(status) \(receipt.from)")
+    }
+    
+    private func subscribe(groups: [Group]) {
+        let topics = groups.map({ $0.channelKey + "/" + $0.channelName})
+        for topic in topics {
+            mqttClient?.subscribe(topic: topic)
+        }
+    }
+    
+    func subscribe(group: Group) {
+        subscribe(groups: [group])
+    }
+    
+    func sendPresence(presence: [Presence]) {
+        print(presence.map({ $0.username }))
+        guard let myUser = VDOTOKObject<UserResponse>().getData() else {return}
+        
+        let filterPresence = removeDuplicateElements(posts: presence)
+        let channel = presence.first?.channel ?? ""
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + "test")
+        for user in filterPresence {
+            NotificationCenter.default.post(name: name,
+                                            object: self,
+                                            userInfo: [Constants.messageKey: "\(user.username) \(user.type ?? "joined")",
+                                                       Constants.topicKey: channel,
+                                                       Constants.usernameKey: user.username])
+            var users: [String] = []
+            if user.type == "joined" {
+                
+                guard presentCandidates[channel]?.filter({$0 == user.username}).count ?? 0 < 1 else {return}
+                users = presentCandidates[channel] ?? []
+                users.append(user.username)
+                users.removeAll(where: {$0 == myUser.refID})
+                presentCandidates[channel]?.removeAll()
+                presentCandidates[channel] = users
+                
+            } else if user.type == "left" {
+                users = presentCandidates[channel] ?? []
+                users.removeAll(where: { $0 == user.username })
+                presentCandidates[channel]?.removeAll()
+                presentCandidates[channel] = users
+            }
+            print(presentCandidates.map({ $0.value.map({ $0 })}))
+        }
+        channelOutput?(.reload)
+    }
+    
+    func removeDuplicateElements(posts: [Presence]) -> [Presence] {
+        var uniquePosts = [Presence]()
+        for post in posts {
+            if !uniquePosts.contains(where: {$0.username == post.username }) {
+                uniquePosts.append(post)
+            }
+        }
+        return uniquePosts
+    }
+}
+
+ extension  ChannelPresenter: FileDelegate {
+    func didReceive(file: FilePart, fileURL: URL, date: UInt64) {
+        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        let data = Data(bytes: file.content, count: file.content.count)
+        let message = ChatMessage(id: file.messageId, sender: file.from, content: "", status: .delivered, mediaType: MediaType(rawValue: file.type), date: date)
+        message.fileType = fileURL
+        
+        var tempMessages: [ChatMessage] = []
+        var unreadMessages: [ChatMessage] = []
+        
+        unreadMessages = self.unreadMessages[file.topic ?? ""] ?? []
+        tempMessages = messages[file.topic ?? ""] ?? []
+        tempMessages.append(message)
+        unreadMessages.append(ChatMessage(id: message.id, sender: message.sender, content: message.content, status: .delivered, date: message.date ))
+        messages[file.topic ?? ""] = tempMessages
+        self.unreadMessages[file.topic ?? ""] = unreadMessages
+        let receipt = ReceiptModel(type: ReceiptType.delivered.rawValue, key: file.key, date: 1622801248314, messageId: file.messageId, from: user.fullName!, topic: file.topic ?? "")
+        
+        self.send(receipt: receipt, status: .delivered, isMyMessage: user.refID == file.from)
+           
+            
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + user.fullName!)
+        NotificationCenter.default.post(name: name, object: self,
+                                        userInfo: [Constants.messageKey: "",
+                                                   Constants.topicKey: file.topic,
+                                                   Constants.usernameKey: file.from,
+                                                   Constants.idKey: message.id,
+                                                   Constants.fileKey: message.fileType,
+                                                   Constants.mediaType: file.type,
+                                                   Constants.date: date
+                                                   
+                                        ])
+        channelOutput?(.reload)
+    }
+    
+    func didReceive(header: Header) {
+        
+    }
+
+}
+
+
+extension ChannelPresenter: CustomPacketDelegate {
+    func didRecieveJson(data: Data, topic: String) {
+        
+    }
+    
+    func didRecieveCustom(packet: String, topic: String) {
+        
+    }
+}
+
+extension ChannelPresenter: PresenceStates {
+    func send(presence: [Presence]) {
+        self.sendPresence(presence: presence)
+    }
+    
+    func didSend(presence: [Presence]) {
+        
+    }
+    
+    func didFailToSend(reason: String) {
+        
+    }
+}
+
+
+extension ChannelPresenter: MessageDelegate {
+    func onMessageReceive(_ message: Message) {
+//        print(message)
+        
+        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        var topic = message.to
+        if message.to.split(separator: "/").count > 1 {
+            topic = message.to.split(separator: "/")[1] + "/"
+        }
+        
+        var tempMessages: [ChatMessage] = []
+        var unreadMessages: [ChatMessage] = []
+        
+        if message.type == "text" {
+            let receipt = ReceiptModel(type: ReceiptType.delivered.rawValue, key: message.key, date: 1622801248314, messageId: message.id, from: user.fullName!, topic: message.to)
+            
+            self.send(receipt: receipt, status: .delivered, isMyMessage: user.refID == message.from)
+            let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + user.fullName!)
+            NotificationCenter.default.post(name: name, object: self,
+                                            userInfo: [Constants.messageKey: message.content,
+                                                       Constants.topicKey: topic,
+                                                       Constants.usernameKey: message.from,
+                                                       Constants.idKey: message.id,
+                                                       Constants.date: message.date
+                                            ])
+            tempMessages = messages[topic] ?? []
+            unreadMessages = self.unreadMessages[topic] ?? []
+            tempMessages.append(ChatMessage(id: message.id, sender: message.from, content: message.content, status: .delivered, date: message.date ))
+            unreadMessages.append(ChatMessage(id: message.id, sender: message.from, content: message.content, status: .delivered, date: message.date ))
+            messages[topic] = tempMessages
+            self.unreadMessages[topic] = unreadMessages
+            channelOutput?(.reload)
+            
+        }
+    }
+    
+    func onMessagePublish(_ playloadString: String, topic: String) {
+        
+    }
+    
+    func didStartTyping(_ message: Message) {
+        print(message)
+        guard let user = VDOTOKObject<UserResponse>().getData(), let fullName = user.fullName else { return }
+        NotificationCenter.default.post(name: NSNotification.Name("didStartTyping" + fullName),
+                                        object: self,
+                                        userInfo: [Constants.messageKey : message.from,
+                                                   "topic": message.to])
+    }
+    
+    func didEndTyping(_ message: Message) {
+        print(message)
+        guard let user = VDOTOKObject<UserResponse>().getData(), let fullName = user.fullName else { return }
+        NotificationCenter.default.post(name: NSNotification.Name("didEndTyping" + fullName),
+                                        object: self,
+                                        userInfo: [Constants.messageKey : message.from,
+                                                   "topic": message.to])
+    }
+    
+    
+}
+
+extension ChannelPresenter: Connectivity {
+    func willConnect() {
+        
+    }
+    
+    func didConnect() {
+        
+    }
+    
+    func didSubscribe(topics: [String]) {
+        
+    }
+    
+    func didUnSubscribe(topic: String) {
+        
+    }
+    
+    func connectionState(status: ConnectionStatus) {
+        switch status {
+        case .CONNECTED:
+            print("Connected")
+            channelOutput?(.connected(.chat))
+            subscribe(groups: groups)
+        case .DISCONNECTED:
+            channelOutput?(.disconnected(.chat))
+            print("disconncted")
+            
+        }
+    }
+    
+    func didFailToConnect(_: Error) {
+        
+    }
+    
+    func willReconnect() {
+        
+    }
+    
+    func didReconnect() {
+        
+    }
 }

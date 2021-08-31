@@ -45,6 +45,7 @@ extension BaseWireframe {
 extension UIViewController {
     
     func presentWireframe<ViewController>(_ wireframe: BaseWireframe<ViewController>, animated: Bool = true, completion: (() -> Void)? = nil) {
+        wireframe.viewController.modalPresentationStyle = .fullScreen
         present(wireframe.viewController, animated: animated, completion: completion)
     }
 
