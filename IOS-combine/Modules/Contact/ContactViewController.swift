@@ -47,7 +47,7 @@ final class ContactViewController: UIViewController {
                     ProgressHud.showError(message: message, viewController: self)
                 }
             case .groupCreated(group: let group, isExit: let isExit):
-                moveToChat(group: group, isExist: isExist)
+                moveToChat(group: group, isExist: isExit)
             case .alreadyCreated(message: let message):
                 break
             }
