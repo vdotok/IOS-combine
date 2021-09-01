@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKConnect
 
 final class ChannelWireframe: BaseWireframe<ChannelViewController> {
 
@@ -32,5 +33,12 @@ final class ChannelWireframe: BaseWireframe<ChannelViewController> {
 // MARK: - Extensions -
 
 extension ChannelWireframe: ChannelWireframeInterface {
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage]) {
+        switch to {
+        case .chat:
+            navigationController?.pushWireframe(ChatWireframe(client: client, group: group, user: user, messages: messages))
+        }
+    }
+    
     
 }

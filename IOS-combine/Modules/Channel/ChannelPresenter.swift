@@ -10,6 +10,7 @@
 
 import Foundation
 import iOSSDKConnect
+import iOSSDKStreaming
 
 
 
@@ -22,10 +23,10 @@ final class ChannelPresenter {
     private let wireframe: ChannelWireframeInterface
     private var channels: GroupResponse?
     var channelOutput: ChannelOutput?
-    var mqttClient: ChatClient?
     var isSearching: Bool = false
     var groups: [Group] = []
-    
+    var vtokSdk: VTokSDK?
+    var mqttClient: ChatClient?
     var presentCandidates: [String: [String]] = [:]
     var messages: [String: [ChatMessage]] = [:]
     var unreadMessages:[String:[ChatMessage]] = [:]
@@ -58,9 +59,10 @@ final class ChannelPresenter {
 // MARK: - Extensions -
 
 extension ChannelPresenter: ChannelPresenterInterface {
-    
+ 
     func viewDidLoad() {
         fetchGroups()
+        configureVdotTok()
     }
     
     func viewWillAppear() {
@@ -146,10 +148,18 @@ extension ChannelPresenter: ChannelPresenterInterface {
         }
     }
     
-    
     func logout() {
-//        mqttClient?.disConnect()
-//        self.vtokSdk?.closeConnection()
+        mqttClient?.disConnect()
+        vtokSdk?.closeConnection()
+    }
+    
+    
+    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group) {
+        guard let client = mqttClient,let user = VDOTOKObject<UserResponse>().getData() else {return}
+        switch to {
+        case .chat:
+            wireframe.move(to: .chat, client: client, group: group, user: user, messages: messages)
+        }
     }
     
 }
@@ -157,8 +167,47 @@ extension ChannelPresenter: ChannelPresenterInterface {
 // MARK: Streaming
 
 extension ChannelPresenter {
-  
+    private func configureVdotTok() {
+        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        let request = RegisterRequest(type: Constants.Request,
+                                      requestType: Constants.Register,
+                                      referenceID: user.refID!,
+                                      authorizationToken: user.authorizationToken!,
+                                      requestID: getRequestId(),
+                                    projectID: AuthenticationConstants.PROJECTID)
+        self.vtokSdk = VTokSDK(url: user.mediaServerMap.completeAddress, registerRequest: request, connectionDelegate: self)
+        
+    }
+    
+    private func getRequestId() -> String {
+        let generatable = IdGenerator()
+        guard let response = VDOTOKObject<UserResponse>().getData() else {return ""}
+        let timestamp = NSDate().timeIntervalSince1970
+        let myTimeInterval = TimeInterval(timestamp)
+        let time = Date(timeIntervalSince1970: TimeInterval(myTimeInterval)).stringValue()
+        let tenantId = "12345"
+        let token = generatable.getUUID(string: time + tenantId + response.refID!)
+        return token
+        
+    }
 }
+ 
+extension ChannelPresenter: SDKConnectionDelegate {
+    func didGenerate(output: SDKOutPut) {
+        switch output {
+        case .registered:
+            self.channelOutput?(.connected(.stream))
+        case .disconnected(_):
+            self.channelOutput?(.disconnected(.stream))
+        case .sessionRequest(let sessionRequest):
+            guard let sdk = vtokSdk else {return}
+          //  router.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: self.contacts)
+        }
+    }
+    
+    
+}
+
 
 // MARK: Connect
 extension ChannelPresenter {

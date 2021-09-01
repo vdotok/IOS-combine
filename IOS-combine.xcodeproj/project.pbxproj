@@ -10,6 +10,14 @@
 		5D4B579826DE45F8005185AE /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579726DE45F8005185AE /* ProgressHud.swift */; };
 		5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579926DE5F5E005185AE /* Constants.swift */; };
 		5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B579C26DE62D6005185AE /* vdotokCert.p12 */; };
+		5D4B57A726DE69E4005185AE /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */; };
+		5D4B57A826DE69E4005185AE /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5D4B57B026DF63C3005185AE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57AA26DF63C3005185AE /* Chat.storyboard */; };
+		5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AB26DF63C3005185AE /* ChatInterfaces.swift */; };
+		5D4B57B226DF63C3005185AE /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AC26DF63C3005185AE /* ChatPresenter.swift */; };
+		5D4B57B326DF63C3005185AE /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AD26DF63C3005185AE /* ChatViewController.swift */; };
+		5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AE26DF63C3005185AE /* ChatInteractor.swift */; };
+		5D4B57B526DF63C3005185AE /* ChatWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -57,6 +65,16 @@
 		8C47BE019EE33D46397A16F3 /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078C1F7BD1D69298A5E3C0D9 /* Pods_IOS_combine.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5D4B57A326DE6787005185AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D4B579F26DE6787005185AE /* iOSSDKStreaming.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D146FA225DE4823000852FB;
+			remoteInfo = iOSSDKStreaming;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		5D4B579626DE34E5005185AE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -64,6 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5D4B57A826DE69E4005185AE /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +95,13 @@
 		5D4B579726DE45F8005185AE /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
 		5D4B579926DE5F5E005185AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D4B579C26DE62D6005185AE /* vdotokCert.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vdotokCert.p12; sourceTree = "<group>"; };
+		5D4B579F26DE6787005185AE /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
+		5D4B57AA26DF63C3005185AE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		5D4B57AB26DF63C3005185AE /* ChatInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInterfaces.swift; sourceTree = "<group>"; };
+		5D4B57AC26DF63C3005185AE /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
+		5D4B57AD26DF63C3005185AE /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		5D4B57AE26DF63C3005185AE /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
+		5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWireframe.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D4B57A726DE69E4005185AE /* iOSSDKStreaming.framework in Frameworks */,
 				8C47BE019EE33D46397A16F3 /* Pods_IOS_combine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +188,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5D4B579E26DE6776005185AE /* Streaming */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B579F26DE6787005185AE /* iOSSDKStreaming.xcodeproj */,
+			);
+			path = Streaming;
+			sourceTree = "<group>";
+		};
+		5D4B57A026DE6787005185AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5D4B57A926DF63B4005185AE /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57AA26DF63C3005185AE /* Chat.storyboard */,
+				5D4B57AB26DF63C3005185AE /* ChatInterfaces.swift */,
+				5D4B57AC26DF63C3005185AE /* ChatPresenter.swift */,
+				5D4B57AD26DF63C3005185AE /* ChatViewController.swift */,
+				5D4B57AE26DF63C3005185AE /* ChatInteractor.swift */,
+				5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		5D8199AA26DCC10100B37B72 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +238,7 @@
 		5D8199B526DCC10100B37B72 /* IOS-combine */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B579E26DE6776005185AE /* Streaming */,
 				5D4B578026DE34B0005185AE /* Connect */,
 				5D4B579C26DE62D6005185AE /* vdotokCert.p12 */,
 				5D8199D526DCC2DB00B37B72 /* Common */,
@@ -202,6 +259,7 @@
 		5D8199CA26DCC17700B37B72 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B57A926DF63B4005185AE /* Chat */,
 				5D819A1526DCF02A00B37B72 /* Signup */,
 				5D819A0426DCE6DF00B37B72 /* Channel */,
 				5D8199D926DCC39A00B37B72 /* Login */,
@@ -371,12 +429,28 @@
 			mainGroup = 5D8199AA26DCC10100B37B72;
 			productRefGroup = 5D8199B426DCC10100B37B72 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5D4B57A026DE6787005185AE /* Products */;
+					ProjectRef = 5D4B579F26DE6787005185AE /* iOSSDKStreaming.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5D8199B226DCC10100B37B72 /* IOS-combine */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = iOSSDKStreaming.framework;
+			remoteRef = 5D4B57A326DE6787005185AE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5D8199B126DCC10100B37B72 /* Resources */ = {
@@ -391,6 +465,7 @@
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
 				5D8199F926DCC9B200B37B72 /* Assets.xcassets in Resources */,
+				5D4B57B026DF63C3005185AE /* Chat.storyboard in Resources */,
 				5D8199BE26DCC10100B37B72 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,14 +525,17 @@
 				5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */,
 				5D8199E426DCC3B900B37B72 /* LoginInteractor.swift in Sources */,
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
+				5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
 				5D8199E826DCC48000B37B72 /* BaseWireframe.swift in Sources */,
 				5D4B579826DE45F8005185AE /* ProgressHud.swift in Sources */,
+				5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */,
 				5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
 				5D819A2126DCF22B00B37B72 /* SignupWireframe.swift in Sources */,
+				5D4B57B526DF63C3005185AE /* ChatWireframe.swift in Sources */,
 				5D819A1026DCE7E700B37B72 /* ChannelPresenter.swift in Sources */,
 				5D819A2A26DE1A0F00B37B72 /* ChannelEntity.swift in Sources */,
 				5D819A0F26DCE7E700B37B72 /* ChannelInterfaces.swift in Sources */,
@@ -480,7 +558,9 @@
 				5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */,
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,
 				5D819A1F26DCF22B00B37B72 /* SignupViewController.swift in Sources */,
+				5D4B57B326DF63C3005185AE /* ChatViewController.swift in Sources */,
 				5D819A2826DE125700B37B72 /* Color+Extension.swift in Sources */,
+				5D4B57B226DF63C3005185AE /* ChatPresenter.swift in Sources */,
 				5D8199D426DCC2AF00B37B72 /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +711,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85W3A63R3P;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "IOS-combine/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -651,6 +732,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85W3A63R3P;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "IOS-combine/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

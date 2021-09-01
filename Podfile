@@ -9,5 +9,6 @@ target 'IOS-combine' do
     pod 'KRProgressHUD'
     pod 'IQKeyboardManagerSwift'
     pod 'VdoTokConnect' , :git => 'https://github.com/vdotok/VdoTokConnect.git'
+    pod 'InternalStrategy', :path => '../internal_strategy'
 
 end
