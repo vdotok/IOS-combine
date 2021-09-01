@@ -10,13 +10,26 @@
 
 import UIKit
 
+typealias ChatOutput = (ChatPresenter.Output) -> Void
+
 protocol ChatWireframeInterface: WireframeInterface {
 }
 
 protocol ChatViewInterface: ViewInterface {
+    
 }
 
 protocol ChatPresenterInterface: PresenterInterface {
+    var group: Group {get set}
+    var messages: [ChatMessage] {get set}
+    var user: UserResponse {get set}
+    var chatOutput: ChatOutput? {get set}
+    func dispatchPackage(start: Bool)
+    func sendMessage(text: String)
+    func messageCount() -> Int
+    func itemAt(row: Int) -> (ChatMessage,CellType)
+    func receivedMessage(userInfo: [String: AnyObject])
+    func sendSeenMessage(message: ChatMessage, row: Int)
 }
 
 protocol ChatInteractorInterface: InteractorInterface {

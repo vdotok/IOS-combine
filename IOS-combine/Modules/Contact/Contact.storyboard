@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Contact View Controller-->
+        <scene sceneID="m4e-vi-aCU">
+            <objects>
+                <viewController storyboardIdentifier="ContactViewController" id="S6g-Ao-YbT" customClass="ContactViewController" customModule="IOS_combine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="39t-MY-f5h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUc-K2-kPR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MUi-Is-aH5">
+                                        <rect key="frame" x="16" y="0.0" width="343" height="101"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Dhz-ek-fv1">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="51"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ENC-9X-rPA">
+                                                <rect key="frame" x="0.0" y="71" width="343" height="30"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group-chat" translatesAutoresizingMaskIntoConstraints="NO" id="VgR-O3-MN1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="T0A-Pq-rw6"/>
+                                                            <constraint firstAttribute="width" constant="32" id="ZCE-2U-ngl"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRr-XA-nV6">
+                                                        <rect key="frame" x="46" y="0.0" width="297" height="30"/>
+                                                        <state key="normal" title="Add Group Chat"/>
+                                                        <connections>
+                                                            <action selector="didTapAddContact:" destination="S6g-Ao-YbT" eventType="touchUpInside" id="tys-3G-vlD"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohh-oJ-rwU">
+                                        <rect key="frame" x="36" y="117" width="303" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="DoK-iB-oFu"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nih-WM-kr2">
+                                        <rect key="frame" x="36" y="140" width="69" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Nih-WM-kr2" firstAttribute="top" secondItem="Ohh-oJ-rwU" secondAttribute="bottom" constant="22" id="26e-ZN-MhL"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ohh-oJ-rwU" secondAttribute="bottom" constant="50" id="Shh-II-DaN"/>
+                                    <constraint firstItem="MUi-Is-aH5" firstAttribute="leading" secondItem="XUc-K2-kPR" secondAttribute="leading" constant="16" id="Uut-Ie-g0G"/>
+                                    <constraint firstItem="Ohh-oJ-rwU" firstAttribute="top" secondItem="MUi-Is-aH5" secondAttribute="bottom" constant="16" id="XM1-FX-Z5U"/>
+                                    <constraint firstItem="Nih-WM-kr2" firstAttribute="leading" secondItem="Ohh-oJ-rwU" secondAttribute="leading" id="m6t-u8-Uwo"/>
+                                    <constraint firstItem="MUi-Is-aH5" firstAttribute="top" secondItem="XUc-K2-kPR" secondAttribute="top" id="oOD-DT-0LQ"/>
+                                    <constraint firstItem="Ohh-oJ-rwU" firstAttribute="leading" secondItem="MUi-Is-aH5" secondAttribute="leading" constant="20" id="uQN-rM-HP3"/>
+                                    <constraint firstItem="Ohh-oJ-rwU" firstAttribute="trailing" secondItem="MUi-Is-aH5" secondAttribute="trailing" constant="-20" id="v7T-j9-sGg"/>
+                                    <constraint firstAttribute="trailing" secondItem="MUi-Is-aH5" secondAttribute="trailing" constant="16" id="zhT-dh-PTJ"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7KX-HX-hWF">
+                                <rect key="frame" x="0.0" y="180" width="375" height="487"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DgV-MV-dVZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7KX-HX-hWF" firstAttribute="top" secondItem="XUc-K2-kPR" secondAttribute="bottom" constant="12" id="1NS-Yg-P5c"/>
+                            <constraint firstItem="DgV-MV-dVZ" firstAttribute="trailing" secondItem="7KX-HX-hWF" secondAttribute="trailing" id="4Rc-W7-TWI"/>
+                            <constraint firstItem="DgV-MV-dVZ" firstAttribute="bottom" secondItem="7KX-HX-hWF" secondAttribute="bottom" id="Mjw-mI-czr"/>
+                            <constraint firstItem="7KX-HX-hWF" firstAttribute="leading" secondItem="DgV-MV-dVZ" secondAttribute="leading" id="h0F-1W-vR9"/>
+                            <constraint firstItem="XUc-K2-kPR" firstAttribute="leading" secondItem="DgV-MV-dVZ" secondAttribute="leading" id="iBF-UD-NVI"/>
+                            <constraint firstItem="XUc-K2-kPR" firstAttribute="top" secondItem="DgV-MV-dVZ" secondAttribute="top" id="j8i-7N-ozu"/>
+                            <constraint firstItem="DgV-MV-dVZ" firstAttribute="trailing" secondItem="XUc-K2-kPR" secondAttribute="trailing" id="zsC-lP-ZsW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addGroup" destination="rRr-XA-nV6" id="uee-Tn-dur"/>
+                        <outlet property="contactLabel" destination="Nih-WM-kr2" id="2RM-hY-uQk"/>
+                        <outlet property="searchBar" destination="Dhz-ek-fv1" id="mpI-c5-ciF"/>
+                        <outlet property="separatorView" destination="Ohh-oJ-rwU" id="hFh-iE-Ciz"/>
+                        <outlet property="tableView" destination="7KX-HX-hWF" id="P14-nX-w0f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s9J-Y0-fnH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="84" y="159"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Group-chat" width="32" height="30"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

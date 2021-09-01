@@ -38,6 +38,20 @@
 		5D4B57DE26DF6F7E005185AE /* IncomingTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57CC26DF6F7E005185AE /* IncomingTextCell.swift */; };
 		5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57CD26DF6F7E005185AE /* outgoingImageCell.swift */; };
 		5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57CE26DF6F7E005185AE /* OutgoingAudioCell.swift */; };
+		5D4B57E226DF7110005185AE /* TextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57E126DF7110005185AE /* TextView+Extensions.swift */; };
+		5D4B57E426DF7390005185AE /* ChatEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57E326DF7390005185AE /* ChatEntity.swift */; };
+		5D4B57E626DF74B0005185AE /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57E526DF74B0005185AE /* Notification+Extension.swift */; };
+		5D4B57E826DF8AC6005185AE /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57E726DF8AC6005185AE /* Data+Extension.swift */; };
+		5D4B57EA26DF8E40005185AE /* UInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57E926DF8E40005185AE /* UInt+Extension.swift */; };
+		5D4B57F226DF93A6005185AE /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57EC26DF93A6005185AE /* Contact.storyboard */; };
+		5D4B57F326DF93A6005185AE /* ContactInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57ED26DF93A6005185AE /* ContactInterfaces.swift */; };
+		5D4B57F426DF93A6005185AE /* ContactPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57EE26DF93A6005185AE /* ContactPresenter.swift */; };
+		5D4B57F526DF93A6005185AE /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57EF26DF93A6005185AE /* ContactViewController.swift */; };
+		5D4B57F626DF93A6005185AE /* ContactInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57F026DF93A6005185AE /* ContactInteractor.swift */; };
+		5D4B57F726DF93A6005185AE /* ContactWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57F126DF93A6005185AE /* ContactWireframe.swift */; };
+		5D4B57FC26DF9800005185AE /* ContactEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57FB26DF9800005185AE /* ContactEntity.swift */; };
+		5D4B57FF26DF9A11005185AE /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57FD26DF9A11005185AE /* ContactCell.swift */; };
+		5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57FE26DF9A11005185AE /* ContactCell.xib */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -142,6 +156,20 @@
 		5D4B57CC26DF6F7E005185AE /* IncomingTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingTextCell.swift; sourceTree = "<group>"; };
 		5D4B57CD26DF6F7E005185AE /* outgoingImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = outgoingImageCell.swift; sourceTree = "<group>"; };
 		5D4B57CE26DF6F7E005185AE /* OutgoingAudioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingAudioCell.swift; sourceTree = "<group>"; };
+		5D4B57E126DF7110005185AE /* TextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView+Extensions.swift"; sourceTree = "<group>"; };
+		5D4B57E326DF7390005185AE /* ChatEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEntity.swift; sourceTree = "<group>"; };
+		5D4B57E526DF74B0005185AE /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
+		5D4B57E726DF8AC6005185AE /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		5D4B57E926DF8E40005185AE /* UInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+Extension.swift"; sourceTree = "<group>"; };
+		5D4B57EC26DF93A6005185AE /* Contact.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
+		5D4B57ED26DF93A6005185AE /* ContactInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInterfaces.swift; sourceTree = "<group>"; };
+		5D4B57EE26DF93A6005185AE /* ContactPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPresenter.swift; sourceTree = "<group>"; };
+		5D4B57EF26DF93A6005185AE /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		5D4B57F026DF93A6005185AE /* ContactInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInteractor.swift; sourceTree = "<group>"; };
+		5D4B57F126DF93A6005185AE /* ContactWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactWireframe.swift; sourceTree = "<group>"; };
+		5D4B57FB26DF9800005185AE /* ContactEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEntity.swift; sourceTree = "<group>"; };
+		5D4B57FD26DF9A11005185AE /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		5D4B57FE26DF9A11005185AE /* ContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -255,6 +283,7 @@
 				5D4B57AD26DF63C3005185AE /* ChatViewController.swift */,
 				5D4B57AE26DF63C3005185AE /* ChatInteractor.swift */,
 				5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */,
+				5D4B57E326DF7390005185AE /* ChatEntity.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -264,6 +293,10 @@
 			children = (
 				5D4B57B726DF6EA2005185AE /* ImagePicker.swift */,
 				5D4B57B926DF6ED3005185AE /* DocumentPicker.swift */,
+				5D4B57E126DF7110005185AE /* TextView+Extensions.swift */,
+				5D4B57E526DF74B0005185AE /* Notification+Extension.swift */,
+				5D4B57E726DF8AC6005185AE /* Data+Extension.swift */,
+				5D4B57E926DF8E40005185AE /* UInt+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -298,6 +331,30 @@
 				5D4B57CE26DF6F7E005185AE /* OutgoingAudioCell.swift */,
 			);
 			path = ChatCells;
+			sourceTree = "<group>";
+		};
+		5D4B57EB26DF9373005185AE /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57F826DF9478005185AE /* Cell */,
+				5D4B57EC26DF93A6005185AE /* Contact.storyboard */,
+				5D4B57ED26DF93A6005185AE /* ContactInterfaces.swift */,
+				5D4B57EE26DF93A6005185AE /* ContactPresenter.swift */,
+				5D4B57EF26DF93A6005185AE /* ContactViewController.swift */,
+				5D4B57F026DF93A6005185AE /* ContactInteractor.swift */,
+				5D4B57F126DF93A6005185AE /* ContactWireframe.swift */,
+				5D4B57FB26DF9800005185AE /* ContactEntity.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		5D4B57F826DF9478005185AE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57FD26DF9A11005185AE /* ContactCell.swift */,
+				5D4B57FE26DF9A11005185AE /* ContactCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5D8199AA26DCC10100B37B72 = {
@@ -342,6 +399,7 @@
 		5D8199CA26DCC17700B37B72 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B57EB26DF9373005185AE /* Contact */,
 				5D4B57A926DF63B4005185AE /* Chat */,
 				5D819A1526DCF02A00B37B72 /* Signup */,
 				5D819A0426DCE6DF00B37B72 /* Channel */,
@@ -547,9 +605,11 @@
 				5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */,
 				5D819A0E26DCE7E700B37B72 /* Channel.storyboard in Resources */,
 				5D4B57DC26DF6F7E005185AE /* IncomingTextCell.xib in Resources */,
+				5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
 				5D4B57D226DF6F7E005185AE /* IncomingAttachmentCell.xib in Resources */,
 				5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */,
+				5D4B57F226DF93A6005185AE /* Contact.storyboard in Resources */,
 				5D4B57D526DF6F7E005185AE /* OutgoingAudioCell.xib in Resources */,
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
@@ -615,10 +675,13 @@
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
 				5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */,
 				5D4B57D626DF6F7E005185AE /* IncomingAttachmentCell.swift in Sources */,
+				5D4B57EA26DF8E40005185AE /* UInt+Extension.swift in Sources */,
 				5D819A3026DE2E8400B37B72 /* ChannelCell.swift in Sources */,
 				5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */,
+				5D4B57FF26DF9A11005185AE /* ContactCell.swift in Sources */,
 				5D8199E426DCC3B900B37B72 /* LoginInteractor.swift in Sources */,
 				5D4B57DE26DF6F7E005185AE /* IncomingTextCell.swift in Sources */,
+				5D4B57E826DF8AC6005185AE /* Data+Extension.swift in Sources */,
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
 				5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
@@ -627,18 +690,23 @@
 				5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */,
 				5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */,
 				5D4B57DA26DF6F7E005185AE /* IncomingImageCell.swift in Sources */,
+				5D4B57F526DF93A6005185AE /* ContactViewController.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
 				5D4B57D126DF6F7E005185AE /* OutgoingTextCell.swift in Sources */,
+				5D4B57FC26DF9800005185AE /* ContactEntity.swift in Sources */,
 				5D819A2126DCF22B00B37B72 /* SignupWireframe.swift in Sources */,
 				5D4B57B526DF63C3005185AE /* ChatWireframe.swift in Sources */,
 				5D819A1026DCE7E700B37B72 /* ChannelPresenter.swift in Sources */,
 				5D819A2A26DE1A0F00B37B72 /* ChannelEntity.swift in Sources */,
 				5D819A0F26DCE7E700B37B72 /* ChannelInterfaces.swift in Sources */,
 				5D819A2326DCF34600B37B72 /* SignupRequest.swift in Sources */,
+				5D4B57E626DF74B0005185AE /* Notification+Extension.swift in Sources */,
 				5D8199D226DCC29C00B37B72 /* BaseDataStore.swift in Sources */,
+				5D4B57F726DF93A6005185AE /* ContactWireframe.swift in Sources */,
+				5D4B57F326DF93A6005185AE /* ContactInterfaces.swift in Sources */,
 				5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */,
 				5D8199EC26DCC4AD00B37B72 /* InteractorInterface.swift in Sources */,
 				5D8199E226DCC3B900B37B72 /* LoginPresenter.swift in Sources */,
@@ -647,9 +715,11 @@
 				5D8199D026DCC27100B37B72 /* ApiRequest.swift in Sources */,
 				5D4B57CF26DF6F7E005185AE /* AttachmentViewController.swift in Sources */,
 				5D8199F226DCC62F00B37B72 /* UIStoryboard+Extension.swift in Sources */,
+				5D4B57E226DF7110005185AE /* TextView+Extensions.swift in Sources */,
 				5D4B57B826DF6EA2005185AE /* ImagePicker.swift in Sources */,
 				5D4B57DB26DF6F7E005185AE /* IncomingAudioCell.swift in Sources */,
 				5D8199D826DCC35500B37B72 /* VDOTOKObject.swift in Sources */,
+				5D4B57F426DF93A6005185AE /* ContactPresenter.swift in Sources */,
 				5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */,
 				5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */,
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,
@@ -658,7 +728,9 @@
 				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
 				5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */,
+				5D4B57F626DF93A6005185AE /* ContactInteractor.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
+				5D4B57E426DF7390005185AE /* ChatEntity.swift in Sources */,
 				5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */,
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,
 				5D819A1F26DCF22B00B37B72 /* SignupViewController.swift in Sources */,
