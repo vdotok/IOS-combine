@@ -18,6 +18,26 @@
 		5D4B57B326DF63C3005185AE /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AD26DF63C3005185AE /* ChatViewController.swift */; };
 		5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AE26DF63C3005185AE /* ChatInteractor.swift */; };
 		5D4B57B526DF63C3005185AE /* ChatWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */; };
+		5D4B57B826DF6EA2005185AE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57B726DF6EA2005185AE /* ImagePicker.swift */; };
+		5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57B926DF6ED3005185AE /* DocumentPicker.swift */; };
+		5D4B57CF26DF6F7E005185AE /* AttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57BC26DF6F7E005185AE /* AttachmentViewController.swift */; };
+		5D4B57D026DF6F7E005185AE /* AttachmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57BD26DF6F7E005185AE /* AttachmentViewController.xib */; };
+		5D4B57D126DF6F7E005185AE /* OutgoingTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57BF26DF6F7E005185AE /* OutgoingTextCell.swift */; };
+		5D4B57D226DF6F7E005185AE /* IncomingAttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57C026DF6F7E005185AE /* IncomingAttachmentCell.xib */; };
+		5D4B57D326DF6F7E005185AE /* OutgoingTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57C126DF6F7E005185AE /* OutgoingTextCell.xib */; };
+		5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57C226DF6F7E005185AE /* OutgoingAttachementCell.swift */; };
+		5D4B57D526DF6F7E005185AE /* OutgoingAudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57C326DF6F7E005185AE /* OutgoingAudioCell.xib */; };
+		5D4B57D626DF6F7E005185AE /* IncomingAttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57C426DF6F7E005185AE /* IncomingAttachmentCell.swift */; };
+		5D4B57D726DF6F7E005185AE /* outgoingImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57C526DF6F7E005185AE /* outgoingImageCell.xib */; };
+		5D4B57D826DF6F7E005185AE /* IncomingAudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57C626DF6F7E005185AE /* IncomingAudioCell.xib */; };
+		5D4B57D926DF6F7E005185AE /* IncomingImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57C726DF6F7E005185AE /* IncomingImageCell.xib */; };
+		5D4B57DA26DF6F7E005185AE /* IncomingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57C826DF6F7E005185AE /* IncomingImageCell.swift */; };
+		5D4B57DB26DF6F7E005185AE /* IncomingAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57C926DF6F7E005185AE /* IncomingAudioCell.swift */; };
+		5D4B57DC26DF6F7E005185AE /* IncomingTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57CA26DF6F7E005185AE /* IncomingTextCell.xib */; };
+		5D4B57DD26DF6F7E005185AE /* OutgoingAttachementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57CB26DF6F7E005185AE /* OutgoingAttachementCell.xib */; };
+		5D4B57DE26DF6F7E005185AE /* IncomingTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57CC26DF6F7E005185AE /* IncomingTextCell.swift */; };
+		5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57CD26DF6F7E005185AE /* outgoingImageCell.swift */; };
+		5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57CE26DF6F7E005185AE /* OutgoingAudioCell.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -102,6 +122,26 @@
 		5D4B57AD26DF63C3005185AE /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5D4B57AE26DF63C3005185AE /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWireframe.swift; sourceTree = "<group>"; };
+		5D4B57B726DF6EA2005185AE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		5D4B57B926DF6ED3005185AE /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		5D4B57BC26DF6F7E005185AE /* AttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentViewController.swift; sourceTree = "<group>"; };
+		5D4B57BD26DF6F7E005185AE /* AttachmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttachmentViewController.xib; sourceTree = "<group>"; };
+		5D4B57BF26DF6F7E005185AE /* OutgoingTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingTextCell.swift; sourceTree = "<group>"; };
+		5D4B57C026DF6F7E005185AE /* IncomingAttachmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingAttachmentCell.xib; sourceTree = "<group>"; };
+		5D4B57C126DF6F7E005185AE /* OutgoingTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingTextCell.xib; sourceTree = "<group>"; };
+		5D4B57C226DF6F7E005185AE /* OutgoingAttachementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingAttachementCell.swift; sourceTree = "<group>"; };
+		5D4B57C326DF6F7E005185AE /* OutgoingAudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingAudioCell.xib; sourceTree = "<group>"; };
+		5D4B57C426DF6F7E005185AE /* IncomingAttachmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingAttachmentCell.swift; sourceTree = "<group>"; };
+		5D4B57C526DF6F7E005185AE /* outgoingImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = outgoingImageCell.xib; sourceTree = "<group>"; };
+		5D4B57C626DF6F7E005185AE /* IncomingAudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingAudioCell.xib; sourceTree = "<group>"; };
+		5D4B57C726DF6F7E005185AE /* IncomingImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingImageCell.xib; sourceTree = "<group>"; };
+		5D4B57C826DF6F7E005185AE /* IncomingImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingImageCell.swift; sourceTree = "<group>"; };
+		5D4B57C926DF6F7E005185AE /* IncomingAudioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingAudioCell.swift; sourceTree = "<group>"; };
+		5D4B57CA26DF6F7E005185AE /* IncomingTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingTextCell.xib; sourceTree = "<group>"; };
+		5D4B57CB26DF6F7E005185AE /* OutgoingAttachementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutgoingAttachementCell.xib; sourceTree = "<group>"; };
+		5D4B57CC26DF6F7E005185AE /* IncomingTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingTextCell.swift; sourceTree = "<group>"; };
+		5D4B57CD26DF6F7E005185AE /* outgoingImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = outgoingImageCell.swift; sourceTree = "<group>"; };
+		5D4B57CE26DF6F7E005185AE /* OutgoingAudioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingAudioCell.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +247,8 @@
 		5D4B57A926DF63B4005185AE /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B57BE26DF6F7E005185AE /* ChatCells */,
+				5D4B57BB26DF6F7E005185AE /* Popup */,
 				5D4B57AA26DF63C3005185AE /* Chat.storyboard */,
 				5D4B57AB26DF63C3005185AE /* ChatInterfaces.swift */,
 				5D4B57AC26DF63C3005185AE /* ChatPresenter.swift */,
@@ -215,6 +257,47 @@
 				5D4B57AF26DF63C3005185AE /* ChatWireframe.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		5D4B57B626DF6E88005185AE /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57B726DF6EA2005185AE /* ImagePicker.swift */,
+				5D4B57B926DF6ED3005185AE /* DocumentPicker.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		5D4B57BB26DF6F7E005185AE /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57BC26DF6F7E005185AE /* AttachmentViewController.swift */,
+				5D4B57BD26DF6F7E005185AE /* AttachmentViewController.xib */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		5D4B57BE26DF6F7E005185AE /* ChatCells */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B57BF26DF6F7E005185AE /* OutgoingTextCell.swift */,
+				5D4B57C026DF6F7E005185AE /* IncomingAttachmentCell.xib */,
+				5D4B57C126DF6F7E005185AE /* OutgoingTextCell.xib */,
+				5D4B57C226DF6F7E005185AE /* OutgoingAttachementCell.swift */,
+				5D4B57C326DF6F7E005185AE /* OutgoingAudioCell.xib */,
+				5D4B57C426DF6F7E005185AE /* IncomingAttachmentCell.swift */,
+				5D4B57C526DF6F7E005185AE /* outgoingImageCell.xib */,
+				5D4B57C626DF6F7E005185AE /* IncomingAudioCell.xib */,
+				5D4B57C726DF6F7E005185AE /* IncomingImageCell.xib */,
+				5D4B57C826DF6F7E005185AE /* IncomingImageCell.swift */,
+				5D4B57C926DF6F7E005185AE /* IncomingAudioCell.swift */,
+				5D4B57CA26DF6F7E005185AE /* IncomingTextCell.xib */,
+				5D4B57CB26DF6F7E005185AE /* OutgoingAttachementCell.xib */,
+				5D4B57CC26DF6F7E005185AE /* IncomingTextCell.swift */,
+				5D4B57CD26DF6F7E005185AE /* outgoingImageCell.swift */,
+				5D4B57CE26DF6F7E005185AE /* OutgoingAudioCell.swift */,
+			);
+			path = ChatCells;
 			sourceTree = "<group>";
 		};
 		5D8199AA26DCC10100B37B72 = {
@@ -280,6 +363,7 @@
 		5D8199D526DCC2DB00B37B72 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B57B626DF6E88005185AE /* UIKit */,
 				5D819A0026DCCE5900B37B72 /* Translation */,
 				5D8199EF26DCC4CC00B37B72 /* Extension */,
 				5D8199E626DCC46700B37B72 /* Viper */,
@@ -457,16 +541,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D4B57D726DF6F7E005185AE /* outgoingImageCell.xib in Resources */,
+				5D4B57DD26DF6F7E005185AE /* OutgoingAttachementCell.xib in Resources */,
 				5D819A1C26DCF22B00B37B72 /* Signup.storyboard in Resources */,
 				5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */,
 				5D819A0E26DCE7E700B37B72 /* Channel.storyboard in Resources */,
+				5D4B57DC26DF6F7E005185AE /* IncomingTextCell.xib in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
+				5D4B57D226DF6F7E005185AE /* IncomingAttachmentCell.xib in Resources */,
 				5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */,
+				5D4B57D526DF6F7E005185AE /* OutgoingAudioCell.xib in Resources */,
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
 				5D8199F926DCC9B200B37B72 /* Assets.xcassets in Resources */,
+				5D4B57D326DF6F7E005185AE /* OutgoingTextCell.xib in Resources */,
+				5D4B57D926DF6F7E005185AE /* IncomingImageCell.xib in Resources */,
+				5D4B57D826DF6F7E005185AE /* IncomingAudioCell.xib in Resources */,
 				5D4B57B026DF63C3005185AE /* Chat.storyboard in Resources */,
 				5D8199BE26DCC10100B37B72 /* Main.storyboard in Resources */,
+				5D4B57D026DF6F7E005185AE /* AttachmentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,9 +614,11 @@
 			files = (
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
 				5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */,
+				5D4B57D626DF6F7E005185AE /* IncomingAttachmentCell.swift in Sources */,
 				5D819A3026DE2E8400B37B72 /* ChannelCell.swift in Sources */,
 				5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */,
 				5D8199E426DCC3B900B37B72 /* LoginInteractor.swift in Sources */,
+				5D4B57DE26DF6F7E005185AE /* IncomingTextCell.swift in Sources */,
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
 				5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
@@ -531,9 +626,12 @@
 				5D4B579826DE45F8005185AE /* ProgressHud.swift in Sources */,
 				5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */,
 				5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */,
+				5D4B57DA26DF6F7E005185AE /* IncomingImageCell.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
+				5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
+				5D4B57D126DF6F7E005185AE /* OutgoingTextCell.swift in Sources */,
 				5D819A2126DCF22B00B37B72 /* SignupWireframe.swift in Sources */,
 				5D4B57B526DF63C3005185AE /* ChatWireframe.swift in Sources */,
 				5D819A1026DCE7E700B37B72 /* ChannelPresenter.swift in Sources */,
@@ -547,13 +645,19 @@
 				5D819A1D26DCF22B00B37B72 /* SignupInterfaces.swift in Sources */,
 				5D819A0226DCCE6A00B37B72 /* ObjectTranslation.swift in Sources */,
 				5D8199D026DCC27100B37B72 /* ApiRequest.swift in Sources */,
+				5D4B57CF26DF6F7E005185AE /* AttachmentViewController.swift in Sources */,
 				5D8199F226DCC62F00B37B72 /* UIStoryboard+Extension.swift in Sources */,
+				5D4B57B826DF6EA2005185AE /* ImagePicker.swift in Sources */,
+				5D4B57DB26DF6F7E005185AE /* IncomingAudioCell.swift in Sources */,
 				5D8199D826DCC35500B37B72 /* VDOTOKObject.swift in Sources */,
+				5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */,
+				5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */,
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
 				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
+				5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
 				5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */,
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,

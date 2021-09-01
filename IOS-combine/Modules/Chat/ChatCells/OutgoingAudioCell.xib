@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Inter-Regular.ttf">
+            <string>Inter-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="69" id="KGk-i7-Jjw" customClass="OutgoingAudioCell" customModule="Chat_Demo_IOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S10-2P-tNR">
+                        <rect key="frame" x="110" y="10" width="187" height="51"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nGK-SV-4we">
+                                <rect key="frame" x="20" y="18" width="147" height="15"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1u-5d-aek">
+                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="4tc-3p-MOx"/>
+                                            <constraint firstAttribute="height" constant="15" id="Wcy-du-Vc2"/>
+                                        </constraints>
+                                        <state key="normal" image="play"/>
+                                        <state key="selected" image="pause"/>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="RRA-YV-MlL">
+                                        <rect key="frame" x="25" y="0.0" width="88" height="16"/>
+                                        <color key="minimumTrackTintColor" name="AppGreenColor"/>
+                                        <color key="maximumTrackTintColor" name="AppTileGreenColor"/>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:37" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-Cy-ija">
+                                        <rect key="frame" x="123" y="0.0" width="24" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="thL-Tl-Gb2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="10"/>
+                                        <color key="textColor" name="AppDarkarGrey"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="AppLightTileGreen"/>
+                        <constraints>
+                            <constraint firstItem="nGK-SV-4we" firstAttribute="leading" secondItem="S10-2P-tNR" secondAttribute="leading" constant="20" id="8oC-Ua-e0B"/>
+                            <constraint firstItem="nGK-SV-4we" firstAttribute="top" secondItem="S10-2P-tNR" secondAttribute="top" constant="18" id="PzK-r6-ser"/>
+                            <constraint firstAttribute="bottom" secondItem="nGK-SV-4we" secondAttribute="bottom" constant="18" id="UYo-MG-BeZ"/>
+                            <constraint firstAttribute="trailing" secondItem="nGK-SV-4we" secondAttribute="trailing" constant="20" id="Uw6-Mc-qKS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="S10-2P-tNR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="JPe-dL-Npg"/>
+                    <constraint firstItem="S10-2P-tNR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="110" id="MaT-Ka-5LS"/>
+                    <constraint firstAttribute="trailing" secondItem="S10-2P-tNR" secondAttribute="trailing" constant="23" id="Mmd-jC-A4H"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="S10-2P-tNR" secondAttribute="bottom" priority="250" constant="20" id="ZaV-Yg-O7D"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="containerView" destination="S10-2P-tNR" id="dJe-Oh-pmz"/>
+                <outlet property="slider" destination="RRA-YV-MlL" id="im5-xm-H03"/>
+            </connections>
+            <point key="canvasLocation" x="-55.072463768115945" y="38.504464285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="pause" width="15" height="15"/>
+        <image name="play" width="15" height="15"/>
+        <namedColor name="AppDarkarGrey">
+            <color red="0.28627450980392155" green="0.26666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppGreenColor">
+            <color red="0.32941176470588235" green="0.76078431372549016" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppLightTileGreen">
+            <color red="0.94117647058823528" green="0.96078431372549022" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppTileGreenColor">
+            <color red="0.69803921568627447" green="0.80392156862745101" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

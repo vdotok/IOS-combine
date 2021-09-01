@@ -11,7 +11,41 @@
 import UIKit
 
 final class ChatViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageTextField: UITextView!
+    @IBOutlet weak var messageInputHieght: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var micButton: UIButton!
+    @IBOutlet weak var sendMessageButton: UIButton!
+    var users: [String] = []
     
+    lazy var titleLabel: UILabel = {
+        
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .left
+        titleLabel.font = UIFont(name: "Inter-Regular", size: 14)
+        titleLabel.textColor = .appTileGreen
+        return titleLabel
+    }()
+    
+    lazy var subTitle: UILabel = {
+        let subtitleLabel = UILabel()
+        subtitleLabel.textAlignment = .left
+        subtitleLabel.font = UIFont(name: "Inter-Regular", size: 14)
+        subtitleLabel.textColor = .appLightGreen
+        return subtitleLabel
+    }()
+    
+    lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, subTitle])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    lazy var documentPicker = DocumentPicker(viewController: self, delegate: self)
+    lazy var imagePicker: ImagePicker = ImagePicker(presentationController: self, delegate: self)
+
 
     // MARK: - Public properties -
 
@@ -28,4 +62,27 @@ final class ChatViewController: UIViewController {
 // MARK: - Extensions -
 
 extension ChatViewController: ChatViewInterface {
+}
+
+
+// MARK: - Document picker
+extension ChatViewController: DocumentPickerProtocol {
+    func didPickDocument(document: Document?) {
+        
+    }
+    
+    func didTapdismiss() {
+        
+    }
+    
+    
+}
+
+// MARK: - Image picker
+extension ChatViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        
+    }
+    
+    
 }
