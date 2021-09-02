@@ -64,6 +64,18 @@
 		5D4B583526E0EC81005185AE /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B583326E0EC81005185AE /* CreateGroupCell.xib */; };
 		5D4B583A26E0EDB8005185AE /* CreateGroupPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B583826E0EDB8005185AE /* CreateGroupPopUp.xib */; };
 		5D4B583B26E0EDB8005185AE /* CreateGroupPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B583926E0EDB8005185AE /* CreateGroupPopUp.swift */; };
+		5D4B584526E0F625005185AE /* Calling.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B583F26E0F625005185AE /* Calling.storyboard */; };
+		5D4B584626E0F625005185AE /* CallingInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584026E0F625005185AE /* CallingInterfaces.swift */; };
+		5D4B584726E0F625005185AE /* CallingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584126E0F625005185AE /* CallingPresenter.swift */; };
+		5D4B584826E0F625005185AE /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584226E0F625005185AE /* CallingViewController.swift */; };
+		5D4B584926E0F625005185AE /* CallingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584326E0F625005185AE /* CallingInteractor.swift */; };
+		5D4B584A26E0F625005185AE /* CallingWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584426E0F625005185AE /* CallingWireframe.swift */; };
+		5D4B585226E0F66D005185AE /* IncomingCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584C26E0F66D005185AE /* IncomingCall.swift */; };
+		5D4B585326E0F66D005185AE /* IncomingCall.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B584D26E0F66D005185AE /* IncomingCall.xib */; };
+		5D4B585426E0F66D005185AE /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B584E26E0F66D005185AE /* VideoCell.swift */; };
+		5D4B585526E0F66D005185AE /* GroupCallingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B584F26E0F66D005185AE /* GroupCallingView.xib */; };
+		5D4B585626E0F66D005185AE /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B585026E0F66D005185AE /* VideoCell.xib */; };
+		5D4B585726E0F66D005185AE /* GroupCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585126E0F66D005185AE /* GroupCallingView.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -194,6 +206,18 @@
 		5D4B583326E0EC81005185AE /* CreateGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupCell.xib; sourceTree = "<group>"; };
 		5D4B583826E0EDB8005185AE /* CreateGroupPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupPopUp.xib; sourceTree = "<group>"; };
 		5D4B583926E0EDB8005185AE /* CreateGroupPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupPopUp.swift; sourceTree = "<group>"; };
+		5D4B583F26E0F625005185AE /* Calling.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calling.storyboard; sourceTree = "<group>"; };
+		5D4B584026E0F625005185AE /* CallingInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingInterfaces.swift; sourceTree = "<group>"; };
+		5D4B584126E0F625005185AE /* CallingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingPresenter.swift; sourceTree = "<group>"; };
+		5D4B584226E0F625005185AE /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
+		5D4B584326E0F625005185AE /* CallingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingInteractor.swift; sourceTree = "<group>"; };
+		5D4B584426E0F625005185AE /* CallingWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingWireframe.swift; sourceTree = "<group>"; };
+		5D4B584C26E0F66D005185AE /* IncomingCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingCall.swift; sourceTree = "<group>"; };
+		5D4B584D26E0F66D005185AE /* IncomingCall.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomingCall.xib; sourceTree = "<group>"; };
+		5D4B584E26E0F66D005185AE /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		5D4B584F26E0F66D005185AE /* GroupCallingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupCallingView.xib; sourceTree = "<group>"; };
+		5D4B585026E0F66D005185AE /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
+		5D4B585126E0F66D005185AE /* GroupCallingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCallingView.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -416,6 +440,33 @@
 			path = Popup;
 			sourceTree = "<group>";
 		};
+		5D4B583C26E0F5FD005185AE /* Calling */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B584B26E0F66D005185AE /* Xib */,
+				5D4B583F26E0F625005185AE /* Calling.storyboard */,
+				5D4B584026E0F625005185AE /* CallingInterfaces.swift */,
+				5D4B584126E0F625005185AE /* CallingPresenter.swift */,
+				5D4B584226E0F625005185AE /* CallingViewController.swift */,
+				5D4B584326E0F625005185AE /* CallingInteractor.swift */,
+				5D4B584426E0F625005185AE /* CallingWireframe.swift */,
+			);
+			path = Calling;
+			sourceTree = "<group>";
+		};
+		5D4B584B26E0F66D005185AE /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B584C26E0F66D005185AE /* IncomingCall.swift */,
+				5D4B584D26E0F66D005185AE /* IncomingCall.xib */,
+				5D4B584E26E0F66D005185AE /* VideoCell.swift */,
+				5D4B584F26E0F66D005185AE /* GroupCallingView.xib */,
+				5D4B585026E0F66D005185AE /* VideoCell.xib */,
+				5D4B585126E0F66D005185AE /* GroupCallingView.swift */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
 		5D8199AA26DCC10100B37B72 = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +509,7 @@
 		5D8199CA26DCC17700B37B72 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B583C26E0F5FD005185AE /* Calling */,
 				5D4B580126E0AB0B005185AE /* CreateGroup */,
 				5D4B57EB26DF9373005185AE /* Contact */,
 				5D4B57A926DF63B4005185AE /* Chat */,
@@ -664,17 +716,21 @@
 				5D4B57DD26DF6F7E005185AE /* OutgoingAttachementCell.xib in Resources */,
 				5D819A1C26DCF22B00B37B72 /* Signup.storyboard in Resources */,
 				5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */,
+				5D4B585526E0F66D005185AE /* GroupCallingView.xib in Resources */,
 				5D819A0E26DCE7E700B37B72 /* Channel.storyboard in Resources */,
 				5D4B57DC26DF6F7E005185AE /* IncomingTextCell.xib in Resources */,
 				5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */,
+				5D4B585626E0F66D005185AE /* VideoCell.xib in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
 				5D4B583526E0EC81005185AE /* CreateGroupCell.xib in Resources */,
 				5D4B583A26E0EDB8005185AE /* CreateGroupPopUp.xib in Resources */,
 				5D4B57D226DF6F7E005185AE /* IncomingAttachmentCell.xib in Resources */,
 				5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */,
+				5D4B585326E0F66D005185AE /* IncomingCall.xib in Resources */,
 				5D4B57F226DF93A6005185AE /* Contact.storyboard in Resources */,
 				5D4B57D526DF6F7E005185AE /* OutgoingAudioCell.xib in Resources */,
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
+				5D4B584526E0F625005185AE /* Calling.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
 				5D8199F926DCC9B200B37B72 /* Assets.xcassets in Resources */,
 				5D4B57D326DF6F7E005185AE /* OutgoingTextCell.xib in Resources */,
@@ -738,6 +794,7 @@
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
 				5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */,
 				5D4B57D626DF6F7E005185AE /* IncomingAttachmentCell.swift in Sources */,
+				5D4B585426E0F66D005185AE /* VideoCell.swift in Sources */,
 				5D4B57EA26DF8E40005185AE /* UInt+Extension.swift in Sources */,
 				5D819A3026DE2E8400B37B72 /* ChannelCell.swift in Sources */,
 				5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */,
@@ -748,6 +805,7 @@
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
 				5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
+				5D4B584A26E0F625005185AE /* CallingWireframe.swift in Sources */,
 				5D8199E826DCC48000B37B72 /* BaseWireframe.swift in Sources */,
 				5D4B579826DE45F8005185AE /* ProgressHud.swift in Sources */,
 				5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */,
@@ -756,6 +814,7 @@
 				5D4B580C26E0AB1D005185AE /* CreateGroupInteractor.swift in Sources */,
 				5D4B57F526DF93A6005185AE /* ContactViewController.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
+				5D4B584726E0F625005185AE /* CallingPresenter.swift in Sources */,
 				5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
@@ -769,6 +828,7 @@
 				5D819A0F26DCE7E700B37B72 /* ChannelInterfaces.swift in Sources */,
 				5D819A2326DCF34600B37B72 /* SignupRequest.swift in Sources */,
 				5D4B57E626DF74B0005185AE /* Notification+Extension.swift in Sources */,
+				5D4B584826E0F625005185AE /* CallingViewController.swift in Sources */,
 				5D8199D226DCC29C00B37B72 /* BaseDataStore.swift in Sources */,
 				5D4B57F726DF93A6005185AE /* ContactWireframe.swift in Sources */,
 				5D4B57F326DF93A6005185AE /* ContactInterfaces.swift in Sources */,
@@ -784,19 +844,23 @@
 				5D4B57E226DF7110005185AE /* TextView+Extensions.swift in Sources */,
 				5D4B57B826DF6EA2005185AE /* ImagePicker.swift in Sources */,
 				5D4B57DB26DF6F7E005185AE /* IncomingAudioCell.swift in Sources */,
+				5D4B585226E0F66D005185AE /* IncomingCall.swift in Sources */,
 				5D8199D826DCC35500B37B72 /* VDOTOKObject.swift in Sources */,
 				5D4B57F426DF93A6005185AE /* ContactPresenter.swift in Sources */,
 				5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */,
 				5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */,
 				5D4B580A26E0AB1D005185AE /* CreateGroupPresenter.swift in Sources */,
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,
+				5D4B584926E0F625005185AE /* CallingInteractor.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
+				5D4B584626E0F625005185AE /* CallingInterfaces.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
 				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
 				5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */,
 				5D4B57F626DF93A6005185AE /* ContactInteractor.swift in Sources */,
 				5D4B583B26E0EDB8005185AE /* CreateGroupPopUp.swift in Sources */,
+				5D4B585726E0F66D005185AE /* GroupCallingView.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
 				5D4B580F26E0B00C005185AE /* CreateGroupRequest.swift in Sources */,
 				5D4B57E426DF7390005185AE /* ChatEntity.swift in Sources */,
