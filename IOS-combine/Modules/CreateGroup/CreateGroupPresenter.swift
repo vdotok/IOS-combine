@@ -93,8 +93,7 @@ extension CreateGroupPresenter {
 }
 
 extension CreateGroupPresenter: CreateGroupPresenterInterface {
-  
-    
+
     func rowsCount() -> Int {
         return isSearching ? searchContacts.count : contacts.count
     }
@@ -173,6 +172,10 @@ extension CreateGroupPresenter: CreateGroupPresenterInterface {
                 
             }
         }
+    }
+    func moveToChat(group: Group) {
+        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        wireframe.moveToChat(with: client, group: group, user: user)
     }
     
 }

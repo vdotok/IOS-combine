@@ -26,6 +26,7 @@ final class CreateGroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        configureAppearance()
         presenter.viewModelDidLoad()
         
     }
@@ -50,11 +51,8 @@ final class CreateGroupViewController: UIViewController {
             case .reload:
                 tableView.reloadData()
             case .groupCreated(group: let group):
-                break
-            //       moveToChat(group: group, isExist: false)
-            //                self.navigationController?.popToRootViewController(animated: true)
-            default:
-                break
+                   moveToChat(group: group, isExist: false)
+          
             }
         }
         
@@ -62,16 +60,12 @@ final class CreateGroupViewController: UIViewController {
     
     func moveToChat(group: Group, isExist: Bool) {
         
-        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         if !isExist {
             NotificationCenter.default.post(name: .didGroupCreated,
                                             object: self,
                                             userInfo: ["model" : group])
         }
-     
-//        let builder = ChatScreenBuilder()
-//            .build(with: self.navigationController, client: viewModel.client, group: group, user: user, messages: [])
-//        self.navigationController?.pushViewController(builder, animated: true)
+        presenter.moveToChat(group: group)
 
     }
 }
@@ -121,10 +115,8 @@ extension CreateGroupViewController {
             present(vc, animated: true, completion: nil)
             vc.delegate = self
             blurView.isHidden = false
-
         }
-        
-       
+
     }
     
     @objc func didTapBackButton() {

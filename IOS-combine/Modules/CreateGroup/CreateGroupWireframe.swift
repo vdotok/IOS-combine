@@ -33,4 +33,9 @@ final class CreateGroupWireframe: BaseWireframe<CreateGroupViewController> {
 // MARK: - Extensions -
 
 extension CreateGroupWireframe: CreateGroupWireframeInterface {
+    func moveToChat(with client: ChatClient, group: Group, user: UserResponse) {
+        let frame = ChatWireframe(client: client, group: group, user: user, messages: [])
+        navigationController?.pushWireframe(frame)
+    }
+    
 }

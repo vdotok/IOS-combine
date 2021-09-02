@@ -54,6 +54,10 @@ final class ChannelPresenter {
         case failure(message: String)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NotifyCallType.notificationName, object: nil)
+    }
+    
 }
 
 // MARK: - Extensions -
@@ -217,7 +221,7 @@ extension ChannelPresenter: SDKConnectionDelegate {
 // MARK: Connect
 extension ChannelPresenter {
     func conncectMqtt() {
-         
+        
         guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         let host = user.messagingServerMap.host
         guard let port = UInt16(user.messagingServerMap.port) else {return}
@@ -229,7 +233,7 @@ extension ChannelPresenter {
                             userName: userName!,
                             password: password!,
                             reConnectivity: true)
-      mqttClient = ChatClient(client: client, presense: self, connectivity: self, messageDelegate: self, customPacketDelegate: self)
+        mqttClient = ChatClient(client: client, presense: self, connectivity: self, messageDelegate: self, customPacketDelegate: self)
         mqttClient?.connect()
         setDelegate()
     }
@@ -297,6 +301,19 @@ extension ChannelPresenter {
             }
         }
         return uniquePosts
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        guard let info = notification.object as? [AnyHashable: Any],
+              let callType = info["callType"] as? String,
+              let groupId = info["groupId"] as? Int,
+              let group = groups.first(where: { $0.id == groupId }) else {return}
+        
+        if callType == NotifyCallType.audio.callType {
+            // moveToAudio(users: group.participants)
+        } else if callType == NotifyCallType.video.callType {
+            //  moveToVideo(users: group.participants)
+        }
     }
 }
 

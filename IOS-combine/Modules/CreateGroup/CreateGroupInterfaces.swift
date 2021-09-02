@@ -15,6 +15,8 @@ typealias CreateGroupOutput = (CreateGroupPresenter.Output) -> Void
 
 
 protocol CreateGroupWireframeInterface: WireframeInterface {
+    
+    func moveToChat(with client: ChatClient, group: Group, user: UserResponse)
 }
 
 protocol CreateGroupViewInterface: ViewInterface {
@@ -37,6 +39,7 @@ protocol CreateGroupPresenterInterface: PresenterInterface {
     func check(id: Int) -> Bool
     func createGroup(with title: String)
     func createGroup(with user: User)
+    func moveToChat(group: Group)
 }
 
 protocol CreateGroupInteractorInterface: InteractorInterface {
