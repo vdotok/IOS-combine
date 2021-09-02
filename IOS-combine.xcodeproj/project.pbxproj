@@ -60,6 +60,10 @@
 		5D4B580D26E0AB1D005185AE /* CreateGroupWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580726E0AB1D005185AE /* CreateGroupWireframe.swift */; };
 		5D4B580F26E0B00C005185AE /* CreateGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580E26E0B00C005185AE /* CreateGroupRequest.swift */; };
 		5D4B581126E0B625005185AE /* AllUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B581026E0B625005185AE /* AllUserRequest.swift */; };
+		5D4B583426E0EC81005185AE /* CreateGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B583226E0EC81005185AE /* CreateGroupCell.swift */; };
+		5D4B583526E0EC81005185AE /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B583326E0EC81005185AE /* CreateGroupCell.xib */; };
+		5D4B583A26E0EDB8005185AE /* CreateGroupPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B583826E0EDB8005185AE /* CreateGroupPopUp.xib */; };
+		5D4B583B26E0EDB8005185AE /* CreateGroupPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B583926E0EDB8005185AE /* CreateGroupPopUp.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -186,6 +190,10 @@
 		5D4B580726E0AB1D005185AE /* CreateGroupWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupWireframe.swift; sourceTree = "<group>"; };
 		5D4B580E26E0B00C005185AE /* CreateGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupRequest.swift; sourceTree = "<group>"; };
 		5D4B581026E0B625005185AE /* AllUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserRequest.swift; sourceTree = "<group>"; };
+		5D4B583226E0EC81005185AE /* CreateGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupCell.swift; sourceTree = "<group>"; };
+		5D4B583326E0EC81005185AE /* CreateGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupCell.xib; sourceTree = "<group>"; };
+		5D4B583826E0EDB8005185AE /* CreateGroupPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupPopUp.xib; sourceTree = "<group>"; };
+		5D4B583926E0EDB8005185AE /* CreateGroupPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupPopUp.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,6 +315,7 @@
 		5D4B57B626DF6E88005185AE /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B583726E0EDB8005185AE /* Popup */,
 				5D4B57B726DF6EA2005185AE /* ImagePicker.swift */,
 				5D4B57B926DF6ED3005185AE /* DocumentPicker.swift */,
 				5D4B57E126DF7110005185AE /* TextView+Extensions.swift */,
@@ -378,6 +387,7 @@
 		5D4B580126E0AB0B005185AE /* CreateGroup */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B583126E0EC71005185AE /* Cell */,
 				5D4B580226E0AB1D005185AE /* CreateGroup.storyboard */,
 				5D4B580326E0AB1D005185AE /* CreateGroupInterfaces.swift */,
 				5D4B580426E0AB1D005185AE /* CreateGroupPresenter.swift */,
@@ -386,6 +396,24 @@
 				5D4B580726E0AB1D005185AE /* CreateGroupWireframe.swift */,
 			);
 			path = CreateGroup;
+			sourceTree = "<group>";
+		};
+		5D4B583126E0EC71005185AE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B583226E0EC81005185AE /* CreateGroupCell.swift */,
+				5D4B583326E0EC81005185AE /* CreateGroupCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5D4B583726E0EDB8005185AE /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B583826E0EDB8005185AE /* CreateGroupPopUp.xib */,
+				5D4B583926E0EDB8005185AE /* CreateGroupPopUp.swift */,
+			);
+			path = Popup;
 			sourceTree = "<group>";
 		};
 		5D8199AA26DCC10100B37B72 = {
@@ -640,6 +668,8 @@
 				5D4B57DC26DF6F7E005185AE /* IncomingTextCell.xib in Resources */,
 				5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
+				5D4B583526E0EC81005185AE /* CreateGroupCell.xib in Resources */,
+				5D4B583A26E0EDB8005185AE /* CreateGroupPopUp.xib in Resources */,
 				5D4B57D226DF6F7E005185AE /* IncomingAttachmentCell.xib in Resources */,
 				5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */,
 				5D4B57F226DF93A6005185AE /* Contact.storyboard in Resources */,
@@ -766,6 +796,7 @@
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
 				5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */,
 				5D4B57F626DF93A6005185AE /* ContactInteractor.swift in Sources */,
+				5D4B583B26E0EDB8005185AE /* CreateGroupPopUp.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
 				5D4B580F26E0B00C005185AE /* CreateGroupRequest.swift in Sources */,
 				5D4B57E426DF7390005185AE /* ChatEntity.swift in Sources */,
@@ -774,6 +805,7 @@
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,
 				5D819A1F26DCF22B00B37B72 /* SignupViewController.swift in Sources */,
 				5D4B57B326DF63C3005185AE /* ChatViewController.swift in Sources */,
+				5D4B583426E0EC81005185AE /* CreateGroupCell.swift in Sources */,
 				5D819A2826DE125700B37B72 /* Color+Extension.swift in Sources */,
 				5D4B57B226DF63C3005185AE /* ChatPresenter.swift in Sources */,
 				5D8199D426DCC2AF00B37B72 /* Service.swift in Sources */,

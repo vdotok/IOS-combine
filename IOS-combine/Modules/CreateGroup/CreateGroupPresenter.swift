@@ -9,6 +9,7 @@
 //
 
 import Foundation
+import iOSSDKConnect
 
 final class CreateGroupPresenter {
 
@@ -17,21 +18,161 @@ final class CreateGroupPresenter {
     private unowned let view: CreateGroupViewInterface
     private let interactor: CreateGroupInteractorInterface
     private let wireframe: CreateGroupWireframeInterface
+    var output: CreateGroupOutput?
+    var selectedItems: [Int] = []
+    var contacts: [User] = []
+    var isSearching: Bool = false
+    var searchContacts: [User] = []
+    var client: ChatClient
 
     // MARK: - Lifecycle -
 
     init(
         view: CreateGroupViewInterface,
         interactor: CreateGroupInteractorInterface,
-        wireframe: CreateGroupWireframeInterface
+        wireframe: CreateGroupWireframeInterface,
+        client: ChatClient
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
+        self.client = client
+    }
+    
+    func viewModelDidLoad() {
+        getUsers()
+    }
+    
+    func viewModelWillAppear() {
+        
+    }
+    
+    enum Output {
+        case reload
+        case showProgress
+        case hideProgress
+        case groupCreated(group: Group)
+        case updateRow(index: Int)
+        case failure(message: String)
     }
 }
 
 // MARK: - Extensions -
 
+extension CreateGroupPresenter {
+    private func getUsers() {
+        output?(.showProgress)
+        interactor.fetchUsers { [weak self] (result) in
+            guard let self = self else {return}
+            self.output?(.hideProgress)
+            switch result {
+            case .success(let response):
+                switch  response.status {
+                case 503:
+                    self.output?(.failure(message: response.message ))
+                case 500:
+                    self.output?(.failure(message: response.message))
+                case 401:
+                    self.output?(.failure(message: response.message))
+                case 200:
+                    self.contacts = response.users
+                    self.searchContacts = self.contacts
+                    DispatchQueue.main.async {
+                        self.output?(.reload)
+                    }
+                    
+                default:
+                    break
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
 extension CreateGroupPresenter: CreateGroupPresenterInterface {
+  
+    
+    func rowsCount() -> Int {
+        return isSearching ? searchContacts.count : contacts.count
+    }
+    
+    func viewModelItem(row: Int) -> User {
+        return isSearching ? searchContacts[row] : contacts[row]
+    }
+    
+    func filterGroups(with text: String) {
+        self.searchContacts = contacts.filter({$0.fullName.lowercased().prefix(text.count) == text.lowercased()})
+        output?(.reload)
+    }
+    
+    func deleteUser(id: Int) {
+        let index = selectedItems.firstIndex(of: id)
+        selectedItems.remove(at: index!)
+    }
+    
+    func addUser(userId: Int, row: Int) {
+        if selectedItems.contains(userId) {
+           deleteUser(id: userId)
+            output?(.updateRow(index: row))
+        } else {
+            if selectedItems.count == 4 {
+                output?(.failure(message: "You can only select 4 participants"))
+                return
+                
+            }
+            selectedItems.append(userId)
+            output?(.updateRow(index: row))
+        }
+    }
+    
+    func check(id: Int) -> Bool {
+        selectedItems.contains(id) ? false : true
+    }
+    
+    func createGroup(with title: String) {
+        let request = CreateGroupRequest(groupTitle: title, participants: selectedItems)
+        output?(.showProgress)
+        interactor.createGroup(with: request) { [weak self] (result) in
+            guard let self = self else {return }
+            self.output?(.hideProgress)
+            switch result {
+            case .success(let response):
+                guard let group = response.group else {return }
+                DispatchQueue.main.async {
+                    self.output?(.groupCreated(group: group))
+                }
+                
+                
+            case .failure(let error):
+                self.output?(.failure(message: error.localizedDescription))
+                print(error)
+            }
+        }
+    }
+    
+    func createGroup(with user: User) {
+        guard let myUser = VDOTOKObject<UserResponse>().getData() else {return}
+        let groupName: String = myUser.fullName! + " - " + user.fullName
+        let request = CreateGroupRequest(groupTitle: groupName, participants: [user.userID], autoCreated: 1)
+        output?(.showProgress)
+        interactor.createGroup(with: request) { [weak self] (result) in
+            guard let self = self else {return}
+            self.output?(.hideProgress)
+            switch result {
+            case .success(let response):
+                guard let group = response.group else {return}
+                DispatchQueue.main.async {
+                    self.output?(.groupCreated(group: group))
+                }
+                
+            case .failure(let error):
+                self.output?(.failure(message: error.localizedDescription))
+                
+            }
+        }
+    }
+    
 }

@@ -10,10 +10,64 @@
 
 import Foundation
 
-final class CreateGroupInteractor {
+typealias GroupComplition = ((Result<CreateGroupResponse, Error>) -> Void)
+
+final class CreateGroupInteractor: BaseDataStore {
+    let translator: ObjectTranslator
+    
+    init(service: Service, translator: ObjectTranslator = ObjectTranslation()) {
+        self.translator = translator
+        super.init(service: service)
+    }
 }
 
 // MARK: - Extensions -
 
 extension CreateGroupInteractor: CreateGroupInteractorInterface {
+ 
+    func createGroup(with request: CreateGroupRequest, complition: @escaping GroupComplition) {
+        service.post(request: request) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                self.translate(data: data, complition: complition)
+            case .failure(let error):
+                complition(.failure(error))
+            }
+        }
+    }
+    
+    func fetchUsers(complition: @escaping AllUserComplition) {
+        service.get(request: AllUserRequest()) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                self.translate(data: data, complition: complition)
+            case .failure(let error):
+                complition(.failure(error))
+            }
+        }
+    }
+    
+    private func translate(data: Data, complition: GroupComplition) {
+        do {
+            let response: CreateGroupResponse = try translator.decodeObject(data: data)
+            complition(.success(response))
+        }
+        catch {
+            complition(.failure(error))
+        }
+    }
+    
+    private func translate(data: Data, complition: AllUserComplition) {
+        do {
+            let response: AllUsersResponse = try translator.decodeObject(data: data)
+            complition(.success(response))
+        } catch {
+            complition(.failure(error))
+        }
+    }
+    
+    
+
 }

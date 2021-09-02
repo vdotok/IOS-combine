@@ -42,7 +42,7 @@ extension ContactWireframe: ContactWireframeInterface {
             let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [])
             navigationController?.pushWireframe(wireFrame)
         case .createGroup:
-            navigationController?.pushWireframe(CreateGroupWireframe())
+            navigationController?.pushWireframe(CreateGroupWireframe(client: client))
         }
     }
     

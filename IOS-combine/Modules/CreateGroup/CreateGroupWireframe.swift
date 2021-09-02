@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKConnect
 
 final class CreateGroupWireframe: BaseWireframe<CreateGroupViewController> {
 
@@ -18,12 +19,12 @@ final class CreateGroupWireframe: BaseWireframe<CreateGroupViewController> {
 
     // MARK: - Module setup -
 
-    init() {
+    init(client: ChatClient) {
         let moduleViewController = storyboard.instantiateViewController(ofType: CreateGroupViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = CreateGroupInteractor()
-        let presenter = CreateGroupPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        let interactor = CreateGroupInteractor(service: NetworkService())
+        let presenter = CreateGroupPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client)
         moduleViewController.presenter = presenter
     }
 
