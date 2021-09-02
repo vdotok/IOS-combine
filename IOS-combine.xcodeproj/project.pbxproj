@@ -52,6 +52,14 @@
 		5D4B57FC26DF9800005185AE /* ContactEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57FB26DF9800005185AE /* ContactEntity.swift */; };
 		5D4B57FF26DF9A11005185AE /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B57FD26DF9A11005185AE /* ContactCell.swift */; };
 		5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B57FE26DF9A11005185AE /* ContactCell.xib */; };
+		5D4B580826E0AB1D005185AE /* CreateGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B580226E0AB1D005185AE /* CreateGroup.storyboard */; };
+		5D4B580926E0AB1D005185AE /* CreateGroupInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580326E0AB1D005185AE /* CreateGroupInterfaces.swift */; };
+		5D4B580A26E0AB1D005185AE /* CreateGroupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580426E0AB1D005185AE /* CreateGroupPresenter.swift */; };
+		5D4B580B26E0AB1D005185AE /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580526E0AB1D005185AE /* CreateGroupViewController.swift */; };
+		5D4B580C26E0AB1D005185AE /* CreateGroupInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580626E0AB1D005185AE /* CreateGroupInteractor.swift */; };
+		5D4B580D26E0AB1D005185AE /* CreateGroupWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580726E0AB1D005185AE /* CreateGroupWireframe.swift */; };
+		5D4B580F26E0B00C005185AE /* CreateGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B580E26E0B00C005185AE /* CreateGroupRequest.swift */; };
+		5D4B581126E0B625005185AE /* AllUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B581026E0B625005185AE /* AllUserRequest.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -170,6 +178,14 @@
 		5D4B57FB26DF9800005185AE /* ContactEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEntity.swift; sourceTree = "<group>"; };
 		5D4B57FD26DF9A11005185AE /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		5D4B57FE26DF9A11005185AE /* ContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
+		5D4B580226E0AB1D005185AE /* CreateGroup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateGroup.storyboard; sourceTree = "<group>"; };
+		5D4B580326E0AB1D005185AE /* CreateGroupInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupInterfaces.swift; sourceTree = "<group>"; };
+		5D4B580426E0AB1D005185AE /* CreateGroupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPresenter.swift; sourceTree = "<group>"; };
+		5D4B580526E0AB1D005185AE /* CreateGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		5D4B580626E0AB1D005185AE /* CreateGroupInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupInteractor.swift; sourceTree = "<group>"; };
+		5D4B580726E0AB1D005185AE /* CreateGroupWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupWireframe.swift; sourceTree = "<group>"; };
+		5D4B580E26E0B00C005185AE /* CreateGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupRequest.swift; sourceTree = "<group>"; };
+		5D4B581026E0B625005185AE /* AllUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserRequest.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -344,6 +360,8 @@
 				5D4B57F026DF93A6005185AE /* ContactInteractor.swift */,
 				5D4B57F126DF93A6005185AE /* ContactWireframe.swift */,
 				5D4B57FB26DF9800005185AE /* ContactEntity.swift */,
+				5D4B580E26E0B00C005185AE /* CreateGroupRequest.swift */,
+				5D4B581026E0B625005185AE /* AllUserRequest.swift */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -355,6 +373,19 @@
 				5D4B57FE26DF9A11005185AE /* ContactCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5D4B580126E0AB0B005185AE /* CreateGroup */ = {
+			isa = PBXGroup;
+			children = (
+				5D4B580226E0AB1D005185AE /* CreateGroup.storyboard */,
+				5D4B580326E0AB1D005185AE /* CreateGroupInterfaces.swift */,
+				5D4B580426E0AB1D005185AE /* CreateGroupPresenter.swift */,
+				5D4B580526E0AB1D005185AE /* CreateGroupViewController.swift */,
+				5D4B580626E0AB1D005185AE /* CreateGroupInteractor.swift */,
+				5D4B580726E0AB1D005185AE /* CreateGroupWireframe.swift */,
+			);
+			path = CreateGroup;
 			sourceTree = "<group>";
 		};
 		5D8199AA26DCC10100B37B72 = {
@@ -399,6 +430,7 @@
 		5D8199CA26DCC17700B37B72 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5D4B580126E0AB0B005185AE /* CreateGroup */,
 				5D4B57EB26DF9373005185AE /* Contact */,
 				5D4B57A926DF63B4005185AE /* Chat */,
 				5D819A1526DCF02A00B37B72 /* Signup */,
@@ -599,6 +631,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D4B580826E0AB1D005185AE /* CreateGroup.storyboard in Resources */,
 				5D4B57D726DF6F7E005185AE /* outgoingImageCell.xib in Resources */,
 				5D4B57DD26DF6F7E005185AE /* OutgoingAttachementCell.xib in Resources */,
 				5D819A1C26DCF22B00B37B72 /* Signup.storyboard in Resources */,
@@ -690,12 +723,14 @@
 				5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */,
 				5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */,
 				5D4B57DA26DF6F7E005185AE /* IncomingImageCell.swift in Sources */,
+				5D4B580C26E0AB1D005185AE /* CreateGroupInteractor.swift in Sources */,
 				5D4B57F526DF93A6005185AE /* ContactViewController.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
 				5D4B57D126DF6F7E005185AE /* OutgoingTextCell.swift in Sources */,
+				5D4B580D26E0AB1D005185AE /* CreateGroupWireframe.swift in Sources */,
 				5D4B57FC26DF9800005185AE /* ContactEntity.swift in Sources */,
 				5D819A2126DCF22B00B37B72 /* SignupWireframe.swift in Sources */,
 				5D4B57B526DF63C3005185AE /* ChatWireframe.swift in Sources */,
@@ -713,6 +748,7 @@
 				5D819A1D26DCF22B00B37B72 /* SignupInterfaces.swift in Sources */,
 				5D819A0226DCCE6A00B37B72 /* ObjectTranslation.swift in Sources */,
 				5D8199D026DCC27100B37B72 /* ApiRequest.swift in Sources */,
+				5D4B581126E0B625005185AE /* AllUserRequest.swift in Sources */,
 				5D4B57CF26DF6F7E005185AE /* AttachmentViewController.swift in Sources */,
 				5D8199F226DCC62F00B37B72 /* UIStoryboard+Extension.swift in Sources */,
 				5D4B57E226DF7110005185AE /* TextView+Extensions.swift in Sources */,
@@ -722,6 +758,7 @@
 				5D4B57F426DF93A6005185AE /* ContactPresenter.swift in Sources */,
 				5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */,
 				5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */,
+				5D4B580A26E0AB1D005185AE /* CreateGroupPresenter.swift in Sources */,
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
@@ -730,14 +767,17 @@
 				5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */,
 				5D4B57F626DF93A6005185AE /* ContactInteractor.swift in Sources */,
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
+				5D4B580F26E0B00C005185AE /* CreateGroupRequest.swift in Sources */,
 				5D4B57E426DF7390005185AE /* ChatEntity.swift in Sources */,
 				5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */,
+				5D4B580926E0AB1D005185AE /* CreateGroupInterfaces.swift in Sources */,
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,
 				5D819A1F26DCF22B00B37B72 /* SignupViewController.swift in Sources */,
 				5D4B57B326DF63C3005185AE /* ChatViewController.swift in Sources */,
 				5D819A2826DE125700B37B72 /* Color+Extension.swift in Sources */,
 				5D4B57B226DF63C3005185AE /* ChatPresenter.swift in Sources */,
 				5D8199D426DCC2AF00B37B72 /* Service.swift in Sources */,
+				5D4B580B26E0AB1D005185AE /* CreateGroupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

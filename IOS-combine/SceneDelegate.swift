@@ -24,7 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.overrideUserInterfaceStyle = .light
    
         let navigationControlr = UINavigationController()
-        navigationControlr.setRootWireframe(LoginWireframe())
+        guard let _ =  VDOTOKObject<UserResponse>().getData() else {
+            navigationControlr.setRootWireframe(LoginWireframe())
+            self.window?.rootViewController = navigationControlr
+            window?.makeKeyAndVisible()
+            return
+        }
+        navigationControlr.setRootWireframe(ChannelWireframe())
         self.window?.rootViewController = navigationControlr
         window?.makeKeyAndVisible()
         

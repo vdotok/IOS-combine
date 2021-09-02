@@ -96,7 +96,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="QPM-sC-Kq5">
                                                 <rect key="frame" x="19.5" y="301.5" width="196" height="204"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcK-Id-32u" customClass="NextButton" customModule="iOS_combine" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcK-Id-32u" customClass="NextButton" customModule="IOS_combine" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="196" height="56"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="196" id="CDf-di-CEA"/>
@@ -107,7 +107,7 @@
                                                             <action selector="didTapNewChat:" destination="S4p-Gu-euc" eventType="touchUpInside" id="rZF-Lu-Hw5"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4T-mi-lXa" customClass="IndigoButton" customModule="iOS_combine" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4T-mi-lXa" customClass="IndigoButton" customModule="IOS_combine" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="74" width="196" height="56"/>
                                                         <state key="normal" title="REFRESH"/>
                                                         <connections>

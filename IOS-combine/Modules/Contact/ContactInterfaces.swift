@@ -10,9 +10,12 @@
 
 import UIKit
 import iOSSDKConnect
+
 typealias ContactOutput = (ContactPresenter.Output) -> Void
+typealias AllUserComplition = ((Result<AllUsersResponse, Error>) -> Void)
 
 protocol ContactWireframeInterface: WireframeInterface {
+    func navigate(to : ContactNavigationOptions, client: ChatClient, group: Group?, user: UserResponse?)
 }
 
 protocol ContactViewInterface: ViewInterface {
@@ -30,7 +33,10 @@ protocol ContactPresenterInterface: PresenterInterface {
     func viewModelItem(row: Int) -> User
     func filterGroups(with text: String)
     func createGroup(with user: User)
+    func navigate(to : ContactNavigationOptions, group: Group?)
 }
 
 protocol ContactInteractorInterface: InteractorInterface {
+    func createGroup(with request: CreateGroupRequest, complition: @escaping ContactComplition)
+    func fetchAllUser(complition: @escaping AllUserComplition)
 }

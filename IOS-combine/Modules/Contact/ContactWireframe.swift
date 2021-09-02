@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKConnect
 
 final class ContactWireframe: BaseWireframe<ContactViewController> {
 
@@ -18,12 +19,12 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
 
     // MARK: - Module setup -
 
-    init() {
+    init(client: ChatClient) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ContactViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = ContactInteractor()
-        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        let interactor = ContactInteractor(service: NetworkService())
+        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client)
         moduleViewController.presenter = presenter
     }
 
@@ -32,4 +33,18 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
 // MARK: - Extensions -
 
 extension ContactWireframe: ContactWireframeInterface {
+    func navigate(to: ContactNavigationOptions, client: ChatClient, group: Group? = nil, user: UserResponse? = nil) {
+        switch to {
+        case .chat:
+            guard let group = group,
+                  let user = user
+            else { return }
+            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [])
+            navigationController?.pushWireframe(wireFrame)
+        case .createGroup:
+            navigationController?.pushWireframe(CreateGroupWireframe())
+        }
+    }
+    
+
 }

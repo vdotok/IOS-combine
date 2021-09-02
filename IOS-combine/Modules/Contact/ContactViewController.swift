@@ -32,6 +32,10 @@ final class ContactViewController: UIViewController {
         presenter.viewModelDidLoad()
     }
     
+    @IBAction func didTapAddContact(_ sender: UIButton) {
+        presenter.navigate(to: .createGroup, group: nil)
+    }
+    
     func bindViewModel() {
         presenter.output = { [unowned self] output in
             switch output {
@@ -48,7 +52,7 @@ final class ContactViewController: UIViewController {
                 }
             case .groupCreated(group: let group, isExit: let isExit):
                 moveToChat(group: group, isExist: isExit)
-            case .alreadyCreated(message: let message):
+            case .alreadyCreated(_):
                 break
             }
         }
@@ -103,7 +107,12 @@ extension ContactViewController {
     }
     
     func moveToChat(group: Group, isExist: Bool) {
-        
+        if !isExist {
+            NotificationCenter.default.post(name: .didGroupCreated,
+                                            object: self,
+                                            userInfo: ["model" : group])
+        }
+        presenter.navigate(to: .chat, group: group)
     }
 
 }

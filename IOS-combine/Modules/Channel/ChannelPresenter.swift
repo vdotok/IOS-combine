@@ -59,7 +59,7 @@ final class ChannelPresenter {
 // MARK: - Extensions -
 
 extension ChannelPresenter: ChannelPresenterInterface {
- 
+  
     func viewDidLoad() {
         fetchGroups()
         configureVdotTok()
@@ -151,6 +151,11 @@ extension ChannelPresenter: ChannelPresenterInterface {
     func logout() {
         mqttClient?.disConnect()
         vtokSdk?.closeConnection()
+    }
+    
+    func moveToCreateGroup() {
+        guard let client = mqttClient else {return}
+        wireframe.moveToCreateGroup(client: client)
     }
     
     

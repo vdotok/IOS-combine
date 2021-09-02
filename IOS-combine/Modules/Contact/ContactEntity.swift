@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ContactNavigationOptions {
+    case chat
+    case createGroup
+}
+
 struct AllUsersResponse: Codable {
     let message: String
     let processTime, status: Int
@@ -31,3 +36,18 @@ struct User: Codable {
         case userID = "user_id"
     }
 }
+struct CreateGroupResponse: Codable {
+    let group: Group?
+    let message: String
+    let processTime, status: Int
+    let isalreadyCreated: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case group, message
+        case processTime = "process_time"
+        case status
+        case isalreadyCreated = "is_already_created"
+        
+    }
+}
+

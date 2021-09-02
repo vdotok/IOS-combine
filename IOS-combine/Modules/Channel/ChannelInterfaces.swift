@@ -23,6 +23,7 @@ typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
 
 protocol ChannelWireframeInterface: WireframeInterface {
     func move(to: ChannelNavigationOptions,client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage])
+    func moveToCreateGroup(client: ChatClient)
 }
 
 protocol ChannelViewInterface: ViewInterface {
@@ -40,6 +41,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     func channelsCount() -> Int
     func logout()
     func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group)
+    func moveToCreateGroup()
    
 
     

@@ -155,10 +155,7 @@ extension ChannelViewController {
     }
     
     @objc func didTappedAdd() {
-//        guard let client = viewModel.mqttClient else {return}
-//        let vc = ContactBuilder()
-//            .build(with: self.navigationController, client: client)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        presenter.moveToCreateGroup()
     }
     
     private func configureEmptyView() {

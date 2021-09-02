@@ -40,5 +40,11 @@ extension ChannelWireframe: ChannelWireframeInterface {
         }
     }
     
+    func moveToCreateGroup(client: ChatClient) {
+        
+        let frame = ContactWireframe(client: client)
+        navigationController?.pushWireframe(frame)
+    }
+    
     
 }

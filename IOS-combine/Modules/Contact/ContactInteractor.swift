@@ -10,10 +10,64 @@
 
 import Foundation
 
-final class ContactInteractor {
+typealias ContactComplition = ((Result<CreateGroupResponse, Error>) -> Void)
+
+final class ContactInteractor: BaseDataStore {
+    let translator: ObjectTranslator
+    
+    init(service: Service, translator: ObjectTranslator = ObjectTranslation() ) {
+        self.translator = translator
+        super.init(service: service)
+    }
 }
 
 // MARK: - Extensions -
 
 extension ContactInteractor: ContactInteractorInterface {
+  
+    func fetchAllUser(complition: @escaping AllUserComplition) {
+        let request = AllUserRequest()
+        service.get(request: request) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                self.translate(data: data, complition: complition)
+            case .failure(let error):
+                complition(.failure(error))
+            }
+        }
+    }
+    
+    func createGroup(with request: CreateGroupRequest, complition: @escaping ContactComplition) {
+        service.post(request: request) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                self.translate(data: data, complition: complition)
+            case .failure(let error):
+                complition(.failure(error))
+            }
+        }
+    }
+    
+   
+    
+    private func translate(data: Data, complition: ContactComplition ) {
+        do {
+            let response: CreateGroupResponse = try translator.decodeObject(data: data)
+            complition(.success(response))
+        } catch {
+            complition(.failure(error))
+        }
+    }
+    
+    
+    private func translate(data: Data, complition: AllUserComplition) {
+        do {
+            let respone: AllUsersResponse = try translator.decodeObject(data: data)
+            complition(.success(respone))
+        } catch {
+            complition(.failure(error))
+        }
+    }
 }

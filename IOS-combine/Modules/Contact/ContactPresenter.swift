@@ -28,11 +28,13 @@ final class ContactPresenter {
     init(
         view: ContactViewInterface,
         interactor: ContactInteractorInterface,
-        wireframe: ContactWireframeInterface
+        wireframe: ContactWireframeInterface,
+        client: ChatClient
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
+        self.client = client
     }
     
     func viewModelDidLoad() {
@@ -68,17 +70,80 @@ extension ContactPresenter: ContactPresenterInterface {
     
     func filterGroups(with text: String) {
         self.searchContacts = contacts.filter({$0.fullName.lowercased().prefix(text.count) == text.lowercased()})
-        
+        output?(.reload)
     }
     
     func createGroup(with user: User) {
-        
+        guard let myUser = VDOTOKObject<UserResponse>().getData() else {return}
+        let groupName: String = myUser.fullName! + " - " + user.fullName
+        let request = CreateGroupRequest(groupTitle: groupName, participants: [user.userID], autoCreated: 1)
+        interactor.createGroup(with: request) { [weak self] result in
+            guard let self = self else {return}
+            self.output?(.hideProgress)
+            switch result {
+            case .success(let response):
+                guard let group = response.group, let isExist = response.isalreadyCreated else {return}
+                DispatchQueue.main.async {
+                    if isExist {
+                        self.output?(.groupCreated(group: group, isExit: true))
+                    } else {
+                        self.output?(.groupCreated(group: group, isExit: false))
+                    }
+                }
+                
+            case .failure(let error):
+                self.output?(.failure(message: error.localizedDescription))
+                
+            }
+        }
+    }
+    
+    func navigate(to: ContactNavigationOptions, group: Group? = nil) {
+        switch to {
+        case .chat:
+            guard let client = client,
+                  let user = VDOTOKObject<UserResponse>().getData(),
+                  let group = group
+            else {return }
+            wireframe.navigate(to: to, client: client, group: group , user: user)
+        case .createGroup:
+            guard let client = client
+            else {return}
+            wireframe.navigate(to: .createGroup, client: client, group: nil, user: nil)
+        }
+
     }
     
 }
 
 extension ContactPresenter {
     func getUsers() {
-        
+        interactor.fetchAllUser { [weak self] result in
+            guard let self = self else {return}
+            self.output?(.hideProgress)
+            switch result {
+            case .success(let response):
+                switch  response.status {
+                case 503:
+                    self.output?(.failure(message: response.message ))
+                case 500:
+                    self.output?(.failure(message: response.message))
+                case 401:
+                    self.output?(.failure(message: response.message))
+                case 200:
+                    self.contacts = response.users
+                    self.searchContacts = self.contacts
+                    DispatchQueue.main.async {
+                        self.output?(.reload)
+                    }
+                    
+                default:
+                    break
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
