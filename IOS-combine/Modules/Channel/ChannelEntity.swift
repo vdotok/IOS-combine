@@ -168,3 +168,17 @@ struct ServerMap: Codable {
         case serverMapProtocol = "protocol"
     }
 }
+
+class AvailableModel: Available, Codable {
+    internal init(key: String, channel: String, changes: Bool, status: Bool) {
+        self.key = key
+        self.channel = channel
+        self.changes = changes
+        self.status = status
+    }
+    
+    var key: String
+    var channel: String
+    var changes: Bool
+    var status: Bool
+}

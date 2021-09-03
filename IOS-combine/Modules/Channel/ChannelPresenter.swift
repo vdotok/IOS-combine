@@ -485,7 +485,14 @@ extension ChannelPresenter: Connectivity {
     }
     
     func didSubscribe(topics: [String]) {
-        
+        let channelArray = topics[0].components(separatedBy: "/")
+        print(channelArray)
+        let presence = Constants.presence
+        let availabe = AvailableModel(key: channelArray[0],
+                                      channel: channelArray[1] + "/",
+                                      changes: true,
+                                      status: true)
+        mqttClient?.presense(topic: presence, presense: availabe)
     }
     
     func didUnSubscribe(topic: String) {
