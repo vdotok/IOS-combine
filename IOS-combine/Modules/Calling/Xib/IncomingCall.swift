@@ -34,7 +34,7 @@ class IncomingCall: UIView {
         case .videoCall:
             title.text = "Incoming Group Video Call from"
             
-            acceptButton.setImage(UIImage(named: "StopVideo"), for: .normal)
+            acceptButton.setImage(UIImage(named: "stopvideo"), for: .normal)
         default:
             break
         }

@@ -23,6 +23,18 @@ final class ChannelInteractor: BaseDataStore {
 // MARK: - Extensions -
 
 extension ChannelInteractor: ChannelInteractorInterface {
+    func fetchUsers(complition: @escaping AllUserComplition) {
+        service.get(request: AllUserRequest()) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let data):
+                self.translate(data: data, complition: complition)
+            case .failure(let error):
+                complition(.failure(error))
+            }
+        }
+    }
+    
     func fetchGroups(complition: @escaping ChannelComplition) {
        let request = AllGroupRequest()
         service.get(request: request) { [weak self] result in
@@ -45,4 +57,12 @@ extension ChannelInteractor: ChannelInteractorInterface {
         }
     }
     
+    private func translate(data: Data, complition: AllUserComplition) {
+        do {
+            let response: AllUsersResponse = try translator.decodeObject(data: data)
+            complition(.success(response))
+        } catch {
+            complition(.failure(error))
+        }
+    }
 }

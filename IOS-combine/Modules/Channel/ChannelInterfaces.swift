@@ -54,4 +54,5 @@ protocol ChannelPresenterInterface: PresenterInterface {
 protocol ChannelInteractorInterface: InteractorInterface {
     
     func fetchGroups(complition: @escaping ChannelComplition)
+    func fetchUsers(complition: @escaping AllUserComplition)
 }

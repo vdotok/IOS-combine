@@ -68,6 +68,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
     func viewDidLoad() {
         fetchGroups()
         configureVdotTok()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: NotifyCallType.notificationName, object: nil)
     }
     
     func viewWillAppear() {
@@ -141,6 +142,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
                         DispatchQueue.main.async {
                             self.channelOutput?(.reload)
                         }
+                        self.fetchUsers()
                     }
                     
                 default:
@@ -151,6 +153,19 @@ extension ChannelPresenter: ChannelPresenterInterface {
                 break
             }
         }
+    }
+    
+    func fetchUsers() {
+        interactor.fetchUsers { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let response):
+                self.contacts = response.users
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
     
     func logout() {
