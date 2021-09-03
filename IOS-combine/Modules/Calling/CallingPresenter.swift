@@ -90,8 +90,7 @@ extension CallingPresenter {
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
-                                              callType: .manytomany,
-                                              connectedUsers: [])
+                                              callType: .manytomany)
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
         callHangupHandling()
