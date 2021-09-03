@@ -72,7 +72,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
     }
     
     func viewWillAppear() {
-        
+        channelOutput?(.reload)
     }
     
     func channelsCount() -> Int {
@@ -135,7 +135,6 @@ extension ChannelPresenter: ChannelPresenterInterface {
                             self.channelOutput?(.reload)
                         }
                        
-                        
                     }else {
                         self.conncectMqtt()
                         self.groups = response.groups ?? []

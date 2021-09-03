@@ -47,7 +47,6 @@ class ChannelCell: UITableViewCell {
                 participentsCount.text = "offline"
             }
             
-            
         } else {
             groupNameLabel.text = model.groupTitle
             participentsCount.text = "\(online)/\(model.participants.count) \(" Online")"
@@ -59,8 +58,6 @@ class ChannelCell: UITableViewCell {
             messageCountLabel.isHidden = false
             messageCountLabel.text = "\(unreadCount)"
         }
-        
-       
     
     }
     
