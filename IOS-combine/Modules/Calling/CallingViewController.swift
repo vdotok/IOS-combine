@@ -59,6 +59,7 @@ final class CallingViewController: UIViewController {
             }
         }
     }
+    
     private func updateVideoView(session: VTokBaseSession) {
         guard let groupCallingView = groupCallingView else {return}
         groupCallingView.updateAudioVideoview(for: session)
