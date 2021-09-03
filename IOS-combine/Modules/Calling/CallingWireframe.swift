@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKStreaming
 
 final class CallingWireframe: BaseWireframe<CallingViewController> {
 
@@ -18,12 +19,14 @@ final class CallingWireframe: BaseWireframe<CallingViewController> {
 
     // MARK: - Module setup -
 
-    init() {
+    init(vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil) {
         let moduleViewController = storyboard.instantiateViewController(ofType: CallingViewController.self)
         super.init(viewController: moduleViewController)
 
         let interactor = CallingInteractor()
-        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+//        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        
+        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact)
         moduleViewController.presenter = presenter
     }
 
@@ -32,4 +35,21 @@ final class CallingWireframe: BaseWireframe<CallingViewController> {
 // MARK: - Extensions -
 
 extension CallingWireframe: CallingWireframeInterface {
+    
+    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User]) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: .videoView, contact: users)
+        navigationController?.viewControllers.last?.presentWireframe(frame)
+    }
+    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User]) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users)
+        navigationController?.presentWireframe(frame)
+
+    }
+    
+    func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User]) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: participants, screenType: .audioView, contact: users)
+        navigationController?.presentWireframe(frame)
+    }
+    
+    
 }

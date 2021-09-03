@@ -25,6 +25,7 @@ final class ChannelPresenter {
     var channelOutput: ChannelOutput?
     var isSearching: Bool = false
     var groups: [Group] = []
+    var contacts: [User] = []
     var vtokSdk: VTokSDK?
     var mqttClient: ChatClient?
     var presentCandidates: [String: [String]] = [:]
@@ -210,7 +211,8 @@ extension ChannelPresenter: SDKConnectionDelegate {
             self.channelOutput?(.disconnected(.stream))
         case .sessionRequest(let sessionRequest):
             guard let sdk = vtokSdk else {return}
-          //  router.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: self.contacts)
+            wireframe.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: contacts)
+         
         }
     }
     
@@ -310,9 +312,22 @@ extension ChannelPresenter {
               let group = groups.first(where: { $0.id == groupId }) else {return}
         
         if callType == NotifyCallType.audio.callType {
-            // moveToAudio(users: group.participants)
+             moveToAudio(users: group.participants)
         } else if callType == NotifyCallType.video.callType {
-            //  moveToVideo(users: group.participants)
+              moveToVideo(users: group.participants)
+        }
+    }
+    
+    func moveToVideo(users: [Participant]) {
+        guard let sdk = vtokSdk else {return}
+        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts)
+    }
+    
+    func moveToAudio(users: [Participant]) {
+        guard let sdk = vtokSdk else {return}
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.wireframe.moveToAudio(sdk: sdk, participants: users, users: self.contacts)
         }
     }
 }

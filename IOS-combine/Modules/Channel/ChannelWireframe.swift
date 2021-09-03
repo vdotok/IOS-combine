@@ -10,6 +10,7 @@
 
 import UIKit
 import iOSSDKConnect
+import iOSSDKStreaming
 
 final class ChannelWireframe: BaseWireframe<ChannelViewController> {
 
@@ -33,6 +34,22 @@ final class ChannelWireframe: BaseWireframe<ChannelViewController> {
 // MARK: - Extensions -
 
 extension ChannelWireframe: ChannelWireframeInterface {
+    
+    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User]) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: .videoView, contact: users)
+        navigationController?.viewControllers.last?.presentWireframe(frame)
+    }
+    
+    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User]) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users)
+        navigationController?.presentWireframe(frame)
+    }
+    
+    func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User]) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: participants, screenType: .audioView, contact: users)
+        navigationController?.presentWireframe(frame)
+    }
+    
     func move(to: ChannelNavigationOptions,client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage]) {
         switch to {
         case .chat:

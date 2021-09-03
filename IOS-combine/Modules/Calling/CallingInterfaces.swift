@@ -9,14 +9,33 @@
 //
 
 import UIKit
+import iOSSDKStreaming
+
+
+typealias CallingOutput = (CallingPresenter.Output) -> Void
 
 protocol CallingWireframeInterface: WireframeInterface {
+   func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User])
+    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User])
+    func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User])
 }
 
 protocol CallingViewInterface: ViewInterface {
 }
 
 protocol CallingPresenterInterface: PresenterInterface {
+    
+    var users: [User]? {get set}
+    var output: CallingOutput? {get set}
+    func viewModelDidLoad()
+    func viewModelWillAppear()
+    func acceptCall(session: VTokBaseSession)
+    func rejectCall(session: VTokBaseSession)
+    func hangupCall(session: VTokBaseSession)
+    func flipCamera(session: VTokBaseSession, state: CameraType)
+    func mute(session: VTokBaseSession, state: AudioState)
+    func speaker(session: VTokBaseSession, state: SpeakerState)
+    func disableVideo(session: VTokBaseSession, state: VideoState)
 }
 
 protocol CallingInteractorInterface: InteractorInterface {

@@ -10,6 +10,7 @@
 
 import UIKit
 import iOSSDKConnect
+import iOSSDKStreaming
 
 enum ChannelNavigationOptions {
     case chat
@@ -24,6 +25,9 @@ typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
 protocol ChannelWireframeInterface: WireframeInterface {
     func move(to: ChannelNavigationOptions,client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage])
     func moveToCreateGroup(client: ChatClient)
+    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User])
+    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User])
+    func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User])
 }
 
 protocol ChannelViewInterface: ViewInterface {
