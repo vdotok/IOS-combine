@@ -78,8 +78,9 @@ final class ChannelViewController: UIViewController {
     
     @IBAction func didTapLogout(_ sender: UIButton) {
         UserDefaults.standard.removeObject(forKey: "UserResponse")
-        navigationController?.presentWireframe(LoginWireframe())
         presenter.logout()
+        navigationController?.presentWireframe(LoginWireframe())
+        
     }
     
     private func bindPresenter() {

@@ -13,9 +13,9 @@ import Foundation
 final class SignupPresenter {
 
     // MARK: - Private properties -
-
+    var output: SingupOutput?
     private unowned let view: SignupViewInterface
-    private let interactor: SignupInteractorInterface
+    var interactor: SignupInteractorInterface
     private let wireframe: SignupWireframeInterface
 
     // MARK: - Lifecycle -
@@ -29,6 +29,12 @@ final class SignupPresenter {
         self.interactor = interactor
         self.wireframe = wireframe
     }
+    
+    enum Output {
+        case showLoading
+        case hideLoading
+        case show(error: String)
+    }
 }
 
 // MARK: - Extensions -
@@ -36,22 +42,27 @@ final class SignupPresenter {
 extension SignupPresenter: SignupPresenterInterface {
     func signup(with userName: String, email: String, password: String) {
         let request = SignupRequest(fullName: userName, email: email, password: password)
-        interactor.singup(with: request) { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let response):
-                self.wireframe.navigate(to: .channel)
-                break
-            case .failure(let error):
-                break
-                
-            }
-        }
+        output?(.showLoading)
+        interactor.singup(with: request)
     }
     
     func login() {
         wireframe.navigate(to: .login)
     }
     
+}
+
+
+extension SignupPresenter: SignupInterectorToPresenter {
+    
+    func didRegister() {
+        output?(.hideLoading)
+        wireframe.navigate(to: .channel)
+    }
+    
+    func failToRegister(with message: String) {
+        output?(.hideLoading)
+        output?(.show(error: message))
+    }
     
 }

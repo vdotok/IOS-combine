@@ -16,6 +16,7 @@ enum SignupNavigationOptions {
 }
 
 typealias SignupComplition = ((Result<UserResponse, Error>) -> Void)
+typealias SingupOutput = (SignupPresenter.Output) -> Void
 
 protocol SignupWireframeInterface: WireframeInterface {
     func navigate(to options: SignupNavigationOptions)
@@ -25,10 +26,20 @@ protocol SignupViewInterface: ViewInterface {
 }
 
 protocol SignupPresenterInterface: PresenterInterface {
+    
+    var interactor: SignupInteractorInterface {get set}
+    var output: SingupOutput? {get set}
     func signup(with userName: String, email: String, password: String)
     func login()
 }
 
 protocol SignupInteractorInterface: InteractorInterface {
-    func singup(with request: SignupRequest, complition: @escaping SignupComplition)
+    var presenter: SignupInterectorToPresenter? {get set}
+    func singup(with request: SignupRequest)
+}
+
+
+protocol SignupInterectorToPresenter: AnyObject {
+    func didRegister()
+    func failToRegister(with message: String)
 }

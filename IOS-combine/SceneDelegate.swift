@@ -25,8 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    
         let navigationControlr = UINavigationController()
         guard let _ =  VDOTOKObject<UserResponse>().getData() else {
-            navigationControlr.setRootWireframe(LoginWireframe())
-            self.window?.rootViewController = navigationControlr
+            let controller = LoginWireframe().viewController
+            self.window?.rootViewController = controller
             window?.makeKeyAndVisible()
             return
         }

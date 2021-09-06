@@ -25,6 +25,7 @@ final class SignupWireframe: BaseWireframe<SignupViewController> {
         let interactor = SignupInteractor(service: NetworkService())
         let presenter = SignupPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
+        moduleViewController.presenter.interactor.presenter = presenter
     }
 
 }
@@ -37,7 +38,12 @@ extension SignupWireframe: SignupWireframeInterface {
         case .login:
             self.viewController.dismiss(animated: true, completion: nil)
         case .channel:
-            navigationController?.pushWireframe(ChannelWireframe())
+            let navigationControlr = UINavigationController()
+            navigationControlr.modalPresentationStyle = .fullScreen
+            let viewController = ChannelWireframe().viewController
+            viewController.modalPresentationStyle = .fullScreen
+            navigationControlr.setViewControllers([viewController], animated: true)
+            self.viewController.present(navigationControlr, animated: true, completion: nil)
         }
     }
     

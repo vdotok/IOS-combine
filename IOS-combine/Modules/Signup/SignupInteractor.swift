@@ -12,45 +12,35 @@ import Foundation
 
 final class SignupInteractor : BaseDataStore {
     
-    let translator: ObjectTranslator
-    
-    init(service: Service, translator: ObjectTranslator = ObjectTranslation()) {
-        self.translator = translator
-        super.init(service: service)
-    }
+    let singupService = SignupService(service: NetworkService())
+    weak var presenter: SignupInterectorToPresenter?
     
 }
 
 // MARK: - Extensions -
 
 extension SignupInteractor: SignupInteractorInterface {
-    
-    func singup(with request: SignupRequest, complition: @escaping SignupComplition) {
-        service.post(request: request) { result in
-            switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
-            case .failure(let error):
-                complition(.failure(error))
+    func singup(with request: SignupRequest) {
+        singupService.singup(with: request) { [weak self] result in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    switch response.status {
+                    case 200:
+                        self.presenter?.didRegister()
+                    default:
+                        self.presenter?.failToRegister(with: response.message)
+                    }
+                case .failure(let error):
+                    self.presenter?.failToRegister(with: error.localizedDescription)
+                    
+                }
             }
+          
         }
     }
     
-    private func translate(data: Data, complition: loginComplition) {
-        do {
-            let response: UserResponse = try translator.decodeObject(data: data)
-            switch response.status {
-            case 200:
-                VDOTOKObject<UserResponse>().setData(response)
-                VDOTOKObject<String>().setToken(response.authToken)
-                
-            default:
-                break
-            }
-            complition(.success(response))
-        }
-        catch {
-            complition(.failure(error))
-        }
-    }
+    
+
 }

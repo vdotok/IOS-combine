@@ -13,9 +13,9 @@ import UIKit
 final class SignupViewController: UIViewController {
     
     // MARK: - Outlets
-    weak var userNameTF: UITextField!
-    weak var emailTF: UITextField!
-    weak var passwordTF: UITextField!
+   @IBOutlet weak var userNameTF: UITextField!
+   @IBOutlet weak var emailTF: UITextField!
+   @IBOutlet weak var passwordTF: UITextField!
     
     // MARK: - Public properties -
     
@@ -25,6 +25,7 @@ final class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindPresenter()
     }
     
     @IBAction func didTapLogin(_ sender: UIButton) {
@@ -39,6 +40,18 @@ final class SignupViewController: UIViewController {
         presenter.signup(with: userName, email: email, password: password)
     }
     
+    private func bindPresenter() {
+        presenter.output = { output in
+            switch output {
+            case .showLoading:
+                ProgressHud.show(viewController: self)
+            case .hideLoading:
+                ProgressHud.hide()
+            case .show(let error):
+                ProgressHud.showError(message: error, viewController: self)
+            }
+        }
+    }
 }
 
 // MARK: - Extensions -

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D1BC44D26E5EDEC00D7E49E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */; };
+		5D1BC44F26E608B300D7E49E /* SignupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44E26E608B300D7E49E /* SignupService.swift */; };
 		5D4B579826DE45F8005185AE /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579726DE45F8005185AE /* ProgressHud.swift */; };
 		5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579926DE5F5E005185AE /* Constants.swift */; };
 		5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B579C26DE62D6005185AE /* vdotokCert.p12 */; };
@@ -153,6 +154,7 @@
 		078C1F7BD1D69298A5E3C0D9 /* Pods_IOS_combine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOS_combine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C66D42E85BAD3EE33855303 /* Pods-IOS-combine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.release.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.release.xcconfig"; sourceTree = "<group>"; };
 		5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		5D1BC44E26E608B300D7E49E /* SignupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupService.swift; sourceTree = "<group>"; };
 		5D4B579726DE45F8005185AE /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
 		5D4B579926DE5F5E005185AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D4B579C26DE62D6005185AE /* vdotokCert.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vdotokCert.p12; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */,
+				5D1BC44E26E608B300D7E49E /* SignupService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -880,6 +883,7 @@
 				5D8199EA26DCC49F00B37B72 /* FormatterInterface.swift in Sources */,
 				5D4B580F26E0B00C005185AE /* CreateGroupRequest.swift in Sources */,
 				5D4B57E426DF7390005185AE /* ChatEntity.swift in Sources */,
+				5D1BC44F26E608B300D7E49E /* SignupService.swift in Sources */,
 				5D819A2026DCF22B00B37B72 /* SignupInteractor.swift in Sources */,
 				5D4B580926E0AB1D005185AE /* CreateGroupInterfaces.swift in Sources */,
 				5D819A1126DCE7E700B37B72 /* ChannelViewController.swift in Sources */,

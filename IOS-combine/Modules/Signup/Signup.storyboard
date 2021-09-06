@@ -126,6 +126,11 @@
                             <constraint firstItem="fZX-7s-k4i" firstAttribute="leading" secondItem="ygo-rv-IAY" secondAttribute="leading" id="Ugj-ra-BNl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTF" destination="6ep-di-p8t" id="g5e-yr-Doc"/>
+                        <outlet property="passwordTF" destination="fq7-pp-ps8" id="6uW-rw-nno"/>
+                        <outlet property="userNameTF" destination="ano-MA-Vns" id="frh-ig-aMj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eo1-TB-4OS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
