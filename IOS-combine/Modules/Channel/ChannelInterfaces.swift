@@ -38,6 +38,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     var isSearching: Bool {get set }
     var messages: [String: [ChatMessage]] {get set}
     var groups: [Group]  {get set}
+    var unreadMessages:[String:[ChatMessage]] {get set}
     func fetchGroups()
     func viewDidLoad()
     func viewWillAppear()

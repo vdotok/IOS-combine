@@ -59,6 +59,7 @@ final class ChannelViewController: UIViewController {
         configureAppearance()
         bindPresenter()
         presenter.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(removeCount(notification:)), name: .removeCount, object: nil)
        
     }
     
@@ -115,6 +116,14 @@ final class ChannelViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc private func removeCount(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        guard let channelName = userInfo["channelName"] as? String else { return }
+        guard let chats = userInfo["chatMessages"] as? [ChatMessage] else {return}
+        presenter.messages[channelName] = chats
+        presenter.unreadMessages[channelName]?.removeAll()
     }
 
 }
