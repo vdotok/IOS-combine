@@ -10,6 +10,8 @@
 
 import UIKit
 
+typealias LoginOutput = (LoginPresenter.Output) -> Void
+
 typealias loginComplition = ((Result<UserResponse, Error>) -> Void)
 
 
@@ -27,12 +29,20 @@ protocol LoginViewInterface: ViewInterface {
 
 protocol LoginPresenterInterface: PresenterInterface {
     
+    var interactor: LoginInteractorInterface? {get set}
+    var output: LoginOutput? {get set}
     func viewDidLoad()
     func login(with email: String, password: String)
     func signup()
 }
 
 protocol LoginInteractorInterface: InteractorInterface {
-    func login(with request: LoginRequest, complition: @escaping loginComplition)
+    var presenter: loginInteractorToPresenterInterface? {get set}
+    func login(with email: String, password: String)
     
+}
+
+protocol loginInteractorToPresenterInterface: AnyObject {
+    func loginSucces()
+    func loginFail(with error: String)
 }

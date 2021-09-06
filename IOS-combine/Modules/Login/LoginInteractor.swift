@@ -10,49 +10,37 @@
 
 import Foundation
 
-final class LoginInteractor: BaseDataStore {
+final class LoginInteractor {
     
-    let translator: ObjectTranslator
-    
-    init(service: Service, translator: ObjectTranslator = ObjectTranslation()) {
-        self.translator = translator
-        super.init(service: service)
-    }
+    weak var presenter: loginInteractorToPresenterInterface?
+    var loginService: LoginService = LoginService(service: NetworkService())
     
 }
 
 // MARK: - Extensions -
 
 extension LoginInteractor: LoginInteractorInterface {
-    func login(with request: LoginRequest, complition: @escaping loginComplition) {
-        service.get(request: request) { [weak self] result in
+    func login(with email: String, password: String) {
+        loginService.loginWith(email: email, password: password) { [weak self] result in
             guard let self = self else {return}
-            switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
-            case .failure(let error):
-                print(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let respons):
+                    switch respons.status {
+                    case 200:
+                        self.presenter?.loginSucces()
+                    default:
+                        self.presenter?.loginFail(with: respons.message)
+                    }
+                case .failure(let error):
+                    self.presenter?.loginFail(with: error.localizedDescription)
+                }
             }
+          
         }
     }
-    private func translate(data: Data, complition: loginComplition) {
-        do {
-            let response: UserResponse = try translator.decodeObject(data: data)
-            switch response.status {
-            case 200:
-                VDOTOKObject<UserResponse>().setData(response)
-                VDOTOKObject<String>().setToken(response.authToken)
-                
-            default:
-                break
-            }
-            complition(.success(response))
-            
-        }
-        catch {
-            complition(.failure(error))
-        }
-    }
+    
+  
 
     
 }

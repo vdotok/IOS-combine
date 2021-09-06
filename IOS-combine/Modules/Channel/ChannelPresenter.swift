@@ -192,14 +192,14 @@ extension ChannelPresenter: ChannelPresenterInterface {
 
 extension ChannelPresenter {
     private func configureVdotTok() {
-        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        guard let user = VDOTOKObject<UserResponse>().getData(), let url = user.mediaServerMap?.completeAddress else {return}
         let request = RegisterRequest(type: Constants.Request,
                                       requestType: Constants.Register,
                                       referenceID: user.refID!,
                                       authorizationToken: user.authorizationToken!,
                                       requestID: getRequestId(),
                                     projectID: AuthenticationConstants.PROJECTID)
-        self.vtokSdk = VTokSDK(url: user.mediaServerMap.completeAddress, registerRequest: request, connectionDelegate: self)
+        self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
         
     }
     
@@ -238,9 +238,9 @@ extension ChannelPresenter: SDKConnectionDelegate {
 extension ChannelPresenter {
     func conncectMqtt() {
         
-        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
-        let host = user.messagingServerMap.host
-        guard let port = UInt16(user.messagingServerMap.port) else {return}
+        guard let user = VDOTOKObject<UserResponse>().getData(), let host = user.messagingServerMap?.host, let messagePort = user.messagingServerMap?.port else {return}
+        
+        guard let port = UInt16(messagePort) else {return}
         let userName = user.refID
         let password = user.authorizationToken
         

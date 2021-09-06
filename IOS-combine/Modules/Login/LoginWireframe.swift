@@ -22,9 +22,11 @@ final class LoginWireframe: BaseWireframe<LoginViewController> {
         let moduleViewController = storyboard.instantiateViewController(ofType: LoginViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = LoginInteractor(service: NetworkService())
+        let interactor = LoginInteractor()
         let presenter = LoginPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        
         moduleViewController.presenter = presenter
+        moduleViewController.presenter.interactor?.presenter = presenter
     }
 
 }

@@ -24,6 +24,7 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindPresenter()
     }
     
     @IBAction func didTapLogin(_ sender: UIButton) {
@@ -33,6 +34,19 @@ final class LoginViewController: UIViewController {
     
     @IBAction func didTapSignup(_ sender: UIButton) {
         presenter.signup()
+    }
+    
+    private func bindPresenter() {
+        presenter.output = { output in
+            switch output {
+            case .hideLoading:
+                ProgressHud.hide()
+            case .showLoading:
+                ProgressHud.show(viewController: self)
+            case .showError(with: let message):
+                ProgressHud.showError(message: message, viewController: self)
+            }
+        }
     }
 
 }

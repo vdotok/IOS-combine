@@ -11,15 +11,16 @@
 import Foundation
 
 final class LoginPresenter {
-
+    
     // MARK: - Private properties -
-
+    var output: LoginOutput?
     private unowned let view: LoginViewInterface
-    private let interactor: LoginInteractorInterface
+    var interactor: LoginInteractorInterface?
     private let wireframe: LoginWireframeInterface
-
+    
+    
     // MARK: - Lifecycle -
-
+    
     init(
         view: LoginViewInterface,
         interactor: LoginInteractorInterface,
@@ -29,32 +30,45 @@ final class LoginPresenter {
         self.interactor = interactor
         self.wireframe = wireframe
     }
+    
+    enum Output {
+        case showLoading
+        case hideLoading
+        case showError(with: String)
+    }
 }
 
 // MARK: - Extensions -
 
 extension LoginPresenter: LoginPresenterInterface {
+ 
+    
     func viewDidLoad() {
         
     }
     
     func login(with email: String, password: String) {
-        let request = LoginRequest(email: email , password: password)
-        interactor.login(with: request) { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.wireframe.navigate(to: .channel)
-                }
-            case .failure(let error):
-                break
-            }
-        }
+        output?(.showLoading)
+        interactor?.login(with: email, password: password)
     }
     
     func signup() {
         wireframe.navigate(to: .signup)
     }
+    
+}
+
+
+extension LoginPresenter: loginInteractorToPresenterInterface {
+    func loginFail(with error: String) {
+        output?(.hideLoading)
+        output?(.showError(with: error))
+    }
+    
+    func loginSucces() {
+        output?(.hideLoading)
+        wireframe.navigate(to: .channel)
+    }
+    
     
 }
