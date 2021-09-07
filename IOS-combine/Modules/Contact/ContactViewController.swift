@@ -172,6 +172,6 @@ extension ContactViewController: UISearchBarDelegate {
 
 extension ContactViewController: ContactCellProtocol {
     func didTapChat() {
-//        self.navigationController?.popViewController(animated: true)
+
     }
 }

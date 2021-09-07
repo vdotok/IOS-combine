@@ -21,12 +21,15 @@ extension CreateGroupService {
         let request = CreateGroupRequest(groupTitle: groupName, participants: participants, autoCreated: 1)
         service.post(request: request) { [weak self] result in
             guard let self = self else {return}
-            switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
-            case .failure(let error):
-                complition(.failure(error))
+            DispatchQueue.main .async {
+                switch result {
+                case .success(let data):
+                    self.translate(data: data, complition: complition)
+                case .failure(let error):
+                    complition(.failure(error))
+                }
             }
+         
         }
     }
     
