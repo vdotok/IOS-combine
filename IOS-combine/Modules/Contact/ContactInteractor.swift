@@ -16,6 +16,7 @@ final class ContactInteractor {
     
     weak  var presenter: ContactInterectorToPresenter?
     let service: ContactService = ContactService(service: NetworkService())
+    let createGroupService: CreateGroupService = CreateGroupService(service: NetworkService())
     var users: [User]?
     
 }
@@ -40,36 +41,21 @@ extension ContactInteractor: ContactInteractorInterface {
         }
     }
     
-    func createGroup(with request: CreateGroupRequest, complition: @escaping ContactComplition) {
-//        service.post(request: request) { [weak self] result in
-//            guard let self = self else {return}
-//            switch result {
-//            case .success(let data):
-//                self.translate(data: data, complition: complition)
-//            case .failure(let error):
-//                complition(.failure(error))
-//            }
-//        }
+    func createGroup(with groupName: String, participants: [Int]) {
+        createGroupService.createGroup(groupName: groupName, participants: participants) { result in
+            switch result {
+            case .success(let response):
+                guard let group = response.group, let isExist = response.isalreadyCreated else {return}
+                if isExist {
+                    self.presenter?.alreadyExist(group: group)
+                } else {
+                    self.presenter?.didGroupCreated(with: group)
+                }
+            case .failure(_):
+                self.presenter?.didfailedToCreate()
+            }
+        }
     }
     
-   
-    
-//    private func translate(data: Data, complition: ContactComplition ) {
-//        do {
-//            let response: CreateGroupResponse = try translator.decodeObject(data: data)
-//            complition(.success(response))
-//        } catch {
-//            complition(.failure(error))
-//        }
-//    }
-//
-//
-//    private func translate(data: Data, complition: AllUserComplition) {
-//        do {
-//            let respone: AllUsersResponse = try translator.decodeObject(data: data)
-//            complition(.success(respone))
-//        } catch {
-//            complition(.failure(error))
-//        }
-//    }
+
 }

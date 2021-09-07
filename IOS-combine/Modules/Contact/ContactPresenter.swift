@@ -76,26 +76,8 @@ extension ContactPresenter: ContactPresenterInterface {
     func createGroup(with user: User) {
         guard let myUser = VDOTOKObject<UserResponse>().getData() else {return}
         let groupName: String = myUser.fullName! + " - " + user.fullName
-        let request = CreateGroupRequest(groupTitle: groupName, participants: [user.userID], autoCreated: 1)
-        interactor?.createGroup(with: request) { [weak self] result in
-            guard let self = self else {return}
-            self.output?(.hideProgress)
-            switch result {
-            case .success(let response):
-                guard let group = response.group, let isExist = response.isalreadyCreated else {return}
-                DispatchQueue.main.async {
-                    if isExist {
-                        self.output?(.groupCreated(group: group, isExit: true))
-                    } else {
-                        self.output?(.groupCreated(group: group, isExit: false))
-                    }
-                }
-                
-            case .failure(let error):
-                self.output?(.failure(message: error.localizedDescription))
-                
-            }
-        }
+        output?(.showProgress)
+        interactor?.createGroup(with: groupName, participants: [user.userID])
     }
     
     func navigate(to: ContactNavigationOptions, group: Group? = nil) {
@@ -125,7 +107,7 @@ extension ContactPresenter {
 
 
 extension ContactPresenter: ContactInterectorToPresenter {
-    
+
     func fetchUserSuccess(with users: [User]) {
         contacts = users
         searchContacts = users
@@ -143,4 +125,18 @@ extension ContactPresenter: ContactInterectorToPresenter {
     }
     
     
+    func didGroupCreated(with group: Group) {
+        output?(.hideProgress)
+        output?(.groupCreated(group: group, isExit: false))
+    }
+    
+    func didfailedToCreate() {
+        output?(.hideProgress)
+        output?(.failure(message: "something went wrong"))
+    }
+    
+    func alreadyExist(group: Group) {
+        output?(.hideProgress)
+        output?(.groupCreated(group: group, isExit: true))
+    }
 }

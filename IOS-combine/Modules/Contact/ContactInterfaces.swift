@@ -39,7 +39,7 @@ protocol ContactPresenterInterface: PresenterInterface {
 
 protocol ContactInteractorInterface: InteractorInterface {
     var presenter: ContactInterectorToPresenter? {get set}
-    func createGroup(with request: CreateGroupRequest, complition: @escaping ContactComplition)
+    func createGroup(with groupName: String, participants: [Int])
     func fetchAllUser()
 }
 
@@ -47,4 +47,7 @@ protocol ContactInteractorInterface: InteractorInterface {
 protocol ContactInterectorToPresenter: AnyObject {
     func fetchUserSuccess(with users: [User])
     func fetchUserFailure(with error: String)
+    func didGroupCreated(with group: Group)
+    func didfailedToCreate()
+    func alreadyExist(group: Group)
 }
