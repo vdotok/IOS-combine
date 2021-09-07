@@ -12,62 +12,64 @@ import Foundation
 
 typealias ContactComplition = ((Result<CreateGroupResponse, Error>) -> Void)
 
-final class ContactInteractor: BaseDataStore {
-    let translator: ObjectTranslator
+final class ContactInteractor {
     
-    init(service: Service, translator: ObjectTranslator = ObjectTranslation() ) {
-        self.translator = translator
-        super.init(service: service)
-    }
+    weak  var presenter: ContactInterectorToPresenter?
+    let service: ContactService = ContactService(service: NetworkService())
+    var users: [User]?
+    
 }
 
 // MARK: - Extensions -
 
 extension ContactInteractor: ContactInteractorInterface {
   
-    func fetchAllUser(complition: @escaping AllUserComplition) {
-        let request = AllUserRequest()
-        service.get(request: request) { [weak self] result in
-            guard let self = self else {return}
+    func fetchAllUser() {
+       
+        service.fetchContacts { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
+            case .success(let response):
+                self.users = response.users
+                guard let users = self.users else {return}
+                self.presenter?.fetchUserSuccess(with: users)
             case .failure(let error):
-                complition(.failure(error))
+                self.presenter?.fetchUserFailure(with: error.localizedDescription)
+                
             }
         }
     }
     
     func createGroup(with request: CreateGroupRequest, complition: @escaping ContactComplition) {
-        service.post(request: request) { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
-            case .failure(let error):
-                complition(.failure(error))
-            }
-        }
+//        service.post(request: request) { [weak self] result in
+//            guard let self = self else {return}
+//            switch result {
+//            case .success(let data):
+//                self.translate(data: data, complition: complition)
+//            case .failure(let error):
+//                complition(.failure(error))
+//            }
+//        }
     }
     
    
     
-    private func translate(data: Data, complition: ContactComplition ) {
-        do {
-            let response: CreateGroupResponse = try translator.decodeObject(data: data)
-            complition(.success(response))
-        } catch {
-            complition(.failure(error))
-        }
-    }
-    
-    
-    private func translate(data: Data, complition: AllUserComplition) {
-        do {
-            let respone: AllUsersResponse = try translator.decodeObject(data: data)
-            complition(.success(respone))
-        } catch {
-            complition(.failure(error))
-        }
-    }
+//    private func translate(data: Data, complition: ContactComplition ) {
+//        do {
+//            let response: CreateGroupResponse = try translator.decodeObject(data: data)
+//            complition(.success(response))
+//        } catch {
+//            complition(.failure(error))
+//        }
+//    }
+//
+//
+//    private func translate(data: Data, complition: AllUserComplition) {
+//        do {
+//            let respone: AllUsersResponse = try translator.decodeObject(data: data)
+//            complition(.success(respone))
+//        } catch {
+//            complition(.failure(error))
+//        }
+//    }
 }

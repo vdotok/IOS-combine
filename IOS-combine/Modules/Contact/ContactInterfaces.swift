@@ -22,6 +22,7 @@ protocol ContactViewInterface: ViewInterface {
 }
 
 protocol ContactPresenterInterface: PresenterInterface {
+    var interactor: ContactInteractorInterface? {get set}
     var output: ContactOutput? { get set}
     var contacts: [User] {get set}
     var searchContacts: [User] {get set}
@@ -37,6 +38,13 @@ protocol ContactPresenterInterface: PresenterInterface {
 }
 
 protocol ContactInteractorInterface: InteractorInterface {
+    var presenter: ContactInterectorToPresenter? {get set}
     func createGroup(with request: CreateGroupRequest, complition: @escaping ContactComplition)
-    func fetchAllUser(complition: @escaping AllUserComplition)
+    func fetchAllUser()
+}
+
+
+protocol ContactInterectorToPresenter: AnyObject {
+    func fetchUserSuccess(with users: [User])
+    func fetchUserFailure(with error: String)
 }

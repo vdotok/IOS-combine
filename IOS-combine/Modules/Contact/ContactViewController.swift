@@ -39,7 +39,6 @@ final class ContactViewController: UIViewController {
     func bindViewModel() {
         presenter.output = { [unowned self] output in
             switch output {
-           
             case .reload:
                 tableView.reloadData()
             case .showProgress:

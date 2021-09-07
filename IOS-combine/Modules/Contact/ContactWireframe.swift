@@ -23,8 +23,9 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
         let moduleViewController = storyboard.instantiateViewController(ofType: ContactViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = ContactInteractor(service: NetworkService())
+        let interactor = ContactInteractor()
         let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client)
+        interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
 

@@ -16,7 +16,7 @@ final class ContactPresenter {
     // MARK: - Private properties -
 
     private unowned let view: ContactViewInterface
-    private let interactor: ContactInteractorInterface
+    var interactor: ContactInteractorInterface?
     private let wireframe: ContactWireframeInterface
     var contacts: [User] = []
     var searchContacts: [User] = []
@@ -77,7 +77,7 @@ extension ContactPresenter: ContactPresenterInterface {
         guard let myUser = VDOTOKObject<UserResponse>().getData() else {return}
         let groupName: String = myUser.fullName! + " - " + user.fullName
         let request = CreateGroupRequest(groupTitle: groupName, participants: [user.userID], autoCreated: 1)
-        interactor.createGroup(with: request) { [weak self] result in
+        interactor?.createGroup(with: request) { [weak self] result in
             guard let self = self else {return}
             self.output?(.hideProgress)
             switch result {
@@ -118,32 +118,29 @@ extension ContactPresenter: ContactPresenterInterface {
 
 extension ContactPresenter {
     func getUsers() {
-        interactor.fetchAllUser { [weak self] result in
-            guard let self = self else {return}
-            self.output?(.hideProgress)
-            switch result {
-            case .success(let response):
-                switch  response.status {
-                case 503:
-                    self.output?(.failure(message: response.message ))
-                case 500:
-                    self.output?(.failure(message: response.message))
-                case 401:
-                    self.output?(.failure(message: response.message))
-                case 200:
-                    self.contacts = response.users
-                    self.searchContacts = self.contacts
-                    DispatchQueue.main.async {
-                        self.output?(.reload)
-                    }
-                    
-                default:
-                    break
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+        output?(.showProgress)
+        interactor?.fetchAllUser()
     }
+}
+
+
+extension ContactPresenter: ContactInterectorToPresenter {
+    
+    func fetchUserSuccess(with users: [User]) {
+        contacts = users
+        searchContacts = users
+        
+        output?(.hideProgress)
+        DispatchQueue.main.async { [weak self] in
+            self?.output?(.reload)
+        }
+       
+    }
+    
+    func fetchUserFailure(with error: String) {
+        output?(.hideProgress)
+        output?(.failure(message: error))
+    }
+    
+    
 }

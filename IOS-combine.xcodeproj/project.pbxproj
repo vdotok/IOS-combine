@@ -123,6 +123,8 @@
 		5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */; };
 		5D819A3026DE2E8400B37B72 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */; };
 		5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */; };
+		5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3326E64D43006EC78E /* ContactService.swift */; };
+		5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */; };
 		8C47BE019EE33D46397A16F3 /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078C1F7BD1D69298A5E3C0D9 /* Pods_IOS_combine.framework */; };
 /* End PBXBuildFile section */
 
@@ -270,6 +272,8 @@
 		5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChannelRequest.swift; sourceTree = "<group>"; };
 		5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
+		5DA4FA3326E64D43006EC78E /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
+		5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupService.swift; sourceTree = "<group>"; };
 		D05EB2BD75BED0E9E2124A49 /* Pods-IOS-combine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.debug.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -300,6 +304,8 @@
 			children = (
 				5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */,
 				5D1BC44E26E608B300D7E49E /* SignupService.swift */,
+				5DA4FA3326E64D43006EC78E /* ContactService.swift */,
+				5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -870,12 +876,14 @@
 				5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */,
 				5D4B580A26E0AB1D005185AE /* CreateGroupPresenter.swift in Sources */,
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,
+				5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */,
 				5D4B584926E0F625005185AE /* CallingInteractor.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
 				5D4B584626E0F625005185AE /* CallingInterfaces.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
 				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
+				5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */,
 				5D4B57DF26DF6F7E005185AE /* outgoingImageCell.swift in Sources */,
 				5D4B57F626DF93A6005185AE /* ContactInteractor.swift in Sources */,
 				5D4B583B26E0EDB8005185AE /* CreateGroupPopUp.swift in Sources */,
