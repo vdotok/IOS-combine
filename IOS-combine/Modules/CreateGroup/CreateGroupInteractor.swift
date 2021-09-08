@@ -12,59 +12,51 @@ import Foundation
 
 typealias GroupComplition = ((Result<CreateGroupResponse, Error>) -> Void)
 
-final class CreateGroupInteractor: BaseDataStore {
-    let translator: ObjectTranslator
+final class CreateGroupInteractor {
     
-    init(service: Service, translator: ObjectTranslator = ObjectTranslation()) {
-        self.translator = translator
-        super.init(service: service)
-    }
+    let service = ContactService(service: NetworkService())
+    let createGroupService = CreateGroupService(service: NetworkService())
+    weak var presenter: CreateGroupInteractorToPresenter?
 }
 
 // MARK: - Extensions -
 
 extension CreateGroupInteractor: CreateGroupInteractorInterface {
- 
-    func createGroup(with request: CreateGroupRequest, complition: @escaping GroupComplition) {
-        service.post(request: request) { [weak self] result in
+    func fetchContacts() {
+        service.fetchContacts { [weak self] result in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    switch response.status {
+                    case 200:
+                        self.presenter?.didFetchContacts(users: response.users)
+                    default:
+                        self.presenter?.didFailedToFetch(with: response.message)
+                    }
+                case .failure(let error):
+                    self.presenter?.didFailedToFetch(with: error.localizedDescription)
+                }
+            }
+            
+        }
+    }
+    
+    func CreateGroup(with title: String, participants: [Int], autoCreated: Int) {
+        createGroupService.createGroup(groupName: title, participants: participants, autoCreated: autoCreated) { [weak self] result in
             guard let self = self else {return}
             switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
+            case .success(let response):
+                switch response.status {
+                case 200:
+                    guard let group = response.group else {return}
+                    self.presenter?.groupCreated(with: group)
+                default:
+                    self.presenter?.groupCreatedFailed(with: response.message)
+                }
             case .failure(let error):
-                complition(.failure(error))
+                self.presenter?.groupCreatedFailed(with: error.localizedDescription)
             }
-        }
-    }
-    
-    func fetchUsers(complition: @escaping AllUserComplition) {
-        service.get(request: AllUserRequest()) { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
-            case .failure(let error):
-                complition(.failure(error))
-            }
-        }
-    }
-    
-    private func translate(data: Data, complition: GroupComplition) {
-        do {
-            let response: CreateGroupResponse = try translator.decodeObject(data: data)
-            complition(.success(response))
-        }
-        catch {
-            complition(.failure(error))
-        }
-    }
-    
-    private func translate(data: Data, complition: AllUserComplition) {
-        do {
-            let response: AllUsersResponse = try translator.decodeObject(data: data)
-            complition(.success(response))
-        } catch {
-            complition(.failure(error))
         }
     }
     

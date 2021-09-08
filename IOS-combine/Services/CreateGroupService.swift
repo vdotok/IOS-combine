@@ -17,8 +17,8 @@ class CreateGroupService: BaseDataStore {
 }
 
 extension CreateGroupService {
-    func createGroup(groupName: String, participants: [Int], complition: @escaping ContactComplition) {
-        let request = CreateGroupRequest(groupTitle: groupName, participants: participants, autoCreated: 1)
+    func createGroup(groupName: String, participants: [Int], autoCreated: Int, complition: @escaping ContactComplition) {
+        let request = CreateGroupRequest(groupTitle: groupName, participants: participants, autoCreated: autoCreated)
         service.post(request: request) { [weak self] result in
             guard let self = self else {return}
             DispatchQueue.main .async {

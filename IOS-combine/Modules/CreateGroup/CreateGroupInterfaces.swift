@@ -43,6 +43,15 @@ protocol CreateGroupPresenterInterface: PresenterInterface {
 }
 
 protocol CreateGroupInteractorInterface: InteractorInterface {
-    func createGroup(with request: CreateGroupRequest, complition: @escaping GroupComplition)
-    func fetchUsers(complition: @escaping AllUserComplition)
+    var presenter: CreateGroupInteractorToPresenter? {get set}
+    func fetchContacts()
+    func CreateGroup(with title: String, participants: [Int], autoCreated: Int)
+}
+
+
+protocol CreateGroupInteractorToPresenter: AnyObject {
+    func didFetchContacts(users: [User])
+    func didFailedToFetch(with error: String)
+    func groupCreated(with group: Group)
+    func groupCreatedFailed(with message: String)
 }

@@ -42,7 +42,7 @@ extension ContactInteractor: ContactInteractorInterface {
     }
     
     func createGroup(with groupName: String, participants: [Int]) {
-        createGroupService.createGroup(groupName: groupName, participants: participants) { result in
+        createGroupService.createGroup(groupName: groupName, participants: participants, autoCreated: 1) { result in
             switch result {
             case .success(let response):
                 guard let group = response.group, let isExist = response.isalreadyCreated else {return}

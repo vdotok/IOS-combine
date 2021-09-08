@@ -24,6 +24,7 @@ final class CreateGroupPresenter {
     var isSearching: Bool = false
     var searchContacts: [User] = []
     var client: ChatClient
+    
 
     // MARK: - Lifecycle -
 
@@ -62,33 +63,7 @@ final class CreateGroupPresenter {
 extension CreateGroupPresenter {
     private func getUsers() {
         output?(.showProgress)
-        interactor.fetchUsers { [weak self] (result) in
-            guard let self = self else {return}
-            self.output?(.hideProgress)
-            switch result {
-            case .success(let response):
-                switch  response.status {
-                case 503:
-                    self.output?(.failure(message: response.message ))
-                case 500:
-                    self.output?(.failure(message: response.message))
-                case 401:
-                    self.output?(.failure(message: response.message))
-                case 200:
-                    self.contacts = response.users
-                    self.searchContacts = self.contacts
-                    DispatchQueue.main.async {
-                        self.output?(.reload)
-                    }
-                    
-                default:
-                    break
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+        interactor.fetchContacts()
     }
 }
 
@@ -132,50 +107,46 @@ extension CreateGroupPresenter: CreateGroupPresenterInterface {
     }
     
     func createGroup(with title: String) {
-        let request = CreateGroupRequest(groupTitle: title, participants: selectedItems)
         output?(.showProgress)
-        interactor.createGroup(with: request) { [weak self] (result) in
-            guard let self = self else {return }
-            self.output?(.hideProgress)
-            switch result {
-            case .success(let response):
-                guard let group = response.group else {return }
-                DispatchQueue.main.async {
-                    self.output?(.groupCreated(group: group))
-                }
-                
-                
-            case .failure(let error):
-                self.output?(.failure(message: error.localizedDescription))
-                print(error)
-            }
-        }
+        interactor.CreateGroup(with: title, participants: selectedItems, autoCreated: 0)
     }
     
     func createGroup(with user: User) {
         guard let myUser = VDOTOKObject<UserResponse>().getData() else {return}
         let groupName: String = myUser.fullName! + " - " + user.fullName
-        let request = CreateGroupRequest(groupTitle: groupName, participants: [user.userID], autoCreated: 1)
+        interactor.CreateGroup(with: groupName, participants: [user.userID], autoCreated: 1)
         output?(.showProgress)
-        interactor.createGroup(with: request) { [weak self] (result) in
-            guard let self = self else {return}
-            self.output?(.hideProgress)
-            switch result {
-            case .success(let response):
-                guard let group = response.group else {return}
-                DispatchQueue.main.async {
-                    self.output?(.groupCreated(group: group))
-                }
-                
-            case .failure(let error):
-                self.output?(.failure(message: error.localizedDescription))
-                
-            }
-        }
     }
     func moveToChat(group: Group) {
         guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         wireframe.moveToChat(with: client, group: group, user: user)
+    }
+    
+}
+
+
+extension CreateGroupPresenter: CreateGroupInteractorToPresenter {
+    
+    func didFetchContacts(users: [User]) {
+        output?(.hideProgress)
+        contacts = users
+        searchContacts = contacts
+        output?(.reload)
+    }
+
+    func didFailedToFetch(with error: String) {
+        output?(.hideProgress)
+        output?(.failure(message: error))
+    }
+    
+    func groupCreated(with group: Group) {
+        output?(.hideProgress)
+        output?(.groupCreated(group: group))
+    }
+    
+    func groupCreatedFailed(with message: String) {
+        output?(.hideProgress)
+        output?(.failure(message: message))
     }
     
 }

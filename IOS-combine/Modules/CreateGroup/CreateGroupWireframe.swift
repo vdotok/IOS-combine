@@ -23,8 +23,9 @@ final class CreateGroupWireframe: BaseWireframe<CreateGroupViewController> {
         let moduleViewController = storyboard.instantiateViewController(ofType: CreateGroupViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = CreateGroupInteractor(service: NetworkService())
+        let interactor = CreateGroupInteractor()
         let presenter = CreateGroupPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client)
+        interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
 
