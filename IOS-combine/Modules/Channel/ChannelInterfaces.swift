@@ -16,6 +16,22 @@ enum ChannelNavigationOptions {
     case chat
 }
 
+enum SocketType {
+    case chat
+    case streaming
+}
+
+enum ConnectConnectionStatus {
+    case connected
+    case disconnected
+}
+
+enum StreamConnectionStatus {
+    case connected
+    case disconnected
+    case request(session: VTokBaseSession, sdk: VTokSDK)
+}
+
 
 
 typealias ChannelOutput = (ChannelPresenter.Output) -> Void
@@ -56,6 +72,8 @@ protocol ChannelInteractorInterface: InteractorInterface {
     var presenter: ChannelInteractorToPresenter? {get set}
     func fetchGroups()
     func fetchUsers()
+    func connectVdoTok()
+  
 }
 
 
@@ -64,4 +82,9 @@ protocol ChannelInteractorToPresenter: AnyObject {
     func channelFetchedFailed(with error: String)
     func usersFetched(with user: [User])
     func usersFetchedFailded(with error: String)
+    func streaming(connectionStats: StreamConnectionStatus, sdk: VTokSDK?)
+    func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
+    func updatePresence(with presence: [String: [String]])
+    func hideProgress()
+    func messageReceived(with readMessages: [String: [ChatMessage]], unreadMessages: [String:[ChatMessage]])
 }
