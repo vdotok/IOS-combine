@@ -19,7 +19,7 @@ final class ChannelPresenter {
     // MARK: - Private properties -
 
     private unowned let view: ChannelViewInterface
-    private let interactor: ChannelInteractorInterface
+    var interactor: ChannelInteractorInterface?
     private let wireframe: ChannelWireframeInterface
     private var channels: GroupResponse?
     var channelOutput: ChannelOutput?
@@ -107,63 +107,12 @@ extension ChannelPresenter: ChannelPresenterInterface {
     func fetchGroups() {
         guard let output = channelOutput else {return}
         output(.showProgress)
-        interactor.fetchGroups { [weak self] result in
-            output(.hideProgress)
-            guard let self = self else {return}
-            switch result {
-            case .success(let response):
-                switch response.status {
-                case 503:
-                    self.channelOutput?(.failure(message: response.message ))
-                case 500:
-                    self.channelOutput?(.failure(message: response.message))
-                case 401:
-                    self.channelOutput?(.failure(message: response.message))
-                case 200:
-                    if self.mqttClient?.isConnected() ?? false {
-                        if response.groups?.count == self.groups.count {
-                            
-                        }
-                        else {
-                            guard let fetchedGroups = response.groups else { return }
-                            let channelKeys = self.groups.map({$0.channelKey})
-                            let newGroups = fetchedGroups.filter({!channelKeys.contains($0.channelKey)})
-                            self.subscribe(groups: newGroups)
-                            self.groups = response.groups ?? []
-                        }
-                        DispatchQueue.main.async {
-                            self.channelOutput?(.reload)
-                        }
-                       
-                    }else {
-                        self.conncectMqtt()
-                        self.groups = response.groups ?? []
-                        DispatchQueue.main.async {
-                            self.channelOutput?(.reload)
-                        }
-                        self.fetchUsers()
-                    }
-                    
-                default:
-                    break
-                }
-               
-            case .failure(let error):
-                break
-            }
-        }
+        interactor?.fetchGroups()
     }
     
     func fetchUsers() {
-        interactor.fetchUsers { [weak self] response in
-            guard let self = self else { return }
-            switch response {
-            case .success(let response):
-                self.contacts = response.users
-            case .failure(let error):
-                print(error)
-            }
-        }
+        channelOutput?(.showProgress)
+        interactor?.fetchUsers()
         
     }
     
@@ -522,4 +471,51 @@ extension ChannelPresenter: Connectivity {
     func didReconnect() {
         
     }
+}
+
+
+extension ChannelPresenter: ChannelInteractorToPresenter {
+    func channelFetched(with group: [Group]) {
+        channelOutput?(.hideProgress)
+        if self.mqttClient?.isConnected() ?? false {
+            if groups.count == self.groups.count {
+                
+            }
+            else {
+                let fetchedGroups = group
+                let channelKeys = self.groups.map({$0.channelKey})
+                let newGroups = fetchedGroups.filter({!channelKeys.contains($0.channelKey)})
+                self.subscribe(groups: newGroups)
+                self.groups = group
+            }
+            DispatchQueue.main.async {
+                self.channelOutput?(.reload)
+            }
+           
+        }else {
+            self.conncectMqtt()
+            self.groups = group
+            DispatchQueue.main.async {
+                self.channelOutput?(.reload)
+            }
+            self.fetchUsers()
+        }
+    }
+    
+    func channelFetchedFailed(with error: String) {
+        channelOutput?(.hideProgress)
+        channelOutput?(.failure(message: error))
+    }
+    
+    func usersFetched(with user: [User]) {
+        channelOutput?(.hideProgress)
+        self.contacts = user
+    }
+    
+    func usersFetchedFailded(with error: String) {
+        channelOutput?(.hideProgress)
+        channelOutput?(.failure(message: error))
+    }
+    
+    
 }

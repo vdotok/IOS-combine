@@ -10,59 +10,48 @@
 
 import Foundation
 
-final class ChannelInteractor: BaseDataStore {
+final class ChannelInteractor {
     
-    let translator: ObjectTranslator
-    
-     init(service: Service, translator: ObjectTranslator = ObjectTranslation()) {
-        self.translator = translator
-        super.init(service: service)
-    }
+    weak var presenter: ChannelInteractorToPresenter?
+    let service = ChannelService(service: NetworkService())
+    let contactService = ContactService(service: NetworkService())
 }
 
 // MARK: - Extensions -
 
 extension ChannelInteractor: ChannelInteractorInterface {
-    func fetchUsers(complition: @escaping AllUserComplition) {
-        service.get(request: AllUserRequest()) { [weak self] result in
+    func fetchUsers() {
+        contactService.fetchContacts { [weak self] result in
             guard let self = self else {return}
             switch result {
-            case .success(let data):
-                self.translate(data: data, complition: complition)
+            case .success(let response):
+                switch response.status {
+                case 200:
+                    self.presenter?.usersFetched(with: response.users)
+                default:
+                    self.presenter?.usersFetchedFailded(with: response.message)
+                }
             case .failure(let error):
-                complition(.failure(error))
+                self.presenter?.usersFetchedFailded(with: error.localizedDescription )
             }
         }
     }
     
-    func fetchGroups(complition: @escaping ChannelComplition) {
-       let request = AllGroupRequest()
-        service.get(request: request) { [weak self] result in
+    func fetchGroups() {
+        service.FetchChannels { [weak self] result in
             guard let self = self else {return}
             switch result {
-            case .success(let data):
-                self.translation(with: data, complitionHandler: complition)
+            case .success(let response):
+                switch response.status  {
+                case 200:
+                    guard let group = response.groups else {return}
+                    self.presenter?.channelFetched(with: group)
+                default:
+                    self.presenter?.channelFetchedFailed(with: response.message)
+                }
             case .failure(let error):
-                complition(.failure(error))
+                self.presenter?.channelFetchedFailed(with: error.localizedDescription)
             }
-        }
-    }
-    
-    private func translation(with data: Data, complitionHandler: ChannelComplition) {
-        do {
-            let response: GroupResponse = try translator.decodeObject(data: data)
-            complitionHandler(.success(response))
-        } catch {
-            complitionHandler(.failure(error))
-        }
-    }
-    
-    private func translate(data: Data, complition: AllUserComplition) {
-        do {
-            let response: AllUsersResponse = try translator.decodeObject(data: data)
-            complition(.success(response))
-        } catch {
-            complition(.failure(error))
         }
     }
 }

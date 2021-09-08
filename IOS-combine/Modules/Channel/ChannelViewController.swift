@@ -210,7 +210,6 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         let channel = presenter.groups[indexPath.row].channelName
         let topic =  presenter.messages[channel]
         presenter.navigation(to: .chat, messages: topic ?? [], group: presenter.groups[indexPath.row])

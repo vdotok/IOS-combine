@@ -53,7 +53,15 @@ protocol ChannelPresenterInterface: PresenterInterface {
 }
 
 protocol ChannelInteractorInterface: InteractorInterface {
-    
-    func fetchGroups(complition: @escaping ChannelComplition)
-    func fetchUsers(complition: @escaping AllUserComplition)
+    var presenter: ChannelInteractorToPresenter? {get set}
+    func fetchGroups()
+    func fetchUsers()
+}
+
+
+protocol ChannelInteractorToPresenter: AnyObject {
+    func channelFetched(with group: [Group])
+    func channelFetchedFailed(with error: String)
+    func usersFetched(with user: [User])
+    func usersFetchedFailded(with error: String)
 }
