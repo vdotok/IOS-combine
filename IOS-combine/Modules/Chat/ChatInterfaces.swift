@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKConnect
 
 typealias ChatOutput = (ChatPresenter.Output) -> Void
 
@@ -20,9 +21,10 @@ protocol ChatViewInterface: ViewInterface {
 }
 
 protocol ChatPresenterInterface: PresenterInterface {
-    var group: Group {get set}
-    var messages: [ChatMessage] {get set}
-    var user: UserResponse {get set}
+    var group: Group? {get set}
+    var interactor: ChatInteractorInterface? {get set}
+    var messages: [ChatMessage]? {get set}
+    var user: UserResponse? {get set}
     var chatOutput: ChatOutput? {get set}
     func dispatchPackage(start: Bool)
     func sendMessage(text: String)
@@ -33,4 +35,17 @@ protocol ChatPresenterInterface: PresenterInterface {
 }
 
 protocol ChatInteractorInterface: InteractorInterface {
+    var presenter: ChatInteractorToPresenter? {get set}
+    func sendMessage(with text: String)
+    func dispatchPackage(start: Bool)
+    func sendSeenMessage(message: ChatMessage, row: Int)
+    func receivedMessage(userInfo: [String: AnyObject])
+    func publish(file data: Data, with ext: String, type: Int)
+    func itemAt(row: Int) -> (ChatMessage,CellType)
+   
+}
+
+protocol ChatInteractorToPresenter: AnyObject {
+    func update(messages: [ChatMessage])
+    func updateGroup(with group: Group, user: UserResponse, messages: [ChatMessage])
 }

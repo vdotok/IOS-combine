@@ -23,10 +23,11 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = ChatInteractor()
+        let interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
 //        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
-        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client, group: group, user: user, messages: messages)
+        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
+        presenter.interactor?.presenter = presenter
     }
 
 }

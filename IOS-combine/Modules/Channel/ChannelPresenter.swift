@@ -155,7 +155,6 @@ extension ChannelPresenter: SDKConnectionDelegate {
         }
     }
     
-    
 }
 
 

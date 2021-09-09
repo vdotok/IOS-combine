@@ -59,7 +59,7 @@ final class ChatViewController: UIViewController {
         configureAppearance()
         bindPresenter()
         notificationsListners()
-        titleLabel.text = presenter.group.groupTitle
+        titleLabel.text = presenter.group?.groupTitle
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,7 +179,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "OutgoingTextCell", for: indexPath) as! OutgoingTextCell
             presenter.sendSeenMessage(message: item.0, row: indexPath.row)
-            guard let userName = presenter.group.participants.filter({$0.refID == item.0.sender}).first else { return UITableViewCell() }
+            guard let userName = presenter.group?.participants.filter({$0.refID == item.0.sender}).first else { return UITableViewCell() }
             cell.backgroundColor = .appLightGrey
             cell.userName.text = userName.fullName
             cell.messageLabel.text = item.0.content
@@ -190,7 +190,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             cell.url = item.0.fileType!
             presenter.sendSeenMessage(message: item.0, row: indexPath.row)
             cell.delegate = self
-            guard let user = presenter.group.participants.filter({$0.refID == item.0.sender}).first else { return UITableViewCell() }
+            guard let user = presenter.group?.participants.filter({$0.refID == item.0.sender}).first else { return UITableViewCell() }
             cell.userName.text = user.fullName
             cell.timeLabel.text = item.0.date.toDateTime.toTimeString
             cell.backgroundColor = .appLightGrey
@@ -211,7 +211,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             cell.timeLabel.text = item.0.date.toDateTime.toTimeString
             presenter.sendSeenMessage(message: item.0, row: indexPath.row)
             cell.configure(with: item.0.fileType)
-            guard let user = presenter.group.participants.filter({$0.refID == item.0.sender}).first else { return UITableViewCell() }
+            guard let user = presenter.group?.participants.filter({$0.refID == item.0.sender}).first else { return UITableViewCell() }
             cell.userName.text = user.fullName
             return cell
         case .outGoingImage:
@@ -353,14 +353,14 @@ extension ChatViewController {
     }
     
     @objc func audioCallAction(_ sender: UIView) {
-        let groupId = presenter.group.id
+        let groupId = presenter.group?.id
         let userInfo: [String: Any] = ["callType": NotifyCallType.audio.callType,
                                        "groupId": groupId]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
     }
     
     @objc func videoCallAction(_ sender: UIView) {
-        let groupId = presenter.group.id
+        let groupId = presenter.group?.id
         let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
                                        "groupId": groupId]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
@@ -369,7 +369,7 @@ extension ChatViewController {
     @objc func didTapBackButton() {
         NotificationCenter.default.post(name: .removeCount,
                                         object: self,
-                                        userInfo: ["channelName" : presenter.group.channelName,
+                                        userInfo: ["channelName" : presenter.group?.channelName,
                                                    "chatMessages": presenter.messages]
                                             )
         navigationController?.popToRootViewController(animated: true)
@@ -392,9 +392,9 @@ extension ChatViewController {
     
     @objc func didStartTyping(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
-        guard let name = userInfo["message"] as? String,let topic = userInfo["topic"] as? String, name != presenter.user.refID  else { return }
-        guard topic == presenter.group.channelName else {return}
-        guard let userName = presenter.group.participants.filter({$0.refID == name}).first else {return}
+        guard let name = userInfo["message"] as? String,let topic = userInfo["topic"] as? String, name != presenter.user?.refID  else { return }
+        guard topic == presenter.group?.channelName else {return}
+        guard let userName = presenter.group?.participants.filter({$0.refID == name}).first else {return}
         
         if !users.contains(userName.fullName) {
             users.append(userName.fullName)
@@ -407,9 +407,9 @@ extension ChatViewController {
     
     @objc func didEndTyping(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
-        guard let name = userInfo["message"] as? String, let topic = userInfo["topic"] as? String, name != self.presenter.user.fullName else { return }
-        guard topic == presenter.group.channelName else {return}
-        guard let userName = presenter.group.participants.filter({$0.refID == name}).first else {return}
+        guard let name = userInfo["message"] as? String, let topic = userInfo["topic"] as? String, name != self.presenter.user?.fullName else { return }
+        guard topic == presenter.group?.channelName else {return}
+        guard let userName = presenter.group?.participants.filter({$0.refID == name}).first else {return}
         users.removeAll(where: {$0 == userName.fullName})
         if users.count == 0 {
             subTitle.text = ""
@@ -451,8 +451,8 @@ extension ChatViewController {
         }
     
     private func scrollToBottom() {
-        let index = IndexPath(row: presenter.messages.count - 1, section: 0)
-        if presenter.messages.count > 4 {
+        let index = IndexPath(row: presenter.messages?.count ?? 0 - 1, section: 0)
+        if presenter.messages?.count ?? 0 > 4 {
             tableView.scrollToRow(at: index, at: .bottom, animated: true)
         }
         
