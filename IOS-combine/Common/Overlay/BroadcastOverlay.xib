@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BroadcastOverlay" customModule="IOS_combine" customModuleProvider="target">
+            <connections>
+                <outlet property="blurView" destination="FYv-tr-kVA" id="z12-Kc-iwD"/>
+                <outlet property="camera" destination="gly-bV-y1H" id="te5-lH-gWx"/>
+                <outlet property="continueBtn" destination="DFh-bk-tOp" id="iov-4d-XrI"/>
+                <outlet property="screenShareAppAudioBtn" destination="jCQ-XE-bnq" id="TY1-Sk-GqG"/>
+                <outlet property="screenShareMicAudioBtn" destination="Esw-vn-i3x" id="gAu-7q-Z10"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYv-tr-kVA">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clv-jj-Ces">
+                    <rect key="frame" x="30" y="251.5" width="354" height="403"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GpQ-jZ-wpu">
+                            <rect key="frame" x="24" y="79" width="306" height="202"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-XE-bnq" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="306" height="54"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="54" id="zgD-gY-xKd"/>
+                                    </constraints>
+                                    <state key="normal" title="SCREEN SHARE WITH APP AUDIO"/>
+                                    <connections>
+                                        <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="Ssh-eU-s8j"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-vn-i3x" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="74" width="306" height="54"/>
+                                    <state key="normal" title="SCREEN SHARE WITH APP MIC AUDIO"/>
+                                    <connections>
+                                        <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="9Nr-X8-gu8"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gly-bV-y1H" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="148" width="306" height="54"/>
+                                    <state key="normal" title="CAMERA"/>
+                                    <connections>
+                                        <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="suC-2t-TDH"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="gly-bV-y1H" firstAttribute="height" secondItem="jCQ-XE-bnq" secondAttribute="height" id="IJe-Ak-3PO"/>
+                                <constraint firstItem="Esw-vn-i3x" firstAttribute="height" secondItem="jCQ-XE-bnq" secondAttribute="height" id="tF5-Xb-O2M"/>
+                            </constraints>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFh-bk-tOp">
+                            <rect key="frame" x="100" y="330" width="154" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="V0w-dd-7Uf"/>
+                            </constraints>
+                            <state key="normal" title="CONTINUE"/>
+                            <connections>
+                                <action selector="didTapContinue:" destination="-1" eventType="touchUpInside" id="8c4-cT-9TC"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eQ-8R-eA6">
+                            <rect key="frame" x="311" y="9" width="24" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="close"/>
+                            <connections>
+                                <action selector="didTapClose:" destination="-1" eventType="touchUpInside" id="16u-Cv-Fbc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="DFh-bk-tOp" firstAttribute="centerX" secondItem="GpQ-jZ-wpu" secondAttribute="centerX" id="D8o-3F-8Wx"/>
+                        <constraint firstItem="GpQ-jZ-wpu" firstAttribute="leading" secondItem="clv-jj-Ces" secondAttribute="leading" constant="24" id="H5L-0x-aqI"/>
+                        <constraint firstAttribute="bottom" secondItem="DFh-bk-tOp" secondAttribute="bottom" constant="29" id="by7-PT-u5v"/>
+                        <constraint firstItem="GpQ-jZ-wpu" firstAttribute="top" secondItem="clv-jj-Ces" secondAttribute="top" constant="79" id="cnj-gA-zZH"/>
+                        <constraint firstItem="GpQ-jZ-wpu" firstAttribute="centerX" secondItem="clv-jj-Ces" secondAttribute="centerX" id="mgu-Z7-5rw"/>
+                        <constraint firstAttribute="trailing" secondItem="DFh-bk-tOp" secondAttribute="trailing" constant="100" id="unF-Oe-zSr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FYv-tr-kVA" secondAttribute="trailing" id="4a6-NC-hwp"/>
+                <constraint firstItem="FYv-tr-kVA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EdO-2i-R5W"/>
+                <constraint firstItem="clv-jj-Ces" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.45" id="ElC-MP-EdN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="clv-jj-Ces" secondAttribute="trailing" constant="30" id="IhT-eb-v1M"/>
+                <constraint firstItem="FYv-tr-kVA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="MdH-4h-adq"/>
+                <constraint firstItem="clv-jj-Ces" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="YFQ-eq-0si"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FYv-tr-kVA" secondAttribute="bottom" id="fbL-vI-CZY"/>
+                <constraint firstItem="clv-jj-Ces" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="km6-9r-TGo"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-481.15942028985512" y="168.75"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close" width="24" height="28"/>
+    </resources>
+</document>

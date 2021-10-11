@@ -139,21 +139,22 @@ extension ChannelViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ChannelCell", bundle: nil), forCellReuseIdentifier: "ChannelCell")
-    //    tableView(isHidden: viewModel.groups.count > 0 ? false : true)
+        //    tableView(isHidden: viewModel.groups.count > 0 ? false : true)
         configureEmptyView()
         navigationTitle.text = "Chat Rooms"
         navigationTitle.font = UIFont(name: "Manrope-Medium", size: 20)
         navigationTitle.textColor = .appDarkGreenColor
         navigationTitle.sizeToFit()
+        let broadCast = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        broadCast.setImage(UIImage(named: "public-broadcast"), for: .normal)
+        broadCast.addTarget(self, action: #selector(didTapBroadCast), for: .touchUpInside)
         let leftItem = UIBarButtonItem(customView: navigationTitle)
+        let broadCastBarButton =  UIBarButtonItem(customView: broadCast)
         self.navigationItem.leftBarButtonItem = leftItem
         let image = UIImage(named: "plus")?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: image,
-            style: .plain,
-            target: self,
-            action: #selector(didTappedAdd)
-        )
+        let addButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didTappedAdd))
+        
+        navigationItem.rightBarButtonItems = [addButton,broadCastBarButton ]
         
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -162,6 +163,15 @@ extension ChannelViewController {
     
     @objc func refresh() {
         presenter.fetchGroups()
+    }
+    
+    @objc func didTapBroadCast() {
+        let vc = BroadcastOverlay()
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+//        vc.delegate = self
+//        vc.broadcastData = broadCastData
+        present(vc, animated: true, completion: nil)
     }
     
     @objc func didTappedAdd() {

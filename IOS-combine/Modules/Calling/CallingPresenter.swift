@@ -22,6 +22,7 @@ final class CallingPresenter {
     var participants: [Participant]?
     var screenType: ScreenType
     var player: AVAudioPlayer?
+    var broadcastData: BroadcastData?
     var counter = 0
     var timer = Timer()
     var vtokSdk: VideoTalkSDK?
@@ -75,6 +76,32 @@ extension CallingPresenter {
             output?(.loadIncomingCallView(session: session, user: selectedUser))
             self.session = session
             callHangupHandling()
+        case .videoAndScreenShare:
+            break
+        }
+    }
+    
+    private func handleBroadcast() {
+        guard let data = broadcastData else { return }
+        switch data.broadcastOptions {
+        case .screenShareWithAppAudio, .screenShareWithMicAudio:
+            let sessionUUID = getRequestId()
+//            guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+//                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+//            })
+        case .videoCall:
+            let sessionUUID = getRequestId()
+           // makeSession(with: .videoCall, sessionUUID: sessionUUID, associatedSessionUUID: nil)
+        case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
+            let callSessionUUID: String = getRequestId()
+            let screenShareUUID: String = getRequestId()
+          //  makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
+//            guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+//                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+//            })
+        
         }
     }
     
