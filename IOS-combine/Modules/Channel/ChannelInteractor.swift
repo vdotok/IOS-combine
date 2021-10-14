@@ -10,6 +10,7 @@
 
 import Foundation
 import iOSSDKStreaming
+import MMWormhole
 import iOSSDKConnect
 
 final class ChannelInteractor {
@@ -23,6 +24,16 @@ final class ChannelInteractor {
     var presentCandidates: [String: [String]] = [:]
     var messages: [String: [ChatMessage]] = [:]
     var unreadMessages:[String:[ChatMessage]] = [:]
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
+    var broadCastData: BroadcastData?
+    init(broadCastData: BroadcastData? = nil) {
+        self.broadCastData = broadCastData
+        registerForCommand()
+    }
+    
+    deinit {
+        unRegisterForCommand()
+    }
 }
 
 
@@ -404,3 +415,32 @@ extension ChannelInteractor: FileDelegate {
     
     
 }
+
+
+extension ChannelInteractor {
+    func unRegisterForCommand(){
+        wormhole.stopListeningForMessage(withIdentifier: "Command")
+    }
+    
+    func registerForCommand() {
+        
+        wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in
+            guard let self = self else {return}
+            if let message = messageObject as? String, message == "StartScreenSharing"  {
+             //   self?.output?(.dismissView)
+                self.presenter?.dismissView()
+                guard let sdk = self.vtokSdk, let broadcastData = self.broadCastData else {return }
+                self.presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
+                print("screen share start")
+            }
+        })
+    }
+    
+    func moveToCallingView(broadcastData: BroadcastData) {
+        
+        guard let sdk = self.vtokSdk else {return }
+        presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
+    }
+}
+
+

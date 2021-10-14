@@ -14,6 +14,7 @@ import iOSSDKConnect
 typealias ChatOutput = (ChatPresenter.Output) -> Void
 
 protocol ChatWireframeInterface: WireframeInterface {
+    func moveToBroadcastOverlay()
 }
 
 protocol ChatViewInterface: ViewInterface {
@@ -32,6 +33,7 @@ protocol ChatPresenterInterface: PresenterInterface {
     func itemAt(row: Int) -> (ChatMessage,CellType)
     func receivedMessage(userInfo: [String: AnyObject])
     func sendSeenMessage(message: ChatMessage, row: Int)
+    func moveToBroadcast()
 }
 
 protocol ChatInteractorInterface: InteractorInterface {

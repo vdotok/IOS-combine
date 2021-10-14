@@ -19,12 +19,12 @@ final class ChannelWireframe: BaseWireframe<ChannelViewController> {
     private let storyboard = UIStoryboard(name: "Channel", bundle: nil)
 
     // MARK: - Module setup -
-
-    init() {
+    let interactor = ChannelInteractor()
+    init(broadCastData: BroadcastData? = nil) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChannelViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = ChannelInteractor()
+        
         let presenter = ChannelPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
         presenter.interactor?.presenter = presenter
@@ -35,9 +35,10 @@ final class ChannelWireframe: BaseWireframe<ChannelViewController> {
 // MARK: - Extensions -
 
 extension ChannelWireframe: ChannelWireframeInterface {
+ 
     
-    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User]) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: .videoView, contact: users)
+    func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType = .videoView) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: screenType, contact: users, broadCastData: broadCastData)
         navigationController?.viewControllers.last?.presentWireframe(frame)
     }
     
@@ -51,10 +52,17 @@ extension ChannelWireframe: ChannelWireframeInterface {
         navigationController?.presentWireframe(frame)
     }
     
-    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage]) {
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: UserResponse, messages: [ChatMessage]) {
         switch to {
         case .chat:
+            guard let group = group else {return}
             navigationController?.pushWireframe(ChatWireframe(client: client, group: group, user: user, messages: messages))
+        case .broadcastOverlay:
+            let vc = BroadcastOverlay()
+            vc.modalPresentationStyle = .custom
+            vc.modalTransitionStyle = .crossDissolve
+            vc.delegate = self
+            navigationController?.present(vc, animated: true, completion: nil)
         }
     }
     
@@ -62,6 +70,23 @@ extension ChannelWireframe: ChannelWireframeInterface {
         
         let frame = ContactWireframe(client: client)
         navigationController?.pushWireframe(frame)
+    }
+    
+    func dismissView() {
+        navigationController?.dismiss(animated: true, completion: {
+    
+        })
+    }
+    
+}
+
+extension ChannelWireframe: BroadcastOverlayDelegate {
+    func moveToCallingView(broadcastData: BroadcastData) {
+        interactor.moveToCallingView(broadcastData: broadcastData)
+    }
+    
+    func didUpdate(broadcastData: BroadcastData) {
+        interactor.broadCastData = broadcastData
     }
     
     

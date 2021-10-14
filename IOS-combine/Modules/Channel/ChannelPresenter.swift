@@ -31,6 +31,8 @@ final class ChannelPresenter {
     var presentCandidates: [String: [String]] = [:]
     var messages: [String: [ChatMessage]] = [:]
     var unreadMessages: [String:[ChatMessage]] = [:]
+    var particinpants: [Participant]?
+  
     
     
 
@@ -40,6 +42,7 @@ final class ChannelPresenter {
         view: ChannelViewInterface,
         interactor: ChannelInteractorInterface,
         wireframe: ChannelWireframeInterface
+   
     ) {
         self.view = view
         self.interactor = interactor
@@ -127,13 +130,17 @@ extension ChannelPresenter: ChannelPresenterInterface {
     }
     
     
-    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group) {
+    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?) {
         guard let client = mqttClient,let user = VDOTOKObject<UserResponse>().getData() else {return}
         switch to {
         case .chat:
+           guard let group = group else {return}
             wireframe.move(to: .chat, client: client, group: group, user: user, messages: messages)
+        case .broadcastOverlay:
+            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: user, messages: messages)
         }
     }
+    
     
 }
 
@@ -172,12 +179,20 @@ extension ChannelPresenter {
              moveToAudio(users: group.participants)
         } else if callType == NotifyCallType.video.callType {
               moveToVideo(users: group.participants)
+        } else if callType == NotifyCallType.broadcast.callType {
+            var broadcastdata = info["broadcastData"] as? BroadcastData
+            broadcastdata?.broadcastType = .group
+            interactor?.broadCastData = broadcastdata
+            particinpants = info["participants"] as? [Participant]
+            
+            
         }
     }
     
     func moveToVideo(users: [Participant]) {
         guard let sdk = vtokSdk else {return}
-        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts)
+//        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts, broadCastData: nil)
+        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView)
     }
     
     func moveToAudio(users: [Participant]) {
@@ -250,6 +265,18 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     func hideProgress() {
         channelOutput?(.hideProgress)
         channelOutput?(.reload)
+    }
+    
+    func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
+       // wireframe.dismissView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.wireframe.moveToCalling(particinats: self.particinpants ?? [], users: [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare)
+        }
+       
+    }
+    
+    func dismissView() {
+        wireframe.dismissView()
     }
 
 }

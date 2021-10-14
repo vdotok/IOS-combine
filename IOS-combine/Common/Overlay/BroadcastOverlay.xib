@@ -32,7 +32,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GpQ-jZ-wpu">
                             <rect key="frame" x="24" y="79" width="306" height="202"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-XE-bnq" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
+                                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-XE-bnq" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="306" height="54"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="54" id="zgD-gY-xKd"/>
@@ -42,14 +42,14 @@
                                         <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="Ssh-eU-s8j"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-vn-i3x" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
+                                <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-vn-i3x" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="74" width="306" height="54"/>
                                     <state key="normal" title="SCREEN SHARE WITH APP MIC AUDIO"/>
                                     <connections>
                                         <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="9Nr-X8-gu8"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gly-bV-y1H" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
+                                <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gly-bV-y1H" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="148" width="306" height="54"/>
                                     <state key="normal" title="CAMERA"/>
                                     <connections>
@@ -72,9 +72,8 @@
                                 <action selector="didTapContinue:" destination="-1" eventType="touchUpInside" id="8c4-cT-9TC"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eQ-8R-eA6">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eQ-8R-eA6">
                             <rect key="frame" x="311" y="9" width="24" height="28"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="close"/>
                             <connections>
                                 <action selector="didTapClose:" destination="-1" eventType="touchUpInside" id="16u-Cv-Fbc"/>
@@ -83,8 +82,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="6eQ-8R-eA6" secondAttribute="trailing" constant="19" id="4R0-H0-ax7"/>
                         <constraint firstItem="DFh-bk-tOp" firstAttribute="centerX" secondItem="GpQ-jZ-wpu" secondAttribute="centerX" id="D8o-3F-8Wx"/>
                         <constraint firstItem="GpQ-jZ-wpu" firstAttribute="leading" secondItem="clv-jj-Ces" secondAttribute="leading" constant="24" id="H5L-0x-aqI"/>
+                        <constraint firstItem="6eQ-8R-eA6" firstAttribute="top" secondItem="clv-jj-Ces" secondAttribute="top" constant="9" id="MRB-UZ-Trp"/>
                         <constraint firstAttribute="bottom" secondItem="DFh-bk-tOp" secondAttribute="bottom" constant="29" id="by7-PT-u5v"/>
                         <constraint firstItem="GpQ-jZ-wpu" firstAttribute="top" secondItem="clv-jj-Ces" secondAttribute="top" constant="79" id="cnj-gA-zZH"/>
                         <constraint firstItem="GpQ-jZ-wpu" firstAttribute="centerX" secondItem="clv-jj-Ces" secondAttribute="centerX" id="mgu-Z7-5rw"/>

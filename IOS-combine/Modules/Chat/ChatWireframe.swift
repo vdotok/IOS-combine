@@ -14,6 +14,7 @@ import iOSSDKConnect
 final class ChatWireframe: BaseWireframe<ChatViewController> {
 
     // MARK: - Private properties -
+    var interactor: ChatInteractor?
 
     private let storyboard = UIStoryboard(name: "Chat", bundle: nil)
 
@@ -23,9 +24,9 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
         super.init(viewController: moduleViewController)
 
-        let interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
+        self.interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
 //        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
-        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self)
         moduleViewController.presenter = presenter
         presenter.interactor?.presenter = presenter
     }
@@ -35,4 +36,28 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
 // MARK: - Extensions -
 
 extension ChatWireframe: ChatWireframeInterface {
+    func moveToBroadcastOverlay() {
+        let vc = BroadcastOverlay()
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.delegate = self
+        navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+}
+
+extension ChatWireframe: BroadcastOverlayDelegate {
+    func didUpdate(broadcastData: BroadcastData) {
+//        let groupId = presenter.group?.id
+//        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
+//                                       "groupId": groupId]
+//        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
+        interactor?.moveToCallingView(broadcastData: broadcastData)
+    }
+    
+    func moveToCallingView(broadcastData: BroadcastData) {
+        interactor?.broadcastData = broadcastData
+    }
+    
+    
 }

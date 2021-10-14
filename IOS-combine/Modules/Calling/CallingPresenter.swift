@@ -10,6 +10,7 @@
 
 import Foundation
 import iOSSDKStreaming
+import MMWormhole
 
 final class CallingPresenter {
 
@@ -27,14 +28,22 @@ final class CallingPresenter {
     var timer = Timer()
     var vtokSdk: VideoTalkSDK?
     var session: VTokBaseSession?
+    var ssSession: VTokBaseSession?
     var output: CallingOutput?
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
+                              optionalDirectory: "wormhole")
 
     // MARK: - Lifecycle -
 
     init(
         view: CallingViewInterface,
         interactor: CallingInteractorInterface,
-        wireframe: CallingWireframeInterface,vtokSdk: VideoTalkSDK, participants: [Participant]? = nil, screenType: ScreenType, session: VTokBaseSession? = nil, users: [User]? = nil
+        wireframe: CallingWireframeInterface,vtokSdk: VideoTalkSDK,
+        participants: [Participant]? = nil,
+        screenType: ScreenType,
+        session: VTokBaseSession? = nil,
+        users: [User]? = nil,
+        broadCastData: BroadcastData? = nil
     ) {
         self.view = view
         self.interactor = interactor
@@ -44,18 +53,22 @@ final class CallingPresenter {
         self.screenType = screenType
         self.session = session
         self.users = users
+        self.broadcastData = broadCastData
     }
     
     enum Output {
         case loadView(mediaType: SessionMediaType)
         case loadIncomingCallView(session: VTokBaseSession, user: User)
         case configureLocal(view: UIView, session: VTokBaseSession)
-        case configureRemote(streams: [UserStream])
+        case configureRemote(streams: [UserStream], session: VTokBaseSession)
         case updateVideoView(session: VTokBaseSession)
         case loadAudioView
         case dismissCallView
         case updateView(session: VTokBaseSession)
+        case loadBroadcastView(session: VTokBaseSession)
         case updateHangupButton(status: Bool)
+        case updateURL(url: String)
+        case updateUsers(Int)
     }
 }
 
@@ -77,7 +90,7 @@ extension CallingPresenter {
             self.session = session
             callHangupHandling()
         case .videoAndScreenShare:
-            break
+            handleBroadcast()
         }
     }
     
@@ -86,21 +99,21 @@ extension CallingPresenter {
         switch data.broadcastOptions {
         case .screenShareWithAppAudio, .screenShareWithMicAudio:
             let sessionUUID = getRequestId()
-//            guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-//                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
-//            })
+            guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+            })
         case .videoCall:
             let sessionUUID = getRequestId()
-           // makeSession(with: .videoCall, sessionUUID: sessionUUID, associatedSessionUUID: nil)
+            makeSession(with: .videoCall, sessionUUID: sessionUUID, associatedSessionUUID: nil)
         case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
             let callSessionUUID: String = getRequestId()
             let screenShareUUID: String = getRequestId()
-          //  makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
-//            guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-//                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
-//            })
+            makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
+            guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+            })
         
         }
     }
@@ -121,6 +134,36 @@ extension CallingPresenter {
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
         callHangupHandling()
+    }
+    
+    @discardableResult
+    private func makeSession(with sessionMediaType: SessionMediaType,sessionUUID: String, associatedSessionUUID: String? ) -> String? {
+        guard let user = VDOTOKObject<UserResponse>().getData(),
+              let refID = user.refID
+        else {return nil}
+        guard let participents = participants, let broadcast = broadcastData else {return nil}
+        let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        
+        let requestId = sessionUUID
+        let baseSession = VTokBaseSessionInit(from: refID,
+                                              to: broadcast.broadcastType == .group ? participantsRefIds : [],
+                                              requestID: requestId,
+                                              sessionUUID: requestId,
+                                              sessionMediaType: sessionMediaType,
+                                              callType: .onetomany,
+                                              sessionType: .call,
+                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions, connectedUsers: [])
+        session = baseSession
+        if associatedSessionUUID == nil {
+            output?(.loadBroadcastView(session: baseSession))
+//            output?(.loadView(mediaType: sessionMediaType))
+        }else {
+            output?(.loadBroadcastView(session: baseSession))
+        }
+        
+        vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
+        callHangupHandling()
+        return requestId
     }
     
     private func getRequestId() -> String {
@@ -176,11 +219,11 @@ extension CallingPresenter: SessionDelegate {
     }
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
-        output?(.configureRemote(streams: streams))
+        output?(.configureRemote(streams: streams, session: session))
     }
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
-        
+        output?(.updateURL(url: url))
     }
     
     func stateDidUpdate(for session: VTokBaseSession) {
@@ -198,6 +241,7 @@ extension CallingPresenter: SessionDelegate {
             sessionHangup()
         case .tryingToConnect:
             output?(.updateView(session: session))
+            
         default:
             break
         }
@@ -245,26 +289,53 @@ extension CallingPresenter: CallingPresenterInterface {
             vtokSdk?.set(sessionDelegate: self, for: baseSession)
         }
         loadViews()
+        listenForPublicURL()
+        listenForParticipantAdd()
+        listenForSessionTerminate()
+        
     }
     
     func viewModelWillAppear() {
         
     }
     
+//    func acceptCall(session: VTokBaseSession) {
+//        stopSound()
+//
+//        switch session.sessionMediaType {
+//        case .audioCall:
+//            output?(.loadView(mediaType: .audioCall))
+//            output?(.updateVideoView(session: session))
+//        case .videoCall:
+//            output?(.loadView(mediaType: .videoCall))
+//            output?(.updateVideoView(session: session))
+//
+//        }
+//        output?(.updateHangupButton(status: false))
+//        vtokSdk?.accept(session: session)
+//    }
+    
     func acceptCall(session: VTokBaseSession) {
         stopSound()
         
-        switch session.sessionMediaType {
-        case .audioCall:
-            output?(.loadView(mediaType: .audioCall))
+        switch session.callType {
+        case .manytomany, .onetoone:
+            switch session.sessionMediaType {
+            case .audioCall:
+                output?(.loadView(mediaType: .audioCall))
+                output?(.updateVideoView(session: session))
+            case .videoCall:
+                output?(.loadView(mediaType: .videoCall))
+                output?(.updateVideoView(session: session))
+            
+            }
+        case .onetomany:
+            output?(.loadBroadcastView(session: session))
             output?(.updateVideoView(session: session))
-        case .videoCall:
-            output?(.loadView(mediaType: .videoCall))
-            output?(.updateVideoView(session: session))
-        
         }
         output?(.updateHangupButton(status: false))
         vtokSdk?.accept(session: session)
+        
     }
     
     func rejectCall(session: VTokBaseSession) {
@@ -331,5 +402,82 @@ extension CallingPresenter {
         } catch let error as NSError {
             print("error: \(error.localizedDescription)")
         }
+    }
+}
+
+extension CallingPresenter {
+    
+    
+    private func listenForPublicURL() {
+        wormhole.listenForMessage(withIdentifier: "didGetPublicURL", listener: { [weak self] (messageObject) -> Void in
+            if let message = messageObject as? String {
+                self?.output?(.updateURL(url: message))
+            }
+         
+        })
+    }
+    
+    private func listenForParticipantAdd() {
+        wormhole.listenForMessage(withIdentifier: "participantAdded") { [weak self] message -> Void  in
+            if let count = message as? String {
+                guard let userCount = Int(count) else {return}
+                self?.output?(.updateUsers(userCount))
+                
+        }
+    }
+        
+       
+    }
+    
+    private func listenForSessionTerminate() {
+        wormhole.listenForMessage(withIdentifier: "sessionTerminated") { [weak self] message -> Void in
+            if let sessionString = message as? String {
+                guard let data = sessionString.data(using: .utf8) else {return }
+                let _ = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
+                guard let callSession = self?.session else { return }
+                self?.vtokSdk?.hangup(session: callSession)
+                
+            }
+        }
+    }
+    
+    private func setScreenShareSession(with message: String) {
+        guard let data = message.data(using: .utf8) else {return }
+        ssSession = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
+        guard let from = ssSession?.from, let to = ssSession?.to, let sessionUUID = ssSession?.sessionUUID else{return}
+        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, connectedUsers: [])
+        output?(.loadBroadcastView(session: baseSession))
+        
+    }
+    
+    func getScreenShareDataString(for sessionUUID: String, with associatedSessionUUID: String?) -> NSString? {
+        
+        guard let user = VDOTOKObject<UserResponse>().getData(),
+              let token = user.authorizationToken,
+              let refID = user.refID,
+              let broadcastData = broadcastData
+        else {return nil}
+        guard let participents = participants else {return nil}
+        let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        let session = VTokBaseSessionInit(from: refID,
+                                          to: participantsRefIds,
+                                          requestID: sessionUUID,
+                                          sessionUUID: sessionUUID,
+                                          sessionMediaType: .videoCall,
+                                          callType: .onetomany,
+                                          sessionType: .screenshare,
+                                          associatedSessionUUID: associatedSessionUUID,
+                                          broadcastType: broadcastData.broadcastType,
+                                          broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
+
+        let data = ScreenShareAppData(url: user.mediaServerMap!.completeAddress,
+                                      authenticationToken: token,
+                                      baseSession: session)
+        self.ssSession = session
+        output?(.loadBroadcastView(session: session))
+        let jsonData = try! JSONEncoder().encode(data)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        
+        return jsonString
     }
 }

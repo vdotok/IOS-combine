@@ -17,6 +17,7 @@ final class ChatInteractor {
     var mqttClient: ChatClient?
     var user: UserResponse
     var group: Group
+    var broadcastData: BroadcastData?
     var messages: [ChatMessage]
     weak var presenter: ChatInteractorToPresenter? {didSet {
         presenter?.updateGroup(with: group, user: user, messages: messages)
@@ -208,4 +209,15 @@ extension ChatInteractor: ReceiptDelegate {
     }
     
     
+}
+
+extension ChatInteractor {
+    func moveToCallingView(broadcastData: BroadcastData) {
+        let groupId = group.id
+        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.broadcast.callType,
+                                             "groupId": groupId,
+                                             "broadcastData": broadcastData,
+                                             "participants": group.participants]
+        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
+    }
 }

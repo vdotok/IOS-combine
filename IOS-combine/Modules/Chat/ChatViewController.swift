@@ -328,7 +328,9 @@ extension ChatViewController {
        
         let audioBarButton = UIBarButtonItem(image: UIImage(named: "Mic"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
         let videoBarButton = UIBarButtonItem(image: UIImage(named: "play"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
-        self.navigationItem.setRightBarButtonItems([audioBarButton, videoBarButton], animated: true)
+        let broadcastButton = UIBarButtonItem(image: UIImage(named: "broadcast-icon"), style: .plain, target: self, action: #selector(broadcastAction))
+        
+        self.navigationItem.setRightBarButtonItems([broadcastButton,audioBarButton, videoBarButton], animated: true)
         
     }
     
@@ -365,6 +367,12 @@ extension ChatViewController {
                                        "groupId": groupId]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
     }
+    
+    @objc func broadcastAction() {
+        
+        presenter.moveToBroadcast()
+    }
+    
     
     @objc func didTapBackButton() {
         NotificationCenter.default.post(name: .removeCount,
@@ -466,3 +474,5 @@ extension ChatViewController: DidTapAttachmentDelagate {
     
     
 }
+
+

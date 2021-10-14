@@ -50,6 +50,7 @@ class MessageModel: Message {
 enum NotifyCallType {
     case audio
     case video
+    case broadcast
     
     static var notificationName =  Notification.Name("StartSessionNotifier")
     
@@ -59,6 +60,8 @@ enum NotifyCallType {
             return "audio"
         case .video:
             return "video"
+        case .broadcast:
+            return "broadcast"
         }
     }
 }

@@ -14,6 +14,7 @@ import iOSSDKStreaming
 
 enum ChannelNavigationOptions {
     case chat
+    case broadcastOverlay
 }
 
 enum SocketType {
@@ -39,11 +40,12 @@ typealias ChannelOutput = (ChannelPresenter.Output) -> Void
 typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
 
 protocol ChannelWireframeInterface: WireframeInterface {
-    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage])
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: UserResponse, messages: [ChatMessage])
     func moveToCreateGroup(client: ChatClient)
-    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User])
+    func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType)
     func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User])
     func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User])
+    func dismissView()
 }
 
 protocol ChannelViewInterface: ViewInterface {
@@ -61,14 +63,13 @@ protocol ChannelPresenterInterface: PresenterInterface {
     func itemAt(row: Int) -> TempGroup?
     func channelsCount() -> Int
     func logout()
-    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group)
+    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?)
     func moveToCreateGroup()
-   
 
-    
 }
 
 protocol ChannelInteractorInterface: InteractorInterface {
+    var broadCastData: BroadcastData? {get set}
     var presenter: ChannelInteractorToPresenter? {get set}
     func fetchGroups()
     func fetchUsers()
@@ -86,5 +87,7 @@ protocol ChannelInteractorToPresenter: AnyObject {
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
     func updatePresence(with presence: [String: [String]])
     func hideProgress()
+    func dismissView()
     func messageReceived(with readMessages: [String: [ChatMessage]], unreadMessages: [String:[ChatMessage]])
+    func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData)
 }

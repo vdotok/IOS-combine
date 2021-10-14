@@ -166,12 +166,7 @@ extension ChannelViewController {
     }
     
     @objc func didTapBroadCast() {
-        let vc = BroadcastOverlay()
-        vc.modalPresentationStyle = .custom
-        vc.modalTransitionStyle = .crossDissolve
-//        vc.delegate = self
-//        vc.broadcastData = broadCastData
-        present(vc, animated: true, completion: nil)
+        presenter.navigation(to: .broadcastOverlay, messages: [], group: nil)
     }
     
     @objc func didTappedAdd() {
@@ -232,3 +227,4 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChannelViewController: ChannelViewInterface {
 }
+

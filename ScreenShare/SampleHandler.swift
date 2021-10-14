@@ -26,7 +26,7 @@ class SampleHandler: RPBroadcastSampleHandler {
         super.init()
         audioState = ScreenShareAudioState(screenShareAudio: .passAll)
         screenState = ScreenShareScreenState(screenShareScreen: .passAll)
-        wormhole.listenForMessage(withIdentifier: "InitScreenSharingSdk", listener: { [weak self] (messageObject) -> Void in
+         wormhole.listenForMessage(withIdentifier: "InitScreenSharingSdk", listener: { [weak self] (messageObject) -> Void in
             guard let self = self else {return }
             if let message = messageObject as? String {
                print(message)

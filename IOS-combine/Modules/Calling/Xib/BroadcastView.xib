@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BroadcastView" customModule="IOS_combine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2If-LL-xGi">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" name="AppLightGrey"/>
+                </view>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-Do-L7m">
+                    <rect key="frame" x="78.5" y="376" width="257.5" height="154"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are sharing your screen..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEZ-BS-ELW">
+                            <rect key="frame" x="0.0" y="0.0" width="257.5" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="broadcast" translatesAutoresizingMaskIntoConstraints="NO" id="5yH-Mg-GVA">
+                            <rect key="frame" x="85" y="45" width="87" height="109"/>
+                        </imageView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaq-nb-Ige">
+                            <rect key="frame" x="83.5" y="154" width="90" height="0.0"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="X6M-Pr-beU"/>
+                            </constraints>
+                            <state key="normal" title="Copy URL">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapCopyURL:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSx-UY-yjb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzh-oz-lq2" customClass="DraggableView" customModule="IOS_combine" customModuleProvider="target">
+                    <rect key="frame" x="24" y="542" width="150" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="SCZ-GJ-v4t">
+                    <rect key="frame" x="352" y="74" width="50" height="284"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBQ-uD-zZp">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz5-hH-koa">
+                            <rect key="frame" x="9" y="68" width="32" height="32"/>
+                            <state key="normal" image="noun_Switch"/>
+                            <connections>
+                                <action selector="didTapFlip:" destination="iN0-l3-epB" eventType="touchUpInside" id="zlt-IJ-Ikx"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-0z-VbI">
+                            <rect key="frame" x="9" y="118" width="32" height="32"/>
+                            <state key="normal" image="Volumn On"/>
+                            <state key="selected" image="Volume Off"/>
+                            <connections>
+                                <action selector="didTapSpeaker:" destination="iN0-l3-epB" eventType="touchUpInside" id="563-90-faD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-hI-L0h">
+                            <rect key="frame" x="13" y="168" width="24" height="24"/>
+                            <state key="normal" image="User"/>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZ6-0a-GoL">
+                            <rect key="frame" x="2" y="201" width="46" height="0.0"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="didTapAppleTV:" destination="iN0-l3-epB" eventType="touchUpInside" id="d7m-uF-kKq"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zeC-we-vJ2">
+                            <rect key="frame" x="9" y="210" width="32" height="32"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="g7D-85-XDS"/>
+                                <constraint firstAttribute="width" constant="32" id="uvP-d2-10c"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-RL-zRs">
+                            <rect key="frame" x="13" y="260" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="0ce-Df-deE"/>
+                                <constraint firstAttribute="width" constant="24" id="QBb-Lf-rcM"/>
+                            </constraints>
+                            <state key="normal" image="audioRoute"/>
+                            <connections>
+                                <action selector="didTapRoute:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lcq-M5-zIc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Braodcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-o0-X1e">
+                    <rect key="frame" x="34" y="74" width="148" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pg-G8-hkv">
+                    <rect key="frame" x="392" y="238" width="8" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" name="AppDarkGreenColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
+                    <rect key="frame" x="22" y="774" width="370" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxb-br-vlQ">
+                            <rect key="frame" x="0.0" y="0.0" width="58" height="60"/>
+                            <state key="normal" image="screenshare"/>
+                            <state key="selected" image="ssoff"/>
+                            <connections>
+                                <action selector="didTapScreenShare:" destination="iN0-l3-epB" eventType="touchUpInside" id="qzo-43-VRg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNx-We-R0D">
+                            <rect key="frame" x="78" y="0.0" width="58" height="60"/>
+                            <state key="normal" image="StopVideo"/>
+                            <state key="selected" image="pause-video"/>
+                            <connections>
+                                <action selector="didTapVideo:" destination="iN0-l3-epB" eventType="touchUpInside" id="BQi-kL-mBV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5C-GM-m0J">
+                            <rect key="frame" x="156" y="0.0" width="58" height="60"/>
+                            <state key="normal" image="end"/>
+                            <connections>
+                                <action selector="didTapHangup:" destination="iN0-l3-epB" eventType="touchUpInside" id="GsU-q0-7ur"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z81-QJ-C5D">
+                            <rect key="frame" x="234" y="0.0" width="58" height="60"/>
+                            <state key="normal" image="appaudioon"/>
+                            <state key="selected" image="appaudio"/>
+                            <connections>
+                                <action selector="didTapAppAudio:" destination="iN0-l3-epB" eventType="touchUpInside" id="OsJ-2S-4wI"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEl-9G-EFc">
+                            <rect key="frame" x="312" y="0.0" width="58" height="60"/>
+                            <state key="normal" image="mute"/>
+                            <state key="selected" image="unMute"/>
+                            <connections>
+                                <action selector="didTapMute:" destination="iN0-l3-epB" eventType="touchUpInside" id="2ft-pQ-g9u"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SCZ-GJ-v4t" secondAttribute="trailing" constant="12" id="AMW-ft-Dja"/>
+                <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="H5u-fC-dzM"/>
+                <constraint firstAttribute="bottom" secondItem="2If-LL-xGi" secondAttribute="bottom" id="KOj-dR-6QD"/>
+                <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="UUr-cc-dHg"/>
+                <constraint firstItem="2If-LL-xGi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X33-FW-lvI"/>
+                <constraint firstItem="4Pg-G8-hkv" firstAttribute="leading" secondItem="EAD-hI-L0h" secondAttribute="trailing" constant="3" id="XJp-eu-SVg"/>
+                <constraint firstItem="aTf-o0-X1e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="dUI-5u-HtF"/>
+                <constraint firstItem="4Pg-G8-hkv" firstAttribute="top" secondItem="EAD-hI-L0h" secondAttribute="top" constant="-4" id="djQ-fe-sev"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cfb-cM-Yho" secondAttribute="bottom" constant="28" id="et0-PZ-zh4"/>
+                <constraint firstItem="cfb-cM-Yho" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="i7B-dR-XxV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2If-LL-xGi" secondAttribute="trailing" id="kGP-xd-c6Z"/>
+                <constraint firstItem="aTf-o0-X1e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="m1w-2P-hpY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cfb-cM-Yho" secondAttribute="trailing" constant="22" id="pFD-13-Stj"/>
+                <constraint firstItem="2If-LL-xGi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM9-lp-BaR"/>
+                <constraint firstItem="SCZ-GJ-v4t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="xtA-6Z-hIj"/>
+            </constraints>
+            <connections>
+                <outlet property="broadCastDummyView" destination="4Qi-Do-L7m" id="AsY-FW-FvT"/>
+                <outlet property="broadCastIcon" destination="5yH-Mg-GVA" id="NfQ-Jj-B0h"/>
+                <outlet property="broadCastTitle" destination="aTf-o0-X1e" id="ZjM-IH-kyg"/>
+                <outlet property="cameraButton" destination="uNx-We-R0D" id="xNq-Ko-il5"/>
+                <outlet property="cameraSwitchIcon" destination="yz5-hH-koa" id="a04-to-KSr"/>
+                <outlet property="connectedUser" destination="4Pg-G8-hkv" id="1Ot-F5-jW6"/>
+                <outlet property="copyUrlBtn" destination="eaq-nb-Ige" id="Yqa-y0-ULZ"/>
+                <outlet property="hangupBtn" destination="e5C-GM-m0J" id="W0F-uL-JJu"/>
+                <outlet property="localView" destination="2If-LL-xGi" id="Ka7-Rx-D8s"/>
+                <outlet property="muteButton" destination="vEl-9G-EFc" id="ERV-qe-dW9"/>
+                <outlet property="routePickerViewContainer" destination="zeC-we-vJ2" id="fZz-B2-7aX"/>
+                <outlet property="screenShareAudio" destination="z81-QJ-C5D" id="8hS-uE-Chd"/>
+                <outlet property="screenShareBtn" destination="gxb-br-vlQ" id="nGT-Eq-PaT"/>
+                <outlet property="smallLocalView" destination="rzh-oz-lq2" id="0Lf-an-r0k"/>
+                <outlet property="speakerIcon" destination="eAU-0z-VbI" id="pUz-S2-Tzz"/>
+                <outlet property="timerLabel" destination="FBQ-uD-zZp" id="WQl-Pk-Gdb"/>
+                <outlet property="titlelabel" destination="VEZ-BS-ELW" id="XaV-Ob-Sb5"/>
+            </connections>
+            <point key="canvasLocation" x="-17" y="65"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="StopVideo" width="60" height="60"/>
+        <image name="User" width="24" height="24"/>
+        <image name="Volume Off" width="32" height="32"/>
+        <image name="Volumn On" width="32" height="32"/>
+        <image name="appaudio" width="51" height="46"/>
+        <image name="appaudioon" width="51" height="46"/>
+        <image name="audioRoute" width="512" height="512"/>
+        <image name="broadcast" width="87" height="109"/>
+        <image name="end" width="60" height="60"/>
+        <image name="mute" width="60" height="60"/>
+        <image name="noun_Switch" width="32" height="32"/>
+        <image name="pause-video" width="55" height="52"/>
+        <image name="screenshare" width="57.5" height="52"/>
+        <image name="ssoff" width="57.5" height="52"/>
+        <image name="unMute" width="60" height="60"/>
+        <namedColor name="AppDarkGreenColor">
+            <color red="0.396078431372549" green="0.60784313725490191" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppLightGrey">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

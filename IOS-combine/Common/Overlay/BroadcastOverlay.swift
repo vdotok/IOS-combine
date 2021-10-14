@@ -9,6 +9,11 @@ import UIKit
 import iOSSDKStreaming
 import VisualEffectView
 
+protocol BroadcastOverlayDelegate: AnyObject {
+    func didUpdate(broadcastData: BroadcastData)
+    func moveToCallingView(broadcastData: BroadcastData)
+}
+
 class BroadcastOverlay: UIViewController {
     
     @IBOutlet weak var blurView: UIView!
@@ -19,9 +24,10 @@ class BroadcastOverlay: UIViewController {
             continueBtn.layer.cornerRadius = 8
         }
     }
-    var broadCastData: BroadcastData = BroadcastData(broadcastType: .none,
+    var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
     @IBOutlet weak var camera: BorderButton!
+    weak var delegate: BroadcastOverlayDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,18 +62,19 @@ class BroadcastOverlay: UIViewController {
     }
     
     @IBAction func didTapContinue(_ sender: UIButton) {
+     //   moveToPublicView()
         broadCastButtonHandling()
+        
         switch broadCastData.broadcastType {
         case .group:
             break
-           // viewModel.moveToChat(with: broadCastData)
         case .publicURL:
-            break
             if broadCastData.broadcastOptions != .videoCall {
 //                self.viewModel.broadCastData = broadCastData
-//                moveToPublicView()
+                delegate?.didUpdate(broadcastData: broadCastData)
+               moveToPublicView()
             } else {
-                
+                delegate?.moveToCallingView(broadcastData: broadCastData)
               //  self.viewModel.moveToCalling(with: broadCastData)
             }
         default:
@@ -92,6 +99,16 @@ class BroadcastOverlay: UIViewController {
         blurView.addSubview(visualEffectView)
     }
     
+    private func moveToPublicView() {
+        let vc = ScreenSharePopup()
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.delegate = self
+        vc.broadcastData = broadCastData
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
     private func broadCastButtonHandling() {
         
         if camera.isSelected {
@@ -112,15 +129,25 @@ class BroadcastOverlay: UIViewController {
     }
     
     private func continueStatsHandling () {
+
         if screenShareAppAudioBtn.isSelected == true ||
            screenShareMicAudioBtn.isSelected == true ||
-            camera.isSelected == true  {
-            continueBtn.backgroundColor = broadCastData.broadcastType == .none ? .appDarkGray :  .appDarkGreenColor
-            continueBtn.isEnabled =  broadCastData.broadcastType == .none ? false :  true
+           camera.isSelected == true  {
+            continueBtn.backgroundColor = .appDarkGreenColor
+            continueBtn.isEnabled = true
         } else {
             continueBtn.backgroundColor = .appDarkGray
             continueBtn.isEnabled = false
         }
     }
 
+}
+
+
+extension BroadcastOverlay: ScreenShareDelegate {
+    func didTapDismiss() {
+        
+    }
+    
+    
 }

@@ -19,14 +19,14 @@ final class CallingWireframe: BaseWireframe<CallingViewController> {
 
     // MARK: - Module setup -
 
-    init(vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil) {
+    init(vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil, broadCastData: BroadcastData? = nil) {
         let moduleViewController = storyboard.instantiateViewController(ofType: CallingViewController.self)
         super.init(viewController: moduleViewController)
 
         let interactor = CallingInteractor()
 //        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         
-        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact)
+        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact, broadCastData: broadCastData)
         moduleViewController.presenter = presenter
     }
 

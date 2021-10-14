@@ -17,6 +17,7 @@ final class CallingViewController: UIViewController {
    
     var groupCallingView: GroupCallingView?
     var incomingCallingView: IncomingCall?
+    var broadcastView: BroadcastView?
     var counter = 0
     var timer = Timer()
 
@@ -40,8 +41,8 @@ final class CallingViewController: UIViewController {
             switch output {
             case .configureLocal(let view, session: let session):
                 self.configureLocalView(rendrer: view, session: session)
-            case .configureRemote(let streams):
-                self.configureRemote(streams: streams)
+            case .configureRemote(let streams, let session):
+                self.configureRemote(streams: streams, session: session)
             case .loadView(let mediaType):
                 self.loadGroupCallingView(mediaType: mediaType)
             case .loadIncomingCallView(let session, let user):
@@ -54,6 +55,12 @@ final class CallingViewController: UIViewController {
                 self.configureView(for: session)
             case .updateHangupButton(let status):
                 self.handleHangup(status: status)
+            case .loadBroadcastView(let session):
+                self.loadBroadcastView(session: session)
+            case .updateURL(let url):
+                self.updateWith(URL: url)
+            case .updateUsers(let count):
+                self.broadcastView?.updateUser(count: count)
             default:
                 break
             }
@@ -61,18 +68,37 @@ final class CallingViewController: UIViewController {
     }
     
     private func updateVideoView(session: VTokBaseSession) {
-        guard let groupCallingView = groupCallingView else {return}
-        groupCallingView.updateAudioVideoview(for: session)
+        switch session.callType {
+        case .onetoone, .manytomany:
+            guard let groupCallingView = groupCallingView else {return}
+            groupCallingView.updateAudioVideoview(for: session)
+        case .onetomany:
+            guard let broadcastView = broadcastView else {return}
+            broadcastView.updateView(with: session)
+        }
     }
     
     private func configureLocalView(rendrer: UIView, session: VTokBaseSession) {
-        guard let groupCallingView = groupCallingView else {return}
-        groupCallingView.configureLocal(view: rendrer)
-        groupCallingView.session = session
+        switch session.callType {
+        case .onetoone, .manytomany:
+            guard let groupCallingView = groupCallingView else {return}
+            groupCallingView.configureLocal(view: rendrer)
+            groupCallingView.session = session
+        case .onetomany:
+            guard let broadcastView = broadcastView else {return}
+            broadcastView.setViewsForOutGoing(session: session, renderer: rendrer)
+        }
     }
     private func configureView(for session: VTokBaseSession) {
-        guard let groupCallingView = groupCallingView else {return}
-        groupCallingView.updateView(for: session)
+        switch session.callType {
+        case .onetoone, .manytomany:
+            guard let groupCallingView = groupCallingView else {return}
+            groupCallingView.updateView(for: session)
+        case .onetomany:
+            guard let broadcastView = broadcastView else {return}
+            broadcastView.updateView(with: session)
+            
+        }
         
     }
     
@@ -81,9 +107,26 @@ final class CallingViewController: UIViewController {
         groupCallingView.handleHanup(status: status)
     }
     
-    private func configureRemote(streams: [UserStream]) {
-        guard let groupCallingView = groupCallingView else {return}
-        groupCallingView.updateDataSource(with: streams)
+    private func configureRemote(streams: [UserStream], session: VTokBaseSession) {
+        switch session.callType {
+        case .manytomany, .onetoone:
+            guard let groupCallingView = groupCallingView else {return}
+            groupCallingView.updateDataSource(with: streams)
+        case .onetomany:
+            guard let broadcastView = self.broadcastView else {return}
+            broadcastView.configureView(with: streams, and: session)
+        }
+       
+    }
+    
+    private func loadBroadcastView(session: VTokBaseSession) {
+        broadcastView = BroadcastView.loadView()
+        guard let broadcastView = self.broadcastView else {return}
+        broadcastView.updateView(with: session)
+        broadcastView.delegate = self
+        broadcastView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(broadcastView)
+        broadcastView.fixInSuperView()
     }
     
     private func loadGroupCallingView(mediaType: SessionMediaType) {
@@ -128,6 +171,10 @@ final class CallingViewController: UIViewController {
 // MARK: - Extensions -
 
 extension CallingViewController: CallingViewInterface {
+    private func updateWith(URL: String) {
+        guard let broadCastView = broadcastView else {return}
+        broadCastView.updateURL(with: URL)
+    }
 }
 
 
@@ -135,19 +182,19 @@ extension CallingViewController: VideoDelegate {
     func didTapVideo(for baseSession: VTokBaseSession, state: VideoState) {
         presenter.disableVideo(session: baseSession, state: state)
     }
-    
+
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState) {
         presenter.mute(session: baseSession, state: state)
     }
-    
+
     func didTapEnd(for baseSession: VTokBaseSession) {
         presenter.hangupCall(session: baseSession)
     }
-    
+
     func didTapFlip(for baseSession: VTokBaseSession, type: CameraType) {
         presenter.flipCamera(session: baseSession, state: type)
     }
-    
+
     func didTapSpeaker(baseSession: VTokBaseSession, state: SpeakerState) {
         presenter.speaker(session: baseSession, state: state)
     }
@@ -164,4 +211,40 @@ extension CallingViewController: IncomingCallDelegate {
     }
     
     
+}
+extension CallingViewController: BroadcastDelegate {
+
+    func didTapStream(with state: StreamStatus) {
+      //  viewModel.didTapStream(with: state)
+}
+    
+    func didTapRoute() {
+        AVAudioSession().ChangeAudioOutput(presenterViewController: self)
+
+    }
+    
+   
+    
+    func didTapMuteSS(for baseSession: VTokBaseSession, state: AudioState) {
+    //    viewModel.mute(session: baseSession, state: state)
+    }
+    
+    func didTapHangUp(for session: VTokBaseSession) {
+      //  viewModel.hangupCall(session: session)
+    }
+    
+    func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState) {
+     //   viewModel.speaker(session: session, state: state)
+        
+    }
+    
+    func didTapFlipCamera(for session: VTokBaseSession, type: CameraType) {
+     //   viewModel.flipCamera(session: session, state: type)
+    }
+    
+    func didTapVideo(for session: VTokBaseSession, type: VideoState) {
+     //   viewModel.disableVideo(session: session, state: type)
+    }
+
+
 }

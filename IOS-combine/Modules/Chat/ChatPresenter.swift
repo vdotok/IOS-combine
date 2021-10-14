@@ -96,5 +96,9 @@ extension ChatPresenter: ChatInteractorToPresenter {
         chatOutput?(.reload)
     }
     
+    func moveToBroadcast() {
+        wireframe.moveToBroadcastOverlay()
+    }
+    
     
 }
