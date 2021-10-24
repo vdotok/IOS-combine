@@ -29,7 +29,7 @@ class GroupCallingCell: UICollectionViewCell {
             subView.removeFromSuperview()
         }
         remoteView.isHidden = false
-        remoteName.text = nil
+        //remoteName.text = nil
     }
     
     func configure(with stream: UserStream, users: [User]?) {
@@ -38,7 +38,7 @@ class GroupCallingCell: UICollectionViewCell {
 //            return
 //
 //        }
-        remoteName.text = "test"
+        remoteName?.text = "test"
         switch stream.sessionMediaType {
         case .audioCall:
             remoteView.isHidden = true

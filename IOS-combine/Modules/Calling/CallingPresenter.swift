@@ -12,7 +12,7 @@ import Foundation
 import iOSSDKStreaming
 import MMWormhole
 
-final class CallingPresenter {
+final class CallingPresenter: NSObject {
 
     // MARK: - Private properties -
 
@@ -33,6 +33,7 @@ final class CallingPresenter {
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     var streamingManager: StreamingMananger?
+    var sessionDirection: SessionDirection
     //var streamManager: StreamingMananger = StreamingMananger()
 
     // MARK: - Lifecycle -
@@ -46,7 +47,8 @@ final class CallingPresenter {
         session: VTokBaseSession? = nil,
         users: [User]? = nil,
         broadCastData: BroadcastData? = nil,
-        streamingManager: StreamingMananger? = nil
+        streamingManager: StreamingMananger? = nil,
+        sessionDirection: SessionDirection
     ) {
         self.view = view
         self.interactor = interactor
@@ -58,6 +60,8 @@ final class CallingPresenter {
         self.users = users
         self.broadcastData = broadCastData
         self.streamingManager = streamingManager
+        self.sessionDirection = sessionDirection
+        super.init()
         self.streamingManager?.delegate = self
     }
     
@@ -76,6 +80,35 @@ final class CallingPresenter {
         case updateUsers(Int)
         case fetchStreams
         case fetchonetomany(session: VTokBaseSession)
+    }
+    
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "captured" {
+
+          if !UIScreen.main.isCaptured {
+            //    UIApplication.shared.isIdleTimerDisabled = false
+              guard let options = broadcastData?.broadcastOptions,
+                    let sdk = vtokSdk
+                  //  sessionDirection == .outgoing
+              else {return}
+              switch options {
+              case .screenShareWithAppAudioAndVideoCall:
+                  guard  let session = session else { return }
+                  sdk.hangup(session: session)
+              case .screenShareWithVideoCall:
+                  guard  let session = session else {return }
+                  sdk.hangup(session: session)
+              case .screenShareWithAppAudio:
+                  output?(.dismissCallView)
+              case .screenShareWithMicAudio:
+                  output?(.dismissCallView)
+              case .videoCall:
+                  output?(.dismissCallView)
+              }
+              
+            }
+        }
+
     }
 }
 
@@ -343,6 +376,7 @@ extension CallingPresenter: CallingPresenterInterface {
  
     
     func viewModelDidLoad() {
+        addNotificationObserver()
         if let baseSession = session, baseSession.state == .receivedSessionInitiation {
             vtokSdk?.set(sessionDelegate: streamingManager!, for: baseSession)
         }
@@ -356,6 +390,18 @@ extension CallingPresenter: CallingPresenterInterface {
     func viewModelWillAppear() {
         
     }
+    
+    func addNotificationObserver(){
+          // Add Key-Value observer on isCaptured property of uiscreen.main
+        UIScreen.main.addObserver(self, forKeyPath: "captured", options: .new, context: nil)
+
+      }
+    
+    // MARK:- Key-Value Observer callback
+
+  
+    
+    
     
 //    func acceptCall(session: VTokBaseSession) {
 //        stopSound()

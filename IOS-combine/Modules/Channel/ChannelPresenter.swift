@@ -160,7 +160,7 @@ extension ChannelPresenter: SDKConnectionDelegate {
             self.channelOutput?(.disconnected(.stream))
         case .sessionRequest(let sessionRequest):
             guard let sdk = vtokSDK else {return}
-            wireframe.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: contacts)
+            wireframe.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: contacts, sessionDirection: .incoming)
          
         }
     }
@@ -193,14 +193,6 @@ extension ChannelPresenter {
             particinpants = info["participants"] as? [Participant]
         } else if callType == NotifyCallType.fetchStreams.callType {
             guard let session = info["session"] as? VTokBaseSession else {return}
-//            if sessionType == "multi" {
-//                moveToVideo(users: [], screenType: .fetchStreams)
-//            } else {
-//                moveToVideo(users: [], screenType: .fetchStreams)
-//            }
-           
-//            moveToVideo(users: group.participants, screenType: .fetchStreams)
-            
             switch session.callType {
             case .onetomany:
                 moveToVideo(users: [], screenType: .fetchonetomany, session: session)
@@ -208,6 +200,14 @@ extension ChannelPresenter {
             case .manytomany, .onetoone:
                 moveToVideo(users: [], screenType: .fetchStreams, session: session)
             }
+        }
+        else if callType == NotifyCallType.cameraBroadcast.callType {
+            guard let group = groups.first(where: { $0.id == groupId }) else
+            {return}
+            guard var broadcastdata = info["broadcastData"] as? BroadcastData else {return}
+            self.particinpants = group.participants
+            broadcastdata.broadcastGroupID = String(groupId)
+            moveToCallingView(sdk: vtokSDK!, screenType: .videoAndScreenShare, broadCastData: broadcastdata)
         }
     }
     
@@ -225,20 +225,20 @@ extension ChannelPresenter {
     
     func moveToVideo(users: [Participant], screenType: ScreenType, session: VTokBaseSession) {
         guard let sdk = vtokSDK else {return}
-        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType, session: session)
+        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType, session: session, sessionDirection: .outgoing)
     }
     
     func moveToVideo(users: [Participant]) {
          guard let sdk = vtokSDK else {return}
 //        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts, broadCastData: nil)
-        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView, session: nil)
+        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView, session: nil, sessionDirection: .outgoing)
     }
     
     func moveToAudio(users: [Participant]) {
         guard let sdk = vtokSDK else {return}
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.wireframe.moveToAudio(sdk: sdk, participants: users, users: self.contacts)
+            self.wireframe.moveToAudio(sdk: sdk, participants: users, users: self.contacts, sessionDirection: .outgoing)
         }
     }
 }
@@ -265,7 +265,7 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
             channelOutput?(.disconnected(.stream))
         case .request(let session, let sdk):
             
-            wireframe.moveToIncomingCall(sdk: sdk, baseSession: session, users: contacts)
+            wireframe.moveToIncomingCall(sdk: sdk, baseSession: session, users: contacts, sessionDirection: .incoming)
         
         }
     }
@@ -310,8 +310,8 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     
     func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
        // wireframe.dismissView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.wireframe.moveToCalling(particinats: self.particinpants ?? [], users: [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.wireframe.moveToCalling(particinats: self?.particinpants ?? [], users: self?.contacts ?? [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
         }
        
     }

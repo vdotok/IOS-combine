@@ -246,7 +246,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
 
 extension GroupCallingUpdatedView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 4 , height: 200)
+        return CGSize(width: UIScreen.main.bounds.width / 4 , height: 120)
     }
 }
 

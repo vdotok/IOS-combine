@@ -385,11 +385,11 @@ extension ChatViewController {
         sendMessageButton.tintColor = .appDarkGray
         messageTextField.setPlaceholder()
        
-        let audioBarButton = UIBarButtonItem(image: UIImage(named: "Mic"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
-        let videoBarButton = UIBarButtonItem(image: UIImage(named: "play"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
+        let audioBarButton = UIBarButtonItem(image: UIImage(named: "call"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
+        let videoBarButton = UIBarButtonItem(image: UIImage(named: "Icon ionic-ios-videocam"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
         let broadcastButton = UIBarButtonItem(image: UIImage(named: "broadcast-icon"), style: .plain, target: self, action: #selector(broadcastAction))
         
-        self.navigationItem.setRightBarButtonItems([broadcastButton,audioBarButton, videoBarButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([broadcastButton, videoBarButton, audioBarButton], animated: true)
         
     }
     

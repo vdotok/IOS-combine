@@ -152,7 +152,7 @@ class BroadcastOverlay: UIViewController {
 
 extension BroadcastOverlay: ScreenShareDelegate {
     func didTapDismiss() {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     

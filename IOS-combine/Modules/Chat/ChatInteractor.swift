@@ -214,7 +214,8 @@ extension ChatInteractor: ReceiptDelegate {
 extension ChatInteractor {
     func moveToCallingView(broadcastData: BroadcastData) {
         let groupId = group.id
-        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.broadcast.callType,
+        
+        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.cameraBroadcast.callType,
                                              "groupId": groupId,
                                              "broadcastData": broadcastData,
                                              "participants": group.participants]

@@ -51,6 +51,7 @@ enum NotifyCallType {
     case audio
     case video
     case broadcast
+    case cameraBroadcast
     case fetchStreams
     case hangup
     
@@ -68,6 +69,8 @@ enum NotifyCallType {
             return "fetchStreams"
         case .hangup:
             return "hangup"
+        case .cameraBroadcast:
+            return "cameraBroadcast"
         }
     }
 }

@@ -44,7 +44,7 @@
                     </subviews>
                 </stackView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Uwm-xl-oEZ">
-                    <rect key="frame" x="0.0" y="117" width="414" height="128"/>
+                    <rect key="frame" x="8" y="117" width="398" height="128"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="128" id="55a-4i-sLg"/>
@@ -57,7 +57,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="atO-nL-8Pe">
-                    <rect key="frame" x="358" y="269" width="32" height="84"/>
+                    <rect key="frame" x="350" y="269" width="32" height="84"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-Fq-ifd">
                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -138,7 +138,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Uwm-xl-oEZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="18x-GR-EmH"/>
+                <constraint firstItem="Uwm-xl-oEZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="18x-GR-EmH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Grk-4v-CLc" secondAttribute="trailing" id="51b-IA-1bE"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Grk-4v-CLc" secondAttribute="bottom" id="58M-IS-ugX"/>
                 <constraint firstItem="Grk-4v-CLc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5fw-cF-20A"/>
@@ -154,7 +154,7 @@
                 <constraint firstItem="I87-8m-hme" firstAttribute="centerX" secondItem="Uwm-xl-oEZ" secondAttribute="centerX" id="Mwb-kn-lTP"/>
                 <constraint firstItem="J2H-9O-12D" firstAttribute="centerY" secondItem="elf-R6-Eg3" secondAttribute="centerY" id="TKX-4i-wMR"/>
                 <constraint firstItem="pWP-b5-vES" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="U7u-Ep-g03"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uwm-xl-oEZ" secondAttribute="trailing" id="WyT-Y2-hoW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uwm-xl-oEZ" secondAttribute="trailing" constant="8" id="WyT-Y2-hoW"/>
                 <constraint firstItem="Uwm-xl-oEZ" firstAttribute="top" secondItem="J2H-9O-12D" secondAttribute="bottom" constant="12" id="Ywa-ru-Zg7"/>
                 <constraint firstItem="elf-R6-Eg3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dDX-a5-IAb"/>
                 <constraint firstItem="atO-nL-8Pe" firstAttribute="trailing" secondItem="Uwm-xl-oEZ" secondAttribute="trailing" constant="-24" id="grP-iU-EvX"/>

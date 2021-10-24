@@ -15,9 +15,9 @@ import iOSSDKStreaming
 typealias CallingOutput = (CallingPresenter.Output) -> Void
 
 protocol CallingWireframeInterface: WireframeInterface {
-    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User])
-    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User])
-    func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User])
+    func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User], sessionDirection: SessionDirection)
+    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User],sessionDirection: SessionDirection)
+    func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User],sessionDirection: SessionDirection)
 }
 
 protocol CallingViewInterface: ViewInterface {
