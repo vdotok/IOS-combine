@@ -248,6 +248,7 @@ extension CallingViewController: BroadcastDelegate {
     }
     
     func didTapHangUp(for session: VTokBaseSession) {
+        presenter.hangupCall(session: session)
       //  viewModel.hangupCall(session: session)
     }
     
