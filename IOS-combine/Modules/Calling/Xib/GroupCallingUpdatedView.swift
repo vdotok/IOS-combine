@@ -115,7 +115,6 @@ class GroupCallingUpdatedView: UIView {
             cameraSwitch.isHidden = true
             speakerButton.isHidden = true
             cameraButton.isEnabled = false
-            
             setNames()
         case .ringing:
             cameraSwitch.isHidden = true
@@ -161,7 +160,10 @@ class GroupCallingUpdatedView: UIView {
         speakerButton.isHidden = false
         cameraSwitch.isHidden = false
         speakerButton.isHidden = false
-        configureTimer()
+        if timer != nil {
+            configureTimer()
+        }
+       
     }
 
 }
@@ -182,6 +184,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func updateDataSource(with streams: [UserStream], session: VTokBaseSession) {
+        connectedState()
         self.session = session
         userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
         setNames()
