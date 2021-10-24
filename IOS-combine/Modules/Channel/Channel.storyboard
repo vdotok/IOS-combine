@@ -202,6 +202,7 @@
                         <outlet property="logoutButton" destination="G8T-RJ-8g4" id="HkO-qZ-2uf"/>
                         <outlet property="subTitle" destination="ukE-Ck-c9n" id="7R4-sn-ndz"/>
                         <outlet property="tableView" destination="fBt-6R-2dR" id="5vK-94-MjI"/>
+                        <outlet property="tableViewTopConstraint" destination="xMC-ez-xsT" id="9mQ-5p-4Ke"/>
                         <outlet property="titleLabel" destination="MYY-nJ-4RK" id="D8T-c4-mU9"/>
                         <outlet property="userName" destination="W8h-AA-zi6" id="XJ0-GO-tI3"/>
                         <outlet property="viewStatus" destination="s1J-IT-2eA" id="9Oz-fM-V0i"/>

@@ -19,10 +19,11 @@ final class ChatViewController: UIViewController {
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var sendMessageButton: UIButton!
-    var users: [String] = []
     @IBOutlet weak var callingViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     var smallCallingView: SmallCallingView?
     var isCallingView: Bool = false
+    var users: [String] = []
     
     
     lazy var titleLabel: UILabel = {
@@ -73,6 +74,8 @@ final class ChatViewController: UIViewController {
         iqKeyBoard(isEnable: false)
         if presenter.streamingManager?.activeSession() != 0 {
             showSmallView()
+        } else {
+            tableViewTopConstraint.constant = 0
         }
         
         if presenter.streamingManager?.activeSession() == 0 && smallCallingView != nil {
@@ -98,6 +101,7 @@ final class ChatViewController: UIViewController {
     }
     
     @objc func showSmallView() {
+        tableViewTopConstraint.constant = 140 + topbarHeight
         UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
         let manager = presenter.streamingManager
         manager?.groupID = presenter.group?.id

@@ -192,8 +192,22 @@ extension ChannelPresenter {
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
         } else if callType == NotifyCallType.fetchStreams.callType {
+            
+            moveToVideo(users: [], screenType: .fetchStreams)
 //            moveToVideo(users: group.participants, screenType: .fetchStreams)
         }
+    }
+    
+    func convertArray<T, U>(array: [T]) -> [U] {
+        var newArray = [U]()
+        for element in array {
+            guard let newElement = element as? U else {
+                print("downcast failed!")
+                return []
+            }
+            newArray.append(newElement)
+        }
+        return newArray
     }
     
     func moveToVideo(users: [Participant], screenType: ScreenType) {

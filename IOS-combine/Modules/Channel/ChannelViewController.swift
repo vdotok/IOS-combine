@@ -49,6 +49,7 @@ final class ChannelViewController: UIViewController {
     private var selectedGroupId: Int? = nil
     let navigationTitle = UILabel()
     var incomingCallingView: GroupCallingUpdatedView?
+    var smallCallingView: SmallCallingView?
 
     // MARK: - Public properties -
 
@@ -72,22 +73,31 @@ final class ChannelViewController: UIViewController {
         
         if presenter.streamingManager.activeSession() != 0 {
             showSmallView()
+        } else {
+            self.tableViewTopConstraint.constant = 0
+        }
+        if presenter.streamingManager.activeSession() == 0 && smallCallingView != nil {
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            smallCallingView = nil
         }
     }
     
     @objc func showSmallView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableViewTopConstraint.constant = 140
+        }
+        
         UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
         let manager = presenter.streamingManager
-        
         manager.vtokSDK = presenter.vtokSDK
-        let view = SmallCallingView.getView(streamingManager: manager)
-        view.getUserStream()
-       // view.delegate = self
-       
-       UIApplication.shared.windows.first!.addSubview(view)
-        view.addConstraintsFor(width: self.view.frame.width, and: 140)
-        view.addTopConstraint(size: self.topbarHeight)
-    
+        smallCallingView = SmallCallingView.getView(streamingManager: manager)
+        smallCallingView?.getUserStream()
+        UIApplication.shared.windows.first!.addSubview(smallCallingView!)
+        smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
+        smallCallingView?.addTopConstraint(size: self.topbarHeight)
+        
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -125,6 +125,7 @@
                         <outlet property="messageTextField" destination="pxX-dx-L5P" id="FVt-NI-rmH"/>
                         <outlet property="sendMessageButton" destination="GbB-Xz-Umz" id="b5B-Fg-1A9"/>
                         <outlet property="tableView" destination="pdR-6G-Qoa" id="6gT-4q-kZu"/>
+                        <outlet property="tableViewTopConstraint" destination="s42-b2-42Z" id="eeA-6s-RyW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BVJ-Oi-3xJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
