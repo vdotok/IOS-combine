@@ -36,11 +36,8 @@ final class ChannelWireframe: BaseWireframe<ChannelViewController> {
 // MARK: - Extensions -
 
 extension ChannelWireframe: ChannelWireframeInterface {
- 
-    
-
-    func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType = .videoView) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: screenType, contact: users, broadCastData: broadCastData, streamingManager: streamingManager!)
+    func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType, session: VTokBaseSession?) {
+        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: screenType, session: session,contact: users, broadCastData: broadCastData, streamingManager: streamingManager!)
         navigationController?.viewControllers.last?.presentWireframe(frame)
     }
     

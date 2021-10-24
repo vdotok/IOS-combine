@@ -192,9 +192,22 @@ extension ChannelPresenter {
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
         } else if callType == NotifyCallType.fetchStreams.callType {
-            
-            moveToVideo(users: [], screenType: .fetchStreams)
+            guard let session = info["session"] as? VTokBaseSession else {return}
+//            if sessionType == "multi" {
+//                moveToVideo(users: [], screenType: .fetchStreams)
+//            } else {
+//                moveToVideo(users: [], screenType: .fetchStreams)
+//            }
+           
 //            moveToVideo(users: group.participants, screenType: .fetchStreams)
+            
+            switch session.callType {
+            case .onetomany:
+                moveToVideo(users: [], screenType: .fetchonetomany, session: session)
+             
+            case .manytomany, .onetoone:
+                moveToVideo(users: [], screenType: .fetchStreams, session: session)
+            }
         }
     }
     
@@ -210,15 +223,15 @@ extension ChannelPresenter {
         return newArray
     }
     
-    func moveToVideo(users: [Participant], screenType: ScreenType) {
+    func moveToVideo(users: [Participant], screenType: ScreenType, session: VTokBaseSession) {
         guard let sdk = vtokSDK else {return}
-        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType)
+        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType, session: session)
     }
     
     func moveToVideo(users: [Participant]) {
          guard let sdk = vtokSDK else {return}
 //        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts, broadCastData: nil)
-        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView)
+        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView, session: nil)
     }
     
     func moveToAudio(users: [Participant]) {
@@ -298,7 +311,7 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
        // wireframe.dismissView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.wireframe.moveToCalling(particinats: self.particinpants ?? [], users: [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare)
+            self.wireframe.moveToCalling(particinats: self.particinpants ?? [], users: [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil)
         }
        
     }

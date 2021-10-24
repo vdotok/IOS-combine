@@ -42,7 +42,7 @@ typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
 protocol ChannelWireframeInterface: WireframeInterface {
     func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: UserResponse, messages: [ChatMessage],sdk: VTokSDK?, streamingManager: StreamingMananger)
     func moveToCreateGroup(client: ChatClient)
-    func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType)
+    func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType, session: VTokBaseSession?)
     func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User])
     func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User])
     func dismissView()

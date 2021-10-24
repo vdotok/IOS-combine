@@ -19,7 +19,7 @@ class SmallCallingView: UIView {
     var streamingManager: StreamingMananger?
     var streams: [UserStream] = []
     var groupID: Int? = nil
-    
+    var session: VTokBaseSession?
     
     override func awakeFromNib() {
         collectionView.delegate = self
@@ -45,9 +45,9 @@ class SmallCallingView: UIView {
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
         let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.fetchStreams.callType,
-                                             "groupId": streamingManager?.groupID ?? 0]
+                                             "groupId": streamingManager?.groupID ?? 0,
+                                             "session": session ]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
-        
         
         delegate?.didTapView()
     }
@@ -108,6 +108,7 @@ extension SmallCallingView: StreamingDelegate {
         } else {
             self.streams = streams
         }
+        self.session = session
         
         collectionView.reloadData()
     }

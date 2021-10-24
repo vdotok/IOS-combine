@@ -75,6 +75,7 @@ final class CallingPresenter {
         case updateURL(url: String)
         case updateUsers(Int)
         case fetchStreams
+        case fetchonetomany(session: VTokBaseSession)
     }
 }
 
@@ -99,6 +100,10 @@ extension CallingPresenter {
             handleBroadcast()
         case .fetchStreams:
             output?(.fetchStreams)
+            streamingManager?.getStreams()
+        case .fetchonetomany:
+            guard let session = session else {return}
+            output?(.fetchonetomany(session: session))
             streamingManager?.getStreams()
         }
     }

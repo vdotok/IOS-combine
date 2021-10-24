@@ -69,6 +69,9 @@ final class CallingViewController: UIViewController {
                 self.broadcastView?.updateUser(count: count)
             case .fetchStreams:
                 self.loadGroupCallingView(mediaType: .videoCall)
+            case .fetchonetomany(let session):
+                self.loadBroadcastView(session: session)
+          
             default:
                 break
             }
