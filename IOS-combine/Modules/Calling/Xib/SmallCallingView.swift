@@ -117,7 +117,12 @@ extension SmallCallingView: StreamingDelegate {
     }
     
     func stateDidUpdate(for session: VTokBaseSession) {
-        
+        switch session.state {
+        case .rejected:
+            NotificationCenter.default.post(name: Notification.Name.hangup, object: nil)
+        default:
+            break
+        }
     }
     
     

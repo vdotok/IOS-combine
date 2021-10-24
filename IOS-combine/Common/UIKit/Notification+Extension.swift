@@ -12,4 +12,5 @@ extension Notification.Name {
     static let didEndTyping = Notification.Name(rawValue: "didEndTyping")
     static let didGroupCreated = Notification.Name(rawValue: "didGroupCreated")
     static let removeCount = Notification.Name(rawValue: "removeCount")
+    static let hangup = Notification.Name(rawValue: "hangup")
 }

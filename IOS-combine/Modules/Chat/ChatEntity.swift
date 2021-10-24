@@ -52,6 +52,7 @@ enum NotifyCallType {
     case video
     case broadcast
     case fetchStreams
+    case hangup
     
     static var notificationName =  Notification.Name("StartSessionNotifier")
     
@@ -65,6 +66,8 @@ enum NotifyCallType {
             return "broadcast"
         case .fetchStreams:
             return "fetchStreams"
+        case .hangup:
+            return "hangup"
         }
     }
 }

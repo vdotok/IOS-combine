@@ -80,6 +80,8 @@ final class ChannelViewController: UIViewController {
             UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
             smallCallingView = nil
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didTapHangup), name: Notification.Name.hangup, object: nil)
     }
     
     @objc func showSmallView() {
@@ -122,6 +124,16 @@ final class ChannelViewController: UIViewController {
     
     @objc func didDismiss() {
         
+    }
+    
+    @objc func didTapHangup() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            self.tableViewTopConstraint.constant = 0
+            self.smallCallingView = nil
+        }
+    
     }
     
     private func bindPresenter() {
