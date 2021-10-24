@@ -20,6 +20,10 @@ final class ChatViewController: UIViewController {
     @IBOutlet weak var micButton: UIButton!
     @IBOutlet weak var sendMessageButton: UIButton!
     var users: [String] = []
+    @IBOutlet weak var callingViewHeight: NSLayoutConstraint!
+    var smallCallingView: SmallCallingView?
+    var isCallingView: Bool = false
+    
     
     lazy var titleLabel: UILabel = {
         
@@ -56,24 +60,60 @@ final class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+   
         configureAppearance()
         bindPresenter()
         notificationsListners()
         titleLabel.text = presenter.group?.groupTitle
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         iqKeyBoard(isEnable: false)
+        if presenter.streamingManager?.activeSession() != 0 {
+            showSmallView()
+        }
+        
+        if presenter.streamingManager?.activeSession() == 0 && smallCallingView != nil {
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            smallCallingView = nil
+        }
     }
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollToBottom()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        guard smallCallingView != nil else {return}
+        if presenter.streamingManager?.activeSession() != 0 && !isCallingView  {
+           // UIApplication.shared.windows.first!.subviews.last?.removeFromSuperview()
+        }
+       
+        
+    }
+    
+    @objc func showSmallView() {
+        UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        let manager = presenter.streamingManager
+        manager?.groupID = presenter.group?.id
+        manager?.vtokSDK = presenter.sdk
+        smallCallingView = SmallCallingView.getView(streamingManager: manager!)
+        smallCallingView?.getUserStream()
+        smallCallingView?.groupID = presenter.group?.id
+        smallCallingView?.delegate = self
+       UIApplication.shared.windows.first!.addSubview(smallCallingView!)
+        smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
+        smallCallingView?.addTopConstraint(size: self.topbarHeight)
+    
+    }
+    
+    deinit {
+        
     }
     
     public override func viewWillLayoutSubviews() {
@@ -357,14 +397,14 @@ extension ChatViewController {
     @objc func audioCallAction(_ sender: UIView) {
         let groupId = presenter.group?.id
         let userInfo: [String: Any] = ["callType": NotifyCallType.audio.callType,
-                                       "groupId": groupId]
+                                       "groupId": groupId ?? 0]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
     }
     
     @objc func videoCallAction(_ sender: UIView) {
         let groupId = presenter.group?.id
         let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
-                                       "groupId": groupId]
+                                       "groupId": groupId ?? 0]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
     }
     
@@ -377,8 +417,8 @@ extension ChatViewController {
     @objc func didTapBackButton() {
         NotificationCenter.default.post(name: .removeCount,
                                         object: self,
-                                        userInfo: ["channelName" : presenter.group?.channelName,
-                                                   "chatMessages": presenter.messages]
+                                        userInfo: ["channelName" : presenter.group?.channelName ?? "",
+                                                   "chatMessages": presenter.messages ?? ""]
                                             )
         navigationController?.popToRootViewController(animated: true)
     }
@@ -475,4 +515,11 @@ extension ChatViewController: DidTapAttachmentDelagate {
     
 }
 
-
+extension ChatViewController: SmallCallingViewDelegate {
+    func didTapView() {
+       // UIApplication.shared.windows.first!.subviews.last?.removeFromSuperview()
+        isCallingView = true
+    }
+    
+    
+}

@@ -1,17 +1,18 @@
 //
-//  VideoCell.swift
-//  Many-to-many-call
+//  GroupCallingCell.swift
+//  IOS-combine
 //
-//  Created by usama farooq on 15/06/2021.
+//  Created by usama farooq on 18/10/2021.
 //
 
 import UIKit
 import iOSSDKStreaming
 
-class VideoCell: UICollectionViewCell {
+class GroupCallingCell: UICollectionViewCell {
     
     @IBOutlet weak var remoteView: UIView! {
         didSet {
+            remoteView.layer.cornerRadius = 20
             remoteView.clipsToBounds = true
         }
     }
@@ -24,7 +25,6 @@ class VideoCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        
         for subView in remoteView.subviews {
             subView.removeFromSuperview()
         }
@@ -33,13 +33,12 @@ class VideoCell: UICollectionViewCell {
     }
     
     func configure(with stream: UserStream, users: [User]?) {
-        
+//
 //        guard let user = users, let currentUser = user.filter({$0.refID == stream.referenceID}).first else{
 //            return
 //
 //        }
-       // remoteName.text = currentUser.fullName
-        
+        remoteName.text = "test"
         switch stream.sessionMediaType {
         case .audioCall:
             remoteView.isHidden = true
@@ -61,9 +60,7 @@ class VideoCell: UICollectionViewCell {
                 update(stateInformation: stateInformation)
             }
         }
-    
     }
-    
     func update(stateInformation: StateInformation) {
         if stateInformation.videoInformation == 1 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in

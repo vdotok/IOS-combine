@@ -46,7 +46,7 @@ final class NetworkService: Service {
         let request = request.request()
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
+            if let _ = response {
               //  print(response)
             }
             guard let data = data else {

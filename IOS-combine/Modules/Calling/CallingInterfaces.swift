@@ -27,6 +27,7 @@ protocol CallingPresenterInterface: PresenterInterface {
     
     var users: [User]? {get set}
     var output: CallingOutput? {get set}
+    var session: VTokBaseSession? {get set}
     func viewModelDidLoad()
     func viewModelWillAppear()
     func acceptCall(session: VTokBaseSession)

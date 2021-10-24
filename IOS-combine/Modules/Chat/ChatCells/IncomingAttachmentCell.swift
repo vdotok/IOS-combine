@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DidTapAttachmentDelagate: class {
+protocol DidTapAttachmentDelagate: AnyObject {
     func didTapAttachment(url: URL)
 }
 

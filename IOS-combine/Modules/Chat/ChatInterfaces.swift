@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKStreaming
 import iOSSDKConnect
 
 typealias ChatOutput = (ChatPresenter.Output) -> Void
@@ -27,6 +28,8 @@ protocol ChatPresenterInterface: PresenterInterface {
     var messages: [ChatMessage]? {get set}
     var user: UserResponse? {get set}
     var chatOutput: ChatOutput? {get set}
+    var sdk: VTokSDK? {get set}
+    var streamingManager: StreamingMananger? {get set}
     func dispatchPackage(start: Bool)
     func sendMessage(text: String)
     func messageCount() -> Int

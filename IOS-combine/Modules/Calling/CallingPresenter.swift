@@ -32,6 +32,8 @@ final class CallingPresenter {
     var output: CallingOutput?
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
+    var streamingManager: StreamingMananger?
+    //var streamManager: StreamingMananger = StreamingMananger()
 
     // MARK: - Lifecycle -
 
@@ -43,7 +45,8 @@ final class CallingPresenter {
         screenType: ScreenType,
         session: VTokBaseSession? = nil,
         users: [User]? = nil,
-        broadCastData: BroadcastData? = nil
+        broadCastData: BroadcastData? = nil,
+        streamingManager: StreamingMananger? = nil
     ) {
         self.view = view
         self.interactor = interactor
@@ -54,6 +57,8 @@ final class CallingPresenter {
         self.session = session
         self.users = users
         self.broadcastData = broadCastData
+        self.streamingManager = streamingManager
+        self.streamingManager?.delegate = self
     }
     
     enum Output {
@@ -69,6 +74,7 @@ final class CallingPresenter {
         case updateHangupButton(status: Bool)
         case updateURL(url: String)
         case updateUsers(Int)
+        case fetchStreams
     }
 }
 
@@ -91,6 +97,9 @@ extension CallingPresenter {
             callHangupHandling()
         case .videoAndScreenShare:
             handleBroadcast()
+        case .fetchStreams:
+            output?(.fetchStreams)
+            streamingManager?.getStreams()
         }
     }
     
@@ -132,7 +141,7 @@ extension CallingPresenter {
                                               sessionMediaType: sessionMediaType,
                                               callType: .manytomany)
         output?(.loadView(mediaType: sessionMediaType))
-        vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
+        vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
         callHangupHandling()
     }
     
@@ -161,7 +170,7 @@ extension CallingPresenter {
             output?(.loadBroadcastView(session: baseSession))
         }
         
-        vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
+        vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
         callHangupHandling()
         return requestId
     }
@@ -213,12 +222,20 @@ extension CallingPresenter {
     }
 }
 
-extension CallingPresenter: SessionDelegate {
-    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+extension CallingPresenter: StreamingDelegate {
+    
+    
+    func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream]) {
+        guard let renderer = steams.first?.renderer else {return}
         output?(.configureLocal(view: renderer, session: session))
     }
     
+//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+//        output?(.configureLocal(view: renderer, session: session))
+//    }
+    
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
+        self.session = session
         output?(.configureRemote(streams: streams, session: session))
     }
     
@@ -232,22 +249,58 @@ extension CallingPresenter: SessionDelegate {
         case .ringing:
             output?(.updateView(session: session))
         case .connected:
-          didConnect()
+            didConnect()
         case .rejected:
-          sessionReject()
+            sessionReject()
         case .missedCall:
             sessionMissed()
         case .hangup:
             sessionHangup()
         case .tryingToConnect:
             output?(.updateView(session: session))
-            
         default:
             break
         }
     }
     
+    
 }
+
+//extension CallingPresenter: SessionDelegate {
+//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+//        output?(.configureLocal(view: renderer, session: session))
+//    }
+//
+//    func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
+//        output?(.configureRemote(streams: streams, session: session))
+//    }
+//
+//    func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
+//        output?(.updateURL(url: url))
+//    }
+//
+//    func stateDidUpdate(for session: VTokBaseSession) {
+//        self.session = session
+//        switch session.state {
+//        case .ringing:
+//            output?(.updateView(session: session))
+//        case .connected:
+//          didConnect()
+//        case .rejected:
+//          sessionReject()
+//        case .missedCall:
+//            sessionMissed()
+//        case .hangup:
+//            sessionHangup()
+//        case .tryingToConnect:
+//            output?(.updateView(session: session))
+//
+//        default:
+//            break
+//        }
+//    }
+//
+//}
 
 extension CallingPresenter {
     private func didConnect() {
@@ -286,7 +339,7 @@ extension CallingPresenter: CallingPresenterInterface {
     
     func viewModelDidLoad() {
         if let baseSession = session, baseSession.state == .receivedSessionInitiation {
-            vtokSdk?.set(sessionDelegate: self, for: baseSession)
+            vtokSdk?.set(sessionDelegate: streamingManager!, for: baseSession)
         }
         loadViews()
         listenForPublicURL()

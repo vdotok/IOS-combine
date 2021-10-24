@@ -23,6 +23,7 @@ final class ChannelViewController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var emptyViewUserName: UILabel!
     @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var emptyViewStatus: UIView! {
         didSet {
             emptyViewStatus.layer.cornerRadius = emptyViewStatus.frame.height/2
@@ -47,6 +48,7 @@ final class ChannelViewController: UIViewController {
     
     private var selectedGroupId: Int? = nil
     let navigationTitle = UILabel()
+    var incomingCallingView: GroupCallingUpdatedView?
 
     // MARK: - Public properties -
 
@@ -66,6 +68,31 @@ final class ChannelViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
+        NotificationCenter.default.addObserver(self, selector: #selector(didDismiss), name: Notification.Name("didDismiss"), object: nil)
+        
+        if presenter.streamingManager.activeSession() != 0 {
+            showSmallView()
+        }
+    }
+    
+    @objc func showSmallView() {
+        UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        let manager = presenter.streamingManager
+        
+        manager.vtokSDK = presenter.vtokSDK
+        let view = SmallCallingView.getView(streamingManager: manager)
+        view.getUserStream()
+       // view.delegate = self
+       
+       UIApplication.shared.windows.first!.addSubview(view)
+        view.addConstraintsFor(width: self.view.frame.width, and: 140)
+        view.addTopConstraint(size: self.topbarHeight)
+    
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @IBAction func didTapReferesh(_ sender: UIButton) {
@@ -79,7 +106,11 @@ final class ChannelViewController: UIViewController {
     @IBAction func didTapLogout(_ sender: UIButton) {
         UserDefaults.standard.removeObject(forKey: "UserResponse")
         presenter.logout()
-        navigationController?.presentWireframe(LoginWireframe())
+     //   navigationController?.presentWireframe(LoginWireframe(streamingManager: <#StreamingMananger#>))
+        
+    }
+    
+    @objc func didDismiss() {
         
     }
     
@@ -170,6 +201,25 @@ extension ChannelViewController {
     }
     
     @objc func didTappedAdd() {
+        
+//        let view = GroupCallingUpdatedView.getView()
+//        self.incomingCallingView = view
+//
+//        guard let incomingCallingView = self.incomingCallingView else {return}
+////        view.configureView(baseSession: session, user: contact)
+////        view.session = session
+////        incomingCallingView.delegate = self
+//        incomingCallingView.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addSubview(incomingCallingView)
+//
+//        NSLayoutConstraint.activate([
+//            incomingCallingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//            incomingCallingView.trailingAnchor.constraint(equalTo:self.view.trailingAnchor),
+//            incomingCallingView.topAnchor.constraint(equalTo: self.view.topAnchor),
+//            incomingCallingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+//        ])
+        
+        
         presenter.moveToCreateGroup()
     }
     
@@ -227,4 +277,3 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChannelViewController: ChannelViewInterface {
 }
-

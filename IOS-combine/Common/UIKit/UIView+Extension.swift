@@ -42,4 +42,12 @@ extension UIView {
             self.widthAnchor.constraint(equalToConstant: width)
         ])
     }
+    
+    func addTopConstraint(size: CGFloat) {
+        guard let _superView = self.superview else {return}
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: _superView.topAnchor, constant: size)
+        ])
+    }
 }

@@ -43,14 +43,11 @@ struct Group: Codable {
 
 // MARK: - Participant
 struct Participant: Codable {
-    let colorCode: String
-    let colorID: Int
+ 
     let email, fullName, refID: String
     let userID: Int
 
     enum CodingKeys: String, CodingKey {
-        case colorCode = "color_code"
-        case colorID = "color_id"
         case email
         case fullName = "full_name"
         case refID = "ref_id"

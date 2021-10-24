@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AttachmentPickerDelegate: class {
+protocol AttachmentPickerDelegate: AnyObject {
     func didSelectImage(data: Data)
     func didSelectDocument(data: Data, fileExtension: String)
     func didCancel()

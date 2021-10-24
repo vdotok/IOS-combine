@@ -40,7 +40,7 @@ typealias ChannelOutput = (ChannelPresenter.Output) -> Void
 typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
 
 protocol ChannelWireframeInterface: WireframeInterface {
-    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: UserResponse, messages: [ChatMessage])
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: UserResponse, messages: [ChatMessage],sdk: VTokSDK?, streamingManager: StreamingMananger)
     func moveToCreateGroup(client: ChatClient)
     func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType)
     func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User])
@@ -57,6 +57,8 @@ protocol ChannelPresenterInterface: PresenterInterface {
     var messages: [String: [ChatMessage]] {get set}
     var groups: [Group]  {get set}
     var unreadMessages:[String:[ChatMessage]] {get set}
+    var streamingManager: StreamingMananger {get set}
+    var vtokSDK: VTokSDK? {get set}
     func fetchGroups()
     func viewDidLoad()
     func viewWillAppear()
@@ -71,6 +73,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
 protocol ChannelInteractorInterface: InteractorInterface {
     var broadCastData: BroadcastData? {get set}
     var presenter: ChannelInteractorToPresenter? {get set}
+    var vtokSdk: VTokSDK? {get set}
     func fetchGroups()
     func fetchUsers()
     func connectVdoTok()
@@ -79,10 +82,12 @@ protocol ChannelInteractorInterface: InteractorInterface {
 
 
 protocol ChannelInteractorToPresenter: AnyObject {
+    var vtokSDK: VTokSDK? {get set}
     func channelFetched(with group: [Group])
     func channelFetchedFailed(with error: String)
     func usersFetched(with user: [User])
     func usersFetchedFailded(with error: String)
+    var streamingManager: StreamingMananger {get set}
     func streaming(connectionStats: StreamConnectionStatus, sdk: VTokSDK?)
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
     func updatePresence(with presence: [String: [String]])

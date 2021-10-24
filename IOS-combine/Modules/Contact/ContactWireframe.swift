@@ -40,7 +40,7 @@ extension ContactWireframe: ContactWireframeInterface {
             guard let group = group,
                   let user = user
             else { return }
-            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [])
+            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil)
             navigationController?.pushWireframe(wireFrame)
         case .createGroup:
             navigationController?.pushWireframe(CreateGroupWireframe(client: client))

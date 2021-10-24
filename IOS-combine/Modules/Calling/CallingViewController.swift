@@ -11,11 +11,13 @@
 import UIKit
 import iOSSDKStreaming
 
+
+
 final class CallingViewController: UIViewController {
 
     // MARK: - Public properties -
    
-    var groupCallingView: GroupCallingView?
+    var groupCallingView: GroupCallingUpdatedView?
     var incomingCallingView: IncomingCall?
     var broadcastView: BroadcastView?
     var counter = 0
@@ -34,6 +36,10 @@ final class CallingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewModelWillAppear()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     func bindPresenter() {
@@ -61,6 +67,8 @@ final class CallingViewController: UIViewController {
                 self.updateWith(URL: url)
             case .updateUsers(let count):
                 self.broadcastView?.updateUser(count: count)
+            case .fetchStreams:
+                self.loadGroupCallingView(mediaType: .videoCall)
             default:
                 break
             }
@@ -82,8 +90,8 @@ final class CallingViewController: UIViewController {
         switch session.callType {
         case .onetoone, .manytomany:
             guard let groupCallingView = groupCallingView else {return}
-            groupCallingView.configureLocal(view: rendrer)
-            groupCallingView.session = session
+//            groupCallingView.configureLocal(view: rendrer)
+           groupCallingView.session = session
         case .onetomany:
             guard let broadcastView = broadcastView else {return}
             broadcastView.setViewsForOutGoing(session: session, renderer: rendrer)
@@ -104,14 +112,14 @@ final class CallingViewController: UIViewController {
     
     private func handleHangup(status: Bool) {
         guard let groupCallingView = groupCallingView else {return}
-        groupCallingView.handleHanup(status: status)
+      //  groupCallingView.handleHanup(status: status)
     }
     
     private func configureRemote(streams: [UserStream], session: VTokBaseSession) {
         switch session.callType {
         case .manytomany, .onetoone:
             guard let groupCallingView = groupCallingView else {return}
-            groupCallingView.updateDataSource(with: streams)
+            groupCallingView.updateDataSource(with: streams, session: session)
         case .onetomany:
             guard let broadcastView = self.broadcastView else {return}
             broadcastView.configureView(with: streams, and: session)
@@ -130,11 +138,14 @@ final class CallingViewController: UIViewController {
     }
     
     private func loadGroupCallingView(mediaType: SessionMediaType) {
-        let view = GroupCallingView.getView()
+        let view = GroupCallingUpdatedView.getView()
+        
         self.groupCallingView = view
+        groupCallingView?.users = presenter.users
         guard let groupCallingView = self.groupCallingView else {return}
-        groupCallingView.loadViewFor(mediaType: mediaType)
-        groupCallingView.users = presenter.users
+        groupCallingView.session = presenter.session
+     //   groupCallingView.loadViewFor(mediaType: mediaType)
+    
         groupCallingView.delegate = self
         groupCallingView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(groupCallingView)
@@ -197,6 +208,10 @@ extension CallingViewController: VideoDelegate {
 
     func didTapSpeaker(baseSession: VTokBaseSession, state: SpeakerState) {
         presenter.speaker(session: baseSession, state: state)
+    }
+    
+    func didTapDismiss() {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

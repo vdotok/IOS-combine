@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D0C3922271842D5003CF416 /* StreamingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C3921271842D5003CF416 /* StreamingManager.swift */; };
 		5D1BC44D26E5EDEC00D7E49E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */; };
 		5D1BC44F26E608B300D7E49E /* SignupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44E26E608B300D7E49E /* SignupService.swift */; };
 		5D1C58FB27156EEB006C149F /* BroadcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1C58F827156EEB006C149F /* BroadcastView.swift */; };
@@ -130,6 +131,13 @@
 		5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3326E64D43006EC78E /* ContactService.swift */; };
 		5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */; };
 		5DA4FA3C26E88E9A006EC78E /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */; };
+		5DE40469271DC092005EA0DF /* GroupCallingUpdatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */; };
+		5DE4046A271DC092005EA0DF /* GroupCallingUpdatedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE40468271DC092005EA0DF /* GroupCallingUpdatedView.xib */; };
+		5DE4046F271DC57C005EA0DF /* GroupCallingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4046D271DC57C005EA0DF /* GroupCallingCell.swift */; };
+		5DE40470271DC57C005EA0DF /* GroupCallingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE4046E271DC57C005EA0DF /* GroupCallingCell.xib */; };
+		5DE40472272008E4005EA0DF /* SmallCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE40471272008E4005EA0DF /* SmallCallingView.swift */; };
+		5DE40474272008F7005EA0DF /* SmallCallingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE40473272008F7005EA0DF /* SmallCallingView.xib */; };
+		5DE4718327213C02006B4258 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4718227213C01006B4258 /* ViewController+Extension.swift */; };
 		5DECB62D271451A500EB43EB /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */; };
 		5DECB62E271451A500EB43EB /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5DECB630271451AA00EB43EB /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4B57A426DE6787005185AE /* iOSSDKStreaming.framework */; };
@@ -228,6 +236,7 @@
 /* Begin PBXFileReference section */
 		3D92D1389C4D23BD732EB5EB /* Pods_ScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C2271028C3EEC3883F9477D /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
+		5D0C3921271842D5003CF416 /* StreamingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingManager.swift; sourceTree = "<group>"; };
 		5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		5D1BC44E26E608B300D7E49E /* SignupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupService.swift; sourceTree = "<group>"; };
 		5D1C58F827156EEB006C149F /* BroadcastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastView.swift; sourceTree = "<group>"; };
@@ -352,6 +361,13 @@
 		5DA4FA3326E64D43006EC78E /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupService.swift; sourceTree = "<group>"; };
 		5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
+		5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCallingUpdatedView.swift; sourceTree = "<group>"; };
+		5DE40468271DC092005EA0DF /* GroupCallingUpdatedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCallingUpdatedView.xib; sourceTree = "<group>"; };
+		5DE4046D271DC57C005EA0DF /* GroupCallingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCallingCell.swift; sourceTree = "<group>"; };
+		5DE4046E271DC57C005EA0DF /* GroupCallingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCallingCell.xib; sourceTree = "<group>"; };
+		5DE40471272008E4005EA0DF /* SmallCallingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCallingView.swift; sourceTree = "<group>"; };
+		5DE40473272008F7005EA0DF /* SmallCallingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallCallingView.xib; sourceTree = "<group>"; };
+		5DE4718227213C01006B4258 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		5DECB6332714525E00EB43EB /* IOS-combine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "IOS-combine.entitlements"; sourceTree = "<group>"; };
 		5DECB6342714526200EB43EB /* ScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenShare.entitlements; sourceTree = "<group>"; };
 		5DECB6352714527000EB43EB /* ScreenShareSetupUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenShareSetupUI.entitlements; sourceTree = "<group>"; };
@@ -573,6 +589,7 @@
 			children = (
 				5D4B583826E0EDB8005185AE /* CreateGroupPopUp.xib */,
 				5D4B583926E0EDB8005185AE /* CreateGroupPopUp.swift */,
+				5DE4718227213C01006B4258 /* ViewController+Extension.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -580,6 +597,7 @@
 		5D4B583C26E0F5FD005185AE /* Calling */ = {
 			isa = PBXGroup;
 			children = (
+				5DE4046C271DC55F005EA0DF /* Cell */,
 				5D4B584B26E0F66D005185AE /* Xib */,
 				5D4B583F26E0F625005185AE /* Calling.storyboard */,
 				5D4B584026E0F625005185AE /* CallingInterfaces.swift */,
@@ -603,6 +621,10 @@
 				5D4B584F26E0F66D005185AE /* GroupCallingView.xib */,
 				5D4B585026E0F66D005185AE /* VideoCell.xib */,
 				5D4B585126E0F66D005185AE /* GroupCallingView.swift */,
+				5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */,
+				5DE40468271DC092005EA0DF /* GroupCallingUpdatedView.xib */,
+				5DE40471272008E4005EA0DF /* SmallCallingView.swift */,
+				5DE40473272008F7005EA0DF /* SmallCallingView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -648,6 +670,7 @@
 				5D8199F826DCC9B200B37B72 /* Assets.xcassets */,
 				5D8199FA26DCC9D700B37B72 /* Colors.xcassets */,
 				5D8199C426DCC10400B37B72 /* Info.plist */,
+				5D0C3921271842D5003CF416 /* StreamingManager.swift */,
 			);
 			path = "IOS-combine";
 			sourceTree = "<group>";
@@ -779,6 +802,15 @@
 			children = (
 				5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */,
 				5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5DE4046C271DC55F005EA0DF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5DE4046D271DC57C005EA0DF /* GroupCallingCell.swift */,
+				5DE4046E271DC57C005EA0DF /* GroupCallingCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -974,10 +1006,13 @@
 				5D4B583A26E0EDB8005185AE /* CreateGroupPopUp.xib in Resources */,
 				5D4B57D226DF6F7E005185AE /* IncomingAttachmentCell.xib in Resources */,
 				5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */,
+				5DE40474272008F7005EA0DF /* SmallCallingView.xib in Resources */,
 				5DF3D50C27107307004988F8 /* BroadcastOverlay.xib in Resources */,
 				5D4B585326E0F66D005185AE /* IncomingCall.xib in Resources */,
 				5D4B57F226DF93A6005185AE /* Contact.storyboard in Resources */,
+				5DE40470271DC57C005EA0DF /* GroupCallingCell.xib in Resources */,
 				5D4B57D526DF6F7E005185AE /* OutgoingAudioCell.xib in Resources */,
+				5DE4046A271DC092005EA0DF /* GroupCallingUpdatedView.xib in Resources */,
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
 				5D4B584526E0F625005185AE /* Calling.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
@@ -1079,6 +1114,7 @@
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
 				5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */,
 				5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */,
+				5DE40469271DC092005EA0DF /* GroupCallingUpdatedView.swift in Sources */,
 				5D4B57D626DF6F7E005185AE /* IncomingAttachmentCell.swift in Sources */,
 				5D4B585426E0F66D005185AE /* VideoCell.swift in Sources */,
 				5D4B57EA26DF8E40005185AE /* UInt+Extension.swift in Sources */,
@@ -1102,6 +1138,7 @@
 				5D4B57DA26DF6F7E005185AE /* IncomingImageCell.swift in Sources */,
 				5D4B580C26E0AB1D005185AE /* CreateGroupInteractor.swift in Sources */,
 				5D4B57F526DF93A6005185AE /* ContactViewController.swift in Sources */,
+				5DE40472272008E4005EA0DF /* SmallCallingView.swift in Sources */,
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D4B584726E0F625005185AE /* CallingPresenter.swift in Sources */,
 				5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */,
@@ -1119,6 +1156,7 @@
 				5D819A2326DCF34600B37B72 /* SignupRequest.swift in Sources */,
 				5D4B57E626DF74B0005185AE /* Notification+Extension.swift in Sources */,
 				5D4B584826E0F625005185AE /* CallingViewController.swift in Sources */,
+				5DE4718327213C02006B4258 /* ViewController+Extension.swift in Sources */,
 				5D8199D226DCC29C00B37B72 /* BaseDataStore.swift in Sources */,
 				5D4B57F726DF93A6005185AE /* ContactWireframe.swift in Sources */,
 				5D4B57F326DF93A6005185AE /* ContactInterfaces.swift in Sources */,
@@ -1146,9 +1184,11 @@
 				5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */,
 				5D4B584926E0F625005185AE /* CallingInteractor.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
+				5D0C3922271842D5003CF416 /* StreamingManager.swift in Sources */,
 				5D4B584626E0F625005185AE /* CallingInterfaces.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
 				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
+				5DE4046F271DC57C005EA0DF /* GroupCallingCell.swift in Sources */,
 				5DA4FA3C26E88E9A006EC78E /* ChannelService.swift in Sources */,
 				5D8199E326DCC3B900B37B72 /* LoginViewController.swift in Sources */,
 				5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */,

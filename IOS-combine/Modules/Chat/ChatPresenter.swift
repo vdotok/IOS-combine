@@ -10,6 +10,7 @@
 
 import Foundation
 import iOSSDKConnect
+import iOSSDKStreaming
 
 final class ChatPresenter {
 
@@ -23,18 +24,23 @@ final class ChatPresenter {
     var messages: [ChatMessage]? = []
     var user: UserResponse?
     var chatOutput: ChatOutput?
-
+    var sdk: VTokSDK?
+    var streamingManager: StreamingMananger?
 
     // MARK: - Lifecycle -
 
     init(
         view: ChatViewInterface,
         interactor: ChatInteractorInterface,
-        wireframe: ChatWireframeInterface
+        wireframe: ChatWireframeInterface,
+        sdk: VTokSDK? = nil,
+        streamingManager: StreamingMananger
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
+        self.sdk = sdk
+        self.streamingManager = streamingManager
     }
     
     enum Output {

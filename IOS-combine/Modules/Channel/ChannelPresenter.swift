@@ -26,12 +26,13 @@ final class ChannelPresenter {
     var isSearching: Bool = false
     var groups: [Group] = []
     var contacts: [User] = []
-    var vtokSdk: VTokSDK?
+    var vtokSDK: VTokSDK?
     var mqttClient: ChatClient?
     var presentCandidates: [String: [String]] = [:]
     var messages: [String: [ChatMessage]] = [:]
     var unreadMessages: [String:[ChatMessage]] = [:]
     var particinpants: [Participant]?
+    var streamingManager: StreamingMananger
   
     
     
@@ -41,12 +42,14 @@ final class ChannelPresenter {
     init(
         view: ChannelViewInterface,
         interactor: ChannelInteractorInterface,
-        wireframe: ChannelWireframeInterface
+        wireframe: ChannelWireframeInterface,
+        streamingManager: StreamingMananger
    
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
+        self.streamingManager = streamingManager
     }
     
     enum Output {
@@ -121,7 +124,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
     
     func logout() {
         mqttClient?.disConnect()
-        vtokSdk?.closeConnection()
+        vtokSDK?.closeConnection()
     }
     
     func moveToCreateGroup() {
@@ -135,9 +138,9 @@ extension ChannelPresenter: ChannelPresenterInterface {
         switch to {
         case .chat:
            guard let group = group else {return}
-            wireframe.move(to: .chat, client: client, group: group, user: user, messages: messages)
+            wireframe.move(to: .chat, client: client, group: group, user: user, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
         case .broadcastOverlay:
-            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: user, messages: messages)
+            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: user, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
         }
     }
     
@@ -156,7 +159,7 @@ extension ChannelPresenter: SDKConnectionDelegate {
         case .disconnected(_):
             self.channelOutput?(.disconnected(.stream))
         case .sessionRequest(let sessionRequest):
-            guard let sdk = vtokSdk else {return}
+            guard let sdk = vtokSDK else {return}
             wireframe.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: contacts)
          
         }
@@ -172,31 +175,40 @@ extension ChannelPresenter {
     @objc func methodOfReceivedNotification(notification: Notification) {
         guard let info = notification.object as? [AnyHashable: Any],
               let callType = info["callType"] as? String,
-              let groupId = info["groupId"] as? Int,
-              let group = groups.first(where: { $0.id == groupId }) else {return}
+              let groupId = info["groupId"] as? Int
+               else {return}
         
         if callType == NotifyCallType.audio.callType {
+           guard let group = groups.first(where: { $0.id == groupId }) else
+           {return}
              moveToAudio(users: group.participants)
         } else if callType == NotifyCallType.video.callType {
+            guard let group = groups.first(where: { $0.id == groupId }) else
+            {return}
               moveToVideo(users: group.participants)
         } else if callType == NotifyCallType.broadcast.callType {
             var broadcastdata = info["broadcastData"] as? BroadcastData
             broadcastdata?.broadcastType = .group
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
-            
-            
+        } else if callType == NotifyCallType.fetchStreams.callType {
+//            moveToVideo(users: group.participants, screenType: .fetchStreams)
         }
     }
     
+    func moveToVideo(users: [Participant], screenType: ScreenType) {
+        guard let sdk = vtokSDK else {return}
+        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType)
+    }
+    
     func moveToVideo(users: [Participant]) {
-        guard let sdk = vtokSdk else {return}
+         guard let sdk = vtokSDK else {return}
 //        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts, broadCastData: nil)
         wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView)
     }
     
     func moveToAudio(users: [Participant]) {
-        guard let sdk = vtokSdk else {return}
+        guard let sdk = vtokSDK else {return}
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.wireframe.moveToAudio(sdk: sdk, participants: users, users: self.contacts)
@@ -206,6 +218,8 @@ extension ChannelPresenter {
 
 
 extension ChannelPresenter: ChannelInteractorToPresenter {
+
+    
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?) {
         switch status {
         case .connected:

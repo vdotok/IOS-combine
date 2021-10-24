@@ -8,7 +8,7 @@
 import UIKit
 import iOSSDKStreaming
 
-protocol IncomingCallDelegate: class {
+protocol IncomingCallDelegate: AnyObject {
     func didReject(session: VTokBaseSession)
     func didAccept(session: VTokBaseSession)
 }
@@ -35,8 +35,7 @@ class IncomingCall: UIView {
             title.text = "Incoming Group Video Call from"
             
             acceptButton.setImage(UIImage(named: "stopvideo"), for: .normal)
-        default:
-            break
+    
         }
     }
     

@@ -67,7 +67,13 @@ class BroadcastOverlay: UIViewController {
         
         switch broadCastData.broadcastType {
         case .group:
-            break
+            if broadCastData.broadcastOptions != .videoCall {
+                delegate?.didUpdate(broadcastData: broadCastData)
+               moveToPublicView()
+            } else {
+                delegate?.moveToCallingView(broadcastData: broadCastData)
+            }
+         
         case .publicURL:
             if broadCastData.broadcastOptions != .videoCall {
 //                self.viewModel.broadCastData = broadCastData

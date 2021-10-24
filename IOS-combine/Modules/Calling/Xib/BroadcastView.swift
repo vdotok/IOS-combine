@@ -29,6 +29,7 @@ protocol BroadcastDelegate: AnyObject {
     func didTapVideo(for session: VTokBaseSession, type: VideoState)
     func didTapStream( with state: StreamStatus )
     func didTapRoute()
+    func didTapDismiss()
 
     
 }
@@ -155,12 +156,12 @@ class BroadcastView: UIView {
     
     @IBAction func didTapStreamPlay(_ sender: UIButton) {
 //        sender.isHighlighted = !sender.isHighlighted
-        delegate?.didTapStream(with: sender.isHighlighted == true ? .Play : .Pause)
+        delegate?.didTapStream(with: sender.isHighlighted == true ? .play : .pause)
     }
     
     @IBAction func didTapStreamStop(_ sender: UIButton) {
         sender.isHighlighted = !sender.isHighlighted
-        delegate?.didTapStream(with: .Stop)
+        delegate?.didTapStream(with: .stop)
     }
     
     
@@ -242,6 +243,10 @@ class BroadcastView: UIView {
             delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
         }
         
+    @IBAction func didTapBack(_ sender: UIButton) {
+        delegate?.didTapDismiss()
+    }
+    
         func addNotificationObserver(){
             
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidConnect(_:)), name: UIScreen.didConnectNotification , object: nil)

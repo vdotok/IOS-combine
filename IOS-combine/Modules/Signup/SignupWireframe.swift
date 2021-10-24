@@ -15,11 +15,13 @@ final class SignupWireframe: BaseWireframe<SignupViewController> {
     // MARK: - Private properties -
 
     private let storyboard = UIStoryboard(name: "Signup", bundle: nil)
+    var streamingManager: StreamingMananger
 
     // MARK: - Module setup -
 
-    init() {
+    init(streamingManager: StreamingMananger) {
         let moduleViewController = storyboard.instantiateViewController(ofType: SignupViewController.self)
+        self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
 
         let interactor = SignupInteractor(service: NetworkService())
@@ -40,7 +42,7 @@ extension SignupWireframe: SignupWireframeInterface {
         case .channel:
             let navigationControlr = UINavigationController()
             navigationControlr.modalPresentationStyle = .fullScreen
-            let viewController = ChannelWireframe().viewController
+            let viewController = ChannelWireframe(streamingManager: streamingManager).viewController
             viewController.modalPresentationStyle = .fullScreen
             navigationControlr.setViewControllers([viewController], animated: true)
             self.viewController.present(navigationControlr, animated: true, completion: nil)

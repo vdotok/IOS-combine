@@ -162,10 +162,17 @@ extension SampleHandler: SDKConnectionDelegate {
 
 
 extension SampleHandler: SessionDelegate {
-    
-    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+    func fetchUser(stream: [UserStream]) {
         
     }
+    
+    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
+        
+    }
+    
+//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+//
+//    }
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         

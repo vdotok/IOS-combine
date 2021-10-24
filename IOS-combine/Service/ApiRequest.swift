@@ -68,7 +68,7 @@ extension APIRequest {
 }
 
 struct CpassApi {
-    static let host = "tenant-api.vdotok.dev"
+    static let host = "stenant.vdotok.dev"
     static let apiVersion = "API/v0"
     static let scheme = "https"
 }

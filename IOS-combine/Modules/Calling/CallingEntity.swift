@@ -12,4 +12,5 @@ enum ScreenType {
     case audioView
     case incomingCall
     case videoAndScreenShare
+    case fetchStreams
 }

@@ -16,17 +16,17 @@ final class CallingWireframe: BaseWireframe<CallingViewController> {
     // MARK: - Private properties -
 
     private let storyboard = UIStoryboard(name: "Calling", bundle: nil)
-
+    var streamingManager: StreamingMananger?
     // MARK: - Module setup -
 
-    init(vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil, broadCastData: BroadcastData? = nil) {
+    init(vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil, broadCastData: BroadcastData? = nil, streamingManager: StreamingMananger) {
         let moduleViewController = storyboard.instantiateViewController(ofType: CallingViewController.self)
         super.init(viewController: moduleViewController)
-
+        self.streamingManager = streamingManager
         let interactor = CallingInteractor()
 //        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         
-        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact, broadCastData: broadCastData)
+        let presenter = CallingPresenter(view: moduleViewController, interactor: interactor, wireframe: self, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact, broadCastData: broadCastData, streamingManager: streamingManager)
         moduleViewController.presenter = presenter
     }
 
@@ -37,17 +37,17 @@ final class CallingWireframe: BaseWireframe<CallingViewController> {
 extension CallingWireframe: CallingWireframeInterface {
     
     func moveToCalling(sdk: VTokSDK, particinats: [Participant], users: [User]) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: .videoView, contact: users)
+        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: .videoView, contact: users, streamingManager: streamingManager!)
         navigationController?.viewControllers.last?.presentWireframe(frame)
     }
     func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User]) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users)
+        let frame = CallingWireframe(vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users, streamingManager: streamingManager!)
         navigationController?.presentWireframe(frame)
 
     }
     
     func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User]) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: participants, screenType: .audioView, contact: users)
+        let frame = CallingWireframe(vtokSdk: sdk, participants: participants, screenType: .audioView, contact: users, streamingManager: streamingManager!)
         navigationController?.presentWireframe(frame)
     }
     

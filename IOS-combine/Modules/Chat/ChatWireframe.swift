@@ -10,6 +10,7 @@
 
 import UIKit
 import iOSSDKConnect
+import iOSSDKStreaming
 
 final class ChatWireframe: BaseWireframe<ChatViewController> {
 
@@ -17,16 +18,17 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
     var interactor: ChatInteractor?
 
     private let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+    
 
     // MARK: - Module setup -
 
-    init(client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage]) {
+    init(client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
         super.init(viewController: moduleViewController)
 
         self.interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
 //        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
-        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self)
+        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self, sdk: vtokSDK, streamingManager: streamingManager!)
         moduleViewController.presenter = presenter
         presenter.interactor?.presenter = presenter
     }
@@ -40,6 +42,7 @@ extension ChatWireframe: ChatWireframeInterface {
         let vc = BroadcastOverlay()
         vc.modalPresentationStyle = .custom
         vc.modalTransitionStyle = .crossDissolve
+        vc.broadCastData.broadcastType = .group
         vc.delegate = self
         navigationController?.present(vc, animated: true, completion: nil)
     }
@@ -56,7 +59,9 @@ extension ChatWireframe: BroadcastOverlayDelegate {
     }
     
     func moveToCallingView(broadcastData: BroadcastData) {
+        navigationController?.dismiss(animated: true, completion: nil)
         interactor?.broadcastData = broadcastData
+        interactor?.moveToCallingView(broadcastData: broadcastData)
     }
     
     

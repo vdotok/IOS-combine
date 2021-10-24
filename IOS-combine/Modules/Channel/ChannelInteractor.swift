@@ -18,7 +18,7 @@ final class ChannelInteractor {
     weak var presenter: ChannelInteractorToPresenter?
     let service = ChannelService(service: NetworkService())
     let contactService = ContactService(service: NetworkService())
-    private var vtokSdk: VTokSDK?
+    var vtokSdk: VTokSDK?
     private var mqttClient: ChatClient?
     private var groups: [Group] = []
     var presentCandidates: [String: [String]] = [:]
@@ -112,6 +112,8 @@ extension ChannelInteractor: SDKConnectionDelegate {
         switch output {
         case .registered:
             guard let sdk = vtokSdk else {return}
+            presenter?.vtokSDK = sdk
+            presenter?.streamingManager.vtokSDK = sdk
             presenter?.streaming(connectionStats: .connected, sdk: sdk)
         case .disconnected(_):
             guard let sdk = vtokSdk else {return}
@@ -398,10 +400,10 @@ extension ChannelInteractor: FileDelegate {
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + user.fullName!)
         NotificationCenter.default.post(name: name, object: self,
                                         userInfo: [Constants.messageKey: "",
-                                                   Constants.topicKey: file.topic,
+                                                   Constants.topicKey: file.topic ?? "",
                                                    Constants.usernameKey: file.from,
                                                    Constants.idKey: message.id,
-                                                   Constants.fileKey: message.fileType,
+                                                   Constants.fileKey: message.fileType ?? "",
                                                    Constants.mediaType: file.type,
                                                    Constants.date: date
                                                    
