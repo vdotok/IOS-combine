@@ -221,4 +221,13 @@ extension ChatInteractor {
                                              "participants": group.participants]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
     }
+    
+    func moveToSSView(broadcastData: BroadcastData) {
+        let groupId = group.id
+        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.broadcast.callType,
+                                             "groupId": groupId,
+                                             "broadcastData": broadcastData,
+                                             "participants": group.participants]
+        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
+    }
 }

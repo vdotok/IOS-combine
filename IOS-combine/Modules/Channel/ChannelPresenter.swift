@@ -98,7 +98,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
      
     func itemAt(row: Int) -> TempGroup? {
         
-         let channel = groups[row].channelName
+        let channel = groups[row].channelName
         let present = presentCandidates[channel]
         let topic =  messages[channel]
         let unReadmessages = unreadMessages[channel]
@@ -106,6 +106,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
         if unReadmessages?.count ?? 0 >= 1 {
             lastMessage = "Misread messages"
         }
+        
         else {
             if let message = topic?.last?.content {
                 lastMessage = message
@@ -113,6 +114,7 @@ extension ChannelPresenter: ChannelPresenterInterface {
             if let _ = topic?.last?.fileType {
                 lastMessage = "Attachment"
             }
+               
         }
         
         let group = TempGroup(group: groups[row], unReadMessageCount: unReadmessages?.count ?? 0, lastMessage: lastMessage, presentParticipant: present?.count ?? 0)

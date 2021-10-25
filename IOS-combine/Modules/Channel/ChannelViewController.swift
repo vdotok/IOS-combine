@@ -128,7 +128,11 @@ final class ChannelViewController: UIViewController {
     }
     
     @IBAction func didTapLogout(_ sender: UIButton) {
-        UserDefaults.standard.removeObject(forKey: "UserResponse")
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "UserResponse")
+        defaults.synchronize()
+        
+//        UserDefaults.standard.removeObject(forKey: "UserResponse")
         presenter.logout()
         navigationController?.presentWireframe(LoginWireframe(streamingManager: self.presenter.streamingManager))
      //   navigationController?.presentWireframe(LoginWireframe(streamingManager: <#StreamingMananger#>))

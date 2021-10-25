@@ -55,7 +55,7 @@ extension ChatWireframe: BroadcastOverlayDelegate {
 //        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
 //                                       "groupId": groupId]
 //        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
-        interactor?.moveToCallingView(broadcastData: broadcastData)
+        interactor?.moveToSSView(broadcastData: broadcastData)
     }
     
     func moveToCallingView(broadcastData: BroadcastData) {

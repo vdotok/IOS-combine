@@ -175,6 +175,10 @@ extension ChannelInteractor {
             }
             
         } else {
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.presenter?.hideProgress()
+            }
             connectMqtt()
             fetchUsers()
             self.groups = group
