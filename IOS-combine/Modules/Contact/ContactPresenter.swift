@@ -23,18 +23,21 @@ final class ContactPresenter {
     var isSearching: Bool = false
     var output: ContactOutput?
     var client: ChatClient?
+    var streamingManager: StreamingMananger
     // MARK: - Lifecycle -
 
     init(
         view: ContactViewInterface,
         interactor: ContactInteractorInterface,
         wireframe: ContactWireframeInterface,
-        client: ChatClient
+        client: ChatClient,
+        streamingManager: StreamingMananger
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
         self.client = client
+        self.streamingManager = streamingManager
     }
     
     func viewModelDidLoad() {

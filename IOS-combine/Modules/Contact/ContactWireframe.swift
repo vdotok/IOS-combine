@@ -16,15 +16,15 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
     // MARK: - Private properties -
 
     private let storyboard = UIStoryboard(name: "Contact", bundle: nil)
-
+    var streamingManager: StreamingMananger
     // MARK: - Module setup -
 
-    init(client: ChatClient) {
+    init(client: ChatClient, streamingManager: StreamingMananger) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ContactViewController.self)
+        self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
-
         let interactor = ContactInteractor()
-        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client)
+        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client, streamingManager: streamingManager)
         interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
@@ -40,10 +40,10 @@ extension ContactWireframe: ContactWireframeInterface {
             guard let group = group,
                   let user = user
             else { return }
-            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil)
+            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil, streamingManager: streamingManager)
             navigationController?.pushWireframe(wireFrame)
         case .createGroup:
-            navigationController?.pushWireframe(CreateGroupWireframe(client: client))
+            navigationController?.pushWireframe(CreateGroupWireframe(client: client, streamingManager: streamingManager))
         }
     }
     

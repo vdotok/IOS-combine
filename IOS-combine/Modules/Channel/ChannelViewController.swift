@@ -104,6 +104,10 @@ final class ChannelViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+    }
+    
+    deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -118,6 +122,7 @@ final class ChannelViewController: UIViewController {
     @IBAction func didTapLogout(_ sender: UIButton) {
         UserDefaults.standard.removeObject(forKey: "UserResponse")
         presenter.logout()
+        navigationController?.presentWireframe(LoginWireframe(streamingManager: self.presenter.streamingManager))
      //   navigationController?.presentWireframe(LoginWireframe(streamingManager: <#StreamingMananger#>))
         
     }

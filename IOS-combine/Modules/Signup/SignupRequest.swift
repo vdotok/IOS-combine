@@ -26,6 +26,7 @@ struct SignupRequest: Codable, APIRequest {
     
     enum CodingKeys: String, CodingKey {
         case fullName = "full_name"
+        case projectID = "project_id"
         case email, password
         case deviceType = "device_type"
         case deviceModel = "device_model"

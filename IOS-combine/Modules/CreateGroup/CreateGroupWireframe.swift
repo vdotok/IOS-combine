@@ -16,11 +16,12 @@ final class CreateGroupWireframe: BaseWireframe<CreateGroupViewController> {
     // MARK: - Private properties -
 
     private let storyboard = UIStoryboard(name: "CreateGroup", bundle: nil)
-
+    var streamingManager: StreamingMananger
     // MARK: - Module setup -
 
-    init(client: ChatClient) {
+    init(client: ChatClient, streamingManager: StreamingMananger) {
         let moduleViewController = storyboard.instantiateViewController(ofType: CreateGroupViewController.self)
+        self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
 
         let interactor = CreateGroupInteractor()
@@ -35,7 +36,7 @@ final class CreateGroupWireframe: BaseWireframe<CreateGroupViewController> {
 
 extension CreateGroupWireframe: CreateGroupWireframeInterface {
     func moveToChat(with client: ChatClient, group: Group, user: UserResponse) {
-        let frame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil)
+        let frame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil, streamingManager: streamingManager)
         navigationController?.pushWireframe(frame)
     }
     

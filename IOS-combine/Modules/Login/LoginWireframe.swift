@@ -50,7 +50,7 @@ extension LoginWireframe: LoginWireframeInterface {
             
             
         case .signup:
-            navigationController?.presentWireframe(SignupWireframe(streamingManager: streamingManager))
+            self.viewController.presentWireframe(SignupWireframe(streamingManager: streamingManager))
         }
     }
     

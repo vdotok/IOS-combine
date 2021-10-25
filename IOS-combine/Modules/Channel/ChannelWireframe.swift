@@ -67,7 +67,7 @@ extension ChannelWireframe: ChannelWireframeInterface {
     
     func moveToCreateGroup(client: ChatClient) {
         
-        let frame = ContactWireframe(client: client)
+        let frame = ContactWireframe(client: client, streamingManager: self.streamingManager!)
         navigationController?.pushWireframe(frame)
     }
     
