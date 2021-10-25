@@ -102,7 +102,7 @@ final class ChannelViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.hangup, object: nil)
     }
     
     deinit {
@@ -146,7 +146,8 @@ final class ChannelViewController: UIViewController {
     @objc func didTapHangup() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            guard let view = UIApplication.shared.windows.first?.subviews[1] else {return}
+            view.removeFromSuperview()
             self.tableViewTopConstraint.constant = 0
             self.smallCallingView = nil
         }
