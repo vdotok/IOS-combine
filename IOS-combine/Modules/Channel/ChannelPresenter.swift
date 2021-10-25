@@ -84,6 +84,17 @@ extension ChannelPresenter: ChannelPresenterInterface {
     func channelsCount() -> Int {
         return groups.count
     }
+    
+    func subscribe(group: Group) {
+        subscribe(groups: [group])
+    }
+    
+    private func subscribe(groups: [Group]) {
+        let topics = groups.map({ $0.channelKey + "/" + $0.channelName})
+        for topic in topics {
+            mqttClient?.subscribe(topic: topic)
+        }
+    }
      
     func itemAt(row: Int) -> TempGroup? {
         

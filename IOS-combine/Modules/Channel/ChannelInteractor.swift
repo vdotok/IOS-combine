@@ -155,11 +155,14 @@ extension ChannelInteractor {
     private func configure(with group: [Group]) {
         
         if mqttClient?.isConnected() ?? false {
-            if groups.count != self.groups.count {
+            if group.count != self.groups.count {
                 let channelKeys = self.groups.map({$0.channelKey})
                 let newGroups = group.filter({!channelKeys.contains($0.channelKey)})
                 self.subscribe(groups: newGroups)
                 self.groups = group
+                DispatchQueue.main.async { [weak self] in
+                    self?.presenter?.hideProgress()
+                }
                 DispatchQueue.main.async { [weak self] in
                     self?.presenter?.channelFetched(with: group)
                 }

@@ -63,6 +63,7 @@ final class ChannelViewController: UIViewController {
         bindPresenter()
         presenter.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(removeCount(notification:)), name: .removeCount, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didSubscribe(notification:)), name: .didGroupCreated, object: nil)
        
     }
     
@@ -97,9 +98,6 @@ final class ChannelViewController: UIViewController {
         UIApplication.shared.windows.first!.addSubview(smallCallingView!)
         smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
         smallCallingView?.addTopConstraint(size: self.topbarHeight)
-        
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -109,6 +107,16 @@ final class ChannelViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func didSubscribe(notification: NSNotification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        guard let model = userInfo["model"] as? Group else {
+            return
+        }
+        presenter.groups.insert(model, at: 0)
+        presenter.subscribe(group: model)
+        
     }
     
     @IBAction func didTapReferesh(_ sender: UIButton) {

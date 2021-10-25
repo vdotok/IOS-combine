@@ -59,6 +59,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     var unreadMessages:[String:[ChatMessage]] {get set}
     var streamingManager: StreamingMananger {get set}
     var vtokSDK: VTokSDK? {get set}
+    func subscribe(group: Group) 
     func fetchGroups()
     func viewDidLoad()
     func viewWillAppear()
