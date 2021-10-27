@@ -151,7 +151,6 @@ final class ChannelViewController: UIViewController {
             self.tableViewTopConstraint.constant = 0
             self.smallCallingView = nil
         }
-    
     }
     
     private func bindPresenter() {

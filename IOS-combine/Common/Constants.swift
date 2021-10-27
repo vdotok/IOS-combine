@@ -32,11 +32,11 @@ struct Constants {
 }
 
 struct AuthenticationConstants {
-    static let PROJECTID = "120O4P14"
+    static let PROJECTID = "125YLEY1"
     static let AUTHTOKEN = "3d9686b635b15b5bc2d19800407609fa"
 }
 
 struct AppsGroup {
-    static let  APP_GROUP = "group.com.vdotok.broadcast"
-    static let SCREEN_SHARE_PREFERED_EXTENSION = "com.vdotok.IOS-combine.ScreenShare"
+    static let  APP_GROUP = "group.com.norgic.combined.broadcast"
+    static let SCREEN_SHARE_PREFERED_EXTENSION = "com.norgic.ios-combinedapp.ScreenShare"
 }

@@ -139,8 +139,8 @@ class BroadcastOverlay: UIViewController {
         if screenShareAppAudioBtn.isSelected == true ||
            screenShareMicAudioBtn.isSelected == true ||
            camera.isSelected == true  {
-            continueBtn.backgroundColor = .appDarkGreenColor
-            continueBtn.isEnabled = true
+            continueBtn.backgroundColor = broadCastData.broadcastType == .none ? .appDarkGray :  .appDarkGreenColor
+            continueBtn.isEnabled =  broadCastData.broadcastType == .none ? false :  true
         } else {
             continueBtn.backgroundColor = .appDarkGray
             continueBtn.isEnabled = false

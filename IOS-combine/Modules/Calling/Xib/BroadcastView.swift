@@ -20,6 +20,7 @@ import iOSSDKStreaming
 import MMWormhole
 import ReplayKit
 import AVKit
+import WebKit
 
 protocol BroadcastDelegate: AnyObject {
     func didTapMuteSS(for baseSession: VTokBaseSession, state: AudioState)
@@ -66,6 +67,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var broadCastIcon: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var connectedUser: UILabel!
+    @IBOutlet weak var webView: WKWebView!
     
     @IBOutlet weak var routePickerViewContainer: UIView!
     
@@ -144,6 +146,10 @@ class BroadcastView: UIView {
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
         smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+        webView.navigationDelegate = self
+        let url = URL(string: "https://www.google.com")!
+        webView.load(URLRequest(url: url))
+        webView.allowsBackForwardNavigationGestures = true
        
     }
     
@@ -327,6 +333,7 @@ class BroadcastView: UIView {
             case .incoming:
                 broadCastTitle.isHidden = true
                 cameraButton.isHidden = true
+                
                 setIncomingView(for: session)
             case .outgoing:
                 switch session.broadcastOption {
@@ -423,7 +430,7 @@ class BroadcastView: UIView {
         
         
         private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
-            
+            webView.isHidden = true
             switch session.sessionType {
             case .call:
                 if session.associatedSessionUUID != nil {
@@ -469,9 +476,11 @@ class BroadcastView: UIView {
         }
         
         func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
-            localView.isHidden = false
-            localView.removeAllSubViews()
-            localView.addSubview(renderer)
+            localView.isHidden = true
+//            localView.removeAllSubViews()
+//            localView.addSubview(renderer)
+            smallLocalView.removeAllSubViews()
+            smallLocalView.addSubview(renderer)
             renderer.translatesAutoresizingMaskIntoConstraints = false
             renderer.fixInSuperView()
         }
@@ -493,6 +502,7 @@ class BroadcastView: UIView {
 //                smallLocalView.isHidden = true
 //                muteButton.isHidden = true
 //            }
+            webView.isHidden = true
             if let _ = session.associatedSessionUUID {
                 screenShareBtn.isHidden = true
                 screenShareAudio.isHidden = true
@@ -522,7 +532,7 @@ class BroadcastView: UIView {
                 speakerIcon.isHidden = true
                 smallLocalView.isHidden = true
                 muteButton.isHidden = true
-                broadCastDummyView.isHidden = false
+                broadCastDummyView.isHidden = true
                 addRPViewToSSButton()
                 
             case .screenShareWithMicAudio:
@@ -532,7 +542,7 @@ class BroadcastView: UIView {
                 speakerIcon.isHidden = true
                 smallLocalView.isHidden = true
                 muteButton.isHidden = false
-                broadCastDummyView.isHidden = false
+                broadCastDummyView.isHidden = true
                 addRPViewToSSButton()
                 
             case .videoCall:
@@ -553,9 +563,9 @@ class BroadcastView: UIView {
                 screenShareAudio.isHidden = false
                 cameraSwitchIcon.isHidden = false
                 speakerIcon.isHidden = true
-                smallLocalView.isHidden = true
+                smallLocalView.isHidden = false
                 muteButton.isHidden = false
-                broadCastDummyView.isHidden = false
+                broadCastDummyView.isHidden = true
                 addRPViewToSSButton()
             }
             
@@ -808,4 +818,8 @@ extension BroadcastView {
         self.externalWindow?.isHidden = false
 
     }
+}
+
+extension BroadcastView: WKNavigationDelegate {
+    
 }

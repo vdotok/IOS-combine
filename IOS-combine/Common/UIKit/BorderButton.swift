@@ -15,9 +15,9 @@ class BorderButton: UIButton {
         didSet {
             if self.isSelected == true {
                 self.backgroundColor = UIColor.appYellowColor
-                setTitleColor(.appDarkIndigoColor, for: .selected)
+                setTitleColor(.appBlueColor, for: .selected)
             } else {
-                setTitleColor(.appDarkIndigoColor, for: .normal)
+                setTitleColor(.appBlueColor, for: .normal)
                 self.backgroundColor = UIColor.white
             }
         }
@@ -41,10 +41,11 @@ class BorderButton: UIButton {
         layer.cornerRadius = 8
         layer.borderWidth = 2
         self.tintColor = UIColor.clear
-        layer.borderColor = UIColor.appDarkIndigoColor.cgColor
-        setTitleColor(.blue, for: .normal)
+        layer.borderColor = UIColor.appBlueColor.cgColor
+        setTitleColor(.appBlueColor, for: .normal)
         titleLabel?.font = UIFont.init(name: "Manrope-Bold", size: 14)
         titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
 }
+

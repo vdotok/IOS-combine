@@ -72,7 +72,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="ptc-ad-oEK">
                                                 <rect key="frame" x="70" y="307.5" width="160" height="116"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqe-WW-Wow">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqe-WW-Wow" customClass="CustomButton" customModule="IOS_combine" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="160" height="48"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="160" id="L83-Xr-aOX"/>
@@ -84,7 +84,7 @@
                                                             <action selector="didTapSignup:" destination="i1U-Hz-anz" eventType="touchUpInside" id="Pfy-cQ-Smy"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpH-XA-F91">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpH-XA-F91" customClass="CustomButton" customModule="IOS_combine" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="86" width="160" height="30"/>
                                                         <state key="normal" title="SIGN IN"/>
                                                         <connections>

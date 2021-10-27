@@ -61,4 +61,7 @@ extension UIColor {
     public static var placeHolder: UIColor {
         return UIColor(named: "PlaceHolder")!
     }
+    public static var appBlueColor: UIColor {
+        return UIColor(named: "AppBlueColor")!
+    }
 }

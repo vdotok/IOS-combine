@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,6 +20,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" name="AppLightGrey"/>
                 </view>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yB-hp-TMf">
+                    <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-Do-L7m">
                     <rect key="frame" x="78.5" y="376" width="257.5" height="154"/>
                     <subviews>
@@ -51,7 +60,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3x-FV-7gL">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3x-FV-7gL">
                     <rect key="frame" x="24" y="56" width="24.5" height="27"/>
                     <state key="normal" image="arrow-left"/>
                     <connections>
@@ -174,11 +183,14 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="1yB-hp-TMf" secondAttribute="bottom" id="04j-iX-S0U"/>
                 <constraint firstItem="a3x-FV-7gL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="7yO-1f-KCL"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SCZ-GJ-v4t" secondAttribute="trailing" constant="12" id="AMW-ft-Dja"/>
                 <constraint firstItem="aTf-o0-X1e" firstAttribute="leading" secondItem="a3x-FV-7gL" secondAttribute="trailing" constant="12" id="C8r-FR-bBz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1yB-hp-TMf" secondAttribute="trailing" id="GF9-d4-anp"/>
                 <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="H5u-fC-dzM"/>
                 <constraint firstAttribute="bottom" secondItem="2If-LL-xGi" secondAttribute="bottom" id="KOj-dR-6QD"/>
+                <constraint firstItem="1yB-hp-TMf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PQ5-wK-I3D"/>
                 <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="UUr-cc-dHg"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X33-FW-lvI"/>
                 <constraint firstItem="4Pg-G8-hkv" firstAttribute="leading" secondItem="EAD-hI-L0h" secondAttribute="trailing" constant="3" id="XJp-eu-SVg"/>
@@ -190,6 +202,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cfb-cM-Yho" secondAttribute="trailing" constant="22" id="pFD-13-Stj"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM9-lp-BaR"/>
                 <constraint firstItem="a3x-FV-7gL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="12" id="ugR-98-eLO"/>
+                <constraint firstItem="1yB-hp-TMf" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="50" id="upL-Ds-TXE"/>
                 <constraint firstItem="SCZ-GJ-v4t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="xtA-6Z-hIj"/>
             </constraints>
             <connections>
@@ -210,6 +223,7 @@
                 <outlet property="speakerIcon" destination="eAU-0z-VbI" id="pUz-S2-Tzz"/>
                 <outlet property="timerLabel" destination="FBQ-uD-zZp" id="WQl-Pk-Gdb"/>
                 <outlet property="titlelabel" destination="VEZ-BS-ELW" id="XaV-Ob-Sb5"/>
+                <outlet property="webView" destination="1yB-hp-TMf" id="Tj9-z9-Ozv"/>
             </connections>
             <point key="canvasLocation" x="-17" y="65"/>
         </view>
