@@ -24,6 +24,7 @@ final class ChatViewController: UIViewController {
     var smallCallingView: SmallCallingView?
     var isCallingView: Bool = false
     var users: [String] = []
+    var timer: Timer? = nil
     
     
     lazy var titleLabel: UILabel = {
@@ -61,12 +62,11 @@ final class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-   
         configureAppearance()
         bindPresenter()
         notificationsListners()
         titleLabel.text = presenter.group?.groupTitle
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +75,7 @@ final class ChatViewController: UIViewController {
         if presenter.streamingManager?.activeSession() != 0 {
             showSmallView()
         } else {
+          
             tableViewTopConstraint.constant = 0
         }
         
@@ -190,7 +191,7 @@ final class ChatViewController: UIViewController {
                         self.tableView.scrollToRow(at: reloadIndexPath, at: .bottom, animated: false)
 
                     }, completion: nil)
-                tableView.reloadData()
+            
             case .reloadCell(let indexPath):
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.tableView.reloadRows(at: [indexPath], with: .none)
@@ -327,8 +328,6 @@ extension ChatViewController: UITextViewDelegate {
             ProgressHud.showError(message: "Text should be 400 character", viewController: self)
             return
         }
-        
-        
         let height = textView.contentSize.height
         DispatchQueue.main.async {
             if height < 100 {
@@ -343,8 +342,16 @@ extension ChatViewController: UITextViewDelegate {
             sendMessageButton.isEnabled = true
             sendMessageButton.tintColor = .appGreenColor
         }
-       
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(sendStopTyping), userInfo: nil, repeats: false)
         presenter.dispatchPackage(start: true)
+        
+    }
+    
+    @objc func sendStopTyping() {
+        timer?.invalidate()
+        timer = nil
+        presenter.dispatchPackage(start: false)
     }
     
     public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -359,6 +366,11 @@ extension ChatViewController: UITextViewDelegate {
         presenter.dispatchPackage(start: false)
         return true
     }
+    
+    func sendEndTyping(count: Int) {
+            
+        
+        }
 }
  
 // MARK: AttachmentPickerDelegate
@@ -391,17 +403,32 @@ extension ChatViewController {
         tableView.dataSource = self
         messageTextField.delegate = self
         configureNavigationView()
-//        messageTextField.text = "Type your message"
+        //        messageTextField.text = "Type your message"
         let image = UIImage(named: "Icon-send")!.withRenderingMode(.alwaysTemplate)
         sendMessageButton.setImage(image, for: .normal)
         sendMessageButton.tintColor = .appDarkGray
         messageTextField.setPlaceholder()
-       
+        
         let audioBarButton = UIBarButtonItem(image: UIImage(named: "call"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
         let videoBarButton = UIBarButtonItem(image: UIImage(named: "Icon ionic-ios-videocam"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
         let broadcastButton = UIBarButtonItem(image: UIImage(named: "broadcast-icon"), style: .plain, target: self, action: #selector(broadcastAction))
         
         self.navigationItem.setRightBarButtonItems([broadcastButton, videoBarButton, audioBarButton], animated: true)
+        if presenter.streamingManager?.activeSession() != 0 {
+            audioBarButton.tintColor = .appGreyColor
+            videoBarButton.tintColor = .appGreyColor
+            broadcastButton.tintColor = .appDarkGray
+            audioBarButton.isEnabled = false
+            audioBarButton.isEnabled = false
+            audioBarButton.isEnabled = false
+        } else {
+            audioBarButton.tintColor = .appTileGreen
+            videoBarButton.tintColor = .appTileGreen
+            broadcastButton.tintColor = .appTileGreen
+            audioBarButton.isEnabled = true
+            audioBarButton.isEnabled = true
+            audioBarButton.isEnabled = true
+        }
         
     }
     

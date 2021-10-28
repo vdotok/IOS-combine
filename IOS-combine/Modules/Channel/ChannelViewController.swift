@@ -114,6 +114,7 @@ final class ChannelViewController: UIViewController {
     
     @IBAction func didTapNewChat(_ sender: UIButton) {
 //        didTappedAdd()
+        didTappedAdd()
     }
     
     @IBAction func didTapLogout(_ sender: UIButton) {

@@ -162,6 +162,7 @@ extension SampleHandler: SDKConnectionDelegate {
 
 
 extension SampleHandler: SessionDelegate {
+    
     func fetchUser(stream: [UserStream]) {
         
     }

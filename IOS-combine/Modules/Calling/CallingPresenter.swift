@@ -262,7 +262,6 @@ extension CallingPresenter {
 
 extension CallingPresenter: StreamingDelegate {
     
-    
     func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream]) {
         guard let renderer = steams.first?.renderer else {return}
         output?(.configureLocal(view: renderer, session: session))

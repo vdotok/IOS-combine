@@ -46,7 +46,7 @@ class GroupCallingUpdatedView: UIView {
     @IBAction func didTapSpeaker(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return }
-        delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onSpeaker : .onEarPiece)
+        delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
     }
     
     @IBAction func didTapMute(_ sender: UIButton) {
@@ -66,7 +66,7 @@ class GroupCallingUpdatedView: UIView {
         guard let session = session else {return }
    //     localView.isHidden = sender.isSelected ? true : false
         cameraSwitch.isEnabled = sender.isSelected ? false : true
-        delegate?.didTapVideo(for: session, state: sender.isSelected ? .videoDisabled :.videoEnabled )
+        delegate?.didTapVideo(for: session, state: sender.isSelected ? .videoDisabled : .videoEnabled)
     }
     
     @IBAction func didTapHangup(_ sender: UIButton) {
@@ -186,12 +186,12 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
     func updateDataSource(with streams: [UserStream], session: VTokBaseSession) {
         connectedState()
         self.session = session
+
         userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
         setNames()
         guard streams.first?.sessionMediaType != .audioCall else {
-            collectionView.reloadData()
+        collectionView.reloadData()
             return
-            
         }
         if selectedStream == nil {
             selectedStream = userStreams[0]
@@ -214,6 +214,11 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         })
         collectionView.reloadData()
         
+    }
+    
+    func updateViews(streams: [UserStream], session: VTokBaseSession) {
+        self.userStreams  = streams
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

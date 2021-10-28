@@ -89,10 +89,7 @@ class SmallCallingViewModelImpl: SmallCallingViewModel {
 }
 
 extension SmallCallingView: StreamingDelegate {
-    
-//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
-//
-//    }
+
     
     func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream]) {
      //   guard let renderer = steams.first?.renderer else {return}
