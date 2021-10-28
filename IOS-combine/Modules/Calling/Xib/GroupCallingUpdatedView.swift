@@ -46,7 +46,16 @@ class GroupCallingUpdatedView: UIView {
     @IBAction func didTapSpeaker(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return }
-        delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
+        
+        switch session.sessionMediaType {
+        case .audioCall:
+            delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onSpeaker : .onEarPiece)
+        case .videoCall:
+            delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
+           
+        }
+        
+       
     }
     
     @IBAction func didTapMute(_ sender: UIButton) {
@@ -187,10 +196,11 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         connectedState()
         self.session = session
 
-      //  userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
+        userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
         setNames()
         guard streams.first?.sessionMediaType != .audioCall else {
         collectionView.reloadData()
+            cameraSwitch.isHidden = true
             return
         }
         

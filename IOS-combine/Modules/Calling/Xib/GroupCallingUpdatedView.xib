@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Grk-4v-CLc">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" name="AppCallingViewGrey"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun" translatesAutoresizingMaskIntoConstraints="NO" id="pWP-b5-vES">
@@ -57,7 +58,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="atO-nL-8Pe">
-                    <rect key="frame" x="350" y="269" width="32" height="84"/>
+                    <rect key="frame" x="350" y="225" width="32" height="84"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-Fq-ifd">
                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -140,7 +141,7 @@
             <constraints>
                 <constraint firstItem="Uwm-xl-oEZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="18x-GR-EmH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Grk-4v-CLc" secondAttribute="trailing" id="51b-IA-1bE"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Grk-4v-CLc" secondAttribute="bottom" id="58M-IS-ugX"/>
+                <constraint firstAttribute="bottom" secondItem="Grk-4v-CLc" secondAttribute="bottom" id="58M-IS-ugX"/>
                 <constraint firstItem="Grk-4v-CLc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5fw-cF-20A"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mk5-lE-iL0" secondAttribute="trailing" constant="24" id="6tt-XE-mpZ"/>
                 <constraint firstItem="mk5-lE-iL0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="9q2-r0-lii"/>
@@ -149,7 +150,7 @@
                 <constraint firstItem="foV-TZ-2vw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Clc-tH-OLT"/>
                 <constraint firstItem="pWP-b5-vES" firstAttribute="centerX" secondItem="Uwm-xl-oEZ" secondAttribute="centerX" id="E6J-Rq-rC8"/>
                 <constraint firstItem="foV-TZ-2vw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="FbS-o4-oeM"/>
-                <constraint firstItem="atO-nL-8Pe" firstAttribute="top" secondItem="Uwm-xl-oEZ" secondAttribute="bottom" constant="24" id="KUx-M6-sMc"/>
+                <constraint firstItem="atO-nL-8Pe" firstAttribute="top" secondItem="Uwm-xl-oEZ" secondAttribute="bottom" constant="-20" id="KUx-M6-sMc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="foV-TZ-2vw" secondAttribute="bottom" id="Mg0-1E-z3C"/>
                 <constraint firstItem="I87-8m-hme" firstAttribute="centerX" secondItem="Uwm-xl-oEZ" secondAttribute="centerX" id="Mwb-kn-lTP"/>
                 <constraint firstItem="J2H-9O-12D" firstAttribute="centerY" secondItem="elf-R6-Eg3" secondAttribute="centerY" id="TKX-4i-wMR"/>
@@ -158,7 +159,7 @@
                 <constraint firstItem="Uwm-xl-oEZ" firstAttribute="top" secondItem="J2H-9O-12D" secondAttribute="bottom" constant="12" id="Ywa-ru-Zg7"/>
                 <constraint firstItem="elf-R6-Eg3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dDX-a5-IAb"/>
                 <constraint firstItem="atO-nL-8Pe" firstAttribute="trailing" secondItem="Uwm-xl-oEZ" secondAttribute="trailing" constant="-24" id="grP-iU-EvX"/>
-                <constraint firstItem="Grk-4v-CLc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qgo-xf-Rpm"/>
+                <constraint firstItem="Grk-4v-CLc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qgo-xf-Rpm"/>
                 <constraint firstItem="elf-R6-Eg3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="23" id="zfN-nI-HIE"/>
             </constraints>
             <connections>
