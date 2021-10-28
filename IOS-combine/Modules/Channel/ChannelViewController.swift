@@ -21,19 +21,8 @@ final class ChannelViewController: UIViewController {
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var emptyViewUserName: UILabel!
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var emptyViewStatus: UIView! {
-        didSet {
-            emptyViewStatus.layer.cornerRadius = emptyViewStatus.frame.height/2
-        }
-    }
-    @IBOutlet weak var emptyViewStatusVideoStream: UIView! {
-        didSet {
-            emptyViewStatusVideoStream.layer.cornerRadius = emptyViewStatusVideoStream.frame.height/2
-        }
-    }
     @IBOutlet weak var viewStatusVideoStream: UIView! {
         didSet {
             viewStatusVideoStream.layer.cornerRadius = viewStatusVideoStream.frame.height/2
@@ -171,18 +160,18 @@ final class ChannelViewController: UIViewController {
                 ProgressHud.showError(message: message, viewController: self)
             case .connected(let sdkType):
                 if sdkType == SDKType.chat {
-                    emptyViewStatus.backgroundColor = .green
+                 //   emptyViewStatus.backgroundColor = .green
                     viewStatus.backgroundColor = .green
                 } else if sdkType == .stream {
-                    emptyViewStatusVideoStream.backgroundColor = .green
+                  //  emptyViewStatusVideoStream.backgroundColor = .green
                     viewStatusVideoStream.backgroundColor = .green
                 }
             case .disconnected(let sdkType):
                 if sdkType == SDKType.chat {
-                    emptyViewStatus.backgroundColor = .red
+                //    emptyViewStatus.backgroundColor = .red
                     viewStatus.backgroundColor = .red
                 } else if sdkType == .stream {
-                    emptyViewStatusVideoStream.backgroundColor = .red
+                //    emptyViewStatusVideoStream.backgroundColor = .red
                     viewStatusVideoStream.backgroundColor = .red
                 }
             }
@@ -205,7 +194,7 @@ extension ChannelViewController {
     func configureAppearance() {
         guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         userName.text = user.fullName
-        emptyViewUserName.text = user.fullName
+      // emptyViewUserName.text = user.fullName
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ChannelCell", bundle: nil), forCellReuseIdentifier: "ChannelCell")

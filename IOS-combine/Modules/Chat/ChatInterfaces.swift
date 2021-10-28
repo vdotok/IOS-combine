@@ -53,4 +53,5 @@ protocol ChatInteractorInterface: InteractorInterface {
 protocol ChatInteractorToPresenter: AnyObject {
     func update(messages: [ChatMessage])
     func updateGroup(with group: Group, user: UserResponse, messages: [ChatMessage])
+    func reloadCell(with indexPath: IndexPath)
 }

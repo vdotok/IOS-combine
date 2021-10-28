@@ -182,7 +182,19 @@ final class ChatViewController: UIViewController {
         presenter.chatOutput = { [unowned self] output in
             switch output {
             case .reload:
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
+                    let reloadIndexPath = IndexPath(item: (self.presenter.messages?.count ?? 0) - 1, section: 0)
+                        self.tableView.beginUpdates()
+                        self.tableView.insertRows(at:[reloadIndexPath], with: .fade)
+                        self.tableView.endUpdates()
+                        self.tableView.scrollToRow(at: reloadIndexPath, at: .bottom, animated: false)
+
+                    }, completion: nil)
                 tableView.reloadData()
+            case .reloadCell(let indexPath):
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
+                }
             
             }
         }
@@ -518,7 +530,7 @@ extension ChatViewController {
         }
     
     private func scrollToBottom() {
-        let index = IndexPath(row: presenter.messages?.count ?? 0 - 1, section: 0)
+        let index = IndexPath(row: (presenter.messages?.count ?? 0) - 1, section: 0)
         if presenter.messages?.count ?? 0 > 4 {
             tableView.scrollToRow(at: index, at: .bottom, animated: true)
         }

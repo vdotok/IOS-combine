@@ -45,6 +45,7 @@ final class ChatPresenter {
     
     enum Output {
         case reload
+        case reloadCell(indexPath: IndexPath)
     }
     
 }
@@ -104,6 +105,10 @@ extension ChatPresenter: ChatInteractorToPresenter {
     
     func moveToBroadcast() {
         wireframe.moveToBroadcastOverlay()
+    }
+    
+    func reloadCell(with indexPath: IndexPath) {
+        chatOutput?(.reloadCell(indexPath: indexPath))
     }
     
     

@@ -194,6 +194,7 @@ extension ChatInteractor: ReceiptAcknowledge {
         if  user.refID != receipt.from {
             messages[messageIndex].status = status
            // self.output?(.reloadCell(indexPath: IndexPath(row: messageIndex, section: 0)))
+            self.presenter?.reloadCell(with: IndexPath(row: messageIndex, section: 0))
         }
     }
     }
