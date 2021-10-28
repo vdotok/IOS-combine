@@ -81,6 +81,7 @@ extension ChannelWireframe: ChannelWireframeInterface {
 
 extension ChannelWireframe: BroadcastOverlayDelegate {
     func moveToCallingView(broadcastData: BroadcastData) {
+        navigationController?.dismiss(animated: true, completion: nil)
         interactor.moveToCallingView(broadcastData: broadcastData)
     }
     

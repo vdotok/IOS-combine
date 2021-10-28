@@ -481,13 +481,30 @@ class BroadcastView: UIView {
         }
         
         func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
-            localView.isHidden = true
-//            localView.removeAllSubViews()
-//            localView.addSubview(renderer)
-            smallLocalView.removeAllSubViews()
-            smallLocalView.addSubview(renderer)
-            renderer.translatesAutoresizingMaskIntoConstraints = false
-            renderer.fixInSuperView()
+            if session.broadcastOption == .videoCall {
+                webView.isHidden = true
+                localView.isHidden = false
+                            localView.removeAllSubViews()
+                            localView.addSubview(renderer)
+                localView.removeAllSubViews()
+                localView.addSubview(renderer)
+                renderer.translatesAutoresizingMaskIntoConstraints = false
+                renderer.fixInSuperView()
+            } else {
+                webView.isHidden = false
+                localView.isHidden = true
+                smallLocalView.isHidden = false
+                smallLocalView.removeAllSubViews()
+                smallLocalView.removeAllSubViews()
+                smallLocalView.addSubview(renderer)
+                smallLocalView.addSubview(renderer)
+                renderer.translatesAutoresizingMaskIntoConstraints = false
+                
+            }
+            
+            
+
+           
         }
 
         private func setIncomingView(for session: VTokBaseSession) {
@@ -527,7 +544,7 @@ class BroadcastView: UIView {
         }
         
         private func setOutGoingView(for session: VTokBaseSession) {
-            
+            webView.isHidden = false
             guard let options = session.broadcastOption else {return}
             switch options {
             case .screenShareWithAppAudio:
@@ -551,6 +568,7 @@ class BroadcastView: UIView {
                 addRPViewToSSButton()
                 
             case .videoCall:
+                webView.isHidden = true
                 screenShareBtn.isHidden = true
                 screenShareAudio.isHidden = true
                 cameraSwitchIcon.isHidden = false
