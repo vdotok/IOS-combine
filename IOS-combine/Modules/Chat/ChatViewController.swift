@@ -71,6 +71,7 @@ final class ChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureNavigationBar()
         iqKeyBoard(isEnable: false)
         if presenter.streamingManager?.activeSession() != 0 {
             showSmallView()
@@ -408,12 +409,15 @@ extension ChatViewController {
         sendMessageButton.setImage(image, for: .normal)
         sendMessageButton.tintColor = .appDarkGray
         messageTextField.setPlaceholder()
-        
+
+    }
+    
+    func configureNavigationBar() {
         let audioBarButton = UIBarButtonItem(image: UIImage(named: "call"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
         let videoBarButton = UIBarButtonItem(image: UIImage(named: "Icon ionic-ios-videocam"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
         let broadcastButton = UIBarButtonItem(image: UIImage(named: "broadcast-icon"), style: .plain, target: self, action: #selector(broadcastAction))
         
-        self.navigationItem.setRightBarButtonItems([broadcastButton, videoBarButton, audioBarButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([audioBarButton, videoBarButton, broadcastButton], animated: true)
         if presenter.streamingManager?.activeSession() != 0 {
             audioBarButton.tintColor = .appGreyColor
             videoBarButton.tintColor = .appGreyColor
@@ -422,14 +426,13 @@ extension ChatViewController {
             audioBarButton.isEnabled = false
             audioBarButton.isEnabled = false
         } else {
-            audioBarButton.tintColor = .appTileGreen
-            videoBarButton.tintColor = .appTileGreen
-            broadcastButton.tintColor = .appTileGreen
+            audioBarButton.tintColor = .appDarkGreenColor
+            videoBarButton.tintColor = .appDarkGreenColor
+            broadcastButton.tintColor = .appDarkGreenColor
             audioBarButton.isEnabled = true
             audioBarButton.isEnabled = true
             audioBarButton.isEnabled = true
         }
-        
     }
     
     private func registerCells() {

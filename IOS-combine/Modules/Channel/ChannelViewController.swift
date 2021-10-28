@@ -58,6 +58,7 @@ final class ChannelViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureNavigationBar()
         presenter.viewWillAppear()
         NotificationCenter.default.addObserver(self, selector: #selector(didDismiss), name: Notification.Name("didDismiss"), object: nil)
         
@@ -187,6 +188,27 @@ final class ChannelViewController: UIViewController {
         presenter.unreadMessages[channelName]?.removeAll()
     }
 
+    func configureNavigationBar() {
+        let broadCast = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        broadCast.setImage(UIImage(named: "public-broadcast"), for: .normal)
+        broadCast.addTarget(self, action: #selector(didTapBroadCast), for: .touchUpInside)
+        let leftItem = UIBarButtonItem(customView: navigationTitle)
+        let broadCastBarButton =  UIBarButtonItem(customView: broadCast)
+        self.navigationItem.leftBarButtonItem = leftItem
+        let image = UIImage(named: "plus")?.withRenderingMode(.alwaysOriginal)
+        let addButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didTappedAdd))
+        
+        navigationItem.rightBarButtonItems = [addButton,broadCastBarButton ]
+        
+        if presenter.streamingManager.activeSession() != 0 {
+            broadCast.tintColor = .appGreyColor
+            broadCast.isEnabled = false
+        } else {
+            broadCast.tintColor = .appDarkGreenColor
+            broadCast.isEnabled = true
+        }
+        
+    }
 }
 
 // MARK: - Extensions -
@@ -205,16 +227,7 @@ extension ChannelViewController {
         navigationTitle.font = UIFont(name: "Manrope-Medium", size: 20)
         navigationTitle.textColor = .appDarkGreenColor
         navigationTitle.sizeToFit()
-        let broadCast = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        broadCast.setImage(UIImage(named: "public-broadcast"), for: .normal)
-        broadCast.addTarget(self, action: #selector(didTapBroadCast), for: .touchUpInside)
-        let leftItem = UIBarButtonItem(customView: navigationTitle)
-        let broadCastBarButton =  UIBarButtonItem(customView: broadCast)
-        self.navigationItem.leftBarButtonItem = leftItem
-        let image = UIImage(named: "plus")?.withRenderingMode(.alwaysOriginal)
-        let addButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didTappedAdd))
-        
-        navigationItem.rightBarButtonItems = [addButton,broadCastBarButton ]
+       
         
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
