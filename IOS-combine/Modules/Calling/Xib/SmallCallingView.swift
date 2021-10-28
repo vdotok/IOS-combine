@@ -100,8 +100,13 @@ extension SmallCallingView: StreamingDelegate {
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         
-        if session.callType == .onetomany {
-            self.streams.append(streams.first!)
+        if session.callType == .onetomany  {
+            if let index = self.streams.firstIndex(where: {$0.referenceID == streams.first?.referenceID}) {
+                self.streams[index] = streams.first!
+            } else {
+                self.streams.append(streams.first!)
+            }
+           
         } else {
             self.streams = streams
         }
