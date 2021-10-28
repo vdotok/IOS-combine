@@ -21,6 +21,7 @@ final class ChatViewController: UIViewController {
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var callingViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    var screenShareBannerView: UIView!
     var smallCallingView: SmallCallingView?
     var isCallingView: Bool = false
     var users: [String] = []
@@ -79,7 +80,7 @@ final class ChatViewController: UIViewController {
           
             tableViewTopConstraint.constant = 0
         }
-        
+        showBroadcastBanner()
         if presenter.streamingManager?.activeSession() == 0 && smallCallingView != nil {
             UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
             smallCallingView = nil
@@ -131,6 +132,25 @@ final class ChatViewController: UIViewController {
         smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
         smallCallingView?.addTopConstraint(size: self.topbarHeight)
     
+    }
+    
+    func showBroadcastBanner() {
+        
+        guard let manager = presenter.streamingManager else {return}
+        if UIScreen.main.isCaptured && presenter.streamingManager?.activeSession() == 0 {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableViewTopConstraint.constant = 20
+            }
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            screenShareBannerView = ScreenShareBannerView.getView(streamingManager: manager)
+            UIApplication.shared.windows.first!.addSubview(screenShareBannerView!)
+            screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
+            screenShareBannerView?.addTopConstraint(size: self.topbarHeight)
+        }
+        if !UIScreen.main.isCaptured && screenShareBannerView != nil {
+            screenShareBannerView = nil
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        }
     }
     
     deinit {

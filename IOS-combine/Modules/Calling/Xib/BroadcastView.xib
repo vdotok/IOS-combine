@@ -91,6 +91,13 @@
                                 <action selector="didTapSpeaker:" destination="iN0-l3-epB" eventType="touchUpInside" id="563-90-faD"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7A1-kE-0s7">
+                            <rect key="frame" x="-15" y="159" width="80.5" height="0.0"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Copy Url">
+                                <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </buttonConfiguration>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-hI-L0h">
                             <rect key="frame" x="13" y="168" width="24" height="24"/>
                             <state key="normal" image="User"/>
@@ -212,6 +219,7 @@
                 <outlet property="cameraButton" destination="uNx-We-R0D" id="xNq-Ko-il5"/>
                 <outlet property="cameraSwitchIcon" destination="yz5-hH-koa" id="a04-to-KSr"/>
                 <outlet property="connectedUser" destination="4Pg-G8-hkv" id="1Ot-F5-jW6"/>
+                <outlet property="copyURL" destination="7A1-kE-0s7" id="50x-Wx-Xxq"/>
                 <outlet property="copyUrlBtn" destination="eaq-nb-Ige" id="Yqa-y0-ULZ"/>
                 <outlet property="hangupBtn" destination="e5C-GM-m0J" id="W0F-uL-JJu"/>
                 <outlet property="localView" destination="2If-LL-xGi" id="Ka7-Rx-D8s"/>

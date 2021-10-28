@@ -21,6 +21,7 @@ protocol StreamingDelegate: AnyObject {
 class StreamingMananger {
     weak var delegate: StreamingDelegate?
     var remoteStreams: [UserStream] = []
+    var session: VTokBaseSession? =  nil
     var vtokSDK: VTokSDK?
     var groupID: Int? = nil
     
@@ -51,15 +52,18 @@ extension StreamingMananger: SessionDelegate {
     
     func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
         remoteStreams = stream
+        self.session = session
         delegate?.configureLocalViewFor(session: session, with: stream)
     }
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         remoteStreams = streams
+        self.session = session
         delegate?.configureRemoteViews(for: session, with: streams)
     }
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
+        self.session = session
         delegate?.didGetPublicUrl(for: session, with: url)
     }
     

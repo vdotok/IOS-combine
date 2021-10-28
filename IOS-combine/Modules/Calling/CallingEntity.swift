@@ -14,4 +14,5 @@ enum ScreenType {
     case videoAndScreenShare
     case fetchStreams
     case fetchonetomany
+    case broadcastOnly
 }

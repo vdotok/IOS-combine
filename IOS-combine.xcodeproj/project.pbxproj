@@ -130,6 +130,9 @@
 		5D90B1CF272A81D1001639E3 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCDC557272A811800B0DFAE /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5D90B1D0272A81D6001639E3 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCDC557272A811800B0DFAE /* iOSSDKStreaming.framework */; };
 		5D90B1D1272A81D6001639E3 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCDC557272A811800B0DFAE /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5D90B1D5272AF92F001639E3 /* ScreenShareBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D90B1D4272AF92F001639E3 /* ScreenShareBannerView.swift */; };
+		5D90B1D8272AF93C001639E3 /* ScreenShareBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D90B1D7272AF93C001639E3 /* ScreenShareBannerView.xib */; };
+		5D90B1D9272AFF0F001639E3 /* StreamingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C3921271842D5003CF416 /* StreamingManager.swift */; };
 		5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3326E64D43006EC78E /* ContactService.swift */; };
 		5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */; };
 		5DA4FA3C26E88E9A006EC78E /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */; };
@@ -355,6 +358,8 @@
 		5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChannelRequest.swift; sourceTree = "<group>"; };
 		5D819A2E26DE2E8400B37B72 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelCell.xib; sourceTree = "<group>"; };
+		5D90B1D4272AF92F001639E3 /* ScreenShareBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShareBannerView.swift; sourceTree = "<group>"; };
+		5D90B1D7272AF93C001639E3 /* ScreenShareBannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenShareBannerView.xib; sourceTree = "<group>"; };
 		5DA4FA3326E64D43006EC78E /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupService.swift; sourceTree = "<group>"; };
 		5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
@@ -616,6 +621,8 @@
 				5DE40468271DC092005EA0DF /* GroupCallingUpdatedView.xib */,
 				5DE40471272008E4005EA0DF /* SmallCallingView.swift */,
 				5DE40473272008F7005EA0DF /* SmallCallingView.xib */,
+				5D90B1D4272AF92F001639E3 /* ScreenShareBannerView.swift */,
+				5D90B1D7272AF93C001639E3 /* ScreenShareBannerView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -1000,6 +1007,7 @@
 				5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */,
 				5D4B585626E0F66D005185AE /* VideoCell.xib in Resources */,
 				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
+				5D90B1D8272AF93C001639E3 /* ScreenShareBannerView.xib in Resources */,
 				5D4B583526E0EC81005185AE /* CreateGroupCell.xib in Resources */,
 				5DECB6392714534D00EB43EB /* ScreenSharePopup.xib in Resources */,
 				5D4B583A26E0EDB8005185AE /* CreateGroupPopUp.xib in Resources */,
@@ -1141,6 +1149,7 @@
 				5D819A1326DCE7E700B37B72 /* ChannelWireframe.swift in Sources */,
 				5D4B584726E0F625005185AE /* CallingPresenter.swift in Sources */,
 				5D4B57BA26DF6ED3005185AE /* DocumentPicker.swift in Sources */,
+				5D90B1D5272AF92F001639E3 /* ScreenShareBannerView.swift in Sources */,
 				5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */,
 				5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */,
 				5D4B57D126DF6F7E005185AE /* OutgoingTextCell.swift in Sources */,
@@ -1221,6 +1230,7 @@
 			files = (
 				5DF3D51A27144DCA004988F8 /* SampleHandler.swift in Sources */,
 				5DF3D53B27144FA4004988F8 /* BroadcastData.swift in Sources */,
+				5D90B1D9272AFF0F001639E3 /* StreamingManager.swift in Sources */,
 				5DF3D53C27145042004988F8 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     var request: RegisterRequest?
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
+    let streamingManager = StreamingMananger()
 
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
@@ -54,6 +55,10 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
+        wormhole.listenForMessage(withIdentifier: "getBroadcastSession") { message in
+            self.getBroadcastSession()
+        }
+        
     }
     
     func setScreenShareAppAudio(with message: String) {
@@ -75,6 +80,14 @@ class SampleHandler: RPBroadcastSampleHandler {
         screenShareData = try? JSONDecoder().decode(ScreenShareAppData.self, from: data)
         guard screenShareData != nil else { return }
         initSdk()
+    }
+    
+    func getBroadcastSession() {
+        guard let screenShareData = screenShareData else { return }
+        let jsonData = try! JSONEncoder().encode(screenShareData)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        wormhole.passMessageObject(jsonString, identifier: "fetchBroadcastData")
+
     }
     
     

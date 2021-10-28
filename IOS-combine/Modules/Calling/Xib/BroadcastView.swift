@@ -46,6 +46,11 @@ class BroadcastView: UIView {
     }
     @IBOutlet weak var screenShareBtn: UIButton!
     @IBOutlet weak var hangupBtn: UIButton!
+    @IBOutlet weak var copyURL: UIButton! {
+        didSet {
+            copyURL.layer.cornerRadius = 8
+        }
+    }
     @IBOutlet weak var screenShareAudio: UIButton!
     @IBOutlet weak var cameraSwitchIcon: UIButton!
     @IBOutlet weak var speakerIcon: UIButton!
@@ -351,10 +356,10 @@ class BroadcastView: UIView {
                 switch broadCastType {
                 case .group:
                     broadCastTitle.text = "Group BroadCast"
-                    copyUrlBtn.isHidden = true
+                    copyURL.isHidden = true
                 case .publicURL:
                     broadCastTitle.text = "Public BroadCast"
-                    copyUrlBtn.isHidden = false
+                    copyURL.isHidden = false
                     
                 default:
                     break
@@ -368,8 +373,8 @@ class BroadcastView: UIView {
         
         func updateURL(with url: String) {
             publicURL = url
-            copyUrlBtn.isEnabled = true
-            copyUrlBtn.backgroundColor = .appDarkGreenColor
+            copyURL.isEnabled = true
+            copyURL.backgroundColor = .appDarkGreenColor
             print("Hello this for test")
         }
         
@@ -486,7 +491,7 @@ class BroadcastView: UIView {
         }
 
         private func setIncomingView(for session: VTokBaseSession) {
-            copyUrlBtn.isHidden = true
+            copyURL.isHidden = true
 //            if let _ = session.associatedSessionUUID {
 //                screenShareBtn.isHidden = true
 //                screenShareAudio.isHidden = true
@@ -555,7 +560,7 @@ class BroadcastView: UIView {
                 titlelabel.isHidden = true
                 broadCastIcon.isHidden = true
                 if session.broadcastType == .publicURL {
-                    copyUrlBtn.isHidden = false
+                    copyURL.isHidden = false
                     broadCastDummyView.isHidden = false
                 }
             case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:

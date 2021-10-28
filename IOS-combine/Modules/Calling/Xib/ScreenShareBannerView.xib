@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ScreenShareBannerView" customModule="IOS_combine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="699" height="46"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5r-rz-9LC">
+                    <rect key="frame" x="0.0" y="0.0" width="699" height="46"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are sharing your screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9d-pQ-Kog">
+                            <rect key="frame" x="17" y="2" width="157.5" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="AppGreenColor"/>
+                    <constraints>
+                        <constraint firstItem="V9d-pQ-Kog" firstAttribute="leading" secondItem="k5r-rz-9LC" secondAttribute="leading" constant="17" id="4WL-7f-PLo"/>
+                        <constraint firstItem="V9d-pQ-Kog" firstAttribute="top" secondItem="k5r-rz-9LC" secondAttribute="top" constant="2" id="tPu-TP-0jF"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="k5r-rz-9LC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0O5-A6-DLN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="k5r-rz-9LC" secondAttribute="trailing" id="0vQ-8o-5zJ"/>
+                <constraint firstItem="k5r-rz-9LC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="HJA-T2-rKX"/>
+                <constraint firstAttribute="bottom" secondItem="k5r-rz-9LC" secondAttribute="bottom" id="o4v-za-JPq"/>
+            </constraints>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="broadcastView" destination="k5r-rz-9LC" id="dlT-OC-nCV"/>
+            </connections>
+            <point key="canvasLocation" x="105.07246376811595" y="-26.116071428571427"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AppGreenColor">
+            <color red="0.32941176470588235" green="0.76078431372549016" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

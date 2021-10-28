@@ -90,7 +90,11 @@ final class CallingPresenter: NSObject {
               guard let options = broadcastData?.broadcastOptions,
                     let sdk = vtokSdk
                   //  sessionDirection == .outgoing
-              else {return}
+              else {
+                  output?(.dismissCallView)
+                  return
+                  
+              }
               switch options {
               case .screenShareWithAppAudioAndVideoCall:
                   guard  let session = session else { return }
@@ -138,6 +142,9 @@ extension CallingPresenter {
             guard let session = session else {return}
             output?(.fetchonetomany(session: session))
             streamingManager?.getStreams()
+        case .broadcastOnly:
+            guard let session = session else {return}
+            output?(.loadBroadcastView(session: session))
         }
     }
     

@@ -201,7 +201,6 @@ extension ChannelPresenter {
               moveToVideo(users: group.participants)
         } else if callType == NotifyCallType.broadcast.callType {
             var broadcastdata = info["broadcastData"] as? BroadcastData
-            broadcastdata?.broadcastType = .group
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
         } else if callType == NotifyCallType.fetchStreams.callType {
@@ -221,6 +220,12 @@ extension ChannelPresenter {
             self.particinpants = group.participants
             broadcastdata.broadcastGroupID = String(groupId)
             moveToCallingView(sdk: vtokSDK!, screenType: .videoAndScreenShare, broadCastData: broadcastdata)
+        }
+        
+        else if callType == NotifyCallType.broadcastOnly.callType {
+          //  moveToCallingView(sdk: vtokSDK!, screenType: .broadcastOnly, broadCastData: nil)
+            guard let data = info["screenShareData"] as? ScreenShareAppData else {return}
+            moveToBroadcastOnly(session: data.baseSession)
         }
     }
     
@@ -319,6 +324,13 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     func hideProgress() {
         channelOutput?(.hideProgress)
         channelOutput?(.reload)
+    }
+    
+    func moveToBroadcastOnly(session: VTokBaseSession) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self = self else {return}
+            self.wireframe.moveToCalling(particinats: [], users: [], sdk: self.vtokSDK!, broadCastData: nil, screenType: .broadcastOnly, session: session, sessionDirection: .outgoing)
+        }
     }
     
     func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {

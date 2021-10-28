@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import MMWormhole
 
 final class ChannelViewController: UIViewController {
     
@@ -39,7 +40,9 @@ final class ChannelViewController: UIViewController {
     let navigationTitle = UILabel()
     var incomingCallingView: GroupCallingUpdatedView?
     var smallCallingView: SmallCallingView?
-
+    var screenShareBannerView: UIView!
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
+                              optionalDirectory: "wormhole")
     // MARK: - Public properties -
 
     var presenter: ChannelPresenterInterface!
@@ -53,6 +56,7 @@ final class ChannelViewController: UIViewController {
         presenter.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(removeCount(notification:)), name: .removeCount, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didSubscribe(notification:)), name: .didGroupCreated, object: nil)
+        
        
     }
     
@@ -67,13 +71,20 @@ final class ChannelViewController: UIViewController {
         } else {
             self.tableViewTopConstraint.constant = 0
         }
+        
+        showBroadCastBanner()
+        
         if presenter.streamingManager.activeSession() == 0 && smallCallingView != nil {
             UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
             smallCallingView = nil
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(didTapHangup), name: Notification.Name.hangup, object: nil)
+   
     }
+    
+    
+    
     
     @objc func showSmallView() {
         DispatchQueue.main.async { [weak self] in
@@ -88,6 +99,27 @@ final class ChannelViewController: UIViewController {
         UIApplication.shared.windows.first!.addSubview(smallCallingView!)
         smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
         smallCallingView?.addTopConstraint(size: self.topbarHeight)
+    }
+    
+    func showBroadCastBanner() {
+        
+        if UIScreen.main.isCaptured && presenter.streamingManager.activeSession() == 0 {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableViewTopConstraint.constant = 20
+            }
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            screenShareBannerView = ScreenShareBannerView.getView(streamingManager: presenter.streamingManager)
+            UIApplication.shared.windows.first!.addSubview(screenShareBannerView!)
+            screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
+            screenShareBannerView?.addTopConstraint(size: self.topbarHeight)
+        }
+        
+        if !UIScreen.main.isCaptured && screenShareBannerView != nil {
+            screenShareBannerView = nil
+            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        }
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
