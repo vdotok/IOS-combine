@@ -187,28 +187,24 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         connectedState()
         self.session = session
 
-        userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
+      //  userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
         setNames()
         guard streams.first?.sessionMediaType != .audioCall else {
         collectionView.reloadData()
             return
         }
-        if selectedStream == nil {
-            selectedStream = userStreams[0]
-            userStreams =  userStreams.filter({$0.referenceID != selectedStream?.referenceID})
-            for remoteView in remoteView.subviews {
-                remoteView.removeFromSuperview()
-            }
-            remoteView.addSubview(selectedStream!.renderer)
-            
-            selectedStream?.renderer.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                selectedStream!.renderer.leadingAnchor.constraint(equalTo: self.remoteView.leadingAnchor),
-                selectedStream!.renderer.trailingAnchor.constraint(equalTo:self.remoteView.trailingAnchor),
-                selectedStream!.renderer.topAnchor.constraint(equalTo: self.remoteView.topAnchor),
-                selectedStream!.renderer.bottomAnchor.constraint(equalTo: self.remoteView.bottomAnchor)
-            ])
+        
+        self.userStreams = streams
+        
+        selectedStream = selectedStream == nil ? userStreams[0] : selectedStream
+        selectedStream = userStreams.filter({$0.referenceID == selectedStream?.referenceID}).first
+
+        userStreams =  userStreams.filter({$0.referenceID != selectedStream?.referenceID})
+        for remoteView in remoteView.subviews {
+            remoteView.removeFromSuperview()
         }
+        remoteView.addSubview(selectedStream!.renderer)
+        selectedStream?.renderer.fixInSuperView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
           //  self?.cameraButton.isEnabled = true
         })
