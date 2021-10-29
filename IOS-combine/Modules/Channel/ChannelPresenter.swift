@@ -225,6 +225,7 @@ extension ChannelPresenter {
         else if callType == NotifyCallType.broadcastOnly.callType {
           //  moveToCallingView(sdk: vtokSDK!, screenType: .broadcastOnly, broadCastData: nil)
             guard let data = info["screenShareData"] as? ScreenShareAppData else {return}
+            
             moveToBroadcastOnly(session: data.baseSession)
         }
     }
@@ -327,9 +328,11 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     }
     
     func moveToBroadcastOnly(session: VTokBaseSession) {
+        guard let broadcastType = session.broadcastType, let broadcastOption = session.broadcastOption else {return}
+        let broadcastData = BroadcastData(broadcastType: broadcastType, broadcastOptions: broadcastOption, broadcastGroupID: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self = self else {return}
-            self.wireframe.moveToCalling(particinats: [], users: [], sdk: self.vtokSDK!, broadCastData: nil, screenType: .broadcastOnly, session: session, sessionDirection: .outgoing)
+            self.wireframe.moveToCalling(particinats: [], users: [], sdk: self.vtokSDK!, broadCastData: broadcastData, screenType: .broadcastOnly, session: session, sessionDirection: .outgoing)
         }
     }
     

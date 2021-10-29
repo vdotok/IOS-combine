@@ -91,7 +91,9 @@ final class CallingPresenter: NSObject {
                     let sdk = vtokSdk
                   //  sessionDirection == .outgoing
               else {
-                  output?(.dismissCallView)
+                  DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                      self?.output?(.dismissCallView)
+                  }
                   return
                   
               }
@@ -294,12 +296,18 @@ extension CallingPresenter: StreamingDelegate {
             output?(.updateView(session: session))
         case .connected:
             didConnect()
+//            output?(.updateUsers(session.connectedUsers.count))
         case .rejected:
             sessionReject()
         case .missedCall:
             sessionMissed()
         case .hangup:
             sessionHangup()
+//            guard session.connectedUsers.count != 0 else {
+//                sessionHangup()
+//                return
+//            }
+//            output?(.updateUsers(session.connectedUsers.count))
         case .tryingToConnect:
             output?(.updateView(session: session))
         default:
@@ -540,13 +548,17 @@ extension CallingPresenter {
     }
     
     private func listenForSessionTerminate() {
+        
         wormhole.listenForMessage(withIdentifier: "sessionTerminated") { [weak self] message -> Void in
             if let sessionString = message as? String {
+                
                 guard let data = sessionString.data(using: .utf8) else {return }
                 let _ = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
+                guard let ssSession = self?.ssSession else {return}
+                self?.vtokSdk?.hangup(session: ssSession)
                 guard let callSession = self?.session else { return }
                 self?.vtokSdk?.hangup(session: callSession)
-                
+               
             }
         }
     }

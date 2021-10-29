@@ -338,8 +338,10 @@ class BroadcastView: UIView {
             case .incoming:
                 broadCastTitle.isHidden = true
                 cameraButton.isHidden = true
-                
-                setIncomingView(for: session)
+                if session.sessionDirection == .incoming {
+                    setIncomingView(for: session)
+                }
+             
             case .outgoing:
                 switch session.broadcastOption {
                 case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
@@ -383,8 +385,11 @@ class BroadcastView: UIView {
             self.selectedStreams = [stream]
             configureTimer()
             self.session = session
-            setIncomingView(for: session)
-            setViewsForIncoming(session: session, with: stream)
+            if session.sessionDirection == .incoming {
+                setIncomingView(for: session)
+                setViewsForIncoming(session: session, with: stream)
+            }
+            
          
             
         }
