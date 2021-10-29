@@ -27,6 +27,10 @@ class GroupCallingUpdatedView: UIView {
     @IBOutlet weak var speakerButton: UIButton!
     @IBOutlet weak var callStatus: UILabel!
     @IBOutlet weak var userAvatar: UIImageView!
+    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var backbutton: UIButton!
+    @IBOutlet weak var callingStackView: UIStackView!
+
     var viewModel: GroGroupCallingUpdatedViewModel?
     var session: VTokBaseSession? {
         didSet {
@@ -148,12 +152,12 @@ class GroupCallingUpdatedView: UIView {
       
         switch session.sessionMediaType {
         case .audioCall:
-//            titleLable.text = "You are audio calling with"
+            titleLable.text = "You are audio calling with"
 //            localView.isHidden = true
             cameraSwitch.isHidden = true
             cameraButton.isHidden = true
         case .videoCall:
-//            titleLable.text = "You are video calling with"
+            titleLable.text = "You are video calling with"
 //            localView.isHidden = false
             cameraSwitch.isHidden = false
             cameraButton.isHidden = false
@@ -162,6 +166,8 @@ class GroupCallingUpdatedView: UIView {
     }
     
     private func connectedState() {
+        
+        backbutton.isHidden = false
         userAvatar.isHidden = true
         callStatus.isHidden = true
 //        connectedView.isHidden = false
@@ -169,9 +175,20 @@ class GroupCallingUpdatedView: UIView {
         speakerButton.isHidden = false
         cameraSwitch.isHidden = false
         speakerButton.isHidden = false
-        if timer != nil {
+        if timer == nil {
             configureTimer()
         }
+        
+        switch session?.sessionMediaType {
+        case .audioCall:
+            titleLable.text = "You are audio calling with"
+        case .videoCall:
+            titleLable.text = "You are video calling with"
+
+        case .none:
+            break
+        }
+        callingStackView.isHidden = false
        
     }
 
@@ -257,7 +274,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
 
 extension GroupCallingUpdatedView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 4 , height: 120)
+        return CGSize(width: UIScreen.main.bounds.width / 4 , height: 100)
     }
 }
 
@@ -288,7 +305,7 @@ extension GroupCallingUpdatedView {
         }
         timeString += intervalFormatter(interval: m) + ":" +
                         intervalFormatter(interval: s)
-        callTime?.text = timeString
+        callTime.text = timeString
     }
     
     private func intervalFormatter(interval: Int) -> String {

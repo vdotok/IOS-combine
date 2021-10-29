@@ -148,7 +148,6 @@ final class CallingViewController: UIViewController {
         guard let groupCallingView = self.groupCallingView else {return}
         groupCallingView.session = presenter.session
 //        groupCallingView.loadViewFor(mediaType: mediaType)
-    
         groupCallingView.delegate = self
         groupCallingView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(groupCallingView)
