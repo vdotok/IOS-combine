@@ -127,8 +127,8 @@ final class ChatViewController: UIViewController {
             self.videoBarButton.tintColor = .appDarkGreenColor
             self.broadcastButton.tintColor = .appDarkGreenColor
             self.audioBarButton.isEnabled = true
-            self.audioBarButton.isEnabled = true
-            self.audioBarButton.isEnabled = true
+            self.videoBarButton.isEnabled = true
+            self.broadcastButton.isEnabled = true
         })
     }
     
@@ -466,15 +466,15 @@ extension ChatViewController {
             videoBarButton.tintColor = .appGreyColor
             broadcastButton.tintColor = .appDarkGray
             audioBarButton.isEnabled = false
-            audioBarButton.isEnabled = false
-            audioBarButton.isEnabled = false
+            videoBarButton.isEnabled = false
+            broadcastButton.isEnabled = false
         } else {
             audioBarButton.tintColor = .appDarkGreenColor
             videoBarButton.tintColor = .appDarkGreenColor
             broadcastButton.tintColor = .appDarkGreenColor
             audioBarButton.isEnabled = true
-            audioBarButton.isEnabled = true
-            audioBarButton.isEnabled = true
+            videoBarButton.isEnabled = true
+            broadcastButton.isEnabled = true
         }
     }
     
