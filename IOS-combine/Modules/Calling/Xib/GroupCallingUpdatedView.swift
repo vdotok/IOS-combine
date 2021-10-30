@@ -168,7 +168,12 @@ class GroupCallingUpdatedView: UIView {
     private func connectedState() {
         
         backbutton.isHidden = false
-        userAvatar.isHidden = true
+        if session?.sessionMediaType == .audioCall {
+            userAvatar.isHidden = false
+        } else {
+            userAvatar.isHidden = true
+        }
+      
         callStatus.isHidden = true
 //        connectedView.isHidden = false
         userNames.isHidden = true

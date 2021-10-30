@@ -33,6 +33,7 @@ final class ChannelPresenter {
     var unreadMessages: [String:[ChatMessage]] = [:]
     var particinpants: [Participant]?
     var streamingManager: StreamingMananger
+    var deleteStore: DeleteStoreable = DeleteService(service: NetworkService())
   
     
     
@@ -348,4 +349,40 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
         wireframe.dismissView()
     }
 
+    func deleteGroup(with id: Int) {
+        
+        channelOutput?(.showProgress)
+        let request = DeleteGroupRequest(group_id: groups[id].id)
+        deleteStore.delete(with: request) { [weak self] response in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                self?.channelOutput?(.hideProgress)
+            })
+       
+            switch response {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    switch response.status {
+                    case 503:
+                        self?.channelOutput?(.failure(message: response.message ))
+                    case 500:
+                        self?.channelOutput?(.failure(message: response.message))
+                    case 401:
+                        self?.channelOutput?(.failure(message: response.message))
+                    case 600:
+                        self?.channelOutput?(.failure(message: response.message))
+                    case 200:
+                        
+                    self?.groups.remove(at: id)
+                    self?.channelOutput?(.reload)
+                    default:
+                    break
+                    }
+                }
+                
+                print("\(response)")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

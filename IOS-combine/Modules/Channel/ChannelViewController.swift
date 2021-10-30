@@ -43,6 +43,7 @@ final class ChannelViewController: UIViewController {
     var screenShareBannerView: UIView!
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
+    
     // MARK: - Public properties -
 
     var presenter: ChannelPresenterInterface!
@@ -350,6 +351,19 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
         presenter.navigation(to: .chat, messages: topic ?? [], group: presenter.groups[indexPath.row])
     }
     
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+   
+        let trash = UIContextualAction(style: .destructive,
+                                       title: "Delete") { [weak self] (action, view, completionHandler) in
+//            self?.viewModel.deleteGroup(with: indexPath.row)
+//                                        completionHandler(true)
+            self?.presenter.deleteGroup(with: indexPath.row)
+        }
+      
+            let configuration = UISwipeActionsConfiguration(actions: [trash])
+            return configuration
+    }
     
 }
 
