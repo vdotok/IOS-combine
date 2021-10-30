@@ -123,6 +123,8 @@ extension SmallCallingView: StreamingDelegate {
         switch session.state {
         case .rejected:
             NotificationCenter.default.post(name: Notification.Name.hangup, object: nil)
+        case .hangup:
+            NotificationCenter.default.post(name: Notification.Name.hangup, object: nil)
         default:
             break
         }

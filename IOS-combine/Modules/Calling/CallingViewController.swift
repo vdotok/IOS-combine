@@ -247,6 +247,7 @@ extension CallingViewController: BroadcastDelegate {
     
     func didTapMuteSS(for baseSession: VTokBaseSession, state: AudioState) {
     //    viewModel.mute(session: baseSession, state: state)
+        presenter.mute(session: baseSession, state: state)
     }
     
     func didTapHangUp(for session: VTokBaseSession) {
@@ -256,15 +257,18 @@ extension CallingViewController: BroadcastDelegate {
     
     func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState) {
      //   viewModel.speaker(session: session, state: state)
+        presenter.speaker(session: session, state: state)
         
     }
     
     func didTapFlipCamera(for session: VTokBaseSession, type: CameraType) {
      //   viewModel.flipCamera(session: session, state: type)
+        presenter.flipCamera(session: session, state: type)
     }
     
     func didTapVideo(for session: VTokBaseSession, type: VideoState) {
      //   viewModel.disableVideo(session: session, state: type)
+        presenter.disableVideo(session: session, state: type)
     }
 
 
