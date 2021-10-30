@@ -88,7 +88,7 @@ final class ChatViewController: UIViewController {
             tableViewTopConstraint.constant = 0
         }
         
-      
+      addNotificationObserver()
         showBroadcastBanner()
         if presenter.streamingManager?.activeSession() == 0 && smallCallingView != nil {
             UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
@@ -263,6 +263,8 @@ extension ChatViewController: DocumentPickerProtocol {
     func didTapdismiss() {
         
     }
+    
+    
     
     
 }
@@ -628,3 +630,25 @@ extension ChatViewController: SmallCallingViewDelegate {
 
 
 
+extension ChatViewController {
+    func addNotificationObserver(){
+          // Add Key-Value observer on isCaptured property of uiscreen.main
+        UIScreen.main.addObserver(self, forKeyPath: "captured", options: .new, context: nil)
+
+      }
+    
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "captured" {
+
+          if !UIScreen.main.isCaptured {
+       
+              AppDelegate.appDelegate.screenShareBannerView?.removeFromSuperview()
+              
+          } else {
+              print("capture start")
+          }
+            
+        }
+
+    }
+}

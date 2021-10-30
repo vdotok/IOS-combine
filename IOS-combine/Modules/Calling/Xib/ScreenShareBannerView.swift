@@ -17,11 +17,11 @@ class ScreenShareBannerView: UIView {
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     var screenShareData: ScreenShareAppData?
-
     
     override func awakeFromNib() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         broadcastView.addGestureRecognizer(tap)
+        
         wormhole.listenForMessage(withIdentifier: "fetchBroadcastData") { messageObject in
             if let message = messageObject as? String {
                 print(message)

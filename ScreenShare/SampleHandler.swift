@@ -99,6 +99,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
     
     func getBroadcastSession() {
+        if  vtokSdk?.sessionCount() == 0 {return}
         guard let screenShareData = screenShareData else { return }
         let jsonData = try! JSONEncoder().encode(screenShareData)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
@@ -222,7 +223,8 @@ extension SampleHandler: SessionDelegate {
             break
         case .rejected:
             print("test")
-            self.finishBroadcastWithError(SessionHangup.forceStop)
+           // self.finishBroadcastWithError(SessionHangup.forceStop)
+            
             break
         case .onhold:
             break
@@ -235,9 +237,10 @@ extension SampleHandler: SessionDelegate {
         case .invalidTarget:
             break
         case .hangup:
+            wormhole.passMessageObject(nil, identifier: "sessionHangup")
             self.finishBroadcastWithError(SessionHangup.forceStop)
             print("test")
-            wormhole.passMessageObject(nil, identifier: "sessionHangup")
+            
             break
         case .tryingToConnect:
             break
