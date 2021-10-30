@@ -242,7 +242,11 @@ class BroadcastView: UIView {
         }
         
         @IBAction func didTapCopyURL(_ sender: UIButton) {
-            guard let url = publicURL else { return }
+            guard let url = publicURL else {
+                
+                return
+                
+            }
             print("<<<<<public url \(url)")
             let pastBoard = UIPasteboard.general
             pastBoard.string = url
@@ -338,10 +342,7 @@ class BroadcastView: UIView {
             case .incoming:
                 broadCastTitle.isHidden = true
                 cameraButton.isHidden = true
-                if session.sessionDirection == .incoming {
                     setIncomingView(for: session)
-                }
-             
             case .outgoing:
                 switch session.broadcastOption {
                 case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
@@ -366,8 +367,6 @@ class BroadcastView: UIView {
                 default:
                     break
                 }
-                
-                
                 setOutGoingView(for: session)
                 
             }
@@ -385,10 +384,15 @@ class BroadcastView: UIView {
             self.selectedStreams = [stream]
             configureTimer()
             self.session = session
+            if session.sessionDirection == .outgoing && session.associatedSessionUUID != "" {
+                webView.isHidden = false
+            }
             if session.sessionDirection == .incoming {
                 setIncomingView(for: session)
-                setViewsForIncoming(session: session, with: stream)
+            } else {
+                smallLocalView.isHidden = false
             }
+            setViewsForIncoming(session: session, with: stream)
             
          
             
@@ -450,6 +454,12 @@ class BroadcastView: UIView {
                     callView.addSubview(userStream.renderer)
                     userStream.renderer.fixInSuperView()
                     callView.tag = callView.tag
+                    if session.sessionDirection == .incoming {
+                        webView.isHidden = true
+                    } else {
+                        webView.isHidden = false
+                    }
+                    
                 } else {
                     
                     localView.removeAllSubViews()
@@ -473,6 +483,7 @@ class BroadcastView: UIView {
                 if session.associatedSessionUUID != nil {
                     ssView.isHidden = false
                     callView.isHidden = false
+                    
                 } else {
                     ssView.isHidden = false
                     callView.isHidden = true
@@ -487,16 +498,16 @@ class BroadcastView: UIView {
         
         func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
             if session.broadcastOption == .videoCall {
-                webView.isHidden = true
+//                webView.isHidden = true
                 localView.isHidden = false
-                            localView.removeAllSubViews()
-                            localView.addSubview(renderer)
+                localView.removeAllSubViews()
+                localView.addSubview(renderer)
                 localView.removeAllSubViews()
                 localView.addSubview(renderer)
                 renderer.translatesAutoresizingMaskIntoConstraints = false
                 renderer.fixInSuperView()
             } else {
-                webView.isHidden = false
+//                webView.isHidden = false
                 localView.isHidden = true
                 smallLocalView.isHidden = false
                 smallLocalView.removeAllSubViews()
@@ -537,6 +548,7 @@ class BroadcastView: UIView {
                 speakerIcon.isHidden = false
                 smallLocalView.isHidden = false
                 muteButton.isHidden = true
+                webView.isHidden = false
             } else {
                 screenShareBtn.isHidden = true
                 screenShareAudio.isHidden = true
@@ -544,6 +556,7 @@ class BroadcastView: UIView {
                 speakerIcon.isHidden = false
                 smallLocalView.isHidden = true
                 muteButton.isHidden = true
+                
             }
             
         }

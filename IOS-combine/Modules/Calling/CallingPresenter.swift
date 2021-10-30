@@ -34,6 +34,7 @@ final class CallingPresenter: NSObject {
                               optionalDirectory: "wormhole")
     var streamingManager: StreamingMananger?
     var sessionDirection: SessionDirection
+    var url: String? = nil
     //var streamManager: StreamingMananger = StreamingMananger()
 
     // MARK: - Lifecycle -
@@ -79,7 +80,7 @@ final class CallingPresenter: NSObject {
         case updateURL(url: String)
         case updateUsers(Int)
         case fetchStreams
-        case fetchonetomany(session: VTokBaseSession)
+        case fetchonetomany(session: VTokBaseSession, url: String?)
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -142,8 +143,9 @@ extension CallingPresenter {
             streamingManager?.getStreams()
         case .fetchonetomany:
             guard let session = session else {return}
-            output?(.fetchonetomany(session: session))
+            output?(.fetchonetomany(session: session, url: AppDelegate.appDelegate.publicURL))
             streamingManager?.getStreams()
+            
         case .broadcastOnly:
             guard let session = session else {return}
             output?(.loadBroadcastView(session: session))
@@ -286,6 +288,7 @@ extension CallingPresenter: StreamingDelegate {
     }
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
+        AppDelegate.appDelegate.publicURL = url
         output?(.updateURL(url: url))
     }
     
@@ -530,6 +533,7 @@ extension CallingPresenter {
         wormhole.listenForMessage(withIdentifier: "didGetPublicURL", listener: { [weak self] (messageObject) -> Void in
             if let message = messageObject as? String {
                 self?.output?(.updateURL(url: message))
+                AppDelegate.appDelegate.publicURL = message
             }
          
         })
@@ -554,10 +558,10 @@ extension CallingPresenter {
                 
                 guard let data = sessionString.data(using: .utf8) else {return }
                 let _ = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
-                guard let ssSession = self?.ssSession else {return}
-                self?.vtokSdk?.hangup(session: ssSession)
                 guard let callSession = self?.session else { return }
                 self?.vtokSdk?.hangup(session: callSession)
+                guard let ssSession = self?.ssSession else {return}
+                self?.vtokSdk?.hangup(session: ssSession)
                
             }
         }

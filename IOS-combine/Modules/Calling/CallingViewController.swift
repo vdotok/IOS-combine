@@ -69,8 +69,10 @@ final class CallingViewController: UIViewController {
                 self.broadcastView?.updateUser(count: count)
             case .fetchStreams:
                 self.loadGroupCallingView(mediaType: .videoCall)
-            case .fetchonetomany(let session):
+            case .fetchonetomany(let session, let url):
                 self.loadBroadcastView(session: session)
+                guard let updatedUrl = url else {return}
+                self.broadcastView?.updateURL(with: updatedUrl)
           
             default:
                 break
@@ -134,6 +136,7 @@ final class CallingViewController: UIViewController {
         broadcastView = BroadcastView.loadView()
         guard let broadcastView = self.broadcastView else {return}
         broadcastView.updateView(with: session)
+        if session.associatedSessionUUID != nil { broadcastView.smallLocalView.isHidden = false}
         broadcastView.delegate = self
         broadcastView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(broadcastView)

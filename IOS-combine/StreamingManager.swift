@@ -7,7 +7,7 @@
 
 import Foundation
 import iOSSDKStreaming
-
+import UIKit
 
 protocol StreamingDelegate: AnyObject {
     func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream])
@@ -24,6 +24,7 @@ class StreamingMananger {
     var session: VTokBaseSession? =  nil
     var vtokSDK: VTokSDK?
     var groupID: Int? = nil
+    var url: String? = nil
     
     init(vtokSDK: VTokSDK? = nil) {
         self.vtokSDK = vtokSDK

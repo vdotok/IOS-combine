@@ -9,6 +9,22 @@ import ReplayKit
 import iOSSDKStreaming
 import MMWormhole
 
+protocol MyAppError : Error {
+    var message: String { get }
+}
+enum SessionHangup : MyAppError {
+    case forceStop
+    
+
+    var message: String {
+        switch self {
+        case .forceStop:
+            return "force stop"
+  
+        }
+    }
+}
+
 class SampleHandler: RPBroadcastSampleHandler {
     
     var vtokSdk : VideoTalkSDK?
@@ -206,6 +222,7 @@ extension SampleHandler: SessionDelegate {
             break
         case .rejected:
             print("test")
+            self.finishBroadcastWithError(SessionHangup.forceStop)
             break
         case .onhold:
             break
@@ -218,7 +235,9 @@ extension SampleHandler: SessionDelegate {
         case .invalidTarget:
             break
         case .hangup:
+            self.finishBroadcastWithError(SessionHangup.forceStop)
             print("test")
+            wormhole.passMessageObject(nil, identifier: "sessionHangup")
             break
         case .tryingToConnect:
             break

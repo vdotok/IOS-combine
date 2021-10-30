@@ -10,6 +10,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import MMWormhole
 
 final class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -21,11 +22,12 @@ final class ChatViewController: UIViewController {
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var callingViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    var screenShareBannerView: UIView!
     var smallCallingView: SmallCallingView?
     var isCallingView: Bool = false
     var users: [String] = []
     var timer: Timer? = nil
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
+                              optionalDirectory: "wormhole")
     
     
     lazy var titleLabel: UILabel = {
@@ -54,7 +56,9 @@ final class ChatViewController: UIViewController {
     lazy var documentPicker = DocumentPicker(viewController: self, delegate: self)
     lazy var imagePicker: ImagePicker = ImagePicker(presentationController: self, delegate: self)
 
-
+    lazy var audioBarButton = UIBarButtonItem(image: UIImage(named: "call"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
+    lazy var videoBarButton = UIBarButtonItem(image: UIImage(named: "Icon ionic-ios-videocam"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
+    lazy var broadcastButton = UIBarButtonItem(image: UIImage(named: "broadcast-icon"), style: .plain, target: self, action: #selector(broadcastAction))
     // MARK: - Public properties -
 
     var presenter: ChatPresenterInterface!
@@ -67,6 +71,9 @@ final class ChatViewController: UIViewController {
         bindPresenter()
         notificationsListners()
         titleLabel.text = presenter.group?.groupTitle
+       
+        listenForHangup()
+    
         
     }
     
@@ -80,6 +87,8 @@ final class ChatViewController: UIViewController {
           
             tableViewTopConstraint.constant = 0
         }
+        
+      
         showBroadcastBanner()
         if presenter.streamingManager?.activeSession() == 0 && smallCallingView != nil {
             UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
@@ -108,12 +117,28 @@ final class ChatViewController: UIViewController {
         
     }
     
+    func listenForHangup() {
+        wormhole.listenForMessage(withIdentifier: "sessionHangup", listener: { [weak self] (messageObject) -> Void in
+            guard let self = self else {return}
+            self.smallCallingView?.removeFromSuperview()
+            self.tableViewTopConstraint.constant = 0
+            self.smallCallingView = nil
+            self.audioBarButton.tintColor = .appDarkGreenColor
+            self.videoBarButton.tintColor = .appDarkGreenColor
+            self.broadcastButton.tintColor = .appDarkGreenColor
+            self.audioBarButton.isEnabled = true
+            self.audioBarButton.isEnabled = true
+            self.audioBarButton.isEnabled = true
+        })
+    }
+    
     @objc func didTapHangup() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            self.smallCallingView?.removeFromSuperview()
             self.tableViewTopConstraint.constant = 0
             self.smallCallingView = nil
+            
         }
     
     }
@@ -141,15 +166,13 @@ final class ChatViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.tableViewTopConstraint.constant = 20
             }
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
-            screenShareBannerView = ScreenShareBannerView.getView(streamingManager: manager)
-            UIApplication.shared.windows.first!.addSubview(screenShareBannerView!)
-            screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
-            screenShareBannerView?.addTopConstraint(size: self.topbarHeight)
+            AppDelegate.appDelegate.screenShareBannerView = ScreenShareBannerView.getView(streamingManager: manager)
+            UIApplication.shared.windows.first!.addSubview(AppDelegate.appDelegate.screenShareBannerView)
+            AppDelegate.appDelegate.screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
+            AppDelegate.appDelegate.screenShareBannerView.addTopConstraint(size: self.topbarHeight)
         }
-        if !UIScreen.main.isCaptured && screenShareBannerView != nil {
-            screenShareBannerView = nil
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        if !UIScreen.main.isCaptured && AppDelegate.appDelegate.screenShareBannerView != nil {
+            AppDelegate.appDelegate.screenShareBannerView.removeFromSuperview()
         }
     }
     
@@ -433,9 +456,7 @@ extension ChatViewController {
     }
     
     func configureNavigationBar() {
-        let audioBarButton = UIBarButtonItem(image: UIImage(named: "call"), style: .plain, target: self, action: #selector(audioCallAction(_:)))
-        let videoBarButton = UIBarButtonItem(image: UIImage(named: "Icon ionic-ios-videocam"), style: .plain, target: self, action: #selector(videoCallAction(_:)))
-        let broadcastButton = UIBarButtonItem(image: UIImage(named: "broadcast-icon"), style: .plain, target: self, action: #selector(broadcastAction))
+       
         
         self.navigationItem.setRightBarButtonItems([audioBarButton, videoBarButton, broadcastButton], animated: true)
         if presenter.streamingManager?.activeSession() != 0 {

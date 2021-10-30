@@ -66,6 +66,11 @@ final class ChannelViewController: UIViewController {
         presenter.viewWillAppear()
         NotificationCenter.default.addObserver(self, selector: #selector(didDismiss), name: Notification.Name("didDismiss"), object: nil)
         
+        wormhole.listenForMessage(withIdentifier: "sessionHangup") { _ in
+            if UIScreen.main.isCaptured {
+                UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            }
+        }
         if presenter.streamingManager.activeSession() != 0 {
             showSmallView()
         } else {
@@ -107,7 +112,8 @@ final class ChannelViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.tableViewTopConstraint.constant = 20
             }
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+            
+            screenShareBannerView?.removeFromSuperview()
             screenShareBannerView = ScreenShareBannerView.getView(streamingManager: presenter.streamingManager)
             UIApplication.shared.windows.first!.addSubview(screenShareBannerView!)
             screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
