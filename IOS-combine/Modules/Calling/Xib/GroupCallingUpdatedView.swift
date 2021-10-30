@@ -217,7 +217,16 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
     func updateDataSource(with streams: [UserStream], session: VTokBaseSession) {
         connectedState()
         self.session = session
-
+        
+        let newRefIds = streams.map({$0.referenceID})
+        let oldRefIds = self.userStreams.map({$0.referenceID})
+        if let seletectedStream = selectedStream {
+            if !newRefIds.contains(seletectedStream.referenceID) {
+                selectedStream = streams[0]
+            }
+        }
+       
+        
         userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
         setNames()
         guard streams.first?.sessionMediaType != .audioCall else {
