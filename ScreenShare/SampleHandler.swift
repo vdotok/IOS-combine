@@ -246,6 +246,8 @@ extension SampleHandler: SessionDelegate {
             break
         case .reconnect:
             break
+        case .updateParticipent:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString

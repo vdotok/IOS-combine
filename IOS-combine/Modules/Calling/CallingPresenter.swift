@@ -35,6 +35,7 @@ final class CallingPresenter: NSObject {
     var streamingManager: StreamingMananger?
     var sessionDirection: SessionDirection
     var url: String? = nil
+    var isBusy: Bool = false
     //var streamManager: StreamingMananger = StreamingMananger()
 
     // MARK: - Lifecycle -
@@ -299,63 +300,34 @@ extension CallingPresenter: StreamingDelegate {
             output?(.updateView(session: session))
         case .connected:
             didConnect()
-//            output?(.updateUsers(session.connectedUsers.count))
         case .rejected:
             sessionReject()
         case .missedCall:
             sessionMissed()
         case .hangup:
-            sessionHangup()
-//            guard session.connectedUsers.count != 0 else {
-//                sessionHangup()
-//                return
-//            }
-//            output?(.updateUsers(session.connectedUsers.count))
+                guard isBusy else {
+                    sessionHangup()
+                    return
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                    self?.sessionHangup()
+                }
+        case .busy:
+            isBusy = true
+            output?(.updateView(session: session))
         case .tryingToConnect:
             output?(.updateView(session: session))
+        case .updateParticipent:
+            output?(.updateUsers(session.connectedUsers.count))
+            
         default:
             break
         }
+        output?(.updateUsers(session.connectedUsers.count))
     }
     
     
 }
-
-//extension CallingPresenter: SessionDelegate {
-//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
-//        output?(.configureLocal(view: renderer, session: session))
-//    }
-//
-//    func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
-//        output?(.configureRemote(streams: streams, session: session))
-//    }
-//
-//    func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
-//        output?(.updateURL(url: url))
-//    }
-//
-//    func stateDidUpdate(for session: VTokBaseSession) {
-//        self.session = session
-//        switch session.state {
-//        case .ringing:
-//            output?(.updateView(session: session))
-//        case .connected:
-//          didConnect()
-//        case .rejected:
-//          sessionReject()
-//        case .missedCall:
-//            sessionMissed()
-//        case .hangup:
-//            sessionHangup()
-//        case .tryingToConnect:
-//            output?(.updateView(session: session))
-//
-//        default:
-//            break
-//        }
-//    }
-//
-//}
 
 extension CallingPresenter {
     private func didConnect() {

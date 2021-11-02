@@ -104,7 +104,8 @@ extension SmallCallingView: StreamingDelegate {
             if let index = self.streams.firstIndex(where: {$0.sessionUUID == streams.first?.sessionUUID}) {
                 self.streams[index] = streams.first!
             } else {
-                self.streams.append(streams.first!)
+                guard let stream = streams.first else {return}
+                self.streams.append(stream)
             }
            
         } else {

@@ -30,6 +30,7 @@ class GroupCallingUpdatedView: UIView {
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var backbutton: UIButton!
     @IBOutlet weak var callingStackView: UIStackView!
+    @IBOutlet weak var connectedUser: UILabel!
 
     var viewModel: GroGroupCallingUpdatedViewModel?
     var session: VTokBaseSession? {
@@ -137,14 +138,17 @@ class GroupCallingUpdatedView: UIView {
             setNames()
         case .connected:
             connectedState()
-       
         case .rejected:
             callStatus.text = "Rejected"
+        case .busy:
+            callStatus.text = "All users are busy"
             
         default:
             break
         }
     }
+    
+
     
     func updateAudioVideoview(for session: VTokBaseSession) {
         
