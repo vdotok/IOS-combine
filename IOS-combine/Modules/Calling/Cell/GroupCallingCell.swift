@@ -38,7 +38,6 @@ class GroupCallingCell: UICollectionViewCell {
 //            return
 //
 //        }
-        remoteName?.text = "test"
         switch stream.sessionMediaType {
         case .audioCall:
             remoteView.isHidden = true
