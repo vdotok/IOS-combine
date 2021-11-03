@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FC947A5D3D4C12106C541E3 /* Pods_ScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7DAF578604AF25EA6378BA /* Pods_ScreenShare.framework */; };
-		4307B2ADD0076F8FB63C9007 /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BFDD9B6C425F4BC197693E /* Pods_IOS_combine.framework */; };
 		5D0C3922271842D5003CF416 /* StreamingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C3921271842D5003CF416 /* StreamingManager.swift */; };
 		5D1BC44D26E5EDEC00D7E49E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */; };
 		5D1BC44F26E608B300D7E49E /* SignupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44E26E608B300D7E49E /* SignupService.swift */; };
@@ -85,6 +83,8 @@
 		5D4B585626E0F66D005185AE /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B585026E0F66D005185AE /* VideoCell.xib */; };
 		5D4B585726E0F66D005185AE /* GroupCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585126E0F66D005185AE /* GroupCallingView.swift */; };
 		5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585826E0F6A1005185AE /* CallingEntity.swift */; };
+		5D79CA5227327753008ACE13 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5127327753008ACE13 /* NextButton.swift */; };
+		5D79CA5427327783008ACE13 /* IndigoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5327327783008ACE13 /* IndigoButton.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -158,6 +158,8 @@
 		5DF3D53A27144FA4004988F8 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3D53927144FA4004988F8 /* BroadcastData.swift */; };
 		5DF3D53B27144FA4004988F8 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3D53927144FA4004988F8 /* BroadcastData.swift */; };
 		5DF3D53C27145042004988F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579926DE5F5E005185AE /* Constants.swift */; };
+		D94C280944CCDF42AEA640D0 /* Pods_ScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B710A139780CBA3B5376691 /* Pods_ScreenShare.framework */; };
+		F1E7B4FA34199DDCA01CD044 /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8201376F161420B5BFF26934 /* Pods_IOS_combine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +301,8 @@
 		5D4B585026E0F66D005185AE /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		5D4B585126E0F66D005185AE /* GroupCallingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCallingView.swift; sourceTree = "<group>"; };
 		5D4B585826E0F6A1005185AE /* CallingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingEntity.swift; sourceTree = "<group>"; };
+		5D79CA5127327753008ACE13 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		5D79CA5327327783008ACE13 /* IndigoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndigoButton.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -375,12 +379,12 @@
 		5DF3D52527144DCA004988F8 /* BroadcastSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastSetupViewController.swift; sourceTree = "<group>"; };
 		5DF3D52727144DCA004988F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF3D53927144FA4004988F8 /* BroadcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastData.swift; sourceTree = "<group>"; };
-		6747C0E3B0777E910696F7CA /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
-		9D1CA9AF29F26D98636D21EE /* Pods-IOS-combine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.debug.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.debug.xcconfig"; sourceTree = "<group>"; };
-		B5BFDD9B6C425F4BC197693E /* Pods_IOS_combine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOS_combine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D083D3515442951E7106A3FF /* Pods-IOS-combine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.release.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.release.xcconfig"; sourceTree = "<group>"; };
-		EB7DAF578604AF25EA6378BA /* Pods_ScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF2E0CDACC2BD3C22AFBC61C /* Pods-ScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
+		5EF810B077402AD989A4C63B /* Pods-IOS-combine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.release.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.release.xcconfig"; sourceTree = "<group>"; };
+		8201376F161420B5BFF26934 /* Pods_IOS_combine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOS_combine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8800C66C4B974900DA4E3322 /* Pods-IOS-combine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.debug.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.debug.xcconfig"; sourceTree = "<group>"; };
+		8B710A139780CBA3B5376691 /* Pods_ScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDFA13FAB1691F2EFF0D21CA /* Pods-ScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
+		FA6751E04FA62F4C86828F09 /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,7 +392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4307B2ADD0076F8FB63C9007 /* Pods_IOS_combine.framework in Frameworks */,
+				F1E7B4FA34199DDCA01CD044 /* Pods_IOS_combine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF3D51727144DCA004988F8 /* ReplayKit.framework in Frameworks */,
-				0FC947A5D3D4C12106C541E3 /* Pods_ScreenShare.framework in Frameworks */,
+				D94C280944CCDF42AEA640D0 /* Pods_ScreenShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,10 +420,10 @@
 		2C2A06AB899423BEED0B8199 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9D1CA9AF29F26D98636D21EE /* Pods-IOS-combine.debug.xcconfig */,
-				D083D3515442951E7106A3FF /* Pods-IOS-combine.release.xcconfig */,
-				FF2E0CDACC2BD3C22AFBC61C /* Pods-ScreenShare.debug.xcconfig */,
-				6747C0E3B0777E910696F7CA /* Pods-ScreenShare.release.xcconfig */,
+				8800C66C4B974900DA4E3322 /* Pods-IOS-combine.debug.xcconfig */,
+				5EF810B077402AD989A4C63B /* Pods-IOS-combine.release.xcconfig */,
+				CDFA13FAB1691F2EFF0D21CA /* Pods-ScreenShare.debug.xcconfig */,
+				FA6751E04FA62F4C86828F09 /* Pods-ScreenShare.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -480,6 +484,8 @@
 				5D1C58FD27156F2B006C149F /* UIView+Extension.swift */,
 				5D1C58FF27156F99006C149F /* DraggableView.swift */,
 				5DC75A202726C47900334269 /* CustomButton.swift */,
+				5D79CA5127327753008ACE13 /* NextButton.swift */,
+				5D79CA5327327783008ACE13 /* IndigoButton.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -843,8 +849,8 @@
 			children = (
 				5DF3D51627144DCA004988F8 /* ReplayKit.framework */,
 				5DF3D52227144DCA004988F8 /* UIKit.framework */,
-				B5BFDD9B6C425F4BC197693E /* Pods_IOS_combine.framework */,
-				EB7DAF578604AF25EA6378BA /* Pods_ScreenShare.framework */,
+				8201376F161420B5BFF26934 /* Pods_IOS_combine.framework */,
+				8B710A139780CBA3B5376691 /* Pods_ScreenShare.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -856,13 +862,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5D8199C726DCC10400B37B72 /* Build configuration list for PBXNativeTarget "IOS-combine" */;
 			buildPhases = (
-				9AA6EF81AFC7FAEA82642E36 /* [CP] Check Pods Manifest.lock */,
+				9A883CBE25AA95802ACECA96 /* [CP] Check Pods Manifest.lock */,
 				5D8199AF26DCC10100B37B72 /* Sources */,
 				5D8199B026DCC10100B37B72 /* Frameworks */,
 				5D8199B126DCC10100B37B72 /* Resources */,
 				5D4B579626DE34E5005185AE /* Embed Frameworks */,
 				5DF3D52E27144DCA004988F8 /* Embed App Extensions */,
-				BB7999088035CBA22E03172B /* [CP] Embed Pods Frameworks */,
+				1B8E1F4C047F9DBD7A025617 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -879,7 +885,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DF3D53527144DCA004988F8 /* Build configuration list for PBXNativeTarget "ScreenShare" */;
 			buildPhases = (
-				3B5DE657C9594A0D00A9CC05 /* [CP] Check Pods Manifest.lock */,
+				454A5781D4BAEDB8482187F8 /* [CP] Check Pods Manifest.lock */,
 				5DF3D51127144DCA004988F8 /* Sources */,
 				5DF3D51227144DCA004988F8 /* Frameworks */,
 				5DF3D51327144DCA004988F8 /* Resources */,
@@ -1012,7 +1018,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3B5DE657C9594A0D00A9CC05 /* [CP] Check Pods Manifest.lock */ = {
+		1B8E1F4C047F9DBD7A025617 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IOS-combine/Pods-IOS-combine-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IOS-combine/Pods-IOS-combine-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IOS-combine/Pods-IOS-combine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		454A5781D4BAEDB8482187F8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1034,7 +1057,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9AA6EF81AFC7FAEA82642E36 /* [CP] Check Pods Manifest.lock */ = {
+		9A883CBE25AA95802ACECA96 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1054,23 +1077,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BB7999088035CBA22E03172B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IOS-combine/Pods-IOS-combine-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IOS-combine/Pods-IOS-combine-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IOS-combine/Pods-IOS-combine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1155,6 +1161,7 @@
 				5D4B584926E0F625005185AE /* CallingInteractor.swift in Sources */,
 				5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */,
 				5D0C3922271842D5003CF416 /* StreamingManager.swift in Sources */,
+				5D79CA5227327753008ACE13 /* NextButton.swift in Sources */,
 				5D4B584626E0F625005185AE /* CallingInterfaces.swift in Sources */,
 				5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */,
 				5D819A2C26DE1CAB00B37B72 /* AllChannelRequest.swift in Sources */,
@@ -1184,6 +1191,7 @@
 				5D4B57B226DF63C3005185AE /* ChatPresenter.swift in Sources */,
 				5D8199D426DCC2AF00B37B72 /* Service.swift in Sources */,
 				5D4B580B26E0AB1D005185AE /* CreateGroupViewController.swift in Sources */,
+				5D79CA5427327783008ACE13 /* IndigoButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1359,14 +1367,14 @@
 		};
 		5D8199C826DCC10400B37B72 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D1CA9AF29F26D98636D21EE /* Pods-IOS-combine.debug.xcconfig */;
+			baseConfigurationReference = 8800C66C4B974900DA4E3322 /* Pods-IOS-combine.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "IOS-combine/IOS-combine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 2XMPHHJW2J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1387,14 +1395,14 @@
 		};
 		5D8199C926DCC10400B37B72 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D083D3515442951E7106A3FF /* Pods-IOS-combine.release.xcconfig */;
+			baseConfigurationReference = 5EF810B077402AD989A4C63B /* Pods-IOS-combine.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "IOS-combine/IOS-combine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 2XMPHHJW2J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1415,7 +1423,7 @@
 		};
 		5DF3D52F27144DCA004988F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF2E0CDACC2BD3C22AFBC61C /* Pods-ScreenShare.debug.xcconfig */;
+			baseConfigurationReference = CDFA13FAB1691F2EFF0D21CA /* Pods-ScreenShare.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ScreenShare/ScreenShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1441,7 +1449,7 @@
 		};
 		5DF3D53027144DCA004988F8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6747C0E3B0777E910696F7CA /* Pods-ScreenShare.release.xcconfig */;
+			baseConfigurationReference = FA6751E04FA62F4C86828F09 /* Pods-ScreenShare.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ScreenShare/ScreenShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;

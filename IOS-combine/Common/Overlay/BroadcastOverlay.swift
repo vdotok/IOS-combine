@@ -18,6 +18,7 @@ class BroadcastOverlay: UIViewController {
     
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var screenShareAppAudioBtn: BorderButton!
+    @IBOutlet weak var overlayTitle: UILabel!
     @IBOutlet weak var screenShareMicAudioBtn: BorderButton!
     @IBOutlet weak var continueBtn: UIButton! {
         didSet {
@@ -33,6 +34,14 @@ class BroadcastOverlay: UIViewController {
         super.viewDidLoad()
         addBlureView()
         // Do any additional setup after loading the view.
+        switch broadCastData.broadcastType {
+        case .publicURL:
+            overlayTitle.text = "Public Broadcast"
+        case .group:
+            overlayTitle.text = "Group Broadcast"
+        default:
+            break
+        }
     }
     
     @IBAction func didTapBroadCastOption(_ sender: UIButton) {

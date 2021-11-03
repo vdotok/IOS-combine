@@ -240,8 +240,8 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         }
         
         self.userStreams = streams
-        
-        selectedStream = selectedStream == nil ? userStreams[0] : selectedStream
+        guard let stream = userStreams.first else {return}
+        selectedStream = selectedStream == nil ? stream : selectedStream
         selectedStream = userStreams.filter({$0.referenceID == selectedStream?.referenceID}).first
 
         userStreams =  userStreams.filter({$0.referenceID != selectedStream?.referenceID})

@@ -14,6 +14,7 @@
                 <outlet property="blurView" destination="FYv-tr-kVA" id="z12-Kc-iwD"/>
                 <outlet property="camera" destination="gly-bV-y1H" id="te5-lH-gWx"/>
                 <outlet property="continueBtn" destination="DFh-bk-tOp" id="iov-4d-XrI"/>
+                <outlet property="overlayTitle" destination="pGU-dB-nyO" id="Xzh-fC-LvW"/>
                 <outlet property="screenShareAppAudioBtn" destination="jCQ-XE-bnq" id="TY1-Sk-GqG"/>
                 <outlet property="screenShareMicAudioBtn" destination="Esw-vn-i3x" id="gAu-7q-Z10"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,30 +30,33 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clv-jj-Ces">
-                    <rect key="frame" x="30" y="251.5" width="354" height="403"/>
+                    <rect key="frame" x="24" y="251.5" width="366" height="403"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GpQ-jZ-wpu">
-                            <rect key="frame" x="24" y="79" width="306" height="202"/>
+                            <rect key="frame" x="20" y="79" width="326" height="202"/>
                             <subviews>
                                 <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-XE-bnq" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="306" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="326" height="54"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="54" id="zgD-gY-xKd"/>
                                     </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="SCREEN SHARE WITH APP AUDIO"/>
                                     <connections>
                                         <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="Ssh-eU-s8j"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esw-vn-i3x" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="74" width="306" height="54"/>
-                                    <state key="normal" title="SCREEN SHARE WITH APP MIC AUDIO"/>
+                                    <rect key="frame" x="0.0" y="74" width="326" height="54"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="SCREEN SHARE WITH MIC AUDIO"/>
                                     <connections>
                                         <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="9Nr-X8-gu8"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gly-bV-y1H" customClass="BorderButton" customModule="IOS_combine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="148" width="306" height="54"/>
+                                    <rect key="frame" x="0.0" y="148" width="326" height="54"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="CAMERA"/>
                                     <connections>
                                         <action selector="didTapBroadCastOption:" destination="-1" eventType="touchUpInside" id="suC-2t-TDH"/>
@@ -65,7 +69,7 @@
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFh-bk-tOp">
-                            <rect key="frame" x="100" y="330" width="154" height="44"/>
+                            <rect key="frame" x="100" y="330" width="166" height="44"/>
                             <color key="backgroundColor" name="AppCallingViewGrey"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="V0w-dd-7Uf"/>
@@ -78,23 +82,31 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eQ-8R-eA6">
-                            <rect key="frame" x="311" y="9" width="24" height="28"/>
+                            <rect key="frame" x="323" y="9" width="24" height="28"/>
                             <state key="normal" image="close"/>
                             <connections>
                                 <action selector="didTapClose:" destination="-1" eventType="touchUpInside" id="16u-Cv-Fbc"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Broadcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGU-dB-nyO">
+                            <rect key="frame" x="20" y="44.5" width="102" height="14.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <color key="textColor" name="AppDarkGrey"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="DFh-bk-tOp" firstAttribute="top" secondItem="GpQ-jZ-wpu" secondAttribute="bottom" constant="49" id="3p4-Rn-PtI"/>
                         <constraint firstAttribute="trailing" secondItem="6eQ-8R-eA6" secondAttribute="trailing" constant="19" id="4R0-H0-ax7"/>
                         <constraint firstItem="DFh-bk-tOp" firstAttribute="centerX" secondItem="GpQ-jZ-wpu" secondAttribute="centerX" id="D8o-3F-8Wx"/>
-                        <constraint firstItem="GpQ-jZ-wpu" firstAttribute="leading" secondItem="clv-jj-Ces" secondAttribute="leading" constant="24" id="H5L-0x-aqI"/>
+                        <constraint firstItem="GpQ-jZ-wpu" firstAttribute="leading" secondItem="clv-jj-Ces" secondAttribute="leading" constant="20" id="H5L-0x-aqI"/>
                         <constraint firstItem="6eQ-8R-eA6" firstAttribute="top" secondItem="clv-jj-Ces" secondAttribute="top" constant="9" id="MRB-UZ-Trp"/>
+                        <constraint firstItem="pGU-dB-nyO" firstAttribute="leading" secondItem="jCQ-XE-bnq" secondAttribute="leading" id="SJa-rA-Zfe"/>
                         <constraint firstAttribute="bottom" secondItem="DFh-bk-tOp" secondAttribute="bottom" constant="29" id="by7-PT-u5v"/>
                         <constraint firstItem="GpQ-jZ-wpu" firstAttribute="top" secondItem="clv-jj-Ces" secondAttribute="top" constant="79" id="cnj-gA-zZH"/>
                         <constraint firstItem="GpQ-jZ-wpu" firstAttribute="centerX" secondItem="clv-jj-Ces" secondAttribute="centerX" id="mgu-Z7-5rw"/>
+                        <constraint firstItem="jCQ-XE-bnq" firstAttribute="top" secondItem="pGU-dB-nyO" secondAttribute="bottom" constant="20" id="tww-wD-Z2o"/>
                         <constraint firstAttribute="trailing" secondItem="DFh-bk-tOp" secondAttribute="trailing" constant="100" id="unF-Oe-zSr"/>
                     </constraints>
                 </view>
@@ -104,7 +116,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FYv-tr-kVA" secondAttribute="trailing" id="4a6-NC-hwp"/>
                 <constraint firstItem="FYv-tr-kVA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EdO-2i-R5W"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="clv-jj-Ces" secondAttribute="trailing" constant="30" id="IhT-eb-v1M"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="clv-jj-Ces" secondAttribute="trailing" constant="24" id="IhT-eb-v1M"/>
                 <constraint firstItem="FYv-tr-kVA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="MdH-4h-adq"/>
                 <constraint firstItem="clv-jj-Ces" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="YFQ-eq-0si"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FYv-tr-kVA" secondAttribute="bottom" id="fbL-vI-CZY"/>
@@ -118,6 +130,9 @@
         <image name="close" width="24" height="28"/>
         <namedColor name="AppCallingViewGrey">
             <color red="0.7686274509803922" green="0.7686274509803922" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AppDarkGrey">
+            <color red="0.54509803921568623" green="0.57647058823529407" blue="0.64313725490196083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

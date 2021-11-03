@@ -460,7 +460,7 @@ extension ChatViewController {
     func configureNavigationBar() {
        
         
-        self.navigationItem.setRightBarButtonItems([audioBarButton, videoBarButton, broadcastButton], animated: true)
+        self.navigationItem.setRightBarButtonItems([ videoBarButton,audioBarButton, broadcastButton], animated: true)
         if presenter.streamingManager?.activeSession() != 0 {
             audioBarButton.tintColor = .appGreyColor
             videoBarButton.tintColor = .appGreyColor

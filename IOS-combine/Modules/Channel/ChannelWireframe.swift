@@ -60,6 +60,7 @@ extension ChannelWireframe: ChannelWireframeInterface {
             let vc = BroadcastOverlay()
             vc.modalPresentationStyle = .custom
             vc.modalTransitionStyle = .crossDissolve
+            vc.broadCastData.broadcastType = .publicURL
             vc.delegate = self
             navigationController?.present(vc, animated: true, completion: nil)
         }
