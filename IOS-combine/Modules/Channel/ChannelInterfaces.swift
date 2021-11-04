@@ -69,6 +69,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?)
     func moveToCreateGroup()
     func deleteGroup(with id: Int)
+    func editGroup(with title: String, id: Int) 
 
 }
 

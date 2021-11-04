@@ -85,6 +85,8 @@
 		5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585826E0F6A1005185AE /* CallingEntity.swift */; };
 		5D79CA5227327753008ACE13 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5127327753008ACE13 /* NextButton.swift */; };
 		5D79CA5427327783008ACE13 /* IndigoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5327327783008ACE13 /* IndigoButton.swift */; };
+		5D79CA582732A37B008ACE13 /* EditGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */; };
+		5D79CA5A2732A3A3008ACE13 /* EditGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA592732A3A3008ACE13 /* EditGroupService.swift */; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -303,6 +305,8 @@
 		5D4B585826E0F6A1005185AE /* CallingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingEntity.swift; sourceTree = "<group>"; };
 		5D79CA5127327753008ACE13 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		5D79CA5327327783008ACE13 /* IndigoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndigoButton.swift; sourceTree = "<group>"; };
+		5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupRequest.swift; sourceTree = "<group>"; };
+		5D79CA592732A3A3008ACE13 /* EditGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupService.swift; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -436,6 +440,7 @@
 				5DA4FA3326E64D43006EC78E /* ContactService.swift */,
 				5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */,
 				5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */,
+				5D79CA592732A3A3008ACE13 /* EditGroupService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -769,6 +774,7 @@
 				5D819A2926DE1A0F00B37B72 /* ChannelEntity.swift */,
 				5D819A2B26DE1CAB00B37B72 /* AllChannelRequest.swift */,
 				5D400AF8272D3F78006BB351 /* DeleteGroupRequest.swift */,
+				5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -1087,6 +1093,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
+				5D79CA5A2732A3A3008ACE13 /* EditGroupService.swift in Sources */,
 				5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */,
 				5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */,
 				5DE40469271DC092005EA0DF /* GroupCallingUpdatedView.swift in Sources */,
@@ -1109,6 +1116,7 @@
 				5D1BC44D26E5EDEC00D7E49E /* LoginService.swift in Sources */,
 				5D4B579826DE45F8005185AE /* ProgressHud.swift in Sources */,
 				5D4B57B126DF63C3005185AE /* ChatInterfaces.swift in Sources */,
+				5D79CA582732A37B008ACE13 /* EditGroupRequest.swift in Sources */,
 				5D819A1E26DCF22B00B37B72 /* SignupPresenter.swift in Sources */,
 				5D4B57DA26DF6F7E005185AE /* IncomingImageCell.swift in Sources */,
 				5D4B580C26E0AB1D005185AE /* CreateGroupInteractor.swift in Sources */,

@@ -353,16 +353,36 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-   
+        
+        let edit = UIContextualAction(style: .normal,
+                                         title: "Edit") { [weak self] (action, view, completionHandler) in
+            self?.selectedGroupId = indexPath.row
+            self?.loadGroupView()
+                                            completionHandler(true)
+        }
         let trash = UIContextualAction(style: .destructive,
                                        title: "Delete") { [weak self] (action, view, completionHandler) in
 //            self?.viewModel.deleteGroup(with: indexPath.row)
-//                                        completionHandler(true)
             self?.presenter.deleteGroup(with: indexPath.row)
+                                        completionHandler(true)
         }
-      
+        if presenter.groups[indexPath.row].participants.count <= 2 {
             let configuration = UISwipeActionsConfiguration(actions: [trash])
             return configuration
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [edit, trash])
+        return configuration
+        
+        
+        
+   
+//        let trash = UIContextualAction(style: .destructive,
+//                                       title: "Delete") { [weak self] (action, view, completionHandler) in
+//            self?.presenter.deleteGroup(with: indexPath.row)
+//        }
+//
+//            let configuration = UISwipeActionsConfiguration(actions: [trash])
+//            return configuration
     }
     
 }
@@ -370,4 +390,27 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension ChannelViewController: ChannelViewInterface {
+}
+
+
+extension ChannelViewController {
+    func loadGroupView() {
+        let vc = CreateGroupPopUp()
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true, completion: nil)
+        vc.delegate = self
+        blurView.isHidden = false
+    }
+}
+
+extension ChannelViewController: PopupDelegate {
+    func didTapDismiss(groupName: String?) {
+        blurView.isHidden = true
+        guard let id = selectedGroupId, let name = groupName else {return}
+        blurView.isHidden = true
+        presenter.editGroup(with: name, id: id)
+    }
+    
+    
 }

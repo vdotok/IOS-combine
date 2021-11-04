@@ -34,6 +34,7 @@ final class ChannelPresenter {
     var particinpants: [Participant]?
     var streamingManager: StreamingMananger
     var deleteStore: DeleteStoreable = DeleteService(service: NetworkService())
+    var editStore: EditGroupStoreable = EditGroupService(service: NetworkService())
   
     
     
@@ -158,6 +159,30 @@ extension ChannelPresenter: ChannelPresenterInterface {
         }
     }
     
+    func editGroup(with title: String, id: Int) {
+        guard let output = channelOutput else {return}
+        guard  groups[id].participants.count != 1 else {
+            output(.failure(message: "one to one group name cannot be updated"))
+            return
+        }
+        output(.showProgress)
+        let request = EditGroupRequest(group_title: title, group_id: groups[id].id)
+        editStore.editGroup(with: request) { [weak self] result in
+            
+            output(.hideProgress)
+            switch result {
+            case .success(_):
+                self?.groups[id].groupTitle = title
+                DispatchQueue.main.async {
+                    output(.reload)
+                }
+               
+            case .failure(let error):
+                print(error)
+                
+            }
+        }
+    }
     
 }
 

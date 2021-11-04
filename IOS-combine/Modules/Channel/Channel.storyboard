@@ -81,10 +81,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fBt-6R-2dR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                             </tableView>
-                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFb-5z-Fbr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Of-HA-Ehd" userLabel="Footer view">
                                 <rect key="frame" x="0.0" y="597" width="375" height="70"/>
                                 <subviews>
@@ -162,6 +158,10 @@
                                     <constraint firstItem="j2M-o7-6r1" firstAttribute="centerX" secondItem="1Of-HA-Ehd" secondAttribute="centerX" id="p10-aE-BtV"/>
                                     <constraint firstItem="j2M-o7-6r1" firstAttribute="centerY" secondItem="1Of-HA-Ehd" secondAttribute="centerY" id="rD2-rt-EWT"/>
                                 </constraints>
+                            </view>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFb-5z-Fbr">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zCt-vY-wE5"/>
