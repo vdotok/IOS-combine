@@ -178,14 +178,8 @@ class BroadcastView: UIView {
     
     @IBAction func didTapPlay(_ sender: UIButton) {
         
+    }
 
-
-}
-    
-    
-    //        NotificationCenter.default.post(name: .startPlaying, object: nil)
-            
-    
         @IBAction func didTapRoute(_ sender: UIButton) {
             delegate?.didTapRoute()
     
@@ -236,17 +230,10 @@ class BroadcastView: UIView {
             default:
                 delegate?.didTapMuteSS(for: session, state: sender.isSelected ? .mute : .unMute)
             }
-            
-            
-            
         }
         
         @IBAction func didTapCopyURL(_ sender: UIButton) {
-            guard let url = publicURL else {
-                
-                return
-                
-            }
+            guard let url = publicURL else { return }
             print("<<<<<public url \(url)")
             let pastBoard = UIPasteboard.general
             pastBoard.string = url
@@ -262,10 +249,8 @@ class BroadcastView: UIView {
         delegate?.didTapDismiss()
     }
     
-        func addNotificationObserver(){
-            
+        func addNotificationObserver() {
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidConnect(_:)), name: UIScreen.didConnectNotification , object: nil)
-            
             NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidDisconnect(_:)), name: UIScreen.didDisconnectNotification , object: nil)
             
         }
@@ -290,7 +275,6 @@ class BroadcastView: UIView {
         
         @objc func didTapLocalView()  {
             guard let session = session else {return}
-            
             switch session.sessionDirection {
             case .incoming:
                 guard let smallView = smallLocalView, let largeView = localView else {return}
@@ -424,22 +408,20 @@ class BroadcastView: UIView {
             
             }
             else {
-                
-                    switch session.sessionType {
-                    case .call:
-                        let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
-                        callContainerView.removeAllSubViews()
-                        callContainerView.addSubview(userStream.renderer)
-                        userStream.renderer.fixInSuperView()
-                        
-                    case .screenshare:
-                        let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
-                        ssContainerView.removeAllSubViews()
-                        ssContainerView.addSubview(userStream.renderer)
-                        userStream.renderer.fixInSuperView()
+                switch session.sessionType {
+                case .call:
+                    let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
+                    callContainerView.removeAllSubViews()
+                    callContainerView.addSubview(userStream.renderer)
+                    userStream.renderer.fixInSuperView()
+                    
+                case .screenshare:
+                    let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
+                    ssContainerView.removeAllSubViews()
+                    ssContainerView.addSubview(userStream.renderer)
+                    userStream.renderer.fixInSuperView()
                 }
             }
-            
         }
         
         

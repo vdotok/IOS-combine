@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var screenShareBannerView: ScreenShareBannerView!
+    var smallCallingView: SmallCallingView!
     var publicURL: String!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

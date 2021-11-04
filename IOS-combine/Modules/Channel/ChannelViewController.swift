@@ -198,7 +198,9 @@ final class ChannelViewController: UIViewController {
             case .hideProgress:
                 ProgressHud.hide()
             case .failure(message: let message):
-                ProgressHud.showError(message: message, viewController: self)
+                DispatchQueue.main.async {
+                    ProgressHud.showError(message: message, viewController: self)
+                }
             case .connected(let sdkType):
                 if sdkType == SDKType.chat {
                  //   emptyViewStatus.backgroundColor = .green

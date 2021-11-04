@@ -117,88 +117,93 @@ class GroupCallingUpdatedView: UIView {
         userNames.text = names
     }
     
+    
     func updateView(for session: VTokBaseSession) {
-      
-        callStatus.isHidden = false
-        userNames.isHidden = false
-        speakerButton.isHidden = true
-        self.session = session
-        switch session.state {
-        case .calling:
-            callStatus.text = "Calling.."
-            cameraSwitch.isHidden = true
-            speakerButton.isHidden = true
-            cameraButton.isEnabled = false
-            setNames()
-        case .ringing:
-            cameraSwitch.isHidden = true
-            speakerButton.isHidden = true
-            callStatus.text = "Ringing.."
-            cameraButton.isEnabled = false
-            setNames()
-        case .connected:
-            connectedState()
-        case .rejected:
-            callStatus.text = "Rejected"
-        case .busy:
-            callStatus.text = "All users are busy"
-            
-        default:
-            break
+        switch session.sessionDirection {
+        case .outgoing:
+           viewsForOutGoing(session: session)
+        case .incoming:
+            setViewsForIncoming(session: session)
         }
-    }
-    
-
-    
-    func updateAudioVideoview(for session: VTokBaseSession) {
         
-        self.session = session
-      
         switch session.sessionMediaType {
         case .audioCall:
             titleLable.text = "You are audio calling with"
-//            localView.isHidden = true
-            cameraSwitch.isHidden = true
-            cameraButton.isHidden = true
         case .videoCall:
             titleLable.text = "You are video calling with"
-//            localView.isHidden = false
-            cameraSwitch.isHidden = false
-            cameraButton.isHidden = false
-       
         }
     }
     
-    private func connectedState() {
-        
+   private func setViewsForIncoming(session: VTokBaseSession) {
+       switch session.state {
+       case .connected:
+           connectedState(session: session)
+       case .hangup:
+           delegate?.didTapDismiss()
+       case .rejected:
+           delegate?.didTapDismiss()
+       case .missedCall:
+           delegate?.didTapDismiss()
+       default:
+           break
+       }
+    }
+    
+   private func viewsForOutGoing(session: VTokBaseSession) {
+    
+       switch session.state {
+           
+       case .calling:
+           callStatus.text = "Calling.."
+           speakerButton.isHidden = true
+           cameraButton.isEnabled = false
+           setNames()
+           cameraSwitch.isHidden = true
+       case .ringing:
+           cameraSwitch.isHidden = true
+           speakerButton.isHidden = true
+           callStatus.text = "Ringing.."
+           cameraButton.isEnabled = false
+           setNames()
+       case .connected:
+           connectedState(session: session)
+       case .failed:
+           delegate?.didTapDismiss()
+       case .rejected:
+           delegate?.didTapDismiss()
+       case .busy:
+           callStatus.text = "All users are busy"
+           DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+               self?.delegate?.didTapDismiss()
+           }
+           
+       case .missedCall:
+           delegate?.didTapDismiss()
+       case .invalidTarget:
+           delegate?.didTapDismiss()
+       case .hangup:
+           delegate?.didTapDismiss()
+       default:
+           break
+       }
+    
+    }
+    
+    
+    func connectedState(session: VTokBaseSession) {
         backbutton.isHidden = false
-        if session?.sessionMediaType == .audioCall {
-            userAvatar.isHidden = false
-        } else {
-            userAvatar.isHidden = true
-        }
-      
         callStatus.isHidden = true
-//        connectedView.isHidden = false
         userNames.isHidden = true
         speakerButton.isHidden = false
-        cameraSwitch.isHidden = false
+        if session.sessionMediaType == .videoCall {
+            cameraSwitch.isHidden = false
+            cameraButton.isEnabled = true
+        }
+        userAvatar.isHidden = true
         speakerButton.isHidden = false
-        if timer == nil {
-            configureTimer()
-        }
-        
-        switch session?.sessionMediaType {
-        case .audioCall:
-            titleLable.text = "You are audio calling with"
-        case .videoCall:
-            titleLable.text = "You are video calling with"
-
-        case .none:
-            break
-        }
+        configureTimer()
         callingStackView.isHidden = false
-       
+        cameraSwitch.isHidden = false
     }
 
 }
@@ -211,17 +216,15 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupCallingCell", for: indexPath) as! GroupCallingCell
-//
-//        let stream = viewModel!.userStreams[indexPath.row]
         let stream = userStreams[indexPath.row]
         cell.configure(with: stream, users: users!)
         return cell
     }
     
     func updateDataSource(with streams: [UserStream], session: VTokBaseSession) {
-        connectedState()
+//        connectedState()
+        guard streams.count != 1 else {return}
         self.session = session
-        
         let newRefIds = streams.map({$0.referenceID})
         let oldRefIds = self.userStreams.map({$0.referenceID})
         if let seletectedStream = selectedStream {
@@ -232,7 +235,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
        
         
         userStreams = streams.filter({$0.referenceID != selectedStream?.referenceID})
-        setNames()
+//        setNames()
         guard streams.first?.sessionMediaType != .audioCall else {
         collectionView.reloadData()
             cameraSwitch.isHidden = true

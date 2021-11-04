@@ -22,7 +22,6 @@ final class ChatViewController: UIViewController {
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var callingViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    var smallCallingView: SmallCallingView?
     var isCallingView: Bool = false
     var users: [String] = []
     var timer: Timer? = nil
@@ -90,9 +89,9 @@ final class ChatViewController: UIViewController {
         
       addNotificationObserver()
         showBroadcastBanner()
-        if presenter.streamingManager?.activeSession() == 0 && smallCallingView != nil {
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
-            smallCallingView = nil
+        if presenter.streamingManager?.activeSession() == 0 && AppDelegate.appDelegate.smallCallingView != nil {
+            AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView = nil
         }
         
 //        NotificationCenter.default.post(name: Notification.Name.hangup, object: nil)
@@ -108,10 +107,6 @@ final class ChatViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        guard smallCallingView != nil else {return}
-        if presenter.streamingManager?.activeSession() != 0 && !isCallingView  {
-           // UIApplication.shared.windows.first!.subviews.last?.removeFromSuperview()
-        }
        
         NotificationCenter.default.removeObserver(self, name: Notification.Name.hangup, object: nil)
         
@@ -120,9 +115,9 @@ final class ChatViewController: UIViewController {
     func listenForHangup() {
         wormhole.listenForMessage(withIdentifier: "sessionHangup", listener: { [weak self] (messageObject) -> Void in
             guard let self = self else {return}
-            self.smallCallingView?.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView?.removeFromSuperview()
             self.tableViewTopConstraint.constant = 0
-            self.smallCallingView = nil
+            AppDelegate.appDelegate.smallCallingView = nil
             self.audioBarButton.tintColor = .appDarkGreenColor
             self.videoBarButton.tintColor = .appDarkGreenColor
             self.broadcastButton.tintColor = .appDarkGreenColor
@@ -135,9 +130,9 @@ final class ChatViewController: UIViewController {
     @objc func didTapHangup() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            self.smallCallingView?.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView?.removeFromSuperview()
             self.tableViewTopConstraint.constant = 0
-            self.smallCallingView = nil
+            AppDelegate.appDelegate.smallCallingView = nil
             
         }
     
@@ -149,13 +144,13 @@ final class ChatViewController: UIViewController {
         let manager = presenter.streamingManager
         manager?.groupID = presenter.group?.id
         manager?.vtokSDK = presenter.sdk
-        smallCallingView = SmallCallingView.getView(streamingManager: manager!)
-        smallCallingView?.getUserStream()
-        smallCallingView?.groupID = presenter.group?.id
-        smallCallingView?.delegate = self
-       UIApplication.shared.windows.first!.addSubview(smallCallingView!)
-        smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
-        smallCallingView?.addTopConstraint(size: self.topbarHeight)
+        AppDelegate.appDelegate.smallCallingView = SmallCallingView.getView(streamingManager: manager!)
+        AppDelegate.appDelegate.smallCallingView?.getUserStream()
+        AppDelegate.appDelegate.smallCallingView?.groupID = presenter.group?.id
+        AppDelegate.appDelegate.smallCallingView?.delegate = self
+       UIApplication.shared.windows.first!.addSubview(AppDelegate.appDelegate.smallCallingView)
+        AppDelegate.appDelegate.smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
+        AppDelegate.appDelegate.smallCallingView?.addTopConstraint(size: self.topbarHeight)
     
     }
     

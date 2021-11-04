@@ -82,6 +82,7 @@ final class CallingPresenter: NSObject {
         case updateUsers(Int)
         case fetchStreams
         case fetchonetomany(session: VTokBaseSession, url: String?)
+        case update(session: VTokBaseSession)
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -136,17 +137,17 @@ extension CallingPresenter {
             playSound()
             output?(.loadIncomingCallView(session: session, user: selectedUser))
             self.session = session
-            callHangupHandling()
+          //  callHangupHandling()
         case .videoAndScreenShare:
             handleBroadcast()
         case .fetchStreams:
-            output?(.fetchStreams)
+            guard let session = session else {return}
+            output?(.update(session: session))
             streamingManager?.getStreams()
         case .fetchonetomany:
             guard let session = session else {return}
             output?(.fetchonetomany(session: session, url: AppDelegate.appDelegate.publicURL))
             streamingManager?.getStreams()
-            
         case .broadcastOnly:
             guard let session = session else {return}
             output?(.loadBroadcastView(session: session))
@@ -192,7 +193,7 @@ extension CallingPresenter {
                                               callType: .manytomany)
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
-        callHangupHandling()
+      //  callHangupHandling()
     }
     
     @discardableResult
@@ -221,7 +222,7 @@ extension CallingPresenter {
         }
         
         vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
-        callHangupHandling()
+     //   callHangupHandling()
         return requestId
     }
     
@@ -295,35 +296,41 @@ extension CallingPresenter: StreamingDelegate {
     
     func stateDidUpdate(for session: VTokBaseSession) {
         self.session = session
-        switch session.state {
-        case .ringing:
-            output?(.updateView(session: session))
-        case .connected:
-            didConnect()
-        case .rejected:
-            sessionReject()
-        case .missedCall:
-            sessionMissed()
-        case .hangup:
-                guard isBusy else {
-                    sessionHangup()
-                    return
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                    self?.sessionHangup()
-                }
-        case .busy:
-            isBusy = true
-            output?(.updateView(session: session))
-        case .tryingToConnect:
-            output?(.updateView(session: session))
-        case .updateParticipent:
-            output?(.updateUsers(session.connectedUsers.count))
-            
-        default:
-            break
+        if session.state == .missedCall {
+            output?(.dismissCallView)
+            return
         }
-        output?(.updateUsers(session.connectedUsers.count))
+        output?(.update(session: session))
+        
+//        switch session.state {
+//        case .ringing:
+//            output?(.updateView(session: session))
+//        case .connected:
+//            didConnect()
+//        case .rejected:
+//            sessionReject()
+//        case .missedCall:
+//            sessionMissed()
+//        case .hangup:
+//                guard isBusy else {
+//                    sessionHangup()
+//                    return
+//                }
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+//                    self?.sessionHangup()
+//                }
+//        case .busy:
+//            isBusy = true
+//            output?(.updateView(session: session))
+//        case .tryingToConnect:
+//            output?(.updateView(session: session))
+//        case .updateParticipent:
+//            output?(.updateUsers(session.connectedUsers.count))
+//
+//        default:
+//            break
+//        }
+//        output?(.updateUsers(session.connectedUsers.count))
     }
     
     
@@ -413,15 +420,7 @@ extension CallingPresenter: CallingPresenterInterface {
         
         switch session.callType {
         case .manytomany, .onetoone:
-            switch session.sessionMediaType {
-            case .audioCall:
-                output?(.loadView(mediaType: .audioCall))
-                output?(.updateVideoView(session: session))
-            case .videoCall:
-                output?(.loadView(mediaType: .videoCall))
-                output?(.updateVideoView(session: session))
-            
-            }
+            output?(.update(session: session))
         case .onetomany:
             output?(.loadBroadcastView(session: session))
             output?(.updateVideoView(session: session))
