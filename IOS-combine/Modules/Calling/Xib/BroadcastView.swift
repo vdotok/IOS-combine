@@ -320,41 +320,101 @@ class BroadcastView: UIView {
             return jsonString
         }
         
-        func updateView(with session: VTokBaseSession) {
-            self.session = session
-            switch session.sessionDirection {
-            case .incoming:
-                broadCastTitle.isHidden = true
-                cameraButton.isHidden = true
-                    setIncomingView(for: session)
-            case .outgoing:
-                switch session.broadcastOption {
-                case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
-                    cameraButton.isHidden = false
-                default:
-                    cameraButton.isHidden = true
-                }
-                guard let broadCastType = session.broadcastType
-                else {return}
-                if timer == nil {
-                    configureTimer()
-                }
-             
-                switch broadCastType {
-                case .group:
-                    broadCastTitle.text = "Group BroadCast"
-                    copyURL.isHidden = true
-                case .publicURL:
-                    broadCastTitle.text = "Public BroadCast"
-                    copyURL.isHidden = false
-                    
-                default:
-                    break
-                }
-                setOutGoingView(for: session)
-                
-            }
+    
+    func update(for session: VTokBaseSession) {
+        self.session = session
+        
+        handleSessionState(session: session)
+        switch session.sessionDirection {
+        case .incoming:
+            setIncomingViews(for: session)
+        case .outgoing:
+            setOutGoingView(for: session)
         }
+        
+        
+    }
+    
+    func handleSessionState(session: VTokBaseSession) {
+        switch session.state {
+        case .missedCall:
+            delegate?.didTapDismiss()
+        case .hangup:
+            delegate?.didTapDismiss()
+        case .rejected:
+            delegate?.didTapDismiss()
+        default:
+            break
+            
+        }
+    }
+    
+    func setIncomingViews(for session: VTokBaseSession) {
+        webView.isHidden = true
+        cameraButton.isHidden = true
+        muteButton.isHidden = true
+        broadCastTitle.isHidden = true
+        screenShareBtn.isHidden = true
+        screenShareAudio.isHidden = true
+        cameraSwitchIcon.isHidden = true
+        muteButton.isHidden = true
+        speakerIcon.isHidden = false
+        titlelabel.isHidden = true
+        copyURL.isHidden = true
+        hangupBtn.isHidden = false
+        
+        if session.associatedSessionUUID != nil {
+            smallLocalView.isHidden = false
+        } else {
+            smallLocalView.isHidden = true
+        }
+        
+    }
+    
+    func setoutGoingViews(for session: VTokBaseSession) {
+        if session.associatedSessionUUID != nil {
+            
+        } else {
+            
+        }
+        
+    }
+    
+//        func updateView(with session: VTokBaseSession) {
+//            self.session = session
+//            switch session.sessionDirection {
+//            case .incoming:
+//                broadCastTitle.isHidden = true
+//                cameraButton.isHidden = true
+//                    setIncomingView(for: session)
+//            case .outgoing:
+//                switch session.broadcastOption {
+//                case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
+//                    cameraButton.isHidden = false
+//                default:
+//                    cameraButton.isHidden = true
+//                }
+//                guard let broadCastType = session.broadcastType
+//                else {return}
+//                if timer == nil {
+//                    configureTimer()
+//                }
+//
+//                switch broadCastType {
+//                case .group:
+//                    broadCastTitle.text = "Group BroadCast"
+//                    copyURL.isHidden = true
+//                case .publicURL:
+//                    broadCastTitle.text = "Public BroadCast"
+//                    copyURL.isHidden = false
+//
+//                default:
+//                    break
+//                }
+//                setOutGoingView(for: session)
+//
+//            }
+//        }
         
         func updateURL(with url: String) {
             publicURL = url
@@ -368,18 +428,10 @@ class BroadcastView: UIView {
             self.selectedStreams = [stream]
             configureTimer()
             self.session = session
-            if session.sessionDirection == .outgoing && session.associatedSessionUUID != "" {
-                webView.isHidden = false
-            }
             if session.sessionDirection == .incoming {
-                setIncomingView(for: session)
-            } else {
-                smallLocalView.isHidden = false
+                setViewsForIncoming(session: session, with: stream)
             }
-            setViewsForIncoming(session: session, with: stream)
-            
-         
-            
+ 
         }
         
         
@@ -426,7 +478,7 @@ class BroadcastView: UIView {
         
         
         private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
-            webView.isHidden = true
+        
             switch session.sessionType {
             case .call:
                 if session.associatedSessionUUID != nil {
@@ -500,9 +552,6 @@ class BroadcastView: UIView {
                 
             }
             
-            
-
-           
         }
 
         private func setIncomingView(for session: VTokBaseSession) {
@@ -577,6 +626,7 @@ class BroadcastView: UIView {
                 muteButton.isHidden = false
                 titlelabel.isHidden = true
                 broadCastIcon.isHidden = true
+                hangupBtn.isHidden = false
                 if session.broadcastType == .publicURL {
                     copyURL.isHidden = false
                     broadCastDummyView.isHidden = false

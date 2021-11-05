@@ -46,15 +46,32 @@ final class CallingViewController: UIViewController {
         presenter.output = { output in
             switch output {
             case .update(let session):
-                guard self.groupCallingView != nil else {
-                    self.loadGroupCallingView(session: session)
-                    return
+                switch session.callType {
+                case .onetomany:
+                    
+                    guard self.broadcastView != nil else {
+                        self.loadBroadcastView(session: session)
+                        return
+                    }
+                    self.broadcastView?.update(for: session)
+                case .manytomany, .onetoone:
+                    guard self.groupCallingView != nil else {
+                        self.loadGroupCallingView(session: session)
+                        return
+                    }
+                    self.groupCallingView?.updateView(for: session)
                 }
-                self.groupCallingView?.updateView(for: session)
+           
             case .configureRemote(let streams, let session):
                 self.configureRemote(streams: streams, session: session)
             case .loadIncomingCallView(let session, let user):
                 self.loadIncomingCallView(session: session, contact: user)
+            case .loadBroadcastView(let session):
+                guard self.broadcastView != nil else {
+                    self.loadBroadcastView(session: session)
+                    return
+                }
+                self.broadcastView?.update(for: session)
             case .dismissCallView:
                 self.dismiss(animated: true, completion: nil)
             default:
@@ -70,7 +87,7 @@ final class CallingViewController: UIViewController {
            // groupCallingView.updateAudioVideoview(for: session)
         case .onetomany:
             guard let broadcastView = broadcastView else {return}
-            broadcastView.updateView(with: session)
+           // broadcastView.updateView(with: session)
         }
     }
     
@@ -92,7 +109,7 @@ final class CallingViewController: UIViewController {
             groupCallingView.updateView(for: session)
         case .onetomany:
             guard let broadcastView = broadcastView else {return}
-            broadcastView.updateView(with: session)
+           // broadcastView.updateView(with: session)
             
         }
         
@@ -118,7 +135,7 @@ final class CallingViewController: UIViewController {
     private func loadBroadcastView(session: VTokBaseSession) {
         broadcastView = BroadcastView.loadView()
         guard let broadcastView = self.broadcastView else {return}
-        broadcastView.updateView(with: session)
+    //    broadcastView.updateView(with: session)
         if session.associatedSessionUUID != nil { broadcastView.smallLocalView.isHidden = false}
         broadcastView.delegate = self
         broadcastView.translatesAutoresizingMaskIntoConstraints = false
