@@ -370,15 +370,7 @@ class BroadcastView: UIView {
         }
         
     }
-    
-    func setoutGoingViews(for session: VTokBaseSession) {
-        if session.associatedSessionUUID != nil {
-            
-        } else {
-            
-        }
-        
-    }
+
     
 //        func updateView(with session: VTokBaseSession) {
 //            self.session = session
@@ -400,17 +392,7 @@ class BroadcastView: UIView {
 //                    configureTimer()
 //                }
 //
-//                switch broadCastType {
-//                case .group:
-//                    broadCastTitle.text = "Group BroadCast"
-//                    copyURL.isHidden = true
-//                case .publicURL:
-//                    broadCastTitle.text = "Public BroadCast"
-//                    copyURL.isHidden = false
-//
-//                default:
-//                    break
-//                }
+
 //                setOutGoingView(for: session)
 //
 //            }
@@ -488,11 +470,6 @@ class BroadcastView: UIView {
                     callView.addSubview(userStream.renderer)
                     userStream.renderer.fixInSuperView()
                     callView.tag = callView.tag
-                    if session.sessionDirection == .incoming {
-                        webView.isHidden = true
-                    } else {
-                        webView.isHidden = false
-                    }
                     
                 } else {
                     
@@ -532,7 +509,7 @@ class BroadcastView: UIView {
         
         func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
             if session.broadcastOption == .videoCall {
-//                webView.isHidden = true
+
                 localView.isHidden = false
                 localView.removeAllSubViews()
                 localView.addSubview(renderer)
@@ -541,7 +518,7 @@ class BroadcastView: UIView {
                 renderer.translatesAutoresizingMaskIntoConstraints = false
                 renderer.fixInSuperView()
             } else {
-//                webView.isHidden = false
+
                 localView.isHidden = true
                 smallLocalView.isHidden = false
                 smallLocalView.removeAllSubViews()
@@ -556,22 +533,7 @@ class BroadcastView: UIView {
 
         private func setIncomingView(for session: VTokBaseSession) {
             copyURL.isHidden = true
-//            if let _ = session.associatedSessionUUID {
-//                screenShareBtn.isHidden = true
-//                screenShareAudio.isHidden = true
-//                cameraSwitchIcon.isHidden = true
-//                speakerIcon.isHidden = false
-//                smallLocalView.isHidden = false
-//                muteButton.isHidden = true
-//            } else {
-//                screenShareBtn.isHidden = true
-//                screenShareAudio.isHidden = true
-//                cameraSwitchIcon.isHidden = true
-//                speakerIcon.isHidden = false
-//                smallLocalView.isHidden = true
-//                muteButton.isHidden = true
-//            }
-            webView.isHidden = true
+     
             if let _ = session.associatedSessionUUID {
                 screenShareBtn.isHidden = true
                 screenShareAudio.isHidden = true
@@ -579,7 +541,7 @@ class BroadcastView: UIView {
                 speakerIcon.isHidden = false
                 smallLocalView.isHidden = false
                 muteButton.isHidden = true
-                webView.isHidden = false
+               
             } else {
                 screenShareBtn.isHidden = true
                 screenShareAudio.isHidden = true
@@ -593,7 +555,18 @@ class BroadcastView: UIView {
         }
         
         private func setOutGoingView(for session: VTokBaseSession) {
-            webView.isHidden = false
+            hangupBtn.isHidden = false
+            switch session.broadcastType {
+            case .group:
+                broadCastTitle.text = "Group BroadCast"
+                copyURL.isHidden = true
+            case .publicURL:
+                broadCastTitle.text = "Public BroadCast"
+                copyURL.isHidden = false
+                
+            default:
+                break
+            }
             guard let options = session.broadcastOption else {return}
             switch options {
             case .screenShareWithAppAudio:
@@ -605,6 +578,7 @@ class BroadcastView: UIView {
                 muteButton.isHidden = true
                 broadCastDummyView.isHidden = true
                 addRPViewToSSButton()
+                webView.isHidden = false
                 
             case .screenShareWithMicAudio:
                 screenShareBtn.isHidden = false
@@ -615,6 +589,7 @@ class BroadcastView: UIView {
                 muteButton.isHidden = false
                 broadCastDummyView.isHidden = true
                 addRPViewToSSButton()
+                webView.isHidden = false
                 
             case .videoCall:
                 webView.isHidden = true
@@ -632,6 +607,7 @@ class BroadcastView: UIView {
                     broadCastDummyView.isHidden = false
                 }
             case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
+                webView.isHidden = false
                 screenShareBtn.isHidden = false
                 screenShareAudio.isHidden = false
                 cameraSwitchIcon.isHidden = false
@@ -640,6 +616,7 @@ class BroadcastView: UIView {
                 muteButton.isHidden = false
                 broadCastDummyView.isHidden = true
                 addRPViewToSSButton()
+                cameraButton.isHidden = false
             }
             
         }

@@ -74,6 +74,8 @@ final class CallingViewController: UIViewController {
                 self.broadcastView?.update(for: session)
             case .dismissCallView:
                 self.dismiss(animated: true, completion: nil)
+            case .configureLocal(let renderer, let session):
+                self.configureLocalView(rendrer: renderer, session: session)
             default:
                 break
             }
@@ -137,6 +139,7 @@ final class CallingViewController: UIViewController {
         guard let broadcastView = self.broadcastView else {return}
     //    broadcastView.updateView(with: session)
         if session.associatedSessionUUID != nil { broadcastView.smallLocalView.isHidden = false}
+        broadcastView.update(for: session)
         broadcastView.delegate = self
         broadcastView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(broadcastView)
