@@ -437,9 +437,10 @@ extension ChannelInteractor {
             guard let self = self else {return}
             if let message = messageObject as? String, message == "StartScreenSharing"  {
              //   self?.output?(.dismissView)
-                self.presenter?.dismissView()
+             
                 guard let sdk = self.vtokSdk, let broadcastData = self.broadCastData else {return }
-                self.presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
+//                self.presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
+                self.presenter?.dismissView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
                 print("screen share start")
             }
         })
@@ -448,7 +449,7 @@ extension ChannelInteractor {
     func moveToCallingView(broadcastData: BroadcastData) {
         
         guard let sdk = self.vtokSdk else {return }
-        presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
+        presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData,participant: [], user: [])
     }
 }
 

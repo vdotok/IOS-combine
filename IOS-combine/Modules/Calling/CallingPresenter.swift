@@ -70,7 +70,7 @@ final class CallingPresenter: NSObject {
     enum Output {
         case loadView(mediaType: SessionMediaType)
         case loadIncomingCallView(session: VTokBaseSession, user: User)
-        case configureLocal(view: UIView, session: VTokBaseSession)
+        case configureLocal(stream: UserStream, session: VTokBaseSession)
         case configureRemote(streams: [UserStream], session: VTokBaseSession)
         case updateVideoView(session: VTokBaseSession)
         case loadAudioView
@@ -83,6 +83,7 @@ final class CallingPresenter: NSObject {
         case fetchStreams
         case fetchonetomany(session: VTokBaseSession, url: String?)
         case update(session: VTokBaseSession)
+        case configureSSButtonStates(videoState: Int, audioState: Int)
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -276,8 +277,8 @@ extension CallingPresenter {
 extension CallingPresenter: StreamingDelegate {
     
     func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream]) {
-        guard let renderer = steams.first?.renderer else {return}
-        output?(.configureLocal(view: renderer, session: session))
+        guard let renderer = steams.first else {return}
+        output?(.configureLocal(stream: renderer, session: session))
     }
     
 //    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
@@ -380,6 +381,7 @@ extension CallingPresenter: CallingPresenterInterface {
         listenForPublicURL()
         listenForParticipantAdd()
         listenForSessionTerminate()
+        screenShareLocalView()
         
     }
     
@@ -576,5 +578,42 @@ extension CallingPresenter {
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
         
         return jsonString
+    }
+}
+
+extension CallingPresenter {
+    func screenShareLocalView() {
+        wormhole.listenForMessage(withIdentifier: "configureLocalStream" ) { [weak self] message -> Void in
+            guard let self = self else {return}
+            if let message = message as? String {
+//                do {
+//                    let dictionary = try self.convertToDictionary(from: message)
+//                       print(dictionary)
+//                } catch {
+//                    print(error)
+//                }
+                let data = message.convertToDictionary()
+                
+                print("\(data)")
+            }
+        }
+    }
+    func convertToDictionary(from text: String) -> [String: String] {
+        guard let data = text.data(using: .utf8) else { return [:] }
+        let anyResult: Any? = try? JSONSerialization.jsonObject(with: data, options: [])
+        return anyResult as? [String: String] ?? [:]
+    }
+}
+
+extension String {
+    func convertToDictionary() -> [String: Any]? {
+        if let data = self.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
     }
 }

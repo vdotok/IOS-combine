@@ -409,12 +409,35 @@ class BroadcastView: UIView {
             guard let stream = userStreams.first else {return}
             self.selectedStreams = [stream]
             configureTimer()
+            
+            if session.sessionType == .screenshare {
+                if stream.stateInformation?.videoInformation == 0 {
+                    screenShareBtn.isSelected = true
+                } else {
+                    screenShareBtn.isSelected = false
+                }
+                if stream.stateInformation?.audioInformation == 0 {
+                    screenShareAudio.isSelected = true
+                } else {
+                    screenShareAudio.isSelected = false
+                }
+            }
+            
+            if stream.stateInformation?.audioInformation == 0 {
+                muteButton.isSelected = true
+            } else {
+                muteButton.isSelected = false
+            }
+            
+            if stream.stateInformation?.videoInformation == 0 {
+                cameraButton.isSelected = true
+            } else {
+                cameraButton.isSelected = false
+            }
+            
             self.session = session
             if session.sessionDirection == .incoming {
                 setViewsForIncoming(session: session, with: stream)
-            }
-            if session.sessionDirection == .outgoing {
-                setViewsForOutGoing(session: session, renderer: stream.renderer)
             }
  
         }
@@ -510,24 +533,26 @@ class BroadcastView: UIView {
             
         }
         
-        func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
+        func setViewsForOutGoing(session: VTokBaseSession, stream: UserStream) {
             if session.broadcastOption == .videoCall {
 
                 localView.isHidden = false
                 localView.removeAllSubViews()
-                localView.addSubview(renderer)
+                localView.addSubview(stream.renderer)
                 localView.removeAllSubViews()
-                localView.addSubview(renderer)
-                renderer.translatesAutoresizingMaskIntoConstraints = false
-                renderer.fixInSuperView()
+                localView.addSubview(stream.renderer)
+                stream.renderer.translatesAutoresizingMaskIntoConstraints = false
+                stream.renderer.fixInSuperView()
+              
+                
             } else {
 
                 localView.isHidden = true
                 smallLocalView.isHidden = false
                 smallLocalView.removeAllSubViews()
-                smallLocalView.addSubview(renderer)
-                renderer.translatesAutoresizingMaskIntoConstraints = false
-                renderer.fixInSuperView()
+                smallLocalView.addSubview(stream.renderer)
+                stream.renderer.translatesAutoresizingMaskIntoConstraints = false
+                stream.renderer.fixInSuperView()
             }
             
         }
@@ -603,6 +628,7 @@ class BroadcastView: UIView {
                 titlelabel.isHidden = true
                 broadCastIcon.isHidden = true
                 hangupBtn.isHidden = false
+                cameraButton.isHidden = false
                 if session.broadcastType == .publicURL {
                     copyURL.isHidden = false
                     broadCastDummyView.isHidden = false

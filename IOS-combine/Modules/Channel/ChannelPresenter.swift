@@ -244,7 +244,7 @@ extension ChannelPresenter {
             guard var broadcastdata = info["broadcastData"] as? BroadcastData else {return}
             self.particinpants = group.participants
             broadcastdata.broadcastGroupID = String(groupId)
-            moveToCallingView(sdk: vtokSDK!, screenType: .videoAndScreenShare, broadCastData: broadcastdata)
+            dismissView(sdk: vtokSDK!, screenType: .videoAndScreenShare, broadCastData: broadcastdata)
         }
         
         else if callType == NotifyCallType.broadcastOnly.callType {
@@ -289,6 +289,12 @@ extension ChannelPresenter {
 
 
 extension ChannelPresenter: ChannelInteractorToPresenter {
+    func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData, participant: [Participant], user: [User]) {
+        
+        
+        wireframe.dismissView(sdk: sdk, screenType: screenType, broadCastData: broadCastData, participant: participant, user: user)
+    }
+    
 
     
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?) {
@@ -362,14 +368,18 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     }
     
     func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
+        
+       
+        
        // wireframe.dismissView()
        
-            wireframe.moveToCalling(particinats: particinpants ?? [], users: contacts, sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
+//            wireframe.moveToCalling(particinats: particinpants ?? [], users: contacts ?? [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
        
     }
     
-    func dismissView() {
-        wireframe.dismissView()
+    func dismissView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
+//        wireframe.dismissView(sdk: sdk, screenType: screenType, broadCastData: broadCastData)
+        wireframe.dismissView(sdk: sdk, screenType: screenType, broadCastData: broadCastData, participant: particinpants ?? []  , user: contacts)
     }
 
     func deleteGroup(with id: Int) {

@@ -67,7 +67,10 @@ final class ChannelViewController: UIViewController {
         
         wormhole.listenForMessage(withIdentifier: "sessionHangup") { _ in
             if UIScreen.main.isCaptured {
-                UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+                if let bannerView = AppDelegate.appDelegate.screenShareBannerView {
+                    bannerView.removeFromSuperview()
+                }
+                
             }
         }
         if presenter.streamingManager.activeSession() != 0 {
@@ -114,7 +117,7 @@ final class ChannelViewController: UIViewController {
             
             AppDelegate.appDelegate.screenShareBannerView?.removeFromSuperview()
             AppDelegate.appDelegate.screenShareBannerView = ScreenShareBannerView.getView(streamingManager: presenter.streamingManager)
-            UIApplication.shared.windows.first!.addSubview(AppDelegate.appDelegate.smallCallingView!)
+            UIApplication.shared.windows.first!.addSubview(AppDelegate.appDelegate.screenShareBannerView)
             AppDelegate.appDelegate.screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
             AppDelegate.appDelegate.screenShareBannerView?.addTopConstraint(size: self.topbarHeight)
         }

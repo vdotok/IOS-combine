@@ -45,7 +45,7 @@ protocol ChannelWireframeInterface: WireframeInterface {
     func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType, session: VTokBaseSession?, sessionDirection: SessionDirection)
     func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User], sessionDirection: SessionDirection)
     func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User], sessionDirection: SessionDirection)
-    func dismissView()
+    func dismissView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData,participant: [Participant], user: [User])
 }
 
 protocol ChannelViewInterface: ViewInterface {
@@ -95,7 +95,7 @@ protocol ChannelInteractorToPresenter: AnyObject {
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
     func updatePresence(with presence: [String: [String]])
     func hideProgress()
-    func dismissView()
+    func dismissView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData)
     func messageReceived(with readMessages: [String: [ChatMessage]], unreadMessages: [String:[ChatMessage]])
-    func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData)
+    func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData, participant: [Participant], user: [User])
 }

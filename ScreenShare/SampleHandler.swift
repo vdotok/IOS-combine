@@ -32,6 +32,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
     let streamingManager = StreamingMananger()
+    var userStream: UserStream?
 
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
@@ -80,6 +81,12 @@ class SampleHandler: RPBroadcastSampleHandler {
     func setScreenShareAppAudio(with message: String) {
         guard let data = message.data(using: .utf8) else {return }
         audioState = try! JSONDecoder().decode(ScreenShareAudioState.self, from: data)
+        
+        if message == "0" {
+            vtokSdk?.mute(session: baseSession!, state: .mute)
+        } else {
+            vtokSdk?.mute(session: baseSession!, state: .unMute)
+        }
         
     }
     
@@ -198,7 +205,12 @@ extension SampleHandler: SessionDelegate {
     }
     
     func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
-        
+        guard let stream = stream.first else {return}
+        let stateInfo = ["audioInfo": stream.stateInformation?.audioInformation,
+                    "videoInfo": stream.stateInformation?.videoInformation]
+        let jsonData = try! JSONEncoder().encode(stateInfo)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        wormhole.passMessageObject(jsonString, identifier: "configureLocalStream")
     }
     
 //    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {

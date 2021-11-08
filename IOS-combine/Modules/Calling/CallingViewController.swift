@@ -76,12 +76,12 @@ final class CallingViewController: UIViewController {
                 self.broadcastView?.update(for: session)
             case .dismissCallView:
                 self.dismiss(animated: true, completion: nil)
-            case .configureLocal(let renderer, let session):
-                self.configureLocalView(rendrer: renderer, session: session)
+            case .configureLocal(let stream, let session):
+                self.configureLocalView(stream: stream, session: session)
             case .fetchonetomany(let session, let url):
                 guard self.broadcastView != nil else {
                     self.loadBroadcastView(session: session)
-                    self.broadcastView?.updateURL(with: AppDelegate.appDelegate.publicURL)
+                    self.broadcastView?.updateURL(with: AppDelegate.appDelegate.publicURL ?? "")
                     return
                 }
                 self.broadcastView?.update(for: session)
@@ -105,7 +105,7 @@ final class CallingViewController: UIViewController {
         }
     }
     
-    private func configureLocalView(rendrer: UIView, session: VTokBaseSession) {
+    private func configureLocalView(stream: UserStream, session: VTokBaseSession) {
         switch session.callType {
         case .onetoone, .manytomany:
             guard let groupCallingView = groupCallingView else {return}
@@ -113,7 +113,7 @@ final class CallingViewController: UIViewController {
            groupCallingView.session = session
         case .onetomany:
             guard let broadcastView = broadcastView else {return}
-            broadcastView.setViewsForOutGoing(session: session, renderer: rendrer)
+            broadcastView.setViewsForOutGoing(session: session, stream: stream)
         }
     }
     private func configureView(for session: VTokBaseSession) {
