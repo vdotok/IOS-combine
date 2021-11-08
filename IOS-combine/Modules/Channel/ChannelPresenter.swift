@@ -363,9 +363,8 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     
     func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
        // wireframe.dismissView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.wireframe.moveToCalling(particinats: self?.particinpants ?? [], users: self?.contacts ?? [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
-        }
+       
+            wireframe.moveToCalling(particinats: particinpants ?? [], users: contacts, sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
        
     }
     

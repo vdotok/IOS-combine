@@ -39,8 +39,6 @@ final class ChannelViewController: UIViewController {
     private var selectedGroupId: Int? = nil
     let navigationTitle = UILabel()
     var incomingCallingView: GroupCallingUpdatedView?
-    var smallCallingView: SmallCallingView?
-    var screenShareBannerView: UIView!
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     
@@ -80,9 +78,9 @@ final class ChannelViewController: UIViewController {
         
         showBroadCastBanner()
         
-        if presenter.streamingManager.activeSession() == 0 && smallCallingView != nil {
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
-            smallCallingView = nil
+        if presenter.streamingManager.activeSession() == 0 && AppDelegate.appDelegate.smallCallingView != nil {
+            AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView = nil
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(didTapHangup), name: Notification.Name.hangup, object: nil)
@@ -97,14 +95,14 @@ final class ChannelViewController: UIViewController {
             self?.tableViewTopConstraint.constant = 140
         }
         
-        UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
         let manager = presenter.streamingManager
         manager.vtokSDK = presenter.vtokSDK
-        smallCallingView = SmallCallingView.getView(streamingManager: manager)
-        smallCallingView?.getUserStream()
-        UIApplication.shared.windows.first!.addSubview(smallCallingView!)
-        smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
-        smallCallingView?.addTopConstraint(size: self.topbarHeight)
+        AppDelegate.appDelegate.smallCallingView = SmallCallingView.getView(streamingManager: manager)
+        AppDelegate.appDelegate.smallCallingView?.getUserStream()
+        UIApplication.shared.windows.first!.addSubview(AppDelegate.appDelegate.smallCallingView)
+        AppDelegate.appDelegate.smallCallingView?.addConstraintsFor(width: self.view.frame.width, and: 140)
+        AppDelegate.appDelegate.smallCallingView?.addTopConstraint(size: self.topbarHeight)
     }
     
     func showBroadCastBanner() {
@@ -114,16 +112,16 @@ final class ChannelViewController: UIViewController {
                 self?.tableViewTopConstraint.constant = 20
             }
             
-            screenShareBannerView?.removeFromSuperview()
-            screenShareBannerView = ScreenShareBannerView.getView(streamingManager: presenter.streamingManager)
-            UIApplication.shared.windows.first!.addSubview(screenShareBannerView!)
-            screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
-            screenShareBannerView?.addTopConstraint(size: self.topbarHeight)
+            AppDelegate.appDelegate.screenShareBannerView?.removeFromSuperview()
+            AppDelegate.appDelegate.screenShareBannerView = ScreenShareBannerView.getView(streamingManager: presenter.streamingManager)
+            UIApplication.shared.windows.first!.addSubview(AppDelegate.appDelegate.smallCallingView!)
+            AppDelegate.appDelegate.screenShareBannerView?.addConstraintsFor(width: self.view.frame.width, and: 20)
+            AppDelegate.appDelegate.screenShareBannerView?.addTopConstraint(size: self.topbarHeight)
         }
         
-        if !UIScreen.main.isCaptured && screenShareBannerView != nil {
-            screenShareBannerView = nil
-            UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        if !UIScreen.main.isCaptured && AppDelegate.appDelegate.screenShareBannerView != nil {
+            AppDelegate.appDelegate.screenShareBannerView = nil
+            AppDelegate.appDelegate.screenShareBannerView.removeFromSuperview()
         }
         
         
@@ -176,10 +174,9 @@ final class ChannelViewController: UIViewController {
     @objc func didTapHangup() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            guard let view = UIApplication.shared.windows.first?.subviews[1] else {return}
-            view.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
             self.tableViewTopConstraint.constant = 0
-            self.smallCallingView = nil
+            AppDelegate.appDelegate.smallCallingView = nil
         }
     }
     
