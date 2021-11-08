@@ -226,7 +226,7 @@ extension ChannelPresenter {
             {return}
               moveToVideo(users: group.participants)
         } else if callType == NotifyCallType.broadcast.callType {
-            var broadcastdata = info["broadcastData"] as? BroadcastData
+            let broadcastdata = info["broadcastData"] as? BroadcastData
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
         } else if callType == NotifyCallType.fetchStreams.callType {
@@ -234,7 +234,6 @@ extension ChannelPresenter {
             switch session.callType {
             case .onetomany:
                 moveToVideo(users: [], screenType: .fetchonetomany, session: session)
-             
             case .manytomany, .onetoone:
                 moveToVideo(users: [], screenType: .fetchStreams, session: session)
             }
@@ -364,9 +363,8 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     
     func moveToCallingView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData) {
        // wireframe.dismissView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.wireframe.moveToCalling(particinats: self?.particinpants ?? [], users: self?.contacts ?? [], sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
-        }
+       
+            wireframe.moveToCalling(particinats: particinpants ?? [], users: contacts, sdk: sdk, broadCastData: broadCastData, screenType: .videoAndScreenShare, session: nil, sessionDirection: .outgoing)
        
     }
     

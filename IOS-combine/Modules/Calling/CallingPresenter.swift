@@ -150,7 +150,7 @@ extension CallingPresenter {
             streamingManager?.getStreams()
         case .broadcastOnly:
             guard let session = session else {return}
-            output?(.loadBroadcastView(session: session))
+            output?(.update(session: session))
         }
     }
     

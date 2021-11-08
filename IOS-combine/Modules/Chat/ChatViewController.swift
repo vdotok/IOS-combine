@@ -140,7 +140,10 @@ final class ChatViewController: UIViewController {
     
     @objc func showSmallView() {
         tableViewTopConstraint.constant = 140 + topbarHeight
-        UIApplication.shared.windows.first?.subviews[1].removeFromSuperview()
+        if let smallCallingView = AppDelegate.appDelegate.smallCallingView {
+            smallCallingView.removeFromSuperview()
+        }
+       
         let manager = presenter.streamingManager
         manager?.groupID = presenter.group?.id
         manager?.vtokSDK = presenter.sdk

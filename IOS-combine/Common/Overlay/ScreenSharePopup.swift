@@ -36,7 +36,7 @@ class ScreenSharePopup: UIViewController {
         addRPViewToSSButton()
         
     }
-    
+
     @IBAction func didTapCross(_ sender: UIButton) {
         delegate?.didTapDismiss()
     }

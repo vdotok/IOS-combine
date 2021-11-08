@@ -414,6 +414,9 @@ class BroadcastView: UIView {
             if session.sessionDirection == .incoming {
                 setViewsForIncoming(session: session, with: stream)
             }
+            if session.sessionDirection == .outgoing {
+                setViewsForOutGoing(session: session, renderer: stream.renderer)
+            }
  
         }
         
@@ -523,11 +526,9 @@ class BroadcastView: UIView {
                 localView.isHidden = true
                 smallLocalView.isHidden = false
                 smallLocalView.removeAllSubViews()
-                smallLocalView.removeAllSubViews()
-                smallLocalView.addSubview(renderer)
                 smallLocalView.addSubview(renderer)
                 renderer.translatesAutoresizingMaskIntoConstraints = false
-                
+                renderer.fixInSuperView()
             }
             
         }
