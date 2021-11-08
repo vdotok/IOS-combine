@@ -237,6 +237,7 @@ class BroadcastView: UIView {
             print("<<<<<public url \(url)")
             let pastBoard = UIPasteboard.general
             pastBoard.string = url
+            ProgressHud.showMessage(text: "URL coppied")
         }
         
         @IBAction func didTapVideo(_ sender: UIButton) {

@@ -126,6 +126,7 @@ extension ChatInteractor: ChatInteractorInterface {
 
             if let mediaType = mediaType {
                 messages.append(ChatMessage(id: id, sender: username, content: "", status: user.refID == username ? .sent : .delivered, fileType: fileType, mediaType: MediaType(rawValue: mediaType), date: date))
+                ProgressHud.hide()
             } else {
                 messages.append(ChatMessage(id: id, sender: username, content: "", status: .delivered, fileType: fileType, date: date))
             }
@@ -147,6 +148,7 @@ extension ChatInteractor: ChatInteractorInterface {
         let now = Date()
         let timeInterval = now.millisecondsSince1970
         mqttClient?.publish(file: data, fileExt: ext, topic: group.channelName, key: group.channelKey, from: user.refID!, type: type, date: timeInterval)
+        ProgressHud.show()
     }
     func itemAt(row: Int) -> (ChatMessage,CellType) {
         

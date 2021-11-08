@@ -16,11 +16,15 @@ class ProgressHud {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    static func show(viewController: UIViewController) {
+    static func show(viewController: UIViewController = UIViewController()) {
         KRProgressHUD.show()
     }
     
     static func hide() {
         KRProgressHUD.dismiss()
+    }
+    
+    static func showMessage(text: String) {
+        KRProgressHUD.showMessage(text)
     }
 }
