@@ -88,6 +88,7 @@
 		5D4B585726E0F66D005185AE /* GroupCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585126E0F66D005185AE /* GroupCallingView.swift */; };
 		5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585826E0F6A1005185AE /* CallingEntity.swift */; };
 		5D62BF4B2738F3380068B2AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D62BF4A2738F3370068B2AC /* Assets.xcassets */; };
+		5D62BF4D2738F3550068B2AC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D62BF4C2738F3550068B2AC /* Colors.xcassets */; };
 		5D79CA5227327753008ACE13 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5127327753008ACE13 /* NextButton.swift */; };
 		5D79CA5427327783008ACE13 /* IndigoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5327327783008ACE13 /* IndigoButton.swift */; };
 		5D79CA582732A37B008ACE13 /* EditGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */; };
@@ -113,7 +114,6 @@
 		5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199ED26DCC4B900B37B72 /* PresenterInterface.swift */; };
 		5D8199F226DCC62F00B37B72 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199F126DCC62F00B37B72 /* UIStoryboard+Extension.swift */; };
 		5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199F326DCC66300B37B72 /* ViewInterface.swift */; };
-		5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8199FA26DCC9D700B37B72 /* Colors.xcassets */; };
 		5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199FC26DCCDB300B37B72 /* LoginEntity.swift */; };
 		5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199FE26DCCDE300B37B72 /* LoginRequest.swift */; };
 		5D819A0226DCCE6A00B37B72 /* ObjectTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D819A0126DCCE6A00B37B72 /* ObjectTranslation.swift */; };
@@ -320,6 +320,7 @@
 		5D4B585126E0F66D005185AE /* GroupCallingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCallingView.swift; sourceTree = "<group>"; };
 		5D4B585826E0F6A1005185AE /* CallingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingEntity.swift; sourceTree = "<group>"; };
 		5D62BF4A2738F3370068B2AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D62BF4C2738F3550068B2AC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5D79CA5127327753008ACE13 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		5D79CA5327327783008ACE13 /* IndigoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndigoButton.swift; sourceTree = "<group>"; };
 		5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupRequest.swift; sourceTree = "<group>"; };
@@ -347,7 +348,6 @@
 		5D8199ED26DCC4B900B37B72 /* PresenterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterInterface.swift; sourceTree = "<group>"; };
 		5D8199F126DCC62F00B37B72 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		5D8199F326DCC66300B37B72 /* ViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
-		5D8199FA26DCC9D700B37B72 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = ../../../CombineFiles/Colors.xcassets; sourceTree = "<group>"; };
 		5D8199FC26DCCDB300B37B72 /* LoginEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEntity.swift; sourceTree = "<group>"; };
 		5D8199FE26DCCDE300B37B72 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		5D819A0126DCCE6A00B37B72 /* ObjectTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTranslation.swift; sourceTree = "<group>"; };
@@ -687,7 +687,7 @@
 				5D8199BC26DCC10100B37B72 /* Main.storyboard */,
 				5D8199C126DCC10400B37B72 /* LaunchScreen.storyboard */,
 				5D62BF4A2738F3370068B2AC /* Assets.xcassets */,
-				5D8199FA26DCC9D700B37B72 /* Colors.xcassets */,
+				5D62BF4C2738F3550068B2AC /* Colors.xcassets */,
 				5D8199C426DCC10400B37B72 /* Info.plist */,
 				5D0C3921271842D5003CF416 /* StreamingManager.swift */,
 			);
@@ -1022,7 +1022,6 @@
 				5D4B57DC26DF6F7E005185AE /* IncomingTextCell.xib in Resources */,
 				5D4B580026DF9A11005185AE /* ContactCell.xib in Resources */,
 				5D4B585626E0F66D005185AE /* VideoCell.xib in Resources */,
-				5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */,
 				5D90B1D8272AF93C001639E3 /* ScreenShareBannerView.xib in Resources */,
 				5D4B583526E0EC81005185AE /* CreateGroupCell.xib in Resources */,
 				5DECB6392714534D00EB43EB /* ScreenSharePopup.xib in Resources */,
@@ -1031,6 +1030,7 @@
 				5D4B579D26DE62D6005185AE /* vdotokCert.p12 in Resources */,
 				5DE40474272008F7005EA0DF /* SmallCallingView.xib in Resources */,
 				5DF3D50C27107307004988F8 /* BroadcastOverlay.xib in Resources */,
+				5D62BF4D2738F3550068B2AC /* Colors.xcassets in Resources */,
 				5D4B585326E0F66D005185AE /* IncomingCall.xib in Resources */,
 				5D4B57F226DF93A6005185AE /* Contact.storyboard in Resources */,
 				5DE40470271DC57C005EA0DF /* GroupCallingCell.xib in Resources */,
