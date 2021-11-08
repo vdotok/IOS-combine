@@ -37,6 +37,7 @@ protocol ChatPresenterInterface: PresenterInterface {
     func receivedMessage(userInfo: [String: AnyObject])
     func sendSeenMessage(message: ChatMessage, row: Int)
     func moveToBroadcast()
+    func publish(file data: Data, with ext: String, type: Int)
 }
 
 protocol ChatInteractorInterface: InteractorInterface {

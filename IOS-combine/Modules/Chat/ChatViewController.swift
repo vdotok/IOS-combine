@@ -267,7 +267,8 @@ extension ChatViewController: DocumentPickerProtocol {
 // MARK: - Image picker
 extension ChatViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        
+        guard let data = image?.pngData(), let presenter = presenter else {return}
+        presenter.publish(file: data, with: "PNG", type: MediaType.image.rawValue)
     }
     
     
@@ -279,6 +280,15 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.messageCount()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = presenter.itemAt(row: indexPath.row)
+        if item.1 == .incomingImage || item.1 == .outGoingImage {
+            if (tableView.cellForRow(at: indexPath) as? IncomingImageCell) != nil || (tableView.cellForRow(at: indexPath) as? outgoingImageCell) != nil {
+                didTapAttachment(url: item.0.fileType!)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -608,10 +618,18 @@ extension ChatViewController {
 
 extension ChatViewController: DidTapAttachmentDelagate {
     func didTapAttachment(url: URL) {
-        
+        let dc = UIDocumentInteractionController(url: url)
+        dc.delegate = self
+        UINavigationBar.appearance().tintColor = .black
+        dc.presentPreview(animated: true)
     }
-    
-    
+}
+
+extension ChatViewController: UIDocumentInteractionControllerDelegate {
+    public func documentInteractionControllerViewControllerForPreview
+        (_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
 }
 
 extension ChatViewController: SmallCallingViewDelegate {
