@@ -48,9 +48,11 @@ final class CallingViewController: UIViewController {
             case .update(let session):
                 switch session.callType {
                 case .onetomany:
-                    
                     guard self.broadcastView != nil else {
                         self.loadBroadcastView(session: session)
+                        if session.broadcastType == .publicURL {
+                            self.broadcastView?.updateURL(with: AppDelegate.appDelegate.publicURL)
+                        }
                         return
                     }
                     self.broadcastView?.update(for: session)
@@ -76,6 +78,16 @@ final class CallingViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             case .configureLocal(let renderer, let session):
                 self.configureLocalView(rendrer: renderer, session: session)
+            case .fetchonetomany(let session, let url):
+                guard self.broadcastView != nil else {
+                    self.loadBroadcastView(session: session)
+                    self.broadcastView?.updateURL(with: AppDelegate.appDelegate.publicURL)
+                    return
+                }
+                self.broadcastView?.update(for: session)
+               
+            case .updateURL(let url):
+                self.broadcastView?.updateURL(with: url)
             default:
                 break
             }

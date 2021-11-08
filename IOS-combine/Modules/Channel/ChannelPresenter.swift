@@ -226,7 +226,7 @@ extension ChannelPresenter {
             {return}
               moveToVideo(users: group.participants)
         } else if callType == NotifyCallType.broadcast.callType {
-            var broadcastdata = info["broadcastData"] as? BroadcastData
+            let broadcastdata = info["broadcastData"] as? BroadcastData
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
         } else if callType == NotifyCallType.fetchStreams.callType {
@@ -234,7 +234,6 @@ extension ChannelPresenter {
             switch session.callType {
             case .onetomany:
                 moveToVideo(users: [], screenType: .fetchonetomany, session: session)
-             
             case .manytomany, .onetoone:
                 moveToVideo(users: [], screenType: .fetchStreams, session: session)
             }
