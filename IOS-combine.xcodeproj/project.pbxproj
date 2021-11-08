@@ -87,6 +87,7 @@
 		5D4B585626E0F66D005185AE /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4B585026E0F66D005185AE /* VideoCell.xib */; };
 		5D4B585726E0F66D005185AE /* GroupCallingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585126E0F66D005185AE /* GroupCallingView.swift */; };
 		5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B585826E0F6A1005185AE /* CallingEntity.swift */; };
+		5D62BF4B2738F3380068B2AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D62BF4A2738F3370068B2AC /* Assets.xcassets */; };
 		5D79CA5227327753008ACE13 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5127327753008ACE13 /* NextButton.swift */; };
 		5D79CA5427327783008ACE13 /* IndigoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5327327783008ACE13 /* IndigoButton.swift */; };
 		5D79CA582732A37B008ACE13 /* EditGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */; };
@@ -112,7 +113,6 @@
 		5D8199EE26DCC4B900B37B72 /* PresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199ED26DCC4B900B37B72 /* PresenterInterface.swift */; };
 		5D8199F226DCC62F00B37B72 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199F126DCC62F00B37B72 /* UIStoryboard+Extension.swift */; };
 		5D8199F426DCC66300B37B72 /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199F326DCC66300B37B72 /* ViewInterface.swift */; };
-		5D8199F926DCC9B200B37B72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8199F826DCC9B200B37B72 /* Assets.xcassets */; };
 		5D8199FB26DCC9D700B37B72 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8199FA26DCC9D700B37B72 /* Colors.xcassets */; };
 		5D8199FD26DCCDB300B37B72 /* LoginEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199FC26DCCDB300B37B72 /* LoginEntity.swift */; };
 		5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199FE26DCCDE300B37B72 /* LoginRequest.swift */; };
@@ -319,6 +319,7 @@
 		5D4B585026E0F66D005185AE /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		5D4B585126E0F66D005185AE /* GroupCallingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCallingView.swift; sourceTree = "<group>"; };
 		5D4B585826E0F6A1005185AE /* CallingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingEntity.swift; sourceTree = "<group>"; };
+		5D62BF4A2738F3370068B2AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D79CA5127327753008ACE13 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		5D79CA5327327783008ACE13 /* IndigoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndigoButton.swift; sourceTree = "<group>"; };
 		5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupRequest.swift; sourceTree = "<group>"; };
@@ -346,7 +347,6 @@
 		5D8199ED26DCC4B900B37B72 /* PresenterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterInterface.swift; sourceTree = "<group>"; };
 		5D8199F126DCC62F00B37B72 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		5D8199F326DCC66300B37B72 /* ViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
-		5D8199F826DCC9B200B37B72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../CombineFiles/Assets.xcassets; sourceTree = "<group>"; };
 		5D8199FA26DCC9D700B37B72 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = ../../../CombineFiles/Colors.xcassets; sourceTree = "<group>"; };
 		5D8199FC26DCCDB300B37B72 /* LoginEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEntity.swift; sourceTree = "<group>"; };
 		5D8199FE26DCCDE300B37B72 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
@@ -686,7 +686,7 @@
 				5D8199BA26DCC10100B37B72 /* ViewController.swift */,
 				5D8199BC26DCC10100B37B72 /* Main.storyboard */,
 				5D8199C126DCC10400B37B72 /* LaunchScreen.storyboard */,
-				5D8199F826DCC9B200B37B72 /* Assets.xcassets */,
+				5D62BF4A2738F3370068B2AC /* Assets.xcassets */,
 				5D8199FA26DCC9D700B37B72 /* Colors.xcassets */,
 				5D8199C426DCC10400B37B72 /* Info.plist */,
 				5D0C3921271842D5003CF416 /* StreamingManager.swift */,
@@ -1014,6 +1014,7 @@
 				5D4B580826E0AB1D005185AE /* CreateGroup.storyboard in Resources */,
 				5D4B57D726DF6F7E005185AE /* outgoingImageCell.xib in Resources */,
 				5D4B57DD26DF6F7E005185AE /* OutgoingAttachementCell.xib in Resources */,
+				5D62BF4B2738F3380068B2AC /* Assets.xcassets in Resources */,
 				5D819A1C26DCF22B00B37B72 /* Signup.storyboard in Resources */,
 				5D819A3126DE2E8400B37B72 /* ChannelCell.xib in Resources */,
 				5D4B585526E0F66D005185AE /* GroupCallingView.xib in Resources */,
@@ -1038,7 +1039,6 @@
 				5D8199E026DCC3B900B37B72 /* Login.storyboard in Resources */,
 				5D4B584526E0F625005185AE /* Calling.storyboard in Resources */,
 				5D8199C326DCC10400B37B72 /* LaunchScreen.storyboard in Resources */,
-				5D8199F926DCC9B200B37B72 /* Assets.xcassets in Resources */,
 				5D4B57D326DF6F7E005185AE /* OutgoingTextCell.xib in Resources */,
 				5D4B57D926DF6F7E005185AE /* IncomingImageCell.xib in Resources */,
 				5D4B57D826DF6F7E005185AE /* IncomingAudioCell.xib in Resources */,
