@@ -155,6 +155,8 @@ class BroadcastView: UIView {
         let url = URL(string: "https://www.google.com")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
+        wormhole.passMessageObject(nil, identifier: "commandScreenShareStates")
+        listenForSSButtonStates()
        
     }
     
@@ -410,19 +412,6 @@ class BroadcastView: UIView {
             guard let stream = userStreams.first else {return}
             self.selectedStreams = [stream]
             configureTimer()
-            
-            if session.sessionType == .screenshare {
-                if stream.stateInformation?.videoInformation == 0 {
-                    screenShareBtn.isSelected = true
-                } else {
-                    screenShareBtn.isSelected = false
-                }
-                if stream.stateInformation?.audioInformation == 0 {
-                    screenShareAudio.isSelected = true
-                } else {
-                    screenShareAudio.isSelected = false
-                }
-            }
             
             if stream.stateInformation?.audioInformation == 0 {
                 muteButton.isSelected = true
@@ -895,6 +884,27 @@ extension BroadcastView {
         
         self.externalWindow?.isHidden = false
 
+    }
+    
+    func updateSSButton(audioState: Bool, videoState: Bool) {
+       
+    }
+    
+    
+    func listenForSSButtonStates() {
+        wormhole.listenForMessage(withIdentifier: "configureLocalStream" ) { [weak self] message -> Void in
+            guard let self = self else {return}
+            if let message = message as? String {
+
+                let data = message.convertToDictionary()
+                guard let dict = data else {return}
+                let videoData = dict["videoState"] as! Int
+                let audioData = dict["audioState"] as! Int
+                self.screenShareAudio.isSelected = audioData == 1 ? true : false
+                self.screenShareBtn.isSelected = videoData == 1 ? true : false
+               print(audioData)
+            }
+        }
     }
 }
 

@@ -30,6 +30,7 @@ protocol CallingPresenterInterface: PresenterInterface {
     var session: VTokBaseSession? {get set}
     func viewModelDidLoad()
     func viewModelWillAppear()
+    func viewModelDidDisapper()
     func acceptCall(session: VTokBaseSession)
     func rejectCall(session: VTokBaseSession)
     func hangupCall(session: VTokBaseSession)

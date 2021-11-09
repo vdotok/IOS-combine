@@ -68,7 +68,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                       let session = self.screenShareData
                 else { return }
                 self.setScreenShareScreen(with: message)
-                sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
+              //  sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
             }
         })
         
@@ -76,17 +76,19 @@ class SampleHandler: RPBroadcastSampleHandler {
             self.getBroadcastSession()
         }
         
+        wormhole.listenForMessage(withIdentifier: "commandScreenShareStates") { message in
+            self.fetchSessions()
+        }
+        
+    }
+    
+    func disableScreen(for session: VTokBaseSession, state: ScreenShareBytes) {
+        
     }
     
     func setScreenShareAppAudio(with message: String) {
         guard let data = message.data(using: .utf8) else {return }
         audioState = try! JSONDecoder().decode(ScreenShareAudioState.self, from: data)
-        
-        if message == "0" {
-            vtokSdk?.mute(session: baseSession!, state: .mute)
-        } else {
-            vtokSdk?.mute(session: baseSession!, state: .unMute)
-        }
         
     }
     
@@ -176,6 +178,16 @@ class SampleHandler: RPBroadcastSampleHandler {
         }
         
     }
+    
+    func fetchSessions() {
+        let audioState = audioState.screenShareAudio.rawValue
+        let videoState = screenState.screenShareScreen.rawValue
+        let json = ["audioState": audioState,
+                    "videoState": videoState]
+        let jsonData = try! JSONEncoder().encode(json)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        wormhole.passMessageObject(jsonString, identifier: "configureLocalStream")
+    }
 }
 
 extension SampleHandler: SDKConnectionDelegate {
@@ -205,12 +217,7 @@ extension SampleHandler: SessionDelegate {
     }
     
     func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
-        guard let stream = stream.first else {return}
-        let stateInfo = ["audioInfo": stream.stateInformation?.audioInformation,
-                    "videoInfo": stream.stateInformation?.videoInformation]
-        let jsonData = try! JSONEncoder().encode(stateInfo)
-        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
-        wormhole.passMessageObject(jsonString, identifier: "configureLocalStream")
+   
     }
     
 //    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {

@@ -31,6 +31,7 @@ class ScreenShareBannerView: UIView {
 
     }
     
+    
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil)  {
         wormhole.passMessageObject(nil, identifier: "getBroadcastSession")
         

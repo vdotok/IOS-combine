@@ -40,6 +40,7 @@ final class CallingViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        presenter.viewModelDidDisapper()
     }
     
     func bindPresenter() {
@@ -88,6 +89,8 @@ final class CallingViewController: UIViewController {
                
             case .updateURL(let url):
                 self.broadcastView?.updateURL(with: url)
+            case .configureSSButtonStates(let videoState, let audioState):
+                self.broadcastView?.updateSSButton(audioState: audioState == 1 ? true : false, videoState: videoState == 1 ?  true : false)
             default:
                 break
             }

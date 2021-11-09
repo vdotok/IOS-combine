@@ -120,6 +120,9 @@ final class CallingPresenter: NSObject {
         }
 
     }
+    deinit {
+        
+    }
 }
 
 // MARK: - Extensions -
@@ -272,6 +275,8 @@ extension CallingPresenter {
       
         
     }
+    
+   
 }
 
 extension CallingPresenter: StreamingDelegate {
@@ -381,11 +386,17 @@ extension CallingPresenter: CallingPresenterInterface {
         listenForPublicURL()
         listenForParticipantAdd()
         listenForSessionTerminate()
-        screenShareLocalView()
+        
         
     }
     
+   
+    
     func viewModelWillAppear() {
+        
+    }
+    
+    func viewModelDidDisapper() {
         
     }
     
@@ -583,20 +594,17 @@ extension CallingPresenter {
 
 extension CallingPresenter {
     func screenShareLocalView() {
-        wormhole.listenForMessage(withIdentifier: "configureLocalStream" ) { [weak self] message -> Void in
-            guard let self = self else {return}
-            if let message = message as? String {
-//                do {
-//                    let dictionary = try self.convertToDictionary(from: message)
-//                       print(dictionary)
-//                } catch {
-//                    print(error)
-//                }
-                let data = message.convertToDictionary()
-                
-                print("\(data)")
-            }
-        }
+//        wormhole.listenForMessage(withIdentifier: "configureLocalStream" ) { [weak self] message -> Void in
+//            guard let self = self else {return}
+//            if let message = message as? String {
+//
+//                let data = message.convertToDictionary()
+//                guard let dict = data else {return}
+//                let videoData = dict["videoState"] as! Int
+//                let audioData = dict["audioState"] as! Int
+//                self.output?(.configureSSButtonStates(videoState: videoData, audioState: audioData))
+//            }
+//        }
     }
     func convertToDictionary(from text: String) -> [String: String] {
         guard let data = text.data(using: .utf8) else { return [:] }

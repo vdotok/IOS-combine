@@ -107,7 +107,7 @@ final class ChatViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-       
+      
         NotificationCenter.default.removeObserver(self, name: Notification.Name.hangup, object: nil)
         
     }
@@ -159,8 +159,8 @@ final class ChatViewController: UIViewController {
     
     func showBroadcastBanner() {
         
-        guard let manager = presenter.streamingManager else {return}
-        if UIScreen.main.isCaptured && presenter.streamingManager?.activeSession() == 0 {
+        guard let manager = presenter.streamingManager, AppDelegate.appDelegate.screenShareBannerView == nil else {return}
+        if UIScreen.main.isCaptured  {
             DispatchQueue.main.async { [weak self] in
                 self?.tableViewTopConstraint.constant = 20
             }
