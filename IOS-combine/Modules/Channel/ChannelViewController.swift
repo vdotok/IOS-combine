@@ -110,7 +110,12 @@ final class ChannelViewController: UIViewController {
     
     func showBroadCastBanner() {
         
-        guard AppDelegate.appDelegate.screenShareBannerView == nil else {return}
+        guard AppDelegate.appDelegate.screenShareBannerView == nil else {
+            if !UIScreen.main.isCaptured {
+                AppDelegate.appDelegate.screenShareBannerView.removeFromSuperview()
+            }
+            return
+        }
         
         if UIScreen.main.isCaptured && presenter.streamingManager.activeSession() == 0 {
             DispatchQueue.main.async { [weak self] in
