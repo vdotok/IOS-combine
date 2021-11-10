@@ -129,6 +129,9 @@ class GroupCallingUpdatedView: UIView {
         switch session.sessionMediaType {
         case .audioCall:
             titleLable.text = "You are audio calling with"
+            cameraSwitch.isHidden = true
+            cameraButton.isHidden = true
+            
         case .videoCall:
             titleLable.text = "You are video calling with"
         }
@@ -253,9 +256,6 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         }
         remoteView.addSubview(selectedStream!.renderer)
         selectedStream?.renderer.fixInSuperView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-          //  self?.cameraButton.isEnabled = true
-        })
         collectionView.reloadData()
         
     }

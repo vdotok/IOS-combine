@@ -97,8 +97,11 @@ final class ChannelViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.tableViewTopConstraint.constant = 140
         }
+        if let smallCallingView = AppDelegate.appDelegate.smallCallingView {
+            smallCallingView.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView = nil
+        }
         
-        AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
         let manager = presenter.streamingManager
         manager.vtokSDK = presenter.vtokSDK
         AppDelegate.appDelegate.smallCallingView = SmallCallingView.getView(streamingManager: manager)
@@ -113,6 +116,7 @@ final class ChannelViewController: UIViewController {
         guard AppDelegate.appDelegate.screenShareBannerView == nil else {
             if !UIScreen.main.isCaptured {
                 AppDelegate.appDelegate.screenShareBannerView.removeFromSuperview()
+                AppDelegate.appDelegate.screenShareBannerView = nil
             }
             return
         }
