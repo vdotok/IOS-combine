@@ -378,7 +378,7 @@ extension CallingPresenter: CallingPresenterInterface {
  
     
     func viewModelDidLoad() {
-        addNotificationObserver()
+        
         if let baseSession = session, baseSession.state == .receivedSessionInitiation {
             vtokSdk?.set(sessionDelegate: streamingManager!, for: baseSession)
         }
@@ -393,11 +393,16 @@ extension CallingPresenter: CallingPresenterInterface {
    
     
     func viewModelWillAppear() {
-        
+        addNotificationObserver()
     }
     
     func viewModelDidDisapper() {
+        removeObservers()
         
+    }
+    
+    func removeObservers(){
+        UIScreen.main.removeObserver(self, forKeyPath: "captured")
     }
     
     func addNotificationObserver(){

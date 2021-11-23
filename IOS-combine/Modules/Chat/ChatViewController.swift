@@ -101,6 +101,7 @@ final class ChatViewController: UIViewController {
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         scrollToBottom()
         
     }
@@ -108,6 +109,7 @@ final class ChatViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
       
+        removeObservers()
         NotificationCenter.default.removeObserver(self, name: Notification.Name.hangup, object: nil)
         
     }
@@ -651,6 +653,10 @@ extension ChatViewController {
           // Add Key-Value observer on isCaptured property of uiscreen.main
         UIScreen.main.addObserver(self, forKeyPath: "captured", options: .new, context: nil)
       }
+    
+    func removeObservers(){
+        UIScreen.main.removeObserver(self, forKeyPath: "captured")
+    }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "captured" {

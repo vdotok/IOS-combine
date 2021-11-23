@@ -161,6 +161,10 @@
 		5DF3D53B27144FA4004988F8 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3D53927144FA4004988F8 /* BroadcastData.swift */; };
 		5DF3D53C27145042004988F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579926DE5F5E005185AE /* Constants.swift */; };
 		6EB31A5F98C5E031C0175E88 /* Pods_ScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28479D9BAD010F3A2989F9D5 /* Pods_ScreenShare.framework */; };
+		A82EB1DD274BA92500D7D6C4 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82EB1DC274BA91700D7D6C4 /* iOSSDKStreaming.framework */; };
+		A82EB1DE274BA92500D7D6C4 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A82EB1DC274BA91700D7D6C4 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A82EB1DF274BA92C00D7D6C4 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82EB1DC274BA91700D7D6C4 /* iOSSDKStreaming.framework */; };
+		A82EB1E0274BA92C00D7D6C4 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A82EB1DC274BA91700D7D6C4 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E99D7787F0A24CE8C625C34F /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B02098133058A920EB418C /* Pods_IOS_combine.framework */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +183,13 @@
 			remoteGlobalIDString = 5DF3D51427144DCA004988F8;
 			remoteInfo = ScreenShare;
 		};
+		A82EB1DB274BA91700D7D6C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A82EB1D7274BA91700D7D6C4 /* iOSSDKStreaming.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D146FA225DE4823000852FB;
+			remoteInfo = iOSSDKStreaming;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -188,6 +199,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A82EB1DE274BA92500D7D6C4 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +210,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A82EB1E0274BA92C00D7D6C4 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +402,7 @@
 		5DF3D52727144DCA004988F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF3D53927144FA4004988F8 /* BroadcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastData.swift; sourceTree = "<group>"; };
 		61EBC6F0C92C42B39A8D150D /* Pods-ScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
+		A82EB1D7274BA91700D7D6C4 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A82EB1DD274BA92500D7D6C4 /* iOSSDKStreaming.framework in Frameworks */,
 				E99D7787F0A24CE8C625C34F /* Pods_IOS_combine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +421,7 @@
 			files = (
 				5DF3D51727144DCA004988F8 /* ReplayKit.framework in Frameworks */,
 				6EB31A5F98C5E031C0175E88 /* Pods_ScreenShare.framework in Frameworks */,
+				A82EB1DF274BA92C00D7D6C4 /* iOSSDKStreaming.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,16 +461,10 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		5D4B578026DE34B0005185AE /* Connect */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Connect;
-			sourceTree = "<group>";
-		};
 		5D4B579E26DE6776005185AE /* Streaming */ = {
 			isa = PBXGroup;
 			children = (
+				A82EB1D7274BA91700D7D6C4 /* iOSSDKStreaming.xcodeproj */,
 			);
 			path = Streaming;
 			sourceTree = "<group>";
@@ -650,7 +660,6 @@
 			children = (
 				5DECB6332714525E00EB43EB /* IOS-combine.entitlements */,
 				5D4B579E26DE6776005185AE /* Streaming */,
-				5D4B578026DE34B0005185AE /* Connect */,
 				5D4B579C26DE62D6005185AE /* vdotokCert.p12 */,
 				5D8199D526DCC2DB00B37B72 /* Common */,
 				5D8199CE26DCC25800B37B72 /* Service */,
@@ -850,6 +859,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A82EB1D8274BA91700D7D6C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A82EB1DC274BA91700D7D6C4 /* iOSSDKStreaming.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FD20C96B072FC78F3016E332 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,6 +972,12 @@
 			mainGroup = 5D8199AA26DCC10100B37B72;
 			productRefGroup = 5D8199B426DCC10100B37B72 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A82EB1D8274BA91700D7D6C4 /* Products */;
+					ProjectRef = A82EB1D7274BA91700D7D6C4 /* iOSSDKStreaming.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5D8199B226DCC10100B37B72 /* IOS-combine */,
@@ -963,6 +986,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A82EB1DC274BA91700D7D6C4 /* iOSSDKStreaming.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = iOSSDKStreaming.framework;
+			remoteRef = A82EB1DB274BA91700D7D6C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5D8199B126DCC10100B37B72 /* Resources */ = {
