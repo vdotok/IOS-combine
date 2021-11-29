@@ -3,6 +3,7 @@
 //  ScreenShareSetupUI
 //
 //  Created by usama farooq on 11/10/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import ReplayKit

@@ -137,6 +137,7 @@
 		5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3326E64D43006EC78E /* ContactService.swift */; };
 		5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */; };
 		5DA4FA3C26E88E9A006EC78E /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */; };
+		5DBFB0D32754C57800BAA602 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBFB0D22754C57800BAA602 /* Testing.swift */; };
 		5DC75A212726C47900334269 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC75A202726C47900334269 /* CustomButton.swift */; };
 		5DE40469271DC092005EA0DF /* GroupCallingUpdatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */; };
 		5DE4046A271DC092005EA0DF /* GroupCallingUpdatedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE40468271DC092005EA0DF /* GroupCallingUpdatedView.xib */; };
@@ -376,6 +377,7 @@
 		5DA4FA3326E64D43006EC78E /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupService.swift; sourceTree = "<group>"; };
 		5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
+		5DBFB0D22754C57800BAA602 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		5DC75A202726C47900334269 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCallingUpdatedView.swift; sourceTree = "<group>"; };
 		5DE40468271DC092005EA0DF /* GroupCallingUpdatedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCallingUpdatedView.xib; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				5D819A1526DCF02A00B37B72 /* Signup */,
 				5D819A0426DCE6DF00B37B72 /* Channel */,
 				5D8199D926DCC39A00B37B72 /* Login */,
+				5DBFB0D22754C57800BAA602 /* Testing.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -949,6 +952,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
+				ORGANIZATIONNAME = VDOTOK;
 				TargetAttributes = {
 					5D8199B226DCC10100B37B72 = {
 						CreatedOnToolsVersion = 12.5;
@@ -1128,6 +1132,7 @@
 				5D819A1226DCE7E700B37B72 /* ChannelInteractor.swift in Sources */,
 				5D79CA5A2732A3A3008ACE13 /* EditGroupService.swift in Sources */,
 				5D4B585926E0F6A1005185AE /* CallingEntity.swift in Sources */,
+				5DBFB0D32754C57800BAA602 /* Testing.swift in Sources */,
 				5D4B579A26DE5F5E005185AE /* Constants.swift in Sources */,
 				5DE40469271DC092005EA0DF /* GroupCallingUpdatedView.swift in Sources */,
 				5D4B57D626DF6F7E005185AE /* IncomingAttachmentCell.swift in Sources */,

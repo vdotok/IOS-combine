@@ -3,6 +3,7 @@
 //  Chat-Demo-IOS
 //
 //  Created by usama farooq on 21/05/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
