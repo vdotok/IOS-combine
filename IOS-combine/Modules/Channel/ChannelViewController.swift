@@ -366,37 +366,29 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        
         
         let edit = UIContextualAction(style: .normal,
-                                         title: "Edit") { [weak self] (action, view, completionHandler) in
+                                      title: "Edit") { [weak self] (action, view, completionHandler) in
             self?.selectedGroupId = indexPath.row
             self?.loadGroupView()
-                                            completionHandler(true)
+            completionHandler(true)
         }
         let trash = UIContextualAction(style: .destructive,
                                        title: "Delete") { [weak self] (action, view, completionHandler) in
-//            self?.viewModel.deleteGroup(with: indexPath.row)
             self?.presenter.deleteGroup(with: indexPath.row)
-                                        completionHandler(true)
+            completionHandler(true)
         }
-        if presenter.groups[indexPath.row].participants.count <= 2 {
-            let configuration = UISwipeActionsConfiguration(actions: [trash])
+      
+        guard let userData = VDOTOKObject<UserResponse>().getData(), let userId = userData.userID else {return nil}
+        
+        if userId == presenter.groups[indexPath.row].adminID {
+            let configuration = UISwipeActionsConfiguration(actions: [edit, trash])
             return configuration
         }
-        let configuration = UISwipeActionsConfiguration(actions: [edit, trash])
+        let configuration = UISwipeActionsConfiguration(actions: [trash])
         return configuration
         
-        
-        
-   
-//        let trash = UIContextualAction(style: .destructive,
-//                                       title: "Delete") { [weak self] (action, view, completionHandler) in
-//            self?.presenter.deleteGroup(with: indexPath.row)
-//        }
-//
-//            let configuration = UISwipeActionsConfiguration(actions: [trash])
-//            return configuration
     }
     
 }
