@@ -15,6 +15,7 @@ protocol StreamingDelegate: AnyObject {
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream])
     func didGetPublicUrl(for session: VTokBaseSession, with url: String)
     func stateDidUpdate(for session: VTokBaseSession)
+    func sessionTimeDidUpdate(with value: String)
     
 }
 
@@ -47,6 +48,10 @@ class StreamingMananger {
 }
 
 extension StreamingMananger: SessionDelegate {
+    func sessionTimeDidUpdate(with value: String) {
+        delegate?.sessionTimeDidUpdate(with: value)
+    }
+    
     
 //    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
 //        delegate?.configureLocalViewFor(session: session, renderer: renderer)

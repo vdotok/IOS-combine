@@ -157,7 +157,6 @@ class GroupCallingView: UIView {
         speakerButton.isHidden = false
         cameraSwitch.isHidden = false
         speakerButton.isHidden = false
-        configureTimer()
     }
     
     func loadViewFor(mediaType: SessionMediaType) {
@@ -367,35 +366,6 @@ extension GroupCallingView {
 }
 
 extension GroupCallingView {
-    private func configureTimer() {
-        timer?.invalidate()
-        timer = nil
-        counter = 0
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-    }
-    
-    @objc private func timerAction() {
-        counter += 1
-        let (h, m, s) = secondsToHoursMinutesSeconds(seconds: counter)
-        var timeString = ""
-        if h > 0 {
-            timeString += intervalFormatter(interval: h) + ":"
-        }
-        timeString += intervalFormatter(interval: m) + ":" +
-                        intervalFormatter(interval: s)
-        callTime.text = timeString
-    }
-    
-    private func intervalFormatter(interval: Int) -> String {
-        if interval < 10 {
-            return "0\(interval)"
-        }
-        return "\(interval)"
-    }
-    
-    private func secondsToHoursMinutesSeconds (seconds :Int) -> (hours: Int, minutes: Int, seconds: Int) {
-      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
 }
 
 extension GroupCallingView {

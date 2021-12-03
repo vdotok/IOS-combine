@@ -84,6 +84,7 @@ final class CallingPresenter: NSObject {
         case fetchonetomany(session: VTokBaseSession, url: String?)
         case update(session: VTokBaseSession)
         case configureSSButtonStates(videoState: Int, audioState: Int)
+        case updateTime(value: String)
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -280,15 +281,15 @@ extension CallingPresenter {
 }
 
 extension CallingPresenter: StreamingDelegate {
-    
+    func sessionTimeDidUpdate(with value: String) {
+        print(value)
+        output?(.updateTime(value: value))
+    }
+
     func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream]) {
         guard let renderer = steams.first else {return}
         output?(.configureLocal(stream: renderer, session: session))
     }
-    
-//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
-//        output?(.configureLocal(view: renderer, session: session))
-//    }
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         self.session = session
@@ -307,38 +308,8 @@ extension CallingPresenter: StreamingDelegate {
             return
         }
         output?(.update(session: session))
-        
-//        switch session.state {
-//        case .ringing:
-//            output?(.updateView(session: session))
-//        case .connected:
-//            didConnect()
-//        case .rejected:
-//            sessionReject()
-//        case .missedCall:
-//            sessionMissed()
-//        case .hangup:
-//                guard isBusy else {
-//                    sessionHangup()
-//                    return
-//                }
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-//                    self?.sessionHangup()
-//                }
-//        case .busy:
-//            isBusy = true
-//            output?(.updateView(session: session))
-//        case .tryingToConnect:
-//            output?(.updateView(session: session))
-//        case .updateParticipent:
-//            output?(.updateUsers(session.connectedUsers.count))
-//
-//        default:
-//            break
-//        }
-//        output?(.updateUsers(session.connectedUsers.count))
+
     }
-    
     
 }
 
@@ -375,7 +346,6 @@ extension CallingPresenter {
 }
 
 extension CallingPresenter: CallingPresenterInterface {
- 
     
     func viewModelDidLoad() {
         
@@ -387,17 +357,16 @@ extension CallingPresenter: CallingPresenterInterface {
         listenForParticipantAdd()
         listenForSessionTerminate()
         
-        
     }
-    
-   
     
     func viewModelWillAppear() {
         addNotificationObserver()
+        listenForSessionDuration()
     }
     
     func viewModelDidDisapper() {
         removeObservers()
+        removeSessionDuration()
         
     }
     
@@ -413,29 +382,8 @@ extension CallingPresenter: CallingPresenterInterface {
     
     // MARK:- Key-Value Observer callback
 
-  
-    
-    
-    
-//    func acceptCall(session: VTokBaseSession) {
-//        stopSound()
-//
-//        switch session.sessionMediaType {
-//        case .audioCall:
-//            output?(.loadView(mediaType: .audioCall))
-//            output?(.updateVideoView(session: session))
-//        case .videoCall:
-//            output?(.loadView(mediaType: .videoCall))
-//            output?(.updateVideoView(session: session))
-//
-//        }
-//        output?(.updateHangupButton(status: false))
-//        vtokSdk?.accept(session: session)
-//    }
-    
     func acceptCall(session: VTokBaseSession) {
         stopSound()
-        
         switch session.callType {
         case .manytomany, .onetoone:
             output?(.update(session: session))
@@ -517,6 +465,20 @@ extension CallingPresenter {
 
 extension CallingPresenter {
     
+    func listenForSessionDuration() {
+        wormhole.listenForMessage(withIdentifier: "sessionDuration", listener: { [weak self]
+            (messageObject) -> Void in
+            guard let self = self else {return}
+            if let message = messageObject as? String {
+                self.output?(.updateTime(value: message))
+            }
+            
+        })
+    }
+    
+    func removeSessionDuration() {
+        wormhole.stopListeningForMessage(withIdentifier: "sessionDuration")
+    }
     
     private func listenForPublicURL() {
         wormhole.listenForMessage(withIdentifier: "didGetPublicURL", listener: { [weak self] (messageObject) -> Void in
@@ -524,7 +486,6 @@ extension CallingPresenter {
                 self?.output?(.updateURL(url: message))
                 AppDelegate.appDelegate.publicURL = message
             }
-         
         })
     }
     
@@ -534,24 +495,20 @@ extension CallingPresenter {
                 guard let userCount = Int(count) else {return}
                 self?.output?(.updateUsers(userCount))
                 
+            }
         }
-    }
-        
-       
     }
     
     private func listenForSessionTerminate() {
-        
         wormhole.listenForMessage(withIdentifier: "sessionTerminated") { [weak self] message -> Void in
             if let sessionString = message as? String {
-                
                 guard let data = sessionString.data(using: .utf8) else {return }
                 let _ = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
                 guard let callSession = self?.session else { return }
                 self?.vtokSdk?.hangup(session: callSession)
                 guard let ssSession = self?.ssSession else {return}
                 self?.vtokSdk?.hangup(session: ssSession)
-               
+                
             }
         }
     }
@@ -566,7 +523,6 @@ extension CallingPresenter {
     }
     
     func getScreenShareDataString(for sessionUUID: String, with associatedSessionUUID: String?) -> NSString? {
-        
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let token = user.authorizationToken,
               let refID = user.refID,
@@ -584,7 +540,7 @@ extension CallingPresenter {
                                           associatedSessionUUID: associatedSessionUUID,
                                           broadcastType: broadcastData.broadcastType,
                                           broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
-
+        
         let data = ScreenShareAppData(url: user.mediaServerMap!.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
@@ -598,19 +554,7 @@ extension CallingPresenter {
 }
 
 extension CallingPresenter {
-    func screenShareLocalView() {
-//        wormhole.listenForMessage(withIdentifier: "configureLocalStream" ) { [weak self] message -> Void in
-//            guard let self = self else {return}
-//            if let message = message as? String {
-//
-//                let data = message.convertToDictionary()
-//                guard let dict = data else {return}
-//                let videoData = dict["videoState"] as! Int
-//                let audioData = dict["audioState"] as! Int
-//                self.output?(.configureSSButtonStates(videoState: videoData, audioState: audioData))
-//            }
-//        }
-    }
+
     func convertToDictionary(from text: String) -> [String: String] {
         guard let data = text.data(using: .utf8) else { return [:] }
         let anyResult: Any? = try? JSONSerialization.jsonObject(with: data, options: [])

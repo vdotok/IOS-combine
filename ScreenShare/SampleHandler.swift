@@ -213,6 +213,12 @@ extension SampleHandler: SDKConnectionDelegate {
 
 extension SampleHandler: SessionDelegate {
     
+    func sessionTimeDidUpdate(with value: String) {
+        guard self.baseSession?.associatedSessionUUID == nil else {return}
+        let message = String(value) as NSString
+        wormhole.passMessageObject(message, identifier: "sessionDuration")
+    }
+    
     func fetchUser(stream: [UserStream]) {
         
     }
@@ -231,6 +237,7 @@ extension SampleHandler: SessionDelegate {
 
     
     func stateDidUpdate(for session: VTokBaseSession) {
+        self.baseSession = session
         switch session.state {
 
         case .calling:

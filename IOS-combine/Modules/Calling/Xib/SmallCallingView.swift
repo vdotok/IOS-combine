@@ -90,7 +90,10 @@ class SmallCallingViewModelImpl: SmallCallingViewModel {
 }
 
 extension SmallCallingView: StreamingDelegate {
-
+    
+    func sessionTimeDidUpdate(with value: String) {
+        
+    }
     
     func configureLocalViewFor(session: VTokBaseSession, with steams: [UserStream]) {
      //   guard let renderer = steams.first?.renderer else {return}
