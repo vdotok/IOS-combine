@@ -491,9 +491,10 @@ extension CallingPresenter {
     
     private func listenForParticipantAdd() {
         wormhole.listenForMessage(withIdentifier: "participantAdded") { [weak self] message -> Void  in
+            guard let self = self, let output = self.output else {return}
             if let count = message as? String {
                 guard let userCount = Int(count) else {return}
-                self?.output?(.updateUsers(userCount))
+                output(.updateUsers(userCount))
                 
             }
         }

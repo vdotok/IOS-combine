@@ -99,6 +99,13 @@ final class CallingViewController: UIViewController {
                     groupCallingView.callTime.text = duration
                 }
                 
+            case .updateUsers(let count):
+                guard let broadcastView = self.broadcastView else {
+                    return
+                }
+                broadcastView.updateUser(count: count)
+
+                
             default:
                 break
             }

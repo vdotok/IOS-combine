@@ -572,6 +572,7 @@ class BroadcastView: UIView {
         }
         
         private func setOutGoingView(for session: VTokBaseSession) {
+            self.updateUser(count: session.connectedUsers.count)
             hangupBtn.isHidden = false
             switch session.broadcastType {
             case .group:
@@ -876,6 +877,8 @@ extension BroadcastView {
                 let audioData = dict["audioState"] as! Int
                 self.screenShareAudio.isSelected = audioData == 1 ? true : false
                 self.screenShareBtn.isSelected = videoData == 1 ? true : false
+                guard let connectedUsers = dict["connectedUsers"] as? Int else {return}
+                self.updateUser(count: connectedUsers)
                print(audioData)
             }
         }

@@ -183,8 +183,10 @@ class SampleHandler: RPBroadcastSampleHandler {
     func fetchSessions() {
         let audioState = audioState.screenShareAudio.rawValue
         let videoState = screenState.screenShareScreen.rawValue
+        let connectedUsers = baseSession?.connectedUsers.count
         let json = ["audioState": audioState,
-                    "videoState": videoState]
+                    "videoState": videoState,
+                    "connectedUsers": connectedUsers]
         let jsonData = try! JSONEncoder().encode(json)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
         wormhole.passMessageObject(jsonString, identifier: "configureLocalStream")
