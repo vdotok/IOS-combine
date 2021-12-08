@@ -142,7 +142,7 @@ extension CallingPresenter {
             playSound()
             output?(.loadIncomingCallView(session: session, user: selectedUser))
             self.session = session
-          //  callHangupHandling()
+            callHangupHandling()
         case .videoAndScreenShare:
             handleBroadcast()
         case .fetchStreams:
@@ -179,6 +179,8 @@ extension CallingPresenter {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
             })
+            timer.invalidate()
+            counter = 0
         
         }
     }
@@ -198,7 +200,7 @@ extension CallingPresenter {
                                               callType: .manytomany)
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
-      //  callHangupHandling()
+        callHangupHandling()
     }
     
     @discardableResult
@@ -227,7 +229,7 @@ extension CallingPresenter {
         }
         
         vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
-     //   callHangupHandling()
+        callHangupHandling()
         return requestId
     }
     
@@ -294,6 +296,8 @@ extension CallingPresenter: StreamingDelegate {
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         self.session = session
         output?(.configureRemote(streams: streams, session: session))
+        timer.invalidate()
+        counter = 0
     }
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
@@ -393,7 +397,8 @@ extension CallingPresenter: CallingPresenterInterface {
         }
         output?(.updateHangupButton(status: false))
         vtokSdk?.accept(session: session)
-        
+        timer.invalidate()
+        counter = 0
     }
     
     func rejectCall(session: VTokBaseSession) {

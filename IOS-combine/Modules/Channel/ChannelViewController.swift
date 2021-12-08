@@ -63,14 +63,11 @@ final class ChannelViewController: UIViewController {
         super.viewWillAppear(animated)
         configureNavigationBar()
         presenter.viewWillAppear()
-        NotificationCenter.default.addObserver(self, selector: #selector(didDismiss), name: Notification.Name("didDismiss"), object: nil)
-        
         wormhole.listenForMessage(withIdentifier: "sessionHangup") { _ in
             if UIScreen.main.isCaptured {
                 if let bannerView = AppDelegate.appDelegate.screenShareBannerView {
                     bannerView.removeFromSuperview()
                 }
-                
             }
         }
         if presenter.streamingManager.activeSession() != 0 {
@@ -174,16 +171,9 @@ final class ChannelViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "UserResponse")
         defaults.synchronize()
-        
-//        UserDefaults.standard.removeObject(forKey: "UserResponse")
         presenter.logout()
         navigationController?.presentWireframe(LoginWireframe(streamingManager: self.presenter.streamingManager))
-     //   navigationController?.presentWireframe(LoginWireframe(streamingManager: <#StreamingMananger#>))
-        
-    }
-    
-    @objc func didDismiss() {
-        
+
     }
     
     @objc func didTapHangup() {
@@ -215,18 +205,14 @@ final class ChannelViewController: UIViewController {
                 }
             case .connected(let sdkType):
                 if sdkType == SDKType.chat {
-                 //   emptyViewStatus.backgroundColor = .green
                     viewStatus.backgroundColor = .green
                 } else if sdkType == .stream {
-                  //  emptyViewStatusVideoStream.backgroundColor = .green
                     viewStatusVideoStream.backgroundColor = .green
                 }
             case .disconnected(let sdkType):
                 if sdkType == SDKType.chat {
-                //    emptyViewStatus.backgroundColor = .red
                     viewStatus.backgroundColor = .red
                 } else if sdkType == .stream {
-                //    emptyViewStatusVideoStream.backgroundColor = .red
                     viewStatusVideoStream.backgroundColor = .red
                 }
             }
@@ -270,18 +256,14 @@ extension ChannelViewController {
     func configureAppearance() {
         guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         userName.text = user.fullName
-      // emptyViewUserName.text = user.fullName
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ChannelCell", bundle: nil), forCellReuseIdentifier: "ChannelCell")
-        //    tableView(isHidden: viewModel.groups.count > 0 ? false : true)
         configureEmptyView()
         navigationTitle.text = "Chat Rooms"
         navigationTitle.font = UIFont(name: "Manrope-Medium", size: 20)
         navigationTitle.textColor = .appDarkGreenColor
         navigationTitle.sizeToFit()
-       
-        
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
@@ -296,25 +278,6 @@ extension ChannelViewController {
     }
     
     @objc func didTappedAdd() {
-        
-//        let view = GroupCallingUpdatedView.getView()
-//        self.incomingCallingView = view
-//
-//        guard let incomingCallingView = self.incomingCallingView else {return}
-////        view.configureView(baseSession: session, user: contact)
-////        view.session = session
-////        incomingCallingView.delegate = self
-//        incomingCallingView.translatesAutoresizingMaskIntoConstraints = false
-//        self.view.addSubview(incomingCallingView)
-//
-//        NSLayoutConstraint.activate([
-//            incomingCallingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-//            incomingCallingView.trailingAnchor.constraint(equalTo:self.view.trailingAnchor),
-//            incomingCallingView.topAnchor.constraint(equalTo: self.view.topAnchor),
-//            incomingCallingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-//        ])
-        
-        
         presenter.moveToCreateGroup()
     }
     
@@ -342,7 +305,6 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if presenter.isSearching {
-            // return pre.searchGroup.count
             return 0
         }
         return presenter.channelsCount()

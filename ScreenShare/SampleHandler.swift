@@ -34,11 +34,13 @@ class SampleHandler: RPBroadcastSampleHandler {
     var screenState: ScreenShareScreenState!
     let streamingManager = StreamingMananger()
     var userStream: UserStream?
+    var counter = 0
 
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
+    var callHangupTimer = Timer()
     
     
     override init() {
@@ -154,6 +156,8 @@ class SampleHandler: RPBroadcastSampleHandler {
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
         wormhole.passMessageObject(jsonString, identifier: message)
         vtokSdk.hangup(session: session)
+        callHangupTimer.invalidate()
+        counter = 0
         
         
     }
@@ -201,6 +205,7 @@ extension SampleHandler: SDKConnectionDelegate {
             guard let sdk = vtokSdk, let session = screenShareData else {return}
             self.screenShareData = session
             sdk.initiate(session: session.baseSession, sessionDelegate: self)
+            callHangupHandling()
         case .disconnected(_):
             print("==== screeen failed to registerd ====")
             break
@@ -247,6 +252,8 @@ extension SampleHandler: SessionDelegate {
         case .ringing:
             break
         case .connected:
+            callHangupTimer.invalidate()
+            counter = 0
             break
         case .failed:
             break
@@ -269,8 +276,6 @@ extension SampleHandler: SessionDelegate {
             wormhole.passMessageObject(nil, identifier: "sessionHangup")
             self.finishBroadcastWithError(SessionHangup.forceStop)
             print("test")
-            
-            break
         case .tryingToConnect:
             break
         case .reconnect:
@@ -303,6 +308,42 @@ extension SampleHandler {
         let requestId = self.request?.referenceID ?? ""
         let token = generatable.getUUID(string: time + tenantId + requestId)
         return token
+        
+    }
+}
+
+extension SampleHandler {
+    func callHangupHandling() {
+        callHangupTimer.invalidate()
+        counter = 0
+        callHangupTimer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(timerAction),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    @objc func timerAction() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            self.counter += 1
+            if self.counter > 30 {
+                guard let session = self.baseSession else {return}
+                self.counter = 0
+                self.callHangupTimer.invalidate()
+                switch session.sessionDirection {
+                case .incoming:
+                    self.vtokSdk?.reject(session: session)
+                    self.wormhole.passMessageObject(nil, identifier: "sessionHangup")
+                case .outgoing:
+                    self.vtokSdk?.hangup(session: session)
+                    
+                }
+                
+               
+            }
+        }
+      
         
     }
 }
