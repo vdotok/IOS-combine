@@ -9,12 +9,15 @@
 import UIKit
 
 protocol ContactCellProtocol: AnyObject {
-    func didTapChat()
+    func didTapChat(with user: User)
+    func didTapVideo(with user: User)
+    func didTapAudio(with user: User)
 }
 
 class ContactCell: UITableViewCell {
 
     @IBOutlet weak var userName: UILabel!
+    private var user: User?
     weak var delegate: ContactCellProtocol?
 
     override func awakeFromNib() {
@@ -35,9 +38,21 @@ class ContactCell: UITableViewCell {
     
     func configure(with model: User) {
         userName.text = model.fullName
+        user = model
     }
     
     @IBAction func didTapChat(_ sender: UIButton) {
-        delegate?.didTapChat()
+        guard let user = user else { return }
+        delegate?.didTapChat(with: user)
+    }
+    
+    @IBAction func didTapVideo(_ sender: UIButton) {
+        guard let user = user else { return }
+        delegate?.didTapVideo(with: user)
+    }
+    
+    @IBAction func didTapAudio(_ sender: UIButton) {
+        guard let user = user else { return }
+        delegate?.didTapAudio(with: user)
     }
 }

@@ -311,6 +311,10 @@ extension CallingPresenter: StreamingDelegate {
             output?(.dismissCallView)
             return
         }
+        
+        if session.state == .connected {
+            didConnect()
+        }
         output?(.update(session: session))
 
     }

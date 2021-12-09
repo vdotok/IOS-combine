@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,17 +32,48 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ar-Jv-hbA">
-                        <rect key="frame" x="274" y="9" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="SuF-19-jhL"/>
-                            <constraint firstAttribute="width" constant="30" id="xjj-Nh-reg"/>
-                        </constraints>
-                        <state key="normal" image="message-circle"/>
-                        <connections>
-                            <action selector="didTapChat:" destination="cKX-Zg-3Vm" eventType="touchUpInside" id="eKB-gN-THW"/>
-                        </connections>
-                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aa9-gt-hPG">
+                        <rect key="frame" x="186" y="9" width="122" height="30"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKj-xP-a4e">
+                                <rect key="frame" x="0.0" y="0.0" width="47.5" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Icon ionic-ios-videocam">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" image="Icon ionic-ios-videocam">
+                                    <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapVideo:" destination="cKX-Zg-3Vm" eventType="touchUpInside" id="yYK-ct-W3f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNt-Ty-Gej">
+                                <rect key="frame" x="47.5" y="0.0" width="44.5" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="call">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" image="call">
+                                    <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapAudio:" destination="cKX-Zg-3Vm" eventType="touchUpInside" id="3kN-Ig-vY4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ar-Jv-hbA">
+                                <rect key="frame" x="92" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SuF-19-jhL"/>
+                                    <constraint firstAttribute="width" constant="30" id="xjj-Nh-reg"/>
+                                </constraints>
+                                <state key="normal" image="message-circle"/>
+                                <connections>
+                                    <action selector="didTapChat:" destination="cKX-Zg-3Vm" eventType="touchUpInside" id="eKB-gN-THW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-wG-K3b">
                         <rect key="frame" x="16" y="52" width="288" height="1"/>
                         <color key="backgroundColor" name="AppDarkGreenColor"/>
@@ -52,12 +84,12 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="9ar-Jv-hbA" firstAttribute="trailing" secondItem="yCh-wG-K3b" secondAttribute="trailing" id="IWa-GZ-ibG"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yCh-wG-K3b" secondAttribute="bottom" priority="250" constant="23" id="MOy-SC-RDq"/>
+                    <constraint firstItem="aa9-gt-hPG" firstAttribute="centerY" secondItem="F4z-mD-i6e" secondAttribute="centerY" id="Mue-0A-bAD"/>
                     <constraint firstItem="yCh-wG-K3b" firstAttribute="centerX" secondItem="evV-f9-rk1" secondAttribute="centerX" id="VRI-3e-gul"/>
                     <constraint firstItem="yCh-wG-K3b" firstAttribute="leading" secondItem="evV-f9-rk1" secondAttribute="leading" constant="16" id="XIM-2F-yKb"/>
+                    <constraint firstAttribute="trailing" secondItem="aa9-gt-hPG" secondAttribute="trailing" constant="12" id="ddn-zP-wgh"/>
                     <constraint firstItem="F4z-mD-i6e" firstAttribute="top" secondItem="evV-f9-rk1" secondAttribute="top" constant="12" id="mVI-f4-OTk"/>
-                    <constraint firstItem="9ar-Jv-hbA" firstAttribute="centerY" secondItem="F4z-mD-i6e" secondAttribute="centerY" id="op6-Ou-vm8"/>
                     <constraint firstItem="F4z-mD-i6e" firstAttribute="leading" secondItem="evV-f9-rk1" secondAttribute="leading" constant="16" id="uOU-6s-FED"/>
                     <constraint firstItem="yCh-wG-K3b" firstAttribute="top" secondItem="F4z-mD-i6e" secondAttribute="bottom" constant="16" id="wM3-qV-CnY"/>
                 </constraints>
@@ -70,7 +102,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Icon ionic-ios-videocam" width="23.5" height="14"/>
         <image name="User" width="24" height="24"/>
+        <image name="call" width="20.5" height="20"/>
         <image name="message-circle" width="26.5" height="29"/>
         <namedColor name="AppDarkGreenColor">
             <color red="0.396078431372549" green="0.60784313725490191" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

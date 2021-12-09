@@ -252,7 +252,7 @@ extension CallingViewController: BroadcastDelegate {
     }
     
     func didTapRoute() {
-        AVAudioSession().ChangeAudioOutput(presenterViewController: self)
+      //  AVAudioSession().ChangeAudioOutput(presenterViewController: self)
         
     }
     

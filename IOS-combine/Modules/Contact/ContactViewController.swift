@@ -171,7 +171,18 @@ extension ContactViewController: UISearchBarDelegate {
 }
 
 extension ContactViewController: ContactCellProtocol {
-    func didTapChat() {
-
+    func didTapChat(with user: User) {
+        
     }
+    
+    func didTapVideo(with user: User) {
+        
+    }
+    
+    func didTapAudio(with user: User) {
+        
+    }
+    
+
+    
 }
