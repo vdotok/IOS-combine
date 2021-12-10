@@ -69,9 +69,9 @@ extension ContactPresenter: ContactPresenterInterface {
     func makeCall(mediaType: SessionMediaType, user: User) {
         switch mediaType {
         case .audioCall:
-            wireframe.navigate(to: .call, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+            wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
         case .videoCall:
-            wireframe.navigate(to: .call, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+            wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
         }
     }
     
@@ -108,7 +108,7 @@ extension ContactPresenter: ContactPresenterInterface {
             guard let client = client
             else {return}
             wireframe.navigate(to: .createGroup, client: client, group: nil, user: nil, vtokSdk: nil)
-        case .call:
+        default:
             break
         }
 

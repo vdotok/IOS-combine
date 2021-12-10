@@ -45,16 +45,24 @@ extension ContactWireframe: ContactWireframeInterface {
             navigationController?.pushWireframe(wireFrame)
         case .createGroup:
             navigationController?.pushWireframe(CreateGroupWireframe(client: client, streamingManager: streamingManager))
-        case .call:
+        case .videoCall:
             guard let vtokSdk = vtokSdk else {
                 return
             }
-            let callingWireFrame = CallingWireframe(vtokSdk: vtokSdk , participants: nil, screenType: .oneToOne, session: nil, contact: [user!], broadCastData: nil, streamingManager: streamingManager, sessionDirection: .outgoing)
-            navigationController?.viewControllers.last?.presentWireframe(callingWireFrame)
-            
-            break
-            
+
+            moveToCallingView(with: vtokSdk, user: user, callType: .videoCall)
+        case .audioCall:
+            guard let vtokSdk = vtokSdk else {
+                return
+            }
+            moveToCallingView(with: vtokSdk, user: user, callType: .audioCall)
         }
+    }
+    
+    private func moveToCallingView(with sdk: VTokSDK,user: User?, callType: SessionMediaType ) {
+       
+        let callingWireFrame = CallingWireframe(vtokSdk: sdk , participants: nil, screenType: callType == .audioCall ? .oneToOneAudio : .oneToOneVideo, session: nil, contact: [user!], broadCastData: nil, streamingManager: streamingManager, sessionDirection: .outgoing)
+        navigationController?.viewControllers.last?.presentWireframe(callingWireFrame)
     }
     
 

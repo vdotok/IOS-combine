@@ -11,7 +11,8 @@ import Foundation
 enum ContactNavigationOptions {
     case chat
     case createGroup
-    case call
+    case audioCall
+    case videoCall
 }
 
 struct AllUsersResponse: Codable {
