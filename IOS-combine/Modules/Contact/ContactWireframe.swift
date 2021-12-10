@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKStreaming
 import iOSSDKConnect
 
 final class ContactWireframe: BaseWireframe<ContactViewController> {
@@ -19,12 +20,12 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
     var streamingManager: StreamingMananger
     // MARK: - Module setup -
 
-    init(client: ChatClient, streamingManager: StreamingMananger) {
+    init(client: ChatClient, streamingManager: StreamingMananger, vtokSdk: VTokSDK) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ContactViewController.self)
         self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
         let interactor = ContactInteractor()
-        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client, streamingManager: streamingManager)
+        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client, streamingManager: streamingManager, vtokSdk: vtokSdk)
         interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
@@ -34,7 +35,7 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
 // MARK: - Extensions -
 
 extension ContactWireframe: ContactWireframeInterface {
-    func navigate(to: ContactNavigationOptions, client: ChatClient, group: Group? = nil, user: UserResponse? = nil) {
+    func navigate(to: ContactNavigationOptions, client: ChatClient, group: Group? = nil, user: User? = nil, vtokSdk: VTokSDK? = nil) {
         switch to {
         case .chat:
             guard let group = group,
@@ -44,6 +45,15 @@ extension ContactWireframe: ContactWireframeInterface {
             navigationController?.pushWireframe(wireFrame)
         case .createGroup:
             navigationController?.pushWireframe(CreateGroupWireframe(client: client, streamingManager: streamingManager))
+        case .call:
+            guard let vtokSdk = vtokSdk else {
+                return
+            }
+            let callingWireFrame = CallingWireframe(vtokSdk: vtokSdk , participants: nil, screenType: .oneToOne, session: nil, contact: [user!], broadCastData: nil, streamingManager: streamingManager, sessionDirection: .outgoing)
+            navigationController?.viewControllers.last?.presentWireframe(callingWireFrame)
+            
+            break
+            
         }
     }
     

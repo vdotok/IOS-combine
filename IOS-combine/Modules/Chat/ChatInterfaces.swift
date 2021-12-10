@@ -26,7 +26,7 @@ protocol ChatPresenterInterface: PresenterInterface {
     var group: Group? {get set}
     var interactor: ChatInteractorInterface? {get set}
     var messages: [ChatMessage]? {get set}
-    var user: UserResponse? {get set}
+    var user: User? {get set}
     var chatOutput: ChatOutput? {get set}
     var sdk: VTokSDK? {get set}
     var streamingManager: StreamingMananger? {get set}
@@ -53,6 +53,6 @@ protocol ChatInteractorInterface: InteractorInterface {
 
 protocol ChatInteractorToPresenter: AnyObject {
     func update(messages: [ChatMessage])
-    func updateGroup(with group: Group, user: UserResponse, messages: [ChatMessage])
+    func updateGroup(with group: Group, user: User, messages: [ChatMessage])
     func reloadCell(with indexPath: IndexPath)
 }

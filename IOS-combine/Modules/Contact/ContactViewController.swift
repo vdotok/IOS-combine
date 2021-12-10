@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import iOSSDKStreaming
 
 final class ContactViewController: UIViewController {
 
@@ -132,9 +133,6 @@ extension ContactViewController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let user = presenter.viewModelItem(row: indexPath.row)
-        presenter.createGroup(with: user)
-        
     }
     public func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSection: Int = 0
@@ -171,18 +169,13 @@ extension ContactViewController: UISearchBarDelegate {
 }
 
 extension ContactViewController: ContactCellProtocol {
+    
     func didTapChat(with user: User) {
-        
+        presenter.createGroup(with: user)
     }
     
-    func didTapVideo(with user: User) {
-        
+    func makeCall(for mediaType: SessionMediaType, user: User) {
+        presenter.makeCall(mediaType: mediaType, user: user)
     }
-    
-    func didTapAudio(with user: User) {
-        
-    }
-    
-
     
 }

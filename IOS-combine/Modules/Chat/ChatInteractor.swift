@@ -15,7 +15,7 @@ final class ChatInteractor {
     
     
     var mqttClient: ChatClient?
-    var user: UserResponse
+    var user: User
     var group: Group
     var broadcastData: BroadcastData?
     var messages: [ChatMessage]
@@ -23,7 +23,7 @@ final class ChatInteractor {
         presenter?.updateGroup(with: group, user: user, messages: messages)
     }}
     
-    init(mqttClient: ChatClient, user: UserResponse, group: Group, messages:[ChatMessage]) {
+    init(mqttClient: ChatClient, user: User, group: Group, messages:[ChatMessage]) {
         self.mqttClient = mqttClient
         self.user = user
         self.group = group
@@ -49,7 +49,7 @@ extension ChatInteractor: ChatInteractorInterface {
         let message = MessageModel(id: UUID().uuidString,
                                    to: group.channelName,
                                    key: group.channelKey,
-                                   from: user.refID!,
+                                   from: user.refID,
                                    content: text.prefix(400).description,
                                    size: 0,
                                    isGroupMessage: false,
@@ -64,7 +64,7 @@ extension ChatInteractor: ChatInteractorInterface {
             let messageModel = MessageModel(id: UUID().uuidString,
                                             to: group.channelName,
                                             key: group.channelKey,
-                                            from: user.refID!,
+                                            from: user.refID,
                                             type: "typing",
                                             content: "1",
                                             size: 0,
@@ -76,7 +76,7 @@ extension ChatInteractor: ChatInteractorInterface {
             let messageModel = MessageModel(id: UUID().uuidString,
                                             to: group.channelName,
                                             key: group.channelKey,
-                                            from: user.refID!,
+                                            from: user.refID,
                                             type: "typing",
                                             content: "0",
                                             size: 0,
@@ -93,7 +93,7 @@ extension ChatInteractor: ChatInteractorInterface {
             let receipt = ReceiptModel(type: ReceiptType.seen.rawValue,
                                        key: group.channelKey, date: 1622801248314,
                                        messageId: message.id,
-                                       from: user.fullName!,
+                                       from: user.fullName,
                                        topic: group.channelName)
             if user.fullName != message.sender {
                 self.messages[row].status = .seen
@@ -147,7 +147,7 @@ extension ChatInteractor: ChatInteractorInterface {
     func publish(file data: Data, with ext: String, type: Int) {
         let now = Date()
         let timeInterval = now.millisecondsSince1970
-        mqttClient?.publish(file: data, fileExt: ext, topic: group.channelName, key: group.channelKey, from: user.refID!, type: type, date: timeInterval)
+        mqttClient?.publish(file: data, fileExt: ext, topic: group.channelName, key: group.channelKey, from: user.refID, type: type, date: timeInterval)
         ProgressHud.show()
     }
     func itemAt(row: Int) -> (ChatMessage,CellType) {

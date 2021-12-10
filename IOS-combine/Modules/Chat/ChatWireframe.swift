@@ -22,7 +22,7 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
 
     // MARK: - Module setup -
 
-    init(client: ChatClient, group: Group, user: UserResponse, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil) {
+    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
         super.init(viewController: moduleViewController)
 

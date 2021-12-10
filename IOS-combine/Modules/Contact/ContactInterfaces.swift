@@ -10,12 +10,13 @@
 
 import UIKit
 import iOSSDKConnect
+import iOSSDKStreaming
 
 typealias ContactOutput = (ContactPresenter.Output) -> Void
 typealias AllUserComplition = ((Result<AllUsersResponse, Error>) -> Void)
 
 protocol ContactWireframeInterface: WireframeInterface {
-    func navigate(to : ContactNavigationOptions, client: ChatClient, group: Group?, user: UserResponse?)
+    func navigate(to : ContactNavigationOptions, client: ChatClient, group: Group?, user: User?, vtokSdk: VTokSDK?)
 }
 
 protocol ContactViewInterface: ViewInterface {
@@ -35,6 +36,7 @@ protocol ContactPresenterInterface: PresenterInterface {
     func filterGroups(with text: String)
     func createGroup(with user: User)
     func navigate(to : ContactNavigationOptions, group: Group?)
+    func makeCall(mediaType: SessionMediaType, user: User)
 }
 
 protocol ContactInteractorInterface: InteractorInterface {

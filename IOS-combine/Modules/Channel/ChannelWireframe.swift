@@ -58,7 +58,7 @@ extension ChannelWireframe: ChannelWireframeInterface {
         navigationController?.presentWireframe(frame)
     }
     
-    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: UserResponse, messages: [ChatMessage], sdk: VTokSDK? = nil, streamingManager: StreamingMananger) {
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: User, messages: [ChatMessage], sdk: VTokSDK? = nil, streamingManager: StreamingMananger) {
         switch to {
         case .chat:
             guard let group = group else {return}
@@ -73,9 +73,9 @@ extension ChannelWireframe: ChannelWireframeInterface {
         }
     }
     
-    func moveToCreateGroup(client: ChatClient) {
+    func moveToCreateGroup(client: ChatClient, sdk: VTokSDK) {
         
-        let frame = ContactWireframe(client: client, streamingManager: self.streamingManager!)
+        let frame = ContactWireframe(client: client, streamingManager: self.streamingManager!, vtokSdk: sdk)
         navigationController?.pushWireframe(frame)
     }
     

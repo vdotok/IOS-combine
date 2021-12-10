@@ -31,6 +31,7 @@ class GroupCallingUpdatedView: UIView {
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var backbutton: UIButton!
     @IBOutlet weak var callingStackView: UIStackView!
+    @IBOutlet weak var groupName: UILabel!
     @IBOutlet weak var connectedUser: UILabel!
 
     var viewModel: GroGroupCallingUpdatedViewModel?
@@ -128,12 +129,28 @@ class GroupCallingUpdatedView: UIView {
         }
         
         switch session.sessionMediaType {
+            
         case .audioCall:
+            switch session.callType {
+            case .onetoone:
+                guard let users = users, let user = users.first, session.sessionDirection == .outgoing else {return}
+                groupName.text = user.fullName
+            default:
+                break
+            }
             titleLable.text = "You are audio calling with"
             cameraSwitch.isHidden = true
             cameraButton.isHidden = true
             
         case .videoCall:
+            switch session.callType {
+            case .onetoone:
+                guard let users = users, let user = users.first, session.sessionDirection == .outgoing else {return}
+                groupName.text = user.fullName
+                
+            default:
+                break
+            }
             titleLable.text = "You are video calling with"
         }
     }
@@ -223,6 +240,11 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         let stream = userStreams[indexPath.row]
         cell.configure(with: stream, users: users!)
         return cell
+    }
+    
+    func setRemote(name: String) {
+        groupName.text = name
+        titleLable.text = "You are video calling with"
     }
     
     func updateDataSource(with streams: [UserStream], session: VTokBaseSession) {

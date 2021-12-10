@@ -119,7 +119,8 @@ extension CreateGroupPresenter: CreateGroupPresenterInterface {
     }
     func moveToChat(group: Group) {
         guard let user = VDOTOKObject<UserResponse>().getData() else {return}
-        wireframe.moveToChat(with: client, group: group, user: user)
+        let tempUser = User(email: "", fullName: user.fullName!, refID: user.refID!, userID: user.userID!)
+        wireframe.moveToChat(with: client, group: group, user: tempUser)
     }
     
 }

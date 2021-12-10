@@ -11,6 +11,7 @@ import Foundation
 enum ContactNavigationOptions {
     case chat
     case createGroup
+    case call
 }
 
 struct AllUsersResponse: Codable {
@@ -26,6 +27,7 @@ struct AllUsersResponse: Codable {
 }
 
 // MARK: - User
+
 struct User: Codable {
     let email, fullName, refID: String
     let userID: Int

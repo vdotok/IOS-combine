@@ -16,4 +16,5 @@ enum ScreenType {
     case fetchStreams
     case fetchonetomany
     case broadcastOnly
+    case oneToOne
 }

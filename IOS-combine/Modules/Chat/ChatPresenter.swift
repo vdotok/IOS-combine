@@ -22,7 +22,7 @@ final class ChatPresenter {
     var mqtt: ChatClient?
     var group: Group?
     var messages: [ChatMessage]? = []
-    var user: UserResponse?
+    var user: User?
     var chatOutput: ChatOutput?
     var sdk: VTokSDK?
     var streamingManager: StreamingMananger?
@@ -92,7 +92,7 @@ extension ChatPresenter: ChatPresenterInterface {
 }
 
 extension ChatPresenter: ChatInteractorToPresenter {
-    func updateGroup(with group: Group, user: UserResponse, messages: [ChatMessage]) {
+    func updateGroup(with group: Group, user: User, messages: [ChatMessage]) {
         self.group = group
         self.user = user
         self.messages = messages

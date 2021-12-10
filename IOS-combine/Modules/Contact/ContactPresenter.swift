@@ -10,6 +10,7 @@
 
 import Foundation
 import iOSSDKConnect
+import iOSSDKStreaming
 
 final class ContactPresenter {
 
@@ -24,6 +25,7 @@ final class ContactPresenter {
     var output: ContactOutput?
     var client: ChatClient?
     var streamingManager: StreamingMananger
+    var vtokSdk: VTokSDK
     // MARK: - Lifecycle -
 
     init(
@@ -31,13 +33,15 @@ final class ContactPresenter {
         interactor: ContactInteractorInterface,
         wireframe: ContactWireframeInterface,
         client: ChatClient,
-        streamingManager: StreamingMananger
+        streamingManager: StreamingMananger,
+        vtokSdk: VTokSDK
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
         self.client = client
         self.streamingManager = streamingManager
+        self.vtokSdk = vtokSdk
     }
     
     func viewModelDidLoad() {
@@ -61,7 +65,15 @@ final class ContactPresenter {
 // MARK: - Extensions -
 
 extension ContactPresenter: ContactPresenterInterface {
-  
+    
+    func makeCall(mediaType: SessionMediaType, user: User) {
+        switch mediaType {
+        case .audioCall:
+            wireframe.navigate(to: .call, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+        case .videoCall:
+            wireframe.navigate(to: .call, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+        }
+    }
     
     func rowsCount() -> Int {
         return isSearching ? searchContacts.count : contacts.count
@@ -90,11 +102,14 @@ extension ContactPresenter: ContactPresenterInterface {
                   let user = VDOTOKObject<UserResponse>().getData(),
                   let group = group
             else {return }
-            wireframe.navigate(to: to, client: client, group: group , user: user)
+            let tempUser = User(email: "", fullName: user.fullName!, refID: user.refID!, userID: user.userID!)
+            wireframe.navigate(to: to, client: client, group: group , user: tempUser, vtokSdk: nil)
         case .createGroup:
             guard let client = client
             else {return}
-            wireframe.navigate(to: .createGroup, client: client, group: nil, user: nil)
+            wireframe.navigate(to: .createGroup, client: client, group: nil, user: nil, vtokSdk: nil)
+        case .call:
+            break
         }
 
     }

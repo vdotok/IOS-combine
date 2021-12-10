@@ -7,13 +7,23 @@
 //
 
 import Foundation
-struct UserResponse: Codable {
-    let authToken, authorizationToken, fullName: String?
+
+protocol UserProtocol: Codable {
+    var userID: Int? { get set }
+    var refID: String? { get set }
+    var fullName: String? { get set }
+}
+
+
+struct UserResponse: UserProtocol {
+    let authToken, authorizationToken: String?
+    var fullName: String?
     let message: String
     let processTime: Int?
-    let refID: String?
+    var refID: String?
     let mediaServerMap: ServerMap?
-    let status, userID: Int?
+    let status: Int?
+    var userID: Int?
     let messagingServerMap: ServerMap?
     
     

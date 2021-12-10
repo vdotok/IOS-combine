@@ -22,6 +22,7 @@ final class CallingViewController: UIViewController {
     var broadcastView: BroadcastView?
     var counter = 0
     var timer = Timer()
+    var remoteUserName: String = ""
 
     var presenter: CallingPresenterInterface!
 
@@ -139,6 +140,12 @@ final class CallingViewController: UIViewController {
         case .manytomany, .onetoone:
             guard let groupCallingView = groupCallingView else {return}
             groupCallingView.updateDataSource(with: streams, session: session)
+            groupCallingView.users = presenter.users
+            if session.sessionDirection == .incoming {
+                groupCallingView.setRemote(name: remoteUserName)
+            }
+            
+            
         case .onetomany:
             guard let broadcastView = self.broadcastView else {return}
             broadcastView.configureView(with: streams, and: session)
@@ -179,7 +186,8 @@ final class CallingViewController: UIViewController {
     
     private func loadIncomingCallView(session: VTokBaseSession, contact: User) {
         let view = IncomingCall.loadView()
-        self.incomingCallingView = view
+        incomingCallingView = view
+        remoteUserName = contact.fullName
         
         guard let incomingCallingView = self.incomingCallingView else {return}
         view.configureView(baseSession: session, user: contact)

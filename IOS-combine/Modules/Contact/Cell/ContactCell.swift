@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import iOSSDKStreaming
 
 protocol ContactCellProtocol: AnyObject {
     func didTapChat(with user: User)
-    func didTapVideo(with user: User)
-    func didTapAudio(with user: User)
+    func makeCall(for mediaType: SessionMediaType, user: User)
 }
 
 class ContactCell: UITableViewCell {
@@ -48,11 +48,11 @@ class ContactCell: UITableViewCell {
     
     @IBAction func didTapVideo(_ sender: UIButton) {
         guard let user = user else { return }
-        delegate?.didTapVideo(with: user)
+        delegate?.makeCall(for: .videoCall, user: user)
     }
     
     @IBAction func didTapAudio(_ sender: UIButton) {
         guard let user = user else { return }
-        delegate?.didTapAudio(with: user)
+        delegate?.makeCall(for: .audioCall, user: user)
     }
 }

@@ -143,19 +143,20 @@ extension ChannelPresenter: ChannelPresenterInterface {
     }
     
     func moveToCreateGroup() {
-        guard let client = mqttClient else {return}
-        wireframe.moveToCreateGroup(client: client)
+        guard let client = mqttClient, let sdk = vtokSDK else {return}
+        wireframe.moveToCreateGroup(client: client, sdk: sdk)
     }
     
     
     func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?) {
         guard let client = mqttClient,let user = VDOTOKObject<UserResponse>().getData() else {return}
+        let tempUser = User(email: "", fullName: user.fullName ?? "", refID: user.refID ?? "", userID: user.userID ?? 0)
         switch to {
         case .chat:
            guard let group = group else {return}
-            wireframe.move(to: .chat, client: client, group: group, user: user, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
+            wireframe.move(to: .chat, client: client, group: group, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
         case .broadcastOverlay:
-            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: user, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
+            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
         }
     }
     
