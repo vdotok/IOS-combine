@@ -225,6 +225,7 @@ final class ChannelViewController: UIViewController {
         guard let chats = userInfo["chatMessages"] as? [ChatMessage] else {return}
         presenter.messages[channelName] = chats
         presenter.unreadMessages[channelName]?.removeAll()
+        presenter.removeMessages(with: channelName)
     }
 
     func configureNavigationBar() {

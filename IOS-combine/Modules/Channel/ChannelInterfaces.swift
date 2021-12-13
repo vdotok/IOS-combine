@@ -69,7 +69,8 @@ protocol ChannelPresenterInterface: PresenterInterface {
     func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?)
     func moveToCreateGroup()
     func deleteGroup(with id: Int)
-    func editGroup(with title: String, id: Int) 
+    func editGroup(with title: String, id: Int)
+    func removeMessages(with channelName: String)
 
 }
 
@@ -80,6 +81,7 @@ protocol ChannelInteractorInterface: InteractorInterface {
     func fetchGroups()
     func fetchUsers()
     func connectVdoTok()
+    func removeUnreadMessages(with channelName: String)
   
 }
 

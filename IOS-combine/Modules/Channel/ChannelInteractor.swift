@@ -41,7 +41,10 @@ final class ChannelInteractor {
 // MARK: - Extensions -
 
 extension ChannelInteractor: ChannelInteractorInterface {
-   
+    func removeUnreadMessages(with channelName: String) {
+      //  messages[channelName] = chats
+        unreadMessages[channelName]?.removeAll()
+    }
     
     func fetchUsers() {
         contactService.fetchContacts { [weak self] result in

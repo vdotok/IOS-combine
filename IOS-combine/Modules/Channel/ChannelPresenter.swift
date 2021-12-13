@@ -73,6 +73,8 @@ final class ChannelPresenter {
 
 extension ChannelPresenter: ChannelPresenterInterface {
   
+    
+  
     func viewDidLoad() {
         fetchGroups()
         interactor?.connectVdoTok()
@@ -185,6 +187,9 @@ extension ChannelPresenter: ChannelPresenterInterface {
         }
     }
     
+    func removeMessages(with channelName: String) {
+        interactor?.removeUnreadMessages(with: channelName)
+    }
 }
 
 
@@ -324,8 +329,40 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     func messageReceived(with readMessages: [String : [ChatMessage]], unreadMessages: [String : [ChatMessage]]) {
         self.messages = readMessages
         self.unreadMessages = unreadMessages
+        sortGroupsByMessageTime()
         channelOutput?(.reload)
     }
+    
+    
+    private func sortGroupsByMessageTime() {
+        let readMessageIDs = getGroupIDs(from: self.messages)
+        let set = readMessageIDs
+        var sortedGroups = [Group]()
+        for id in set {
+        guard let group = self.groups.first(where: {$0.channelName == id}) else {continue}
+        sortedGroups.append(group)
+        self.groups.removeAll(where: {$0.id == group.id})
+        }
+        self.groups.insert(contentsOf: sortedGroups, at: 0)
+        
+    }
+    
+    private func getGroupIDs(from messages: [String: [ChatMessage]]) -> [String] {
+        var lastMessages = [String: ChatMessage]()
+        for msg in messages {
+            let id = msg.key
+            let lastMessage = msg.value.sorted(by:{$0.date > $1.date}).first
+            lastMessages[id] = lastMessage
+        }
+        let sortedMessages = lastMessages.sorted(by: {$0.value.date > $1.value.date})
+        let groupIds = sortedMessages.map({$0.key})
+        return groupIds
+        
+    }
+
+
+    
+    
     
     func updatePresence(with presence: [String : [String]]) {
         self.presentCandidates = presence
