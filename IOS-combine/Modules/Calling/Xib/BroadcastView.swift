@@ -163,6 +163,8 @@ class BroadcastView: UIView {
     
 
     
+    
+    
     @IBAction func didTapStream(_ sender: UIButton) {
         delegate?.didTapStream(with: .initiate)
     }
@@ -646,6 +648,10 @@ class BroadcastView: UIView {
             }
             
         }
+    
+    deinit {
+        print("broadcastView")
+    }
 
 }
 

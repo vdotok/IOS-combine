@@ -162,7 +162,7 @@ final class ChatViewController: UIViewController {
     func showBroadcastBanner() {
         
         guard let manager = presenter.streamingManager, AppDelegate.appDelegate.screenShareBannerView == nil else {return}
-        if UIScreen.main.isCaptured  {
+        if UIScreen.main.isCaptured && presenter.streamingManager?.activeSession() == 0  {
             DispatchQueue.main.async { [weak self] in
                 self?.tableViewTopConstraint.constant = 20
             }

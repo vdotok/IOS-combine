@@ -32,37 +32,37 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aa9-gt-hPG">
-                        <rect key="frame" x="186" y="9" width="122" height="30"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="aa9-gt-hPG">
+                        <rect key="frame" x="194" y="9" width="114" height="30"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKj-xP-a4e">
-                                <rect key="frame" x="0.0" y="0.0" width="47.5" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="En0-oD-FMs"/>
+                                    <constraint firstAttribute="width" constant="30" id="P8E-HE-o2V"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="Icon ionic-ios-videocam">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <buttonConfiguration key="configuration" style="plain" image="Icon ionic-ios-videocam">
-                                    <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain" image="Icon ionic-ios-videocam"/>
                                 <connections>
                                     <action selector="didTapVideo:" destination="cKX-Zg-3Vm" eventType="touchUpInside" id="yYK-ct-W3f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNt-Ty-Gej">
-                                <rect key="frame" x="47.5" y="0.0" width="44.5" height="30"/>
+                                <rect key="frame" x="42" y="0.0" width="30" height="30"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="call">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <buttonConfiguration key="configuration" style="plain" image="call">
-                                    <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain" image="call"/>
                                 <connections>
                                     <action selector="didTapAudio:" destination="cKX-Zg-3Vm" eventType="touchUpInside" id="3kN-Ig-vY4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ar-Jv-hbA">
-                                <rect key="frame" x="92" y="0.0" width="30" height="30"/>
+                                <rect key="frame" x="84" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="SuF-19-jhL"/>
                                     <constraint firstAttribute="width" constant="30" id="xjj-Nh-reg"/>
