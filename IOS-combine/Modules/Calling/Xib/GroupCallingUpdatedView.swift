@@ -136,6 +136,7 @@ class GroupCallingUpdatedView: UIView {
                 guard let users = users, let user = users.first, session.sessionDirection == .outgoing else {return}
                 groupName.text = user.fullName
             default:
+                groupName.text = "Group"
                 break
             }
             titleLable.text = "You are audio calling with"
@@ -149,8 +150,11 @@ class GroupCallingUpdatedView: UIView {
                 groupName.text = user.fullName
                 
             default:
+                groupName.text = "Group"
                 break
             }
+            cameraButton.isHidden = false
+            cameraSwitch.isHidden = false
             titleLable.text = "You are video calling with"
         }
     }
@@ -216,15 +220,17 @@ class GroupCallingUpdatedView: UIView {
         callStatus.isHidden = true
         userNames.isHidden = true
         speakerButton.isHidden = false
+        cameraSwitch.isHidden = true
         if session.sessionMediaType == .videoCall {
             cameraSwitch.isHidden = false
             cameraButton.isEnabled = true
+            cameraButton.isHidden = false
         }
         userAvatar.isHidden = true
         speakerButton.isHidden = false
        // configureTimer()
         callingStackView.isHidden = false
-        cameraSwitch.isHidden = false
+ 
     }
 
 }
@@ -243,8 +249,19 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func setRemote(name: String) {
-        groupName.text = name
-        titleLable.text = "You are video calling with"
+        switch session?.callType {
+        case .onetoone:
+            if session?.sessionMediaType == .videoCall {
+                titleLable.text = "You are video calling with"
+            } else {
+                titleLable.text = "You are audio calling with"
+            }
+            groupName.text = name
+           
+        default:
+            groupName.text = "Group"
+        }
+       
     }
     
     func updateDataSource(with streams: [UserStream], session: VTokBaseSession) {

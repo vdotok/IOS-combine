@@ -215,8 +215,7 @@ extension CallingPresenter {
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
-                                              callType: participantsRefIds.count == 1 ? .onetoone
-                                              : .manytomany)
+                                              callType: .manytomany)
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
         callHangupHandling()

@@ -58,17 +58,17 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="atO-nL-8Pe">
-                    <rect key="frame" x="350" y="202" width="32" height="104"/>
+                    <rect key="frame" x="350" y="202" width="32" height="32"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-Fq-ifd">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-Fq-ifd">
+                            <rect key="frame" x="0.0" y="0.0" width="32" height="0.0"/>
                             <state key="normal" image="noun_Switch"/>
                             <connections>
                                 <action selector="didTapCameraSwitch:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="K6U-ng-sbI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh7-nN-2ad">
-                            <rect key="frame" x="0.0" y="72" width="32" height="32"/>
+                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                             <state key="normal" image="Volumn On"/>
                             <state key="selected" image="Volume Off"/>
                             <connections>
@@ -78,10 +78,10 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="foV-TZ-2vw">
-                    <rect key="frame" x="87" y="782" width="240" height="60"/>
+                    <rect key="frame" x="132" y="782" width="150" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6b-pa-cTX">
-                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6b-pa-cTX">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                             <state key="normal" image="stopvideo"/>
                             <state key="selected" image="video"/>
                             <connections>
@@ -89,14 +89,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbX-Hg-sz4">
-                            <rect key="frame" x="90" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                             <state key="normal" image="end"/>
                             <connections>
                                 <action selector="didTapHangup:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="WNC-bd-iAt"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygx-0w-WsE">
-                            <rect key="frame" x="180" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="90" y="0.0" width="60" height="60"/>
                             <state key="normal" image="mute"/>
                             <state key="selected" image="unMute"/>
                             <connections>
