@@ -12,6 +12,7 @@ target 'IOS-combine' do
     pod 'InternalStrategy', :path => '../internal_strategy'
     pod "VisualEffectView"
     pod 'MMWormhole'
+    pod 'CocoaMQTT'
     
 
 end

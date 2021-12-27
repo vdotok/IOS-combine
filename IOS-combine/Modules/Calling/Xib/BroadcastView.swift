@@ -743,8 +743,8 @@ extension BroadcastView {
         
         //tell the window which screen to use
         self.externalWindow?.screen = screen
-        
-        let stream = streams.first!
+        guard let firstStream = streams.first else {return}
+        let stream = firstStream
         let renderer = stream.renderer
         self.externalWindow.addSubview(renderer)
         renderer.fixInSuperView()
