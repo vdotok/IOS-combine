@@ -105,7 +105,7 @@ extension CreateGroupViewController {
     @objc func didTappedAdd() {
         if presenter.selectedItems.count >= 1 {
             if presenter.selectedItems.count < 2 {
-                guard let user = presenter.contacts.first else { return }
+                guard let user = presenter.contacts.filter({$0.userID == presenter.selectedItems.first!}).first else { return }
                 presenter.createGroup(with: user)
                 return
             }

@@ -572,7 +572,7 @@ extension CallingPresenter {
         let data = ScreenShareAppData(url: user.mediaServerMap!.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
-        self.ssSession = session
+        self.ssSession = session 
         output?(.loadBroadcastView(session: session))
         let jsonData = try! JSONEncoder().encode(data)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString

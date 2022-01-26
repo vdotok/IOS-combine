@@ -179,7 +179,7 @@ final class ChannelViewController: UIViewController {
     @objc func didTapHangup() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
-            AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
+            AppDelegate.appDelegate.smallCallingView?.removeFromSuperview()
             self.tableViewTopConstraint.constant = 0
             AppDelegate.appDelegate.smallCallingView = nil
         }

@@ -104,6 +104,8 @@ class SampleHandler: RPBroadcastSampleHandler {
     
     func getScreenShareAppData(with message: String) {
         
+        
+        
         guard let data = message.data(using: .utf8) else {return }
         screenShareData = try? JSONDecoder().decode(ScreenShareAppData.self, from: data)
         guard screenShareData != nil else { return }

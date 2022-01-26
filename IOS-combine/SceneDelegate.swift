@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.overrideUserInterfaceStyle = .light
    
         let navigationControlr = UINavigationController()
-        guard let _ =  VDOTOKObject<UserResponse>().getData() else {
+        guard let user =  VDOTOKObject<UserResponse>().getData() else {
             let controller = LoginWireframe(streamingManager: streamingManager).viewController
             self.window?.rootViewController = controller
             window?.makeKeyAndVisible()
