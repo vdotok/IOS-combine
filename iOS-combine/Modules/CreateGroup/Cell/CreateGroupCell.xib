@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="74" id="KGk-i7-Jjw" customClass="CreateGroupCell" customModule="Chat_Demo_IOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="xiX-zz-GTB">
+                        <rect key="frame" x="16" y="10" width="133" height="24"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="T9S-cD-j2T">
+                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jason Bailey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR1-RF-EWb">
+                                <rect key="frame" x="38" y="0.0" width="95" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-qr-Lmz">
+                        <rect key="frame" x="16" y="50" width="288" height="1"/>
+                        <color key="backgroundColor" name="AppDarkGreenColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="85w-Jp-DAf"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="kTA-j2-WQo"/>
+                        </constraints>
+                    </view>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCo-oA-vWl">
+                        <rect key="frame" x="274" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="ZS1-cs-bMj"/>
+                            <constraint firstAttribute="width" constant="30" id="c7B-FJ-LuB"/>
+                        </constraints>
+                        <state key="normal" image="left-arrow"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xiX-zz-GTB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="GAj-xr-zZN"/>
+                    <constraint firstItem="Fd5-qr-Lmz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="KpB-NA-Ws6"/>
+                    <constraint firstItem="Fd5-qr-Lmz" firstAttribute="top" secondItem="xiX-zz-GTB" secondAttribute="bottom" constant="16" id="MCu-CO-7oD"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Fd5-qr-Lmz" secondAttribute="bottom" priority="250" constant="23" id="TFC-zj-jgf"/>
+                    <constraint firstItem="XCo-oA-vWl" firstAttribute="centerY" secondItem="xiX-zz-GTB" secondAttribute="centerY" id="fso-g8-AVo"/>
+                    <constraint firstItem="XCo-oA-vWl" firstAttribute="trailing" secondItem="Fd5-qr-Lmz" secondAttribute="trailing" id="gth-yw-moJ"/>
+                    <constraint firstItem="Fd5-qr-Lmz" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="nxL-uj-wUE"/>
+                    <constraint firstItem="xiX-zz-GTB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="zHA-lo-RTi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="tickImage" destination="XCo-oA-vWl" id="Ydk-jN-xNQ"/>
+                <outlet property="userName" destination="eR1-RF-EWb" id="HYv-ay-iVW"/>
+            </connections>
+            <point key="canvasLocation" x="3" y="43"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="User" width="24" height="24"/>
+        <image name="left-arrow" width="28" height="30.5"/>
+        <namedColor name="AppDarkGreenColor">
+            <color red="0.396078431372549" green="0.60784313725490191" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

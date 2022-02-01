@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chat Screen View Controller-->
+        <scene sceneID="wj9-b2-6Q8">
+            <objects>
+                <viewController storyboardIdentifier="ChatScreenViewController" id="yNj-G0-2LL" customClass="ChatScreenViewController" customModule="Chat_Demo_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E8v-Hc-GEB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5zK-M9-gEI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="866"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cjk-jL-p2Y">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="762"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vcO-o4-e1i">
+                                        <rect key="frame" x="0.0" y="762" width="414" height="104"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtw-kn-I6n" userLabel="MessageInputBar">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zOj-Uc-OET">
+                                                        <rect key="frame" x="8" y="8" width="398" height="38"/>
+                                                        <subviews>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pE3-dX-uzO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="38"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="38" id="OuV-j5-ai5"/>
+                                                                </constraints>
+                                                                <color key="textColor" systemColor="labelColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            </textView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="zOj-Uc-OET" firstAttribute="top" secondItem="wtw-kn-I6n" secondAttribute="top" constant="8" id="Kxh-FC-wfi"/>
+                                                    <constraint firstItem="zOj-Uc-OET" firstAttribute="leading" secondItem="wtw-kn-I6n" secondAttribute="leading" constant="8" id="ScU-zz-77w"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zOj-Uc-OET" secondAttribute="trailing" constant="8" id="epd-yN-y1r"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zOj-Uc-OET" secondAttribute="bottom" constant="8" id="fkd-dt-sM7"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMc-IF-zvu">
+                                                <rect key="frame" x="0.0" y="54" width="414" height="50"/>
+                                                <subviews>
+                                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U49-hQ-oyx">
+                                                        <rect key="frame" x="360" y="10" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="9ei-Yw-duh"/>
+                                                            <constraint firstAttribute="width" constant="30" id="qHa-VN-njK"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Icon-send"/>
+                                                        <connections>
+                                                            <action selector="didTapSend:" destination="yNj-G0-2LL" eventType="touchUpInside" id="iyL-ik-sLb"/>
+                                                        </connections>
+                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MsT-eR-jCl">
+                                                        <rect key="frame" x="24" y="8" width="60" height="34"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBu-pY-bTP">
+                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="34"/>
+                                                                <state key="normal" image="Icon material-image"/>
+                                                                <connections>
+                                                                    <action selector="didTapImage:" destination="yNj-G0-2LL" eventType="touchUpInside" id="aw4-TR-jid"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msN-GQ-ThV">
+                                                                <rect key="frame" x="40" y="0.0" width="20" height="34"/>
+                                                                <state key="normal" image="Icon ionic-ios-add-circle-outline"/>
+                                                                <connections>
+                                                                    <action selector="didTapAttachment:" destination="yNj-G0-2LL" eventType="touchUpInside" id="hsJ-Qe-Tb1"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="MsT-eR-jCl" secondAttribute="bottom" constant="8" id="b6M-3h-2Sh"/>
+                                                    <constraint firstItem="MsT-eR-jCl" firstAttribute="top" secondItem="gMc-IF-zvu" secondAttribute="top" constant="8" id="d0k-JQ-OVn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="U49-hQ-oyx" secondAttribute="trailing" constant="24" id="hrH-0U-cOP"/>
+                                                    <constraint firstItem="U49-hQ-oyx" firstAttribute="centerY" secondItem="MsT-eR-jCl" secondAttribute="centerY" id="u8E-QY-lpP"/>
+                                                    <constraint firstItem="MsT-eR-jCl" firstAttribute="leading" secondItem="gMc-IF-zvu" secondAttribute="leading" constant="24" id="xr0-y5-xcV"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <view hidden="YES" alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xD-bC-PyZ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="h9h-Ht-iNv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5zK-M9-gEI" firstAttribute="top" secondItem="E8v-Hc-GEB" secondAttribute="top" id="2bE-ul-vTL"/>
+                            <constraint firstItem="5zK-M9-gEI" firstAttribute="leading" secondItem="E8v-Hc-GEB" secondAttribute="leading" id="5sZ-w0-YaX"/>
+                            <constraint firstAttribute="bottom" secondItem="5zK-M9-gEI" secondAttribute="bottom" constant="30" id="TF2-T4-9hA"/>
+                            <constraint firstItem="8xD-bC-PyZ" firstAttribute="trailing" secondItem="h9h-Ht-iNv" secondAttribute="trailing" id="lhm-1W-uHl"/>
+                            <constraint firstItem="8xD-bC-PyZ" firstAttribute="leading" secondItem="h9h-Ht-iNv" secondAttribute="leading" id="s7l-br-sic"/>
+                            <constraint firstAttribute="trailing" secondItem="5zK-M9-gEI" secondAttribute="trailing" id="tzR-78-bUa"/>
+                            <constraint firstItem="8xD-bC-PyZ" firstAttribute="top" secondItem="h9h-Ht-iNv" secondAttribute="top" id="vDD-nR-M8k"/>
+                            <constraint firstItem="h9h-Ht-iNv" firstAttribute="bottom" secondItem="8xD-bC-PyZ" secondAttribute="bottom" id="xPp-gd-ffG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="blurView" destination="8xD-bC-PyZ" id="2OA-Bo-1eB"/>
+                        <outlet property="bottomConstraint" destination="TF2-T4-9hA" id="hfu-8f-0P6"/>
+                        <outlet property="messageInputHieght" destination="OuV-j5-ai5" id="PVH-fg-I6z"/>
+                        <outlet property="messageTextField" destination="pE3-dX-uzO" id="V2V-iu-bVZ"/>
+                        <outlet property="sendMessageButton" destination="U49-hQ-oyx" id="6sO-eT-e04"/>
+                        <outlet property="tableView" destination="Cjk-jL-p2Y" id="7PF-3k-vbx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KHl-lC-3nE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="147.82608695652175" y="47.544642857142854"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon ionic-ios-add-circle-outline" width="20" height="20"/>
+        <image name="Icon material-image" width="18" height="18.5"/>
+        <image name="Icon-send" width="20" height="18"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
