@@ -1,8 +1,9 @@
 //
 //  NextButton.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 20/05/2021.
+//  Created by usama farooq on 03/11/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation

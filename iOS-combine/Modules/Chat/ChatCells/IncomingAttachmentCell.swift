@@ -3,11 +3,12 @@
 //  Chat-Demo-IOS
 //
 //  Created by usama farooq on 31/05/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
 
-protocol DidTapAttachmentDelagate: class {
+protocol DidTapAttachmentDelagate: AnyObject {
     func didTapAttachment(url: URL)
 }
 

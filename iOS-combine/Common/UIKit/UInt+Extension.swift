@@ -1,8 +1,9 @@
 //
 //  UInt+Extension.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 03/06/2021.
+//  Created by usama farooq on 01/09/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation

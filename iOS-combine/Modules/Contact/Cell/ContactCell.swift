@@ -1,22 +1,23 @@
 //
 //  ContactCell.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 20/05/2021.
+//  Created by usama farooq on 01/09/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
+import iOSSDKStreaming
 
-protocol ContactCellProtocol: class {
-    func didTapChat(cell: UITableViewCell)
-    func didTapVideo(user: User)
-    func didTapAudio(user: User)
+protocol ContactCellProtocol: AnyObject {
+    func didTapChat(with user: User)
+    func makeCall(for mediaType: SessionMediaType, user: User)
 }
 
 class ContactCell: UITableViewCell {
-    
+
     @IBOutlet weak var userName: UILabel!
-    var user: User?
+    private var user: User?
     weak var delegate: ContactCellProtocol?
 
     override func awakeFromNib() {
@@ -37,21 +38,21 @@ class ContactCell: UITableViewCell {
     
     func configure(with model: User) {
         userName.text = model.fullName
-        self.user = model
+        user = model
     }
     
     @IBAction func didTapChat(_ sender: UIButton) {
-        delegate?.didTapChat(cell: self)
-    }
-    
-    @IBAction func didTapAudio(_ sender: UIButton) {
-        guard let user = user else {return}
-        delegate?.didTapAudio(user: user)
+        guard let user = user else { return }
+        delegate?.didTapChat(with: user)
     }
     
     @IBAction func didTapVideo(_ sender: UIButton) {
-        guard let user = user else {return }
-        delegate?.didTapVideo(user: user)
+        guard let user = user else { return }
+        delegate?.makeCall(for: .videoCall, user: user)
     }
     
+    @IBAction func didTapAudio(_ sender: UIButton) {
+        guard let user = user else { return }
+        delegate?.makeCall(for: .audioCall, user: user)
+    }
 }

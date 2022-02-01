@@ -3,18 +3,13 @@
 //  Many-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
 import iOSSDKStreaming
 
-protocol VideoDelegate: class {
-    func didTapVideo(for baseSession: VTokBaseSession, state: VideoState)
-    func didTapMute(for baseSession: VTokBaseSession, state: AudioState)
-    func didTapEnd(for baseSession: VTokBaseSession)
-    func didTapFlip(for baseSession: VTokBaseSession, type: CameraType)
-    func didTapSpeaker(baseSession: VTokBaseSession, state: SpeakerState)
-}
+
 
 
 
@@ -106,7 +101,7 @@ class GroupCallingView: UIView {
             localView.isHidden = false
             cameraSwitch.isHidden = false
             cameraButton.isHidden = false
-      
+       
         }
     }
     
@@ -162,7 +157,6 @@ class GroupCallingView: UIView {
         speakerButton.isHidden = false
         cameraSwitch.isHidden = false
         speakerButton.isHidden = false
-        configureTimer()
     }
     
     func loadViewFor(mediaType: SessionMediaType) {
@@ -179,6 +173,7 @@ class GroupCallingView: UIView {
             cameraSwitch.isHidden = false
             cameraButton.isEnabled = false
             speakerButton.isSelected = true
+   
         }
         
     }
@@ -371,35 +366,6 @@ extension GroupCallingView {
 }
 
 extension GroupCallingView {
-    private func configureTimer() {
-        timer?.invalidate()
-        timer = nil
-        counter = 0
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-    }
-    
-    @objc private func timerAction() {
-        counter += 1
-        let (h, m, s) = secondsToHoursMinutesSeconds(seconds: counter)
-        var timeString = ""
-        if h > 0 {
-            timeString += intervalFormatter(interval: h) + ":"
-        }
-        timeString += intervalFormatter(interval: m) + ":" +
-                        intervalFormatter(interval: s)
-        callTime.text = timeString
-    }
-    
-    private func intervalFormatter(interval: Int) -> String {
-        if interval < 10 {
-            return "0\(interval)"
-        }
-        return "\(interval)"
-    }
-    
-    private func secondsToHoursMinutesSeconds (seconds :Int) -> (hours: Int, minutes: Int, seconds: Int) {
-      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
 }
 
 extension GroupCallingView {

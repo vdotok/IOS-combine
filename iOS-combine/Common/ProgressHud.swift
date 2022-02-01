@@ -1,8 +1,9 @@
 //
 //  ProgressHud.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 07/05/2021.
+//  Created by usama farooq on 31/08/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
@@ -16,11 +17,15 @@ class ProgressHud {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    static func show(viewController: UIViewController) {
+    static func show(viewController: UIViewController = UIViewController()) {
         KRProgressHUD.show()
     }
     
     static func hide() {
         KRProgressHUD.dismiss()
+    }
+    
+    static func showMessage(text: String) {
+        KRProgressHUD.showMessage(text)
     }
 }

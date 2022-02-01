@@ -1,11 +1,13 @@
 //
 //  Service.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 05/05/2021.
+//  Created by usama farooq on 30/08/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
+
 enum ServiceError: Error {
     case noData
     case requestEncodingError(error: Error)
@@ -45,8 +47,8 @@ final class NetworkService: Service {
         let request = request.request()
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
+            if let _ = response {
+              //  print(response)
             }
             guard let data = data else {
                 completion(.failure(ServiceError.noData))

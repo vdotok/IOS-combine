@@ -1,14 +1,15 @@
 //
 //  ImagePicker.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 26/05/2021.
+//  Created by usama farooq on 01/09/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public protocol ImagePickerDelegate: class {
+public protocol ImagePickerDelegate: AnyObject {
     func didSelect(image: UIImage?)
 }
 

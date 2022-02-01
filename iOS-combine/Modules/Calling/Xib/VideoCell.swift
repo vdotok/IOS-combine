@@ -3,6 +3,7 @@
 //  Many-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
@@ -34,8 +35,11 @@ class VideoCell: UICollectionViewCell {
     
     func configure(with stream: UserStream, users: [User]?) {
         
-        guard let user = users, let currentUser = user.filter({$0.refID == stream.referenceID}).first else{return}
-        remoteName.text = currentUser.fullName
+//        guard let user = users, let currentUser = user.filter({$0.refID == stream.referenceID}).first else{
+//            return
+//
+//        }
+       // remoteName.text = currentUser.fullName
         
         switch stream.sessionMediaType {
         case .audioCall:
@@ -57,9 +61,6 @@ class VideoCell: UICollectionViewCell {
             if let stateInformation = stream.stateInformation {
                 update(stateInformation: stateInformation)
             }
-            
-        default:
-            break
         }
     
     }

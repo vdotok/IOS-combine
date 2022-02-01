@@ -1,17 +1,25 @@
 //
 //  AppDelegate.swift
-//  Chat-Demo-IOS
+//  IOS-combine
 //
-//  Created by usama farooq on 05/05/2021.
+//  Created by usama farooq on 30/08/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
 import IQKeyboardManagerSwift
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    static var appDelegate: AppDelegate {
+        UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    var screenShareBannerView: ScreenShareBannerView!
+    var smallCallingView: SmallCallingView!
+    var publicURL: String!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true

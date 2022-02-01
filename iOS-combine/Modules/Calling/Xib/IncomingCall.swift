@@ -3,12 +3,13 @@
 //  Many-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
 import iOSSDKStreaming
 
-protocol IncomingCallDelegate: class {
+protocol IncomingCallDelegate: AnyObject {
     func didReject(session: VTokBaseSession)
     func didAccept(session: VTokBaseSession)
 }
@@ -34,9 +35,8 @@ class IncomingCall: UIView {
         case .videoCall:
             title.text = "Incoming Group Video Call from"
             
-            acceptButton.setImage(UIImage(named: "StopVideo"), for: .normal)
-        default:
-            break
+            acceptButton.setImage(UIImage(named: "stopvideo"), for: .normal)
+    
         }
     }
     
