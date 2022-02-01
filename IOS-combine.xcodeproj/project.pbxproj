@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -89,8 +89,6 @@
 		5D79CA5427327783008ACE13 /* IndigoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA5327327783008ACE13 /* IndigoButton.swift */; };
 		5D79CA582732A37B008ACE13 /* EditGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */; };
 		5D79CA5A2732A3A3008ACE13 /* EditGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79CA592732A3A3008ACE13 /* EditGroupService.swift */; };
-		5D7CD9F72791735A00F1105E /* iOSSDKConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7CD9F32791735400F1105E /* iOSSDKConnect.framework */; platformFilter = ios; };
-		5D7CD9F82791735A00F1105E /* iOSSDKConnect.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7CD9F32791735400F1105E /* iOSSDKConnect.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5D8199B726DCC10100B37B72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B626DCC10100B37B72 /* AppDelegate.swift */; };
 		5D8199B926DCC10100B37B72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199B826DCC10100B37B72 /* SceneDelegate.swift */; };
 		5D8199BB26DCC10100B37B72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8199BA26DCC10100B37B72 /* ViewController.swift */; };
@@ -162,36 +160,11 @@
 		5DF3D53A27144FA4004988F8 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3D53927144FA4004988F8 /* BroadcastData.swift */; };
 		5DF3D53B27144FA4004988F8 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF3D53927144FA4004988F8 /* BroadcastData.swift */; };
 		5DF3D53C27145042004988F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4B579926DE5F5E005185AE /* Constants.swift */; };
-		5DFAD9232790428C00A47167 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D285614279040B7002D88B0 /* iOSSDKStreaming.framework */; };
-		5DFAD9242790428C00A47167 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D285614279040B7002D88B0 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5DFAD9262790429300A47167 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D285614279040B7002D88B0 /* iOSSDKStreaming.framework */; };
-		5DFAD9272790429300A47167 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D285614279040B7002D88B0 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D707C7CA038CB4877C1DFBA /* Pods_ScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53027DE53F71055330E08EB2 /* Pods_ScreenShare.framework */; };
 		A4F5DC2C0B2A78BA87E6EDEB /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832E7532A33AD2055BC085E9 /* Pods_IOS_combine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5D285613279040B7002D88B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D28560F279040B7002D88B0 /* iOSSDKStreaming.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5D146FA225DE4823000852FB;
-			remoteInfo = iOSSDKStreaming;
-		};
-		5D7CD9F22791735400F1105E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D7CD9ED2791735400F1105E /* iOSSDKConnect.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0080171725482C730094136E;
-			remoteInfo = iOSSDKConnect;
-		};
-		5D7CD9F42791735400F1105E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D7CD9ED2791735400F1105E /* iOSSDKConnect.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0080172025482C730094136E;
-			remoteInfo = iOSSDKConnectTests;
-		};
 		5DF3D52827144DCA004988F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5D8199AB26DCC10100B37B72 /* Project object */;
@@ -237,7 +210,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5DFAD9242790428C00A47167 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,8 +220,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5D7CD9F82791735A00F1105E /* iOSSDKConnect.framework in Embed Frameworks */,
-				5DFAD9272790429300A47167 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +236,6 @@
 		5D1C58FA27156EEB006C149F /* BroadcastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BroadcastView.xib; sourceTree = "<group>"; };
 		5D1C58FD27156F2B006C149F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5D1C58FF27156F99006C149F /* DraggableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
-		5D28560F279040B7002D88B0 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
 		5D400AF8272D3F78006BB351 /* DeleteGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupRequest.swift; sourceTree = "<group>"; };
 		5D4B579726DE45F8005185AE /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
 		5D4B579926DE5F5E005185AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -342,7 +311,6 @@
 		5D79CA5327327783008ACE13 /* IndigoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndigoButton.swift; sourceTree = "<group>"; };
 		5D79CA572732A37B008ACE13 /* EditGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupRequest.swift; sourceTree = "<group>"; };
 		5D79CA592732A3A3008ACE13 /* EditGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupService.swift; sourceTree = "<group>"; };
-		5D7CD9ED2791735400F1105E /* iOSSDKConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKConnect.xcodeproj; path = "../../../ios-sdk-connect/iOSSDKConnect.xcodeproj"; sourceTree = "<group>"; };
 		5D8199B326DCC10100B37B72 /* IOS-combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-combine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8199B626DCC10100B37B72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D8199B826DCC10100B37B72 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -428,8 +396,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DFAD9262790429300A47167 /* iOSSDKStreaming.framework in Frameworks */,
-				5D7CD9F72791735A00F1105E /* iOSSDKConnect.framework in Frameworks */,
 				A4F5DC2C0B2A78BA87E6EDEB /* Pods_IOS_combine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,7 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF3D51727144DCA004988F8 /* ReplayKit.framework in Frameworks */,
-				5DFAD9232790428C00A47167 /* iOSSDKStreaming.framework in Frameworks */,
 				9D707C7CA038CB4877C1DFBA /* Pods_ScreenShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,22 +443,6 @@
 				5D79CA592732A3A3008ACE13 /* EditGroupService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		5D285610279040B7002D88B0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5D285614279040B7002D88B0 /* iOSSDKStreaming.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5D4B579E26DE6776005185AE /* Streaming */ = {
-			isa = PBXGroup;
-			children = (
-				5D28560F279040B7002D88B0 /* iOSSDKStreaming.xcodeproj */,
-			);
-			path = Streaming;
 			sourceTree = "<group>";
 		};
 		5D4B57A926DF63B4005185AE /* Chat */ = {
@@ -660,15 +609,6 @@
 			path = Xib;
 			sourceTree = "<group>";
 		};
-		5D7CD9EE2791735400F1105E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5D7CD9F32791735400F1105E /* iOSSDKConnect.framework */,
-				5D7CD9F52791735400F1105E /* iOSSDKConnectTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5D8199AA26DCC10100B37B72 = {
 			isa = PBXGroup;
 			children = (
@@ -694,9 +634,7 @@
 		5D8199B526DCC10100B37B72 /* IOS-combine */ = {
 			isa = PBXGroup;
 			children = (
-				5D9CF30727745CC400566F1D /* Connect */,
 				5DECB6332714525E00EB43EB /* IOS-combine.entitlements */,
-				5D4B579E26DE6776005185AE /* Streaming */,
 				5D4B579C26DE62D6005185AE /* vdotokCert.p12 */,
 				5D8199D526DCC2DB00B37B72 /* Common */,
 				5D8199CE26DCC25800B37B72 /* Service */,
@@ -846,14 +784,6 @@
 				5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		5D9CF30727745CC400566F1D /* Connect */ = {
-			isa = PBXGroup;
-			children = (
-				5D7CD9ED2791735400F1105E /* iOSSDKConnect.xcodeproj */,
-			);
-			path = Connect;
 			sourceTree = "<group>";
 		};
 		5DE4046C271DC55F005EA0DF /* Cell */ = {
@@ -1010,16 +940,6 @@
 			mainGroup = 5D8199AA26DCC10100B37B72;
 			productRefGroup = 5D8199B426DCC10100B37B72 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 5D7CD9EE2791735400F1105E /* Products */;
-					ProjectRef = 5D7CD9ED2791735400F1105E /* iOSSDKConnect.xcodeproj */;
-				},
-				{
-					ProductGroup = 5D285610279040B7002D88B0 /* Products */;
-					ProjectRef = 5D28560F279040B7002D88B0 /* iOSSDKStreaming.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				5D8199B226DCC10100B37B72 /* IOS-combine */,
@@ -1028,30 +948,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		5D285614279040B7002D88B0 /* iOSSDKStreaming.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iOSSDKStreaming.framework;
-			remoteRef = 5D285613279040B7002D88B0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5D7CD9F32791735400F1105E /* iOSSDKConnect.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = iOSSDKConnect.framework;
-			remoteRef = 5D7CD9F22791735400F1105E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5D7CD9F52791735400F1105E /* iOSSDKConnectTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = iOSSDKConnectTests.xctest;
-			remoteRef = 5D7CD9F42791735400F1105E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5D8199B126DCC10100B37B72 /* Resources */ = {
