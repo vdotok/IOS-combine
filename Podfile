@@ -8,8 +8,9 @@ target 'IOS-combine' do
   # Pods for IOS-combine
     pod 'KRProgressHUD'
     pod 'IQKeyboardManagerSwift'
+    pod 'InternalStrategy', :path => '../internal_strategy'
     pod 'VdoTokConnect' , :git => 'https://github.com/vdotok/VdoTokConnect.git'
-    pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
+   # pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
     pod "VisualEffectView"
     pod 'MMWormhole'
     pod 'CocoaMQTT'
@@ -21,5 +22,6 @@ target 'ScreenShare' do
   # Pods for screen share
     use_frameworks!
     pod 'MMWormhole'
-
+    pod 'InternalStrategy', :path => '../internal_strategy'
+    
 end
