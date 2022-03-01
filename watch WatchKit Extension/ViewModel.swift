@@ -15,6 +15,7 @@ class ViewModel: NSObject, WCSessionDelegate {
     var session: WCSession
     let heartRateQuantity = HKUnit(from: "count/min")
     var value: Int = 0
+    var ableToSend: Bool = false
     private var healthStore = HKHealthStore()
     init(session: WCSession = .default){
         self.session = session
@@ -32,7 +33,7 @@ class ViewModel: NSObject, WCSessionDelegate {
         // Requests permission to save and read the specified data types.
         healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { success, error in
             if success {
-                self.startHeartRateQuery(quantityTypeIdentifier: .heartRate)
+             //   self.startHeartRateQuery(quantityTypeIdentifier: .heartRate)
             }
             print(error)
         }
@@ -67,19 +68,26 @@ class ViewModel: NSObject, WCSessionDelegate {
         }
     
     private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
-            // variable initialization
-            var lastHeartRate = 0.0
-            
-            // cycle and value assignment
-            for sample in samples {
-                if type == .heartRate {
-                    lastHeartRate = sample.quantity.doubleValue(for: heartRateQuantity)
-                }
-                
-                self.value = Int(lastHeartRate)
-                print(value)
+        // variable initialization
+        var lastHeartRate = 0.0
+        
+        // cycle and value assignment
+        for sample in samples {
+            if type == .heartRate {
+                lastHeartRate = sample.quantity.doubleValue(for: heartRateQuantity)
             }
+            
+            self.value = Int(lastHeartRate)
+           
         }
+        if ableToSend {
+            session.sendMessage(["heartRate": self.value], replyHandler: nil) { error in
+                print(error)
+        }
+            ableToSend = false
+       
+        }
+    }
     
 //    private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
 //        // variable initialization
@@ -94,6 +102,7 @@ class ViewModel: NSObject, WCSessionDelegate {
 //            self.value = Int(lastHeartRate)
 //
 //
+    
 //        }
 //        session.sendMessage(["heartRate": self.value], replyHandler: nil) { error in
 //            print(error)
@@ -108,7 +117,8 @@ class ViewModel: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         print(message)
         if message["message"] as! String == "get_heartrate" {
-   //         startHeartRateQuery(quantityTypeIdentifier: .heartRate)
+            ableToSend = true
+            startHeartRateQuery(quantityTypeIdentifier: .heartRate)
         }
         
     }

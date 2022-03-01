@@ -275,7 +275,7 @@ extension ChannelInteractor: MessageDelegate {
         var tempMessages: [ChatMessage] = []
         var unreadMessages: [ChatMessage] = []
         
-        if message.type == "text" {
+        if message.type == "text" || message.type == "fetchingSensorData" || message.type == "sensorDataFetched"{
             let receipt = ReceiptModel(type: ReceiptType.delivered.rawValue, key: message.key, date: 1622801248314, messageId: message.id, from: user.fullName!, topic: message.to)
             
             self.send(receipt: receipt, status: .delivered, isMyMessage: user.refID == message.from)

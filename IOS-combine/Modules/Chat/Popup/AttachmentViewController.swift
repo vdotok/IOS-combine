@@ -7,10 +7,14 @@
 //
 
 import UIKit
+enum SensorType {
+    case heartBeat
+    case stepCount
+    case oxygenLevel
+}
 
 protocol AttachmentPickerDelegate: AnyObject {
-    func didSelectImage(data: Data)
-    func didSelectDocument(data: Data, fileExtension: String)
+    func didSend(sensorType: SensorType)
     func didCancel()
 }
 
@@ -39,11 +43,27 @@ class AttachmentViewController: UIViewController {
         
     }
     @objc func tapToDismiss(_ recognizer: UITapGestureRecognizer) {
+        
        self.dismiss(animated: true, completion: nil)
         delegate?.didCancel()
       
     }
     
+    
+    @IBAction func didStepCount(_ sender: UIButton) {
+        delegate?.didSend(sensorType: .stepCount)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapOxygen(_ sender: UIButton) {
+        delegate?.didSend(sensorType: .oxygenLevel)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapHeartBeat(_ sender: UIButton) {
+        delegate?.didSend(sensorType: .heartBeat)
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func didTapAlbum(_ sender: UIButton) {
         imagePicker.action(for: .photoLibrary)
@@ -63,7 +83,7 @@ extension AttachmentViewController:ImagePickerDelegate {
         if let image = image {
             let jpegData = image.jpegData(compressionQuality: 0.2)
             guard let data = jpegData else {return}
-            delegate?.didSelectImage(data: data)
+        //    delegate?.didSelectImage(data: data)
         }
     }
     
@@ -86,7 +106,7 @@ extension AttachmentViewController: DocumentPickerProtocol {
                 ProgressHud.showError(message: "File should be 6MBs", viewController: self)
                 return
             }
-            delegate?.didSelectDocument(data: documentData, fileExtension: fileExtn)
+          //  delegate?.didSelectDocument(data: documentData, fileExtension: fileExtn)
         }
     }
     

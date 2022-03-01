@@ -12,9 +12,9 @@ struct ContentView: View {
     var viewModel = ViewModel()
     var body: some View {
         VStack {
-            Text("Hello, World!")
+            Text("Hello VDO TOK ")
                 .padding()
-        }
+        }.background(Color.yellow)
     
     }
 }

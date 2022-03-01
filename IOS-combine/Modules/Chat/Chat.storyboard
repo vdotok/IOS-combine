@@ -69,38 +69,38 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QcI-yY-K9M">
-                                                        <rect key="frame" x="24" y="8" width="212.5" height="22"/>
+                                                        <rect key="frame" x="24" y="8" width="60" height="22"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41B-ZD-GgL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="22"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
                                                                 <state key="normal" image="Icon material-image"/>
                                                                 <connections>
                                                                     <action selector="didTapImage:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="drK-dt-Z1I"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA1-ns-8fP">
-                                                                <rect key="frame" x="46.5" y="0.0" width="26.5" height="22"/>
+                                                                <rect key="frame" x="40" y="0.0" width="20" height="22"/>
                                                                 <state key="normal" image="Icon ionic-ios-add-circle-outline"/>
                                                                 <connections>
                                                                     <action selector="didTapAttachment:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="FzC-ka-VK4"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vge-zr-Ubd">
-                                                                <rect key="frame" x="93" y="0.0" width="26.5" height="22"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vge-zr-Ubd">
+                                                                <rect key="frame" x="60" y="0.0" width="0.0" height="22"/>
                                                                 <state key="normal" image="heart.fill" catalog="system"/>
                                                                 <connections>
                                                                     <action selector="didTapHeartCount:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="QJw-TT-niy"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsJ-f1-ZrZ">
-                                                                <rect key="frame" x="139.5" y="0.0" width="26.5" height="22"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsJ-f1-ZrZ">
+                                                                <rect key="frame" x="60" y="0.0" width="0.0" height="22"/>
                                                                 <state key="normal" image="drop.fill" catalog="system"/>
                                                                 <connections>
                                                                     <action selector="didTapbloodOxygen:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="xY9-Tk-Lgo"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t34-5F-ECX">
-                                                                <rect key="frame" x="186" y="0.0" width="26.5" height="22"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t34-5F-ECX">
+                                                                <rect key="frame" x="60" y="0.0" width="0.0" height="22"/>
                                                                 <state key="normal" image="stethoscope" catalog="system"/>
                                                                 <connections>
                                                                     <action selector="didTapStepsCount:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="9Gc-Nb-yaK"/>

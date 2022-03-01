@@ -221,16 +221,6 @@ final class ChatViewController: UIViewController {
         
     }
     
-    @IBAction func didTapStepsCount(_ sender: UIButton) {
-        presenter.sendMessage(text: "#sc#")
-    }
-    @IBAction func didTapHeartCount(_ sender: UIButton) {
-        presenter.sendMessage(text: "#hr#")
-    }
-    @IBAction func didTapbloodOxygen(_ sender: UIButton) {
-        presenter.sendMessage(text: "#bo#")
-    }
-    
     func bindPresenter() {
         presenter.chatOutput = { [unowned self] output in
             switch output {
@@ -440,16 +430,19 @@ extension ChatViewController: UITextViewDelegate {
 // MARK: AttachmentPickerDelegate
 
 extension ChatViewController: AttachmentPickerDelegate {
-    func didSelectImage(data: Data) {
-        
+    func didSend(sensorType: SensorType) {
+        blurView.isHidden = true
+        switch sensorType {
+        case .heartBeat:
+            presenter.sendMessage(text: "#hr#")
+        case .stepCount:
+            presenter.sendMessage(text: "#sc#")
+        case .oxygenLevel:
+            presenter.sendMessage(text: "#bo#")
+        }
     }
-    
-    func didSelectDocument(data: Data, fileExtension: String) {
-        
-    }
-    
     func didCancel() {
-        
+        blurView.isHidden = true
     }
     
     

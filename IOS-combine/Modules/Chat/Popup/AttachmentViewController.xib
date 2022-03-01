@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AttachmentViewController" customModule="Chat_Demo_IOS" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AttachmentViewController" customModule="IOS_combine" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="jJ1-Rs-FDZ" id="ZtM-Hc-dHN"/>
                 <outlet property="mainTitle" destination="IKt-JZ-Kqz" id="6Fm-ki-aGQ"/>
@@ -25,7 +26,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJ1-Rs-FDZ">
-                    <rect key="frame" x="24" y="213.5" width="366" height="298"/>
+                    <rect key="frame" x="24" y="207.5" width="366" height="310"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-67-81T">
                             <rect key="frame" x="36" y="36" width="294" height="30"/>
@@ -51,48 +52,36 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="7XQ-wF-TbL">
-                            <rect key="frame" x="36" y="98" width="294" height="170"/>
+                            <rect key="frame" x="36" y="98" width="294" height="182"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Rvu-W1-Tyn">
-                                    <rect key="frame" x="0.0" y="0.0" width="294" height="76"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="294" height="82"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1e-a4-dDU">
-                                            <rect key="frame" x="0.0" y="0.0" width="98" height="76"/>
-                                            <state key="normal" image="File"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="147" height="82"/>
+                                            <state key="normal" image="Group 1991"/>
                                             <connections>
-                                                <action selector="didTapFile:" destination="-1" eventType="touchUpInside" id="4N6-DH-89a"/>
+                                                <action selector="didTapOxygen:" destination="-1" eventType="touchUpInside" id="him-Ba-Lwa"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rn-5x-1y0">
-                                            <rect key="frame" x="98" y="0.0" width="98" height="76"/>
-                                            <state key="normal" image="Camera"/>
+                                            <rect key="frame" x="147" y="0.0" width="147" height="82"/>
+                                            <state key="normal" image="Group 1990"/>
                                             <connections>
-                                                <action selector="didTapCamera:" destination="-1" eventType="touchUpInside" id="IKJ-xt-dPN"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV2-rI-cCM">
-                                            <rect key="frame" x="196" y="0.0" width="98" height="76"/>
-                                            <state key="normal" image="Album"/>
-                                            <connections>
-                                                <action selector="didTapAlbum:" destination="-1" eventType="touchUpInside" id="ijn-jo-dpP"/>
+                                                <action selector="didStepCount:" destination="-1" eventType="touchUpInside" id="pGf-R1-4fq"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="2OM-75-yxj">
-                                    <rect key="frame" x="0.0" y="94" width="294" height="76"/>
+                                    <rect key="frame" x="0.0" y="100" width="294" height="82"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zy-BC-lax">
-                                            <rect key="frame" x="0.0" y="0.0" width="98" height="76"/>
-                                            <state key="normal" image="Audio"/>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0n0-WG-sRx">
-                                            <rect key="frame" x="98" y="0.0" width="98" height="76"/>
-                                            <state key="normal" image="Location"/>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a72-5e-v7d">
-                                            <rect key="frame" x="196" y="0.0" width="98" height="76"/>
-                                            <state key="normal" image="Contact"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="294" height="82"/>
+                                            <state key="normal" image="Group 1989"/>
+                                            <connections>
+                                                <action selector="didTapHeartBeat:" destination="-1" eventType="touchUpInside" id="HTa-Ws-yEn"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -126,12 +115,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Album" width="64" height="76"/>
-        <image name="Audio" width="64" height="76"/>
-        <image name="Camera" width="64" height="76"/>
-        <image name="Contact" width="64" height="76"/>
-        <image name="File" width="64" height="76"/>
-        <image name="Location" width="64" height="76"/>
+        <image name="Group 1989" width="64" height="82"/>
+        <image name="Group 1990" width="89" height="82"/>
+        <image name="Group 1991" width="89" height="82"/>
         <image name="close" width="24" height="28"/>
     </resources>
 </document>
