@@ -10,11 +10,14 @@
 
 import Foundation
 import iOSSDKConnect
+import WatchConnectivity
+import HealthKit
 
-final class ChatInteractor {
+final class ChatInteractor: NSObject {
     
-    
+
     var mqttClient: ChatClient?
+    let healthStore = HKHealthStore()
     var user: User
     var group: Group
     var broadcastData: BroadcastData?
@@ -22,14 +25,23 @@ final class ChatInteractor {
     weak var presenter: ChatInteractorToPresenter? {didSet {
         presenter?.updateGroup(with: group, user: user, messages: messages)
     }}
+    var session: WCSession
     
-    init(mqttClient: ChatClient, user: User, group: Group, messages:[ChatMessage]) {
+    init(mqttClient: ChatClient, user: User, group: Group, messages:[ChatMessage],session: WCSession = .default) {
+        
         self.mqttClient = mqttClient
         self.user = user
         self.group = group
         self.messages = messages
+        self.session = session
+        super.init()
+        getHealthKitPermission()
         setupDelegates()
+        session.delegate = self
+        session.activate()
+        
     }
+    
     
 }
 
@@ -122,6 +134,31 @@ extension ChatInteractor: ChatInteractorInterface {
 
             return
         }
+        if username != user.refID {
+            if content.contains("#sc#")  {
+                getStepsCount(forSpecificDate: Date()) { [weak self] steps in
+                    guard let self = self else {return}
+                    self.sendMessage(with: "\(steps)")
+                }
+                return
+            }
+            
+            if content.contains("#hr#") {
+                session.sendMessage(["message": "get_heartrate"], replyHandler: nil) { error in
+                    print(error)
+                }
+            }
+            
+            if content.contains("#bo#") {
+                sendOxygenLevel()
+            }
+        } else {
+            if content.contains("#sc#") || content.contains("#hr#") || content.contains("#bo#") {
+                return
+            }
+        }
+     
+        
         if content.isEmpty {
 
             if let mediaType = mediaType {
@@ -137,6 +174,9 @@ extension ChatInteractor: ChatInteractorInterface {
             return
         }
 
+        if content.contains("#sc#") || content.contains("#hr#") || content.contains("#bo#") {
+            return
+        }
         let chatMessage = ChatMessage(id: id,sender: username, content: content, status: user.refID == username ? .sent :.delivered, date: date)
         messages.append(chatMessage)
         presenter?.update(messages: messages)
@@ -233,4 +273,185 @@ extension ChatInteractor {
                                              "participants": group.participants]
         NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
     }
+}
+
+extension ChatInteractor: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        switch activationState {
+        case .activated:
+            print("activated")
+        case .inactive:
+            print("inactive")
+        case .notActivated:
+            print("notActivated")
+        default:
+             break
+        }
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        
+        guard let heartRate = message["heartRate"] as? Int else {return}
+        sendMessage(with: "\(heartRate)")
+    }
+}
+
+
+extension ChatInteractor {
+    func getStepsCount(forSpecificDate:Date, completion: @escaping (Double) -> Void) {
+            let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+            let (start, end) = self.getWholeDate(date: forSpecificDate)
+
+            let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
+
+            let query = HKStatisticsQuery(quantityType: stepsQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, _ in
+                guard let result = result, let sum = result.sumQuantity() else {
+                    completion(0.0)
+                    return
+                }
+                completion(sum.doubleValue(for: HKUnit.count()))
+            }
+
+            self.healthStore.execute(query)
+        }
+
+        func getWholeDate(date : Date) -> (startDate:Date, endDate: Date) {
+            var startDate = date
+            var length = TimeInterval()
+            _ = Calendar.current.dateInterval(of: .day, start: &startDate, interval: &length, for: startDate)
+            let endDate:Date = startDate.addingTimeInterval(length)
+            return (startDate,endDate)
+        }
+    
+    func getHealthKitPermission() {
+
+     
+            guard HKHealthStore.isHealthDataAvailable() else {
+                return
+            }
+
+            let stepsCount = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!
+
+            self.healthStore.requestAuthorization(toShare: [], read: [stepsCount]) { (success, error) in
+                if success {
+                    print("Permission accept.")
+                }
+                else {
+                    if error != nil {
+                        print(error ?? "")
+                    }
+                    print("Permission denied.")
+                }
+            }
+        
+    }
+    public func getOxygenLevel(completion: @escaping (Double?, Error?) -> Void) {
+
+        guard let oxygenQuantityType = HKQuantityType.quantityType(forIdentifier: .oxygenSaturation) else {
+            fatalError("*** Unable to get oxygen saturation on this device ***")
+        }
+
+        HKHealthStore().requestAuthorization(toShare: nil, read: [oxygenQuantityType]) { (success, error) in
+
+            guard error == nil, success == true else {
+                completion(nil, error)
+                return
+            }
+
+            let predicate = HKQuery.predicateForSamples(withStart: Date.distantPast, end: Date(), options: .strictEndDate)
+            let query = HKStatisticsQuery(quantityType: oxygenQuantityType,
+                                          quantitySamplePredicate: predicate,
+                                          options: .mostRecent) { query, result, error in
+
+                DispatchQueue.main.async {
+
+                    if let err = error {
+                        completion(nil, err)
+                    } else {
+                        guard let level = result, let sum = level.mostRecentQuantity() else {
+                            completion(nil, error)
+                            return
+                        }
+                        print("Quantity : ", sum)   // It prints 97 % and I need 97 only
+
+                        let measureUnit0 = HKUnit(from: "%")
+                        let count0 = sum.doubleValue(for: measureUnit0)
+                        print("Count 0 : ", count0)   // It pronts 0.97 and I need 97 only
+
+                        let measureUnit1 = HKUnit.count().unitMultiplied(by: HKUnit.percent())
+                        let count1 = sum.doubleValue(for: measureUnit1)
+                        print("Count 1 : ", count1)   // It pronts 0.97 and I need 97 only
+
+                        let measureUnit2 = HKUnit.percent()
+                        let count2 = sum.doubleValue(for: measureUnit2)
+                        print("Count 2 : ", count2)   // It pronts 0.97 and I need 97 only
+
+                        let measureUnit3 = HKUnit.count()
+                        let count3 = sum.doubleValue(for: measureUnit3)
+                        print("Count 3 : ", count3)   // It pronts 0.97 and I need 97 only
+
+                        completion(count0 * 100.0, nil)
+                    }
+                }
+            }
+            HKHealthStore().execute(query)
+        }
+    }
+    
+    func sendOxygenLevel() {
+        getOxygenLevel {[weak self] oxygen, error in
+            guard let self = self,let  oxygen = oxygen else {return}
+            self.sendMessage(with: "\(oxygen)")
+        }
+     //   autorizeHealthKit()
+        //startOxygenRateQuery(quantityTypeIdentifier: .oxygenSaturation)
+    }
+    
+    func autorizeHealthKit() {
+        let healthKitTypes: Set = [
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!]
+
+        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in }
+    }
+    
+    private func startOxygenRateQuery(quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+           
+           let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+
+           let updateHandler: (HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void = {
+               query, samples, deletedObjects, queryAnchor, error in
+               
+           guard let samples = samples as? [HKQuantitySample] else {
+               return
+           }
+               
+           self.process(samples, type: quantityTypeIdentifier)
+
+           }
+           
+           let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
+           
+           query.updateHandler = updateHandler
+
+           healthStore.execute(query)
+       }
+    
+    private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
+         var lastOxygenRate = ""
+         for sample in samples {
+             if type == .oxygenSaturation {
+                 lastOxygenRate = sample.quantity.description
+             }
+             
+         }
+        print(lastOxygenRate)
+     }
 }

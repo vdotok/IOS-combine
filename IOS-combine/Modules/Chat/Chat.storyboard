@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,20 +69,41 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QcI-yY-K9M">
-                                                        <rect key="frame" x="24" y="8" width="60" height="22"/>
+                                                        <rect key="frame" x="24" y="8" width="212.5" height="22"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41B-ZD-GgL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="22"/>
                                                                 <state key="normal" image="Icon material-image"/>
                                                                 <connections>
                                                                     <action selector="didTapImage:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="drK-dt-Z1I"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dA1-ns-8fP">
-                                                                <rect key="frame" x="40" y="0.0" width="20" height="22"/>
+                                                                <rect key="frame" x="46.5" y="0.0" width="26.5" height="22"/>
                                                                 <state key="normal" image="Icon ionic-ios-add-circle-outline"/>
                                                                 <connections>
                                                                     <action selector="didTapAttachment:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="FzC-ka-VK4"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vge-zr-Ubd">
+                                                                <rect key="frame" x="93" y="0.0" width="26.5" height="22"/>
+                                                                <state key="normal" image="heart.fill" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="didTapHeartCount:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="QJw-TT-niy"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsJ-f1-ZrZ">
+                                                                <rect key="frame" x="139.5" y="0.0" width="26.5" height="22"/>
+                                                                <state key="normal" image="drop.fill" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="didTapbloodOxygen:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="xY9-Tk-Lgo"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t34-5F-ECX">
+                                                                <rect key="frame" x="186" y="0.0" width="26.5" height="22"/>
+                                                                <state key="normal" image="stethoscope" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="didTapStepsCount:" destination="ut6-mq-Fbq" eventType="touchUpInside" id="9Gc-Nb-yaK"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -137,6 +159,9 @@
         <image name="Icon ionic-ios-add-circle-outline" width="20" height="20"/>
         <image name="Icon material-image" width="18" height="18.5"/>
         <image name="Icon-send" width="20" height="18"/>
+        <image name="drop.fill" catalog="system" width="101" height="128"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <image name="stethoscope" catalog="system" width="128" height="96"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

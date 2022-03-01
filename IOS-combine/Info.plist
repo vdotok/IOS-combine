@@ -26,10 +26,14 @@
 	<dict/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app wants to take pictures.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app wants health permission</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app wants to record audio</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app wants to use your photos.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This app wants health permission</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

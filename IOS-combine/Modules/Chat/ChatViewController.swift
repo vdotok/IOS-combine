@@ -27,8 +27,7 @@ final class ChatViewController: UIViewController {
     var timer: Timer? = nil
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
-    
-    
+
     lazy var titleLabel: UILabel = {
         
         let titleLabel = UILabel()
@@ -70,7 +69,6 @@ final class ChatViewController: UIViewController {
         bindPresenter()
         notificationsListners()
         titleLabel.text = presenter.group?.groupTitle
-       
         listenForHangup()
     
         
@@ -221,6 +219,16 @@ final class ChatViewController: UIViewController {
     @IBAction func didTapImage(_ sender: UIButton) {
         imagePicker.action(for: .savedPhotosAlbum)
         
+    }
+    
+    @IBAction func didTapStepsCount(_ sender: UIButton) {
+        presenter.sendMessage(text: "#sc#")
+    }
+    @IBAction func didTapHeartCount(_ sender: UIButton) {
+        presenter.sendMessage(text: "#hr#")
+    }
+    @IBAction func didTapbloodOxygen(_ sender: UIButton) {
+        presenter.sendMessage(text: "#bo#")
     }
     
     func bindPresenter() {
@@ -672,4 +680,8 @@ extension ChatViewController {
         }
 
     }
+}
+
+extension ChatViewController {
+ 
 }
