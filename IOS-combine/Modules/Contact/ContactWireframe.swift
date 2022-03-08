@@ -20,12 +20,12 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
     var streamingManager: StreamingMananger
     // MARK: - Module setup -
 
-    init(client: ChatClient, streamingManager: StreamingMananger, vtokSdk: VTokSDK) {
+    init(client: ChatClient, streamingManager: StreamingMananger, vtokSdk: VTokSDK, healthManager: HealthManager) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ContactViewController.self)
         self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
         let interactor = ContactInteractor()
-        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client, streamingManager: streamingManager, vtokSdk: vtokSdk)
+        let presenter = ContactPresenter(view: moduleViewController, interactor: interactor, wireframe: self, client: client, streamingManager: streamingManager, vtokSdk: vtokSdk, healthManager: healthManager)
         interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
@@ -35,16 +35,16 @@ final class ContactWireframe: BaseWireframe<ContactViewController> {
 // MARK: - Extensions -
 
 extension ContactWireframe: ContactWireframeInterface {
-    func navigate(to: ContactNavigationOptions, client: ChatClient, group: Group? = nil, user: User? = nil, vtokSdk: VTokSDK? = nil) {
+    func navigate(to: ContactNavigationOptions, client: ChatClient, group: Group? = nil, user: User? = nil, vtokSdk: VTokSDK? = nil, healthManager: HealthManager) {
         switch to {
         case .chat:
             guard let group = group,
                   let user = user
             else { return }
-            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil, streamingManager: streamingManager)
+            let wireFrame = ChatWireframe(client: client, group: group, user: user, messages: [], vtokSDK: nil, streamingManager: streamingManager, healthManager: healthManager)
             navigationController?.pushWireframe(wireFrame)
         case .createGroup:
-            navigationController?.pushWireframe(CreateGroupWireframe(client: client, streamingManager: streamingManager))
+            navigationController?.pushWireframe(CreateGroupWireframe(client: client, streamingManager: streamingManager, healthManager: healthManager))
         case .videoCall:
             guard let vtokSdk = vtokSdk else {
                 return

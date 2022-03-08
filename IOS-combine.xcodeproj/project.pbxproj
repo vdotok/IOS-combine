@@ -11,6 +11,7 @@
 		35BD6F1B6AD5E28DD5C5E900 /* Pods_IOS_combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0DC78CDBB709011D6EF623 /* Pods_IOS_combine.framework */; };
 		5D0B7A9427CE2DE20042313E /* iOSSDKConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4524A27CE2D1E0063B112 /* iOSSDKConnect.framework */; platformFilter = ios; };
 		5D0B7A9527CE2DE20042313E /* iOSSDKConnect.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4524A27CE2D1E0063B112 /* iOSSDKConnect.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5D0B7A9727CF3EEE0042313E /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B7A9627CF3EEE0042313E /* HealthManager.swift */; };
 		5D0C3922271842D5003CF416 /* StreamingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C3921271842D5003CF416 /* StreamingManager.swift */; };
 		5D1BC44D26E5EDEC00D7E49E /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */; };
 		5D1BC44F26E608B300D7E49E /* SignupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1BC44E26E608B300D7E49E /* SignupService.swift */; };
@@ -298,6 +299,7 @@
 		2515B1D2DA2ADE6B3249B8A5 /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		4122B3C2D2F93285C0390AB2 /* Pods-IOS-combine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOS-combine.release.xcconfig"; path = "Target Support Files/Pods-IOS-combine/Pods-IOS-combine.release.xcconfig"; sourceTree = "<group>"; };
 		449749F11605EF195DCB0547 /* Pods-ScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
+		5D0B7A9627CF3EEE0042313E /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		5D0C3921271842D5003CF416 /* StreamingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingManager.swift; sourceTree = "<group>"; };
 		5D1BC44C26E5EDEC00D7E49E /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		5D1BC44E26E608B300D7E49E /* SignupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupService.swift; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 				5D62BF4C2738F3550068B2AC /* Colors.xcassets */,
 				5D8199C426DCC10400B37B72 /* Info.plist */,
 				5D0C3921271842D5003CF416 /* StreamingManager.swift */,
+				5D0B7A9627CF3EEE0042313E /* HealthManager.swift */,
 			);
 			path = "IOS-combine";
 			sourceTree = "<group>";
@@ -1349,6 +1352,7 @@
 				5D4B57E826DF8AC6005185AE /* Data+Extension.swift in Sources */,
 				5D8199E526DCC3B900B37B72 /* LoginWireframe.swift in Sources */,
 				5DF3D50E271073CC004988F8 /* BorderButton.swift in Sources */,
+				5D0B7A9727CF3EEE0042313E /* HealthManager.swift in Sources */,
 				5D4B57B426DF63C3005185AE /* ChatInteractor.swift in Sources */,
 				5D8199FF26DCCDE300B37B72 /* LoginRequest.swift in Sources */,
 				5D4B584A26E0F625005185AE /* CallingWireframe.swift in Sources */,

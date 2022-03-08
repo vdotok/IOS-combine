@@ -41,3 +41,9 @@ struct AppsGroup {
     static let  APP_GROUP = "group.com.norgic.combined.broadcast"
     static let SCREEN_SHARE_PREFERED_EXTENSION = "com.norgic.ios-combinedapp.ScreenShare"
 }
+
+struct SensorTypeConstants {
+    static let HEART_RATE = "#hr#"
+    static let BLOOD_OXYGEN = "#bo#"
+    static let STEP_COUNT = "#sc#"
+}

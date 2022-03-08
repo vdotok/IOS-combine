@@ -22,11 +22,11 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
 
     // MARK: - Module setup -
 
-    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil) {
+    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil, healthManager: HealthManager) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
         super.init(viewController: moduleViewController)
 
-        self.interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
+        self.interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages, healthManager: healthManager)
 //        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self, sdk: vtokSDK, streamingManager: streamingManager!)
         moduleViewController.presenter = presenter

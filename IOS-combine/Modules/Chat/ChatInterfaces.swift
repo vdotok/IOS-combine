@@ -31,7 +31,7 @@ protocol ChatPresenterInterface: PresenterInterface {
     var sdk: VTokSDK? {get set}
     var streamingManager: StreamingMananger? {get set}
     func dispatchPackage(start: Bool)
-    func sendMessage(text: String)
+    func sendMessage(with text: String, type: String)
     func messageCount() -> Int
     func itemAt(row: Int) -> (ChatMessage,CellType)
     func receivedMessage(userInfo: [String: AnyObject])
@@ -42,13 +42,25 @@ protocol ChatPresenterInterface: PresenterInterface {
 
 protocol ChatInteractorInterface: InteractorInterface {
     var presenter: ChatInteractorToPresenter? {get set}
-    func sendMessage(with text: String)
+    func sendMessage(with text: String, type: String)
     func dispatchPackage(start: Bool)
     func sendSeenMessage(message: ChatMessage, row: Int)
     func receivedMessage(userInfo: [String: AnyObject])
     func publish(file data: Data, with ext: String, type: Int)
     func itemAt(row: Int) -> (ChatMessage,CellType)
    
+}
+
+extension ChatInteractorInterface {
+    func sendMessage(with text: String, type: String = "text") {
+        return sendMessage(with: text, type: type)
+    }
+}
+
+extension ChatPresenterInterface {
+    func sendMessage(with text: String, type: String = "text") {
+        return sendMessage(with: text, type: type)
+    }
 }
 
 protocol ChatInteractorToPresenter: AnyObject {

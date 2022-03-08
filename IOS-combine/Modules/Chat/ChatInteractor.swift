@@ -22,20 +22,21 @@ final class ChatInteractor: NSObject {
     var group: Group
     var broadcastData: BroadcastData?
     var messages: [ChatMessage]
+    var healthManager: HealthManager
     weak var presenter: ChatInteractorToPresenter? {didSet {
         presenter?.updateGroup(with: group, user: user, messages: messages)
     }}
     var session: WCSession
     
-    init(mqttClient: ChatClient, user: User, group: Group, messages:[ChatMessage],session: WCSession = .default) {
+    init(mqttClient: ChatClient, user: User, group: Group, messages:[ChatMessage],session: WCSession = .default, healthManager: HealthManager) {
         
         self.mqttClient = mqttClient
         self.user = user
         self.group = group
         self.messages = messages
         self.session = session
+        self.healthManager = healthManager
         super.init()
-        getHealthKitPermission()
         setupDelegates()
         session.delegate = self
         session.activate()
@@ -55,13 +56,14 @@ extension ChatInteractor: ChatInteractorInterface {
     
     }
     
-    func sendMessage(with text: String) {
+    func sendMessage(with text: String, type: String) {
         let now = Date()
         let timeInterval = now.millisecondsSince1970
         let message = MessageModel(id: UUID().uuidString,
                                    to: group.channelName,
                                    key: group.channelKey,
                                    from: user.refID,
+                                   type: type,
                                    content: text.prefix(400).description,
                                    size: 0,
                                    isGroupMessage: false,
@@ -122,45 +124,19 @@ extension ChatInteractor: ChatInteractorInterface {
         let fileType = userInfo[Constants.fileKey] as? URL
         let mediaType = userInfo[Constants.mediaType] as? Int
         let date = userInfo[Constants.date] as! UInt64
+        let messageType = userInfo[Constants.mediaType] as? String
         
         
         guard let topic = userInfo[Constants.topicKey] as? String,
               topic == group.channelName
         else { return }
         if content.contains("left") {
-
             return
         } else if content.contains("joined"){
-
             return
         }
-        if username != user.refID {
-            if content.contains("#sc#")  {
-                getStepsCount(forSpecificDate: Date()) { [weak self] steps in
-                    guard let self = self else {return}
-                    self.sendMessage(with: "\(steps)")
-                }
-                return
-            }
-            
-            if content.contains("#hr#") {
-                session.sendMessage(["message": "get_heartrate"], replyHandler: nil) { error in
-                    print(error)
-                }
-            }
-            
-            if content.contains("#bo#") {
-                sendOxygenLevel()
-            }
-        } else {
-            if content.contains("#sc#") || content.contains("#hr#") || content.contains("#bo#") {
-                return
-            }
-        }
-     
         
         if content.isEmpty {
-
             if let mediaType = mediaType {
                 messages.append(ChatMessage(id: id, sender: username, content: "", status: user.refID == username ? .sent : .delivered, fileType: fileType, mediaType: MediaType(rawValue: mediaType), date: date))
                 ProgressHud.hide()
@@ -173,6 +149,33 @@ extension ChatInteractor: ChatInteractorInterface {
             
             return
         }
+        
+        if let messageType = messageType {
+            
+            if messageType == "sensorDataFetched" || messageType == "fetchingSensorData" {
+                if username != user.refID {
+                    
+                    switch content {
+                    case SensorTypeConstants.BLOOD_OXYGEN:
+                        sendOxygenLevel()
+                        return
+                    case SensorTypeConstants.HEART_RATE:
+                        session.sendMessage(["message": "get_heartrate"], replyHandler: nil) { error in
+                            print(error)
+                        }
+                        return
+                    case SensorTypeConstants.STEP_COUNT:
+                        getStepsCount(forSpecificDate: Date()) { [weak self] steps in
+                            guard let self = self else {return}
+                            self.sendMessage(with: "\(steps)", type: "sensorDataFetched")
+                        }
+                        return
+                    default:
+                        break
+                    }
+                }
+            }
+        }
 
         if content.contains("#sc#") || content.contains("#hr#") || content.contains("#bo#") {
             return
@@ -181,6 +184,7 @@ extension ChatInteractor: ChatInteractorInterface {
         messages.append(chatMessage)
         presenter?.update(messages: messages)
       //  chatOutput?(.reload)
+       
         
     }
     
@@ -409,40 +413,9 @@ extension ChatInteractor {
     func sendOxygenLevel() {
         getOxygenLevel {[weak self] oxygen, error in
             guard let self = self,let  oxygen = oxygen else {return}
-            self.sendMessage(with: "\(oxygen)")
+            self.sendMessage(with: "\(oxygen)", type: "sensorDataFetched")
         }
-     //   autorizeHealthKit()
-        //startOxygenRateQuery(quantityTypeIdentifier: .oxygenSaturation)
     }
-    
-    func autorizeHealthKit() {
-        let healthKitTypes: Set = [
-            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!]
-
-        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in }
-    }
-    
-    private func startOxygenRateQuery(quantityTypeIdentifier: HKQuantityTypeIdentifier) {
-           
-           let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
-
-           let updateHandler: (HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void = {
-               query, samples, deletedObjects, queryAnchor, error in
-               
-           guard let samples = samples as? [HKQuantitySample] else {
-               return
-           }
-               
-           self.process(samples, type: quantityTypeIdentifier)
-
-           }
-           
-           let query = HKAnchoredObjectQuery(type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!, predicate: devicePredicate, anchor: nil, limit: HKObjectQueryNoLimit, resultsHandler: updateHandler)
-           
-           query.updateHandler = updateHandler
-
-           healthStore.execute(query)
-       }
     
     private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
          var lastOxygenRate = ""

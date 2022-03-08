@@ -40,7 +40,7 @@ typealias ChannelOutput = (ChannelPresenter.Output) -> Void
 typealias ChannelComplition = ((Result<GroupResponse, Error>) -> Void)
 
 protocol ChannelWireframeInterface: WireframeInterface {
-    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: User, messages: [ChatMessage],sdk: VTokSDK?, streamingManager: StreamingMananger)
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: User, messages: [ChatMessage],sdk: VTokSDK?, streamingManager: StreamingMananger, healthManager: HealthManager)
     func moveToCreateGroup(client: ChatClient, sdk: VTokSDK)
     func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType, session: VTokBaseSession?, sessionDirection: SessionDirection)
     func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User], sessionDirection: SessionDirection)
@@ -58,6 +58,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     var groups: [Group]  {get set}
     var unreadMessages:[String:[ChatMessage]] {get set}
     var streamingManager: StreamingMananger {get set}
+    var healthManager: HealthManager! {get set}
     var vtokSDK: VTokSDK? {get set}
     func subscribe(group: Group) 
     func fetchGroups()
@@ -66,7 +67,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     func itemAt(row: Int) -> TempGroup?
     func channelsCount() -> Int
     func logout()
-    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?)
+    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?, healthManager: HealthManager)
     func moveToCreateGroup()
     func deleteGroup(with id: Int)
     func editGroup(with title: String, id: Int)
@@ -77,6 +78,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
 protocol ChannelInteractorInterface: InteractorInterface {
     var broadCastData: BroadcastData? {get set}
     var presenter: ChannelInteractorToPresenter? {get set}
+    var healthManager: HealthManager! {get set}
     var vtokSdk: VTokSDK? {get set}
     func fetchGroups()
     func fetchUsers()
@@ -93,6 +95,7 @@ protocol ChannelInteractorToPresenter: AnyObject {
     func usersFetched(with user: [User])
     func usersFetchedFailded(with error: String)
     var streamingManager: StreamingMananger {get set}
+    var healthManager: HealthManager! {get set}
     func streaming(connectionStats: StreamConnectionStatus, sdk: VTokSDK?)
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
     func updatePresence(with presence: [String: [String]])

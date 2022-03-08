@@ -24,6 +24,7 @@ final class ContactPresenter {
     var isSearching: Bool = false
     var output: ContactOutput?
     var client: ChatClient?
+    var healthManager: HealthManager
     var streamingManager: StreamingMananger
     var vtokSdk: VTokSDK
     // MARK: - Lifecycle -
@@ -34,7 +35,8 @@ final class ContactPresenter {
         wireframe: ContactWireframeInterface,
         client: ChatClient,
         streamingManager: StreamingMananger,
-        vtokSdk: VTokSDK
+        vtokSdk: VTokSDK,
+        healthManager: HealthManager
     ) {
         self.view = view
         self.interactor = interactor
@@ -42,6 +44,7 @@ final class ContactPresenter {
         self.client = client
         self.streamingManager = streamingManager
         self.vtokSdk = vtokSdk
+        self.healthManager = healthManager 
     }
     
     func viewModelDidLoad() {
@@ -66,12 +69,12 @@ final class ContactPresenter {
 
 extension ContactPresenter: ContactPresenterInterface {
     
-    func makeCall(mediaType: SessionMediaType, user: User) {
+    func makeCall(mediaType: SessionMediaType, user: User, healthManager: HealthManager) {
         switch mediaType {
         case .audioCall:
-            wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+            wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk, healthManager: healthManager)
         case .videoCall:
-            wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+            wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk, healthManager: healthManager)
         }
     }
     
@@ -95,7 +98,7 @@ extension ContactPresenter: ContactPresenterInterface {
         interactor?.createGroup(with: groupName, participants: [user.userID])
     }
     
-    func navigate(to: ContactNavigationOptions, group: Group? = nil) {
+    func navigate(to: ContactNavigationOptions, group: Group? = nil, healthManager: HealthManager) {
         switch to {
         case .chat:
             guard let client = client,
@@ -103,11 +106,11 @@ extension ContactPresenter: ContactPresenterInterface {
                   let group = group
             else {return }
             let tempUser = User(email: "", fullName: user.fullName!, refID: user.refID!, userID: user.userID!)
-            wireframe.navigate(to: to, client: client, group: group , user: tempUser, vtokSdk: nil)
+            wireframe.navigate(to: to, client: client, group: group , user: tempUser, vtokSdk: nil, healthManager: healthManager)
         case .createGroup:
             guard let client = client
             else {return}
-            wireframe.navigate(to: .createGroup, client: client, group: nil, user: nil, vtokSdk: nil)
+            wireframe.navigate(to: .createGroup, client: client, group: nil, user: nil, vtokSdk: nil, healthManager: healthManager)
         default:
             break
         }

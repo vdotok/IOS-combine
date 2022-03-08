@@ -34,7 +34,7 @@ final class ContactViewController: UIViewController {
     }
     
     @IBAction func didTapAddContact(_ sender: UIButton) {
-        presenter.navigate(to: .createGroup, group: nil)
+        presenter.navigate(to: .createGroup, group: nil, healthManager: presenter.healthManager)
     }
     
     func bindViewModel() {
@@ -112,7 +112,7 @@ extension ContactViewController {
                                             object: self,
                                             userInfo: ["model" : group])
         }
-        presenter.navigate(to: .chat, group: group)
+        presenter.navigate(to: .chat, group: group, healthManager: presenter.healthManager)
     }
 
 }
@@ -175,7 +175,7 @@ extension ContactViewController: ContactCellProtocol {
     }
     
     func makeCall(for mediaType: SessionMediaType, user: User) {
-        presenter.makeCall(mediaType: mediaType, user: user)
+        presenter.makeCall(mediaType: mediaType, user: user, healthManager: presenter.healthManager)
     }
     
 }

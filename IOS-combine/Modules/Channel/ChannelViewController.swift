@@ -1,4 +1,4 @@
-//
+ //
 //  ChannelViewController.swift
 //  IOS-combine
 //
@@ -35,6 +35,7 @@ final class ChannelViewController: UIViewController {
         }
     }
     lazy var refreshControl = UIRefreshControl()
+  
     
     private var selectedGroupId: Int? = nil
     let navigationTitle = UILabel()
@@ -275,7 +276,7 @@ extension ChannelViewController {
     }
     
     @objc func didTapBroadCast() {
-        presenter.navigation(to: .broadcastOverlay, messages: [], group: nil)
+    //    presenter.navigation(to: .broadcastOverlay, messages: [], group: nil, healthManager: HealthManager())
     }
     
     @objc func didTappedAdd() {
@@ -325,7 +326,7 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = presenter.groups[indexPath.row].channelName
         let topic =  presenter.messages[channel]
-        presenter.navigation(to: .chat, messages: topic ?? [], group: presenter.groups[indexPath.row])
+        presenter.navigation(to: .chat, messages: topic ?? [], group: presenter.groups[indexPath.row], healthManager: presenter.healthManager)
     }
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

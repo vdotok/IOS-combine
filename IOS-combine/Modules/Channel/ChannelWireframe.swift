@@ -58,11 +58,11 @@ extension ChannelWireframe: ChannelWireframeInterface {
         navigationController?.presentWireframe(frame)
     }
     
-    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: User, messages: [ChatMessage], sdk: VTokSDK? = nil, streamingManager: StreamingMananger) {
+    func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: User, messages: [ChatMessage], sdk: VTokSDK? = nil, streamingManager: StreamingMananger, healthManager: HealthManager) {
         switch to {
         case .chat:
             guard let group = group else {return}
-            navigationController?.pushWireframe(ChatWireframe(client: client, group: group, user: user, messages: messages, vtokSDK: sdk, streamingManager: streamingManager))
+            navigationController?.pushWireframe(ChatWireframe(client: client, group: group, user: user, messages: messages, vtokSDK: sdk, streamingManager: streamingManager, healthManager: healthManager))
         case .broadcastOverlay:
             let vc = BroadcastOverlay()
             vc.modalPresentationStyle = .custom
@@ -75,7 +75,7 @@ extension ChannelWireframe: ChannelWireframeInterface {
     
     func moveToCreateGroup(client: ChatClient, sdk: VTokSDK) {
         
-        let frame = ContactWireframe(client: client, streamingManager: self.streamingManager!, vtokSdk: sdk)
+        let frame = ContactWireframe(client: client, streamingManager: self.streamingManager!, vtokSdk: sdk, healthManager: interactor.healthManager)
         navigationController?.pushWireframe(frame)
     }
     

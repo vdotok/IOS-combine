@@ -89,26 +89,6 @@ class ViewModel: NSObject, WCSessionDelegate {
         }
     }
     
-//    private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
-//        // variable initialization
-//        var lastHeartRate = 0.0
-//
-//        // cycle and value assignment
-//        for sample in samples {
-//            if type == .heartRate {
-//                lastHeartRate = sample.quantity.doubleValue(for: heartRateQuantity)
-//            }
-//
-//            self.value = Int(lastHeartRate)
-//
-//
-    
-//        }
-//        session.sendMessage(["heartRate": self.value], replyHandler: nil) { error in
-//            print(error)
-//        }
-//        print(value)
-//    }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         

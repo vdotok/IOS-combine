@@ -77,8 +77,8 @@ extension ChatPresenter: ChatPresenterInterface {
         interactor?.dispatchPackage(start: start)
     }
     
-    func sendMessage(text: String) {
-        interactor?.sendMessage(with: text)
+        func sendMessage(with text: String, type: String) {
+        interactor?.sendMessage(with: text, type: type)
     }
     
     func itemAt(row: Int) -> (ChatMessage,CellType) {

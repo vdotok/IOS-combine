@@ -26,6 +26,7 @@ final class ChannelPresenter {
     var isSearching: Bool = false
     var groups: [Group] = []
     var contacts: [User] = []
+    var healthManager: HealthManager!
     var vtokSDK: VTokSDK?
     var mqttClient: ChatClient?
     var presentCandidates: [String: [String]] = [:]
@@ -52,6 +53,7 @@ final class ChannelPresenter {
         self.interactor = interactor
         self.wireframe = wireframe
         self.streamingManager = streamingManager
+        healthManager = interactor.healthManager
     }
     
     enum Output {
@@ -150,15 +152,15 @@ extension ChannelPresenter: ChannelPresenterInterface {
     }
     
     
-    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?) {
+    func navigation(to: ChannelNavigationOptions, messages: [ChatMessage], group: Group?, healthManager: HealthManager) {
         guard let client = mqttClient,let user = VDOTOKObject<UserResponse>().getData() else {return}
         let tempUser = User(email: "", fullName: user.fullName ?? "", refID: user.refID ?? "", userID: user.userID ?? 0)
         switch to {
         case .chat:
            guard let group = group else {return}
-            wireframe.move(to: .chat, client: client, group: group, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
+            wireframe.move(to: .chat, client: client, group: group, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager, healthManager: healthManager)
         case .broadcastOverlay:
-            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
+            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager, healthManager: healthManager)
         }
     }
     

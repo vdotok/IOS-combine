@@ -26,9 +26,12 @@ final class ChannelInteractor {
     var unreadMessages:[String:[ChatMessage]] = [:]
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
     var broadCastData: BroadcastData?
+    var healthManager: HealthManager!
+    
     init(broadCastData: BroadcastData? = nil) {
         self.broadCastData = broadCastData
         registerForCommand()
+        healthManager = HealthManager()
     }
     
     deinit {
@@ -285,7 +288,8 @@ extension ChannelInteractor: MessageDelegate {
                                                        Constants.topicKey: topic,
                                                        Constants.usernameKey: message.from,
                                                        Constants.idKey: message.id,
-                                                       Constants.date: message.date
+                                                       Constants.date: message.date,
+                                                       Constants.mediaType: message.type
                                             ])
             tempMessages = messages[topic] ?? []
             unreadMessages = self.unreadMessages[topic] ?? []
@@ -296,6 +300,8 @@ extension ChannelInteractor: MessageDelegate {
             presenter?.messageReceived(with: messages, unreadMessages: self.unreadMessages)
             
         }
+        
+       
     }
     
     func onMessagePublish(_ playloadString: String, topic: String) {

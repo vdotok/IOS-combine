@@ -194,7 +194,8 @@ final class ChatViewController: UIViewController {
         let messageText = messageTextField.text.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if messageText.count != 0 {
-            presenter.sendMessage(text: messageTextField.text!)
+//            presenter.sendMessage(text: messageTextField.text!)
+            presenter.sendMessage(with: messageTextField.text!)
             self.messageTextField.text = ""
             self.messageTextField.checkPlaceholder()
             sendMessageButton.tintColor = .appDarkGray
@@ -282,7 +283,10 @@ extension ChatViewController: ImagePickerDelegate {
 extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.messageCount()
+        if (section  == 0 ) {
+             return presenter.messageCount()
+         }
+         return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -430,17 +434,19 @@ extension ChatViewController: UITextViewDelegate {
 // MARK: AttachmentPickerDelegate
 
 extension ChatViewController: AttachmentPickerDelegate {
+    
     func didSend(sensorType: SensorType) {
         blurView.isHidden = true
         switch sensorType {
         case .heartBeat:
-            presenter.sendMessage(text: "#hr#")
+            presenter.sendMessage(with: "#hr#", type: "sensorDataFetched")
         case .stepCount:
-            presenter.sendMessage(text: "#sc#")
+            presenter.sendMessage(with: "#sc#", type: "sensorDataFetched")
         case .oxygenLevel:
-            presenter.sendMessage(text: "#bo#")
+            presenter.sendMessage(with: "#bo#", type: "sensorDataFetched")
         }
     }
+    
     func didCancel() {
         blurView.isHidden = true
     }
@@ -452,6 +458,7 @@ extension ChatViewController: AttachmentPickerDelegate {
 // MARK: -
 
 extension ChatViewController {
+    
     func configureAppearance() {
         registerCells()
         tableView.keyboardDismissMode = .onDrag

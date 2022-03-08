@@ -16,7 +16,7 @@ typealias ContactOutput = (ContactPresenter.Output) -> Void
 typealias AllUserComplition = ((Result<AllUsersResponse, Error>) -> Void)
 
 protocol ContactWireframeInterface: WireframeInterface {
-    func navigate(to : ContactNavigationOptions, client: ChatClient, group: Group?, user: User?, vtokSdk: VTokSDK?)
+    func navigate(to : ContactNavigationOptions, client: ChatClient, group: Group?, user: User?, vtokSdk: VTokSDK?, healthManager: HealthManager)
 }
 
 protocol ContactViewInterface: ViewInterface {
@@ -26,6 +26,7 @@ protocol ContactPresenterInterface: PresenterInterface {
     var interactor: ContactInteractorInterface? {get set}
     var output: ContactOutput? { get set}
     var contacts: [User] {get set}
+    var healthManager: HealthManager {get set}
     var searchContacts: [User] {get set}
     var isSearching: Bool {get set}
     var client: ChatClient? {get set}
@@ -35,8 +36,8 @@ protocol ContactPresenterInterface: PresenterInterface {
     func viewModelItem(row: Int) -> User
     func filterGroups(with text: String)
     func createGroup(with user: User)
-    func navigate(to : ContactNavigationOptions, group: Group?)
-    func makeCall(mediaType: SessionMediaType, user: User)
+    func navigate(to : ContactNavigationOptions, group: Group?, healthManager: HealthManager)
+    func makeCall(mediaType: SessionMediaType, user: User, healthManager: HealthManager)
 }
 
 protocol ContactInteractorInterface: InteractorInterface {
