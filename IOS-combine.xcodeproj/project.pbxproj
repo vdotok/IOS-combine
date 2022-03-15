@@ -634,7 +634,6 @@
 		5D8199B526DCC10100B37B72 /* IOS-combine */ = {
 			isa = PBXGroup;
 			children = (
-				5DB1BE7927A973CD00A140EE /* Streaming */,
 				5DECB6332714525E00EB43EB /* IOS-combine.entitlements */,
 				5D4B579C26DE62D6005185AE /* vdotokCert.p12 */,
 				5D8199D526DCC2DB00B37B72 /* Common */,
@@ -785,13 +784,6 @@
 				5D819A2F26DE2E8400B37B72 /* ChannelCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		5DB1BE7927A973CD00A140EE /* Streaming */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Streaming;
 			sourceTree = "<group>";
 		};
 		5DE4046C271DC55F005EA0DF /* Cell */ = {
