@@ -12,7 +12,7 @@ target 'IOS-combine' do
     pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
     pod "VisualEffectView"
     pod 'MMWormhole'
-    pod 'CocoaMQTT'
+    pod 'CocoaMQTT' , '2.0.3-beta2'
     
 
 end
