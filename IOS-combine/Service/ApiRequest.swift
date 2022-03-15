@@ -59,10 +59,6 @@ extension APIRequest {
             print("Unable to create URL components")
             return fakeUrl
         }
-        
-        if getPath() == "AuthenticateSDK" {
-            url = URL(string: "https://vtkapi.vdotok.com/API/v0/AuthenticateSDK")!
-        }
         return url
     }
     
