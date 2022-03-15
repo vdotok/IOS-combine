@@ -8,11 +8,12 @@ target 'IOS-combine' do
   # Pods for IOS-combine
     pod 'KRProgressHUD'
     pod 'IQKeyboardManagerSwift'
-    pod 'VdoTokConnect' , :git => 'https://github.com/vdotok/VdoTokConnect.git'
+    pod 'ConnectStrategy', :path => '../connect_strategy'
+   # pod 'VdoTokConnect' , :git => 'https://github.com/vdotok/VdoTokConnect.git'
     pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
     pod "VisualEffectView"
     pod 'MMWormhole'
-    pod 'CocoaMQTT'
+    pod 'CocoaMQTT' , '2.0.3-beta2'
     
 
 end
