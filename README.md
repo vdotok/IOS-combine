@@ -11,7 +11,7 @@ VDOTOK-IOS-combine Chat/Audio/Video/Broadcast
    
 ##### Development Requirements
 * Xcode 12+
-* [Click here](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) Click here to follow instructions on downloading and installation of Xcode on your device. 
+* [Click here](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) to follow instructions on downloading and installation of Xcode on your device. 
 * It’s recommended to install Xcode from **App Store**.   
 
 ## Installation
@@ -24,7 +24,7 @@ If command is not found then you don’t have Cocoapods installed on your system
 * After installation is complete, type command `pod --version` and hit **Enter** to confirm installation is successful
 
 ### Project Signup and Project ID
-Register at [VdoTok HomePage](https://vdotok.com) to get **Authentication Token** and **Project ID**
+Register at [VdoTok HomePage](https://vdotok.com) to get **Authentication Token**, **HOST** and **Project ID**
 
 ### Code Setup
 *    Click on **Code** button 
@@ -41,7 +41,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **Authentication Token*
 
 *  Get **Project ID** and **Authentication Token** from [Admin Panel](https://userpanel.vdotok.com/login)
 *  Double-click to open **.xcworkspace file** in Xcode
-*  In struct AuthenticationConstants, replace the values for **PROJECTID** and **AUTHTOKEN** with your values
+*  In struct AuthenticationConstants, replace the values for **PROJECTID**, **HOST** and **AUTHTOKEN** with your values
 
 ### Set up App groups
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
