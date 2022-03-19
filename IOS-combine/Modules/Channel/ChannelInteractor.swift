@@ -405,8 +405,8 @@ extension ChannelInteractor: FileDelegate {
         let receipt = ReceiptModel(type: ReceiptType.delivered.rawValue, key: file.key, date: 1622801248314, messageId: file.messageId, from: user.fullName!, topic: file.topic ?? "")
         
         self.send(receipt: receipt, status: .delivered, isMyMessage: user.refID == file.from)
-           
-            
+        
+        
         let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + user.fullName!)
         NotificationCenter.default.post(name: name, object: self,
                                         userInfo: [Constants.messageKey: "",
@@ -417,14 +417,12 @@ extension ChannelInteractor: FileDelegate {
                                                    Constants.mediaType: file.type,
                                                    Constants.date: date
                                                    
-                                        ])
-//        channelOutput?(.reload)
+                                                  ])
     }
     
     func didReceive(header: Header) {
         
     }
-    
     
 }
 
@@ -439,10 +437,7 @@ extension ChannelInteractor {
         wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in
             guard let self = self else {return}
             if let message = messageObject as? String, message == "StartScreenSharing"  {
-             //   self?.output?(.dismissView)
-             
                 guard let sdk = self.vtokSdk, let broadcastData = self.broadCastData else {return }
-//                self.presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
                 self.presenter?.dismissView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
                 print("screen share start")
             }
