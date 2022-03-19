@@ -56,7 +56,7 @@ class GroupCallingUpdatedView: UIView {
         
         switch session.sessionMediaType {
         case .audioCall:
-            delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onSpeaker : .onEarPiece)
+            delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
         case .videoCall:
             delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
            
@@ -225,8 +225,15 @@ class GroupCallingUpdatedView: UIView {
             cameraSwitch.isHidden = false
             cameraButton.isEnabled = true
             cameraButton.isHidden = false
+            speakerButton.isSelected = false
         }
         userAvatar.isHidden = true
+        if session.sessionMediaType == .audioCall {
+            userAvatar.isHidden = false
+            speakerButton.isSelected = true
+            
+        }
+      
         speakerButton.isHidden = false
        // configureTimer()
         callingStackView.isHidden = false
@@ -255,6 +262,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
                 titleLable.text = "You are video calling with"
             } else {
                 titleLable.text = "You are audio calling with"
+                userAvatar.isHidden = false
             }
             groupName.text = name
            
