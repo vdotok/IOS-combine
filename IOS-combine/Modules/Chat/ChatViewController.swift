@@ -237,7 +237,8 @@ final class ChatViewController: UIViewController {
                     }, completion: nil)
             
             case .reloadCell(let indexPath):
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    guard let self = self else {return}
                     self.tableView.reloadRows(at: [indexPath], with: .none)
                 }
             

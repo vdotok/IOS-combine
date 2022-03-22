@@ -52,11 +52,6 @@ extension StreamingMananger: SessionDelegate {
         delegate?.sessionTimeDidUpdate(with: value)
     }
     
-    
-//    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
-//        delegate?.configureLocalViewFor(session: session, renderer: renderer)
-//    }
-    
     func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
         remoteStreams = stream
         self.session = session
