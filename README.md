@@ -10,7 +10,7 @@ VDOTOK-IOS-combine Chat/Audio/Video/Broadcast
 * 8GB of RAM memory
    
 ##### Development Requirements
-* Xcode 13.2.1
+* Xcode 13.3
 * [Click here](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) to follow instructions on downloading and installation of Xcode on your device. 
 * It’s recommended to install Xcode from **App Store**.   
 
