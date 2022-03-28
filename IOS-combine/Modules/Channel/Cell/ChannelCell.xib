@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,15 +25,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbp-FG-EiQ">
-                        <rect key="frame" x="32" y="10" width="30" height="20"/>
+                        <rect key="frame" x="40.5" y="10" width="7.5" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="8AB-BU-GT7"/>
-                            <constraint firstAttribute="width" constant="30" id="cOw-sx-n6v"/>
-                        </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHH-pm-cPS">
-                        <rect key="frame" x="32" y="10" width="30" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHH-pm-cPS">
+                        <rect key="frame" x="40.5" y="10" width="7.5" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,22 +55,21 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Zbp-FG-EiQ" secondAttribute="trailing" constant="24" id="9dK-Le-uXn"/>
+                    <constraint firstItem="Zbp-FG-EiQ" firstAttribute="trailing" secondItem="Vrv-xT-0dE" secondAttribute="trailing" multiplier="2" id="0kh-Li-gpb"/>
                     <constraint firstItem="JrR-Ta-3Ud" firstAttribute="top" secondItem="huF-hX-8BS" secondAttribute="bottom" constant="10" id="CVJ-RE-GKh"/>
+                    <constraint firstItem="KHH-pm-cPS" firstAttribute="leading" secondItem="Zbp-FG-EiQ" secondAttribute="leading" id="DQP-Ek-OIa"/>
                     <constraint firstAttribute="trailing" secondItem="SqX-cE-duZ" secondAttribute="trailing" constant="24" id="FTN-9U-ohl"/>
                     <constraint firstItem="SqX-cE-duZ" firstAttribute="centerY" secondItem="huF-hX-8BS" secondAttribute="centerY" id="IKp-B1-7IR"/>
+                    <constraint firstItem="KHH-pm-cPS" firstAttribute="top" secondItem="Zbp-FG-EiQ" secondAttribute="top" id="K6n-Df-ieg"/>
                     <constraint firstItem="huF-hX-8BS" firstAttribute="top" secondItem="Vrv-xT-0dE" secondAttribute="bottom" constant="11.5" id="NbZ-Vb-b9s"/>
                     <constraint firstItem="huF-hX-8BS" firstAttribute="leading" secondItem="Vrv-xT-0dE" secondAttribute="leading" id="Oab-YZ-0m0"/>
                     <constraint firstItem="Vrv-xT-0dE" firstAttribute="top" secondItem="zJc-BL-2p2" secondAttribute="top" constant="12" id="Rco-Dd-RyI"/>
-                    <constraint firstItem="KHH-pm-cPS" firstAttribute="leading" secondItem="Zbp-FG-EiQ" secondAttribute="leading" id="SdN-wv-g7x"/>
-                    <constraint firstItem="Zbp-FG-EiQ" firstAttribute="leading" secondItem="Vrv-xT-0dE" secondAttribute="trailing" constant="8" id="TAR-IA-wdS"/>
+                    <constraint firstItem="KHH-pm-cPS" firstAttribute="trailing" secondItem="Zbp-FG-EiQ" secondAttribute="trailing" id="Tdj-Tn-eOl"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JrR-Ta-3Ud" secondAttribute="bottom" priority="250" id="Trm-7w-60E"/>
                     <constraint firstItem="JrR-Ta-3Ud" firstAttribute="centerX" secondItem="zJc-BL-2p2" secondAttribute="centerX" id="V4j-k5-jT5"/>
-                    <constraint firstItem="KHH-pm-cPS" firstAttribute="top" secondItem="Zbp-FG-EiQ" secondAttribute="top" id="YxK-D6-CAW"/>
+                    <constraint firstItem="KHH-pm-cPS" firstAttribute="bottom" secondItem="Zbp-FG-EiQ" secondAttribute="bottom" id="caM-x5-Xg2"/>
+                    <constraint firstItem="Zbp-FG-EiQ" firstAttribute="top" secondItem="zJc-BL-2p2" secondAttribute="top" constant="10" id="cxf-lA-9ih"/>
                     <constraint firstItem="SqX-cE-duZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="huF-hX-8BS" secondAttribute="trailing" constant="8" id="dOi-xk-sWo"/>
-                    <constraint firstItem="KHH-pm-cPS" firstAttribute="bottom" secondItem="Zbp-FG-EiQ" secondAttribute="bottom" id="ekn-uz-3sp"/>
-                    <constraint firstItem="KHH-pm-cPS" firstAttribute="trailing" secondItem="Zbp-FG-EiQ" secondAttribute="trailing" id="hLQ-ze-Ev7"/>
-                    <constraint firstItem="Zbp-FG-EiQ" firstAttribute="top" secondItem="Vrv-xT-0dE" secondAttribute="top" constant="-2" id="jkC-Xw-l06"/>
                     <constraint firstItem="JrR-Ta-3Ud" firstAttribute="leading" secondItem="zJc-BL-2p2" secondAttribute="leading" constant="13" id="sq2-fc-Q1v"/>
                     <constraint firstItem="Vrv-xT-0dE" firstAttribute="leading" secondItem="zJc-BL-2p2" secondAttribute="leading" constant="24" id="t8o-rr-taS"/>
                 </constraints>
