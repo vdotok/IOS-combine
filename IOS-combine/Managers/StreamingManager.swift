@@ -24,7 +24,11 @@ class StreamingMananger {
     weak var delegate: StreamingDelegate?
     var remoteStreams: [UserStream] = []
     var session: VTokBaseSession? =  nil
-    var vtokSDK: VTokSDK?
+    var vtokSDK: VTokSDK? {
+        didSet {
+            print("vtok sdk did set")
+        }
+    }
     var groupID: Int? = nil
     var url: String? = nil
     

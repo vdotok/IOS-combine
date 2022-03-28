@@ -145,7 +145,7 @@ final class ChatViewController: UIViewController {
        
         let manager = presenter.streamingManager
         manager?.groupID = presenter.group?.id
-        manager?.vtokSDK = presenter.sdk
+        manager?.vtokSDK = presenter.callingManager.vtokSdk
         AppDelegate.appDelegate.smallCallingView = SmallCallingView.getView(streamingManager: manager!)
         AppDelegate.appDelegate.smallCallingView?.getUserStream()
         AppDelegate.appDelegate.smallCallingView?.groupID = presenter.group?.id
@@ -508,21 +508,10 @@ extension ChatViewController {
     
     @objc func audioCallAction(_ sender: UIView) {
         presenter.moveToAudio()
-//        let groupId = presenter.group?.id
-//        let userInfo: [String: Any] = ["callType": NotifyCallType.audio.callType,
-//                                       "groupId": groupId ?? 0]
-//        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
-        
-        
-        
-        
     }
     
     @objc func videoCallAction(_ sender: UIView) {
-        let groupId = presenter.group?.id
-        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
-                                       "groupId": groupId ?? 0]
-        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
+        presenter.moveToVideo()
     }
     
     @objc func broadcastAction() {

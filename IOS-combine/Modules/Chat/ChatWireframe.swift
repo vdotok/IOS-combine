@@ -74,6 +74,13 @@ extension ChatWireframe: BroadcastOverlayDelegate {
         navigationController?.presentWireframe(frame)
     }
     
+    func moveToVideo() {
+        guard let group = callingManager.group else {return}
+        let frame = CallingWireframe(vtokSdk: callingManager.vtokSdk!, participants: group.participants, screenType: .videoView, session: nil,contact: callingManager.contacts, broadCastData: nil, streamingManager: streamingManager!, sessionDirection: .outgoing)
+        navigationController?.viewControllers.last?.presentWireframe(frame)
+        
+    }
+    
     
     
 }

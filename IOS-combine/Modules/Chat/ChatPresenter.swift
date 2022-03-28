@@ -113,6 +113,9 @@ extension ChatPresenter: ChatInteractorToPresenter {
         wireframe.moveToAudio()
     }
     
+    func moveToVideo() {
+        wireframe.moveToVideo()
+    }
     func reloadCell(with indexPath: IndexPath) {
         chatOutput?(.reloadCell(indexPath: indexPath))
     }
