@@ -87,7 +87,7 @@ extension ChannelInteractor: ChannelInteractorInterface {
 // MARK: Streaming
 extension ChannelInteractor {
     func connectVdoTok() {
-        self.callingManager = CallingManager(delegate: self)
+        self.callingManager?.connect(delegate: self)
     }
 }
 
@@ -98,11 +98,12 @@ extension ChannelInteractor: CallingManagerDelegate {
             guard let sdk = callingManager?.vtokSdk else {return}
             presenter?.vtokSDK = sdk
             presenter?.streamingManager.vtokSDK = sdk
+            
             presenter?.streaming(connectionStats: .connected, callingManager: callingManager!)
         case .disconnected(_):
             presenter?.streaming(connectionStats: .disconnected, callingManager: callingManager!)
         case .sessionRequest(let sessionRequest):
-            guard let sdk = vtokSdk else {return}
+            guard let sdk = callingManager?.vtokSdk else {return}
             presenter?.streaming(connectionStats: .request(session: sessionRequest, sdk: sdk), callingManager: callingManager!)
         }
     }

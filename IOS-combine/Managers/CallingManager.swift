@@ -18,8 +18,14 @@ class CallingManager {
     var vtokSdk: VTokSDK?
     weak var delegate: CallingManagerDelegate?
     var vtokBaseSession: VTokBaseSession?
+    var group: Group?
+    var contacts: [User] = []
     
-    init(delegate: CallingManagerDelegate) {
+    init() {
+ 
+    }
+    
+    func connect(delegate: CallingManagerDelegate) {
         self.delegate = delegate
         guard let user = VDOTOKObject<UserResponse>().getData(), let url = user.mediaServerMap?.completeAddress else {return}
         let request = RegisterRequest(type: Constants.Request,
@@ -31,17 +37,10 @@ class CallingManager {
         self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
     }
     
-    private func getRequestId() -> String {
-        let generatable = IdGenerator()
-        guard let response = VDOTOKObject<UserResponse>().getData() else {return ""}
-        let timestamp = NSDate().timeIntervalSince1970
-        let myTimeInterval = TimeInterval(timestamp)
-        let time = Date(timeIntervalSince1970: TimeInterval(myTimeInterval)).stringValue()
-        let tenantId = "12345"
-        let token = generatable.getUUID(string: time + tenantId + response.refID!)
-        return token
+    func makeCall() {
         
     }
+   
 }
 
 extension CallingManager: SDKConnectionDelegate {
@@ -58,4 +57,18 @@ extension CallingManager: SDKConnectionDelegate {
     }
     
     
+}
+
+extension CallingManager {
+    private func getRequestId() -> String {
+        let generatable = IdGenerator()
+        guard let response = VDOTOKObject<UserResponse>().getData() else {return ""}
+        let timestamp = NSDate().timeIntervalSince1970
+        let myTimeInterval = TimeInterval(timestamp)
+        let time = Date(timeIntervalSince1970: TimeInterval(myTimeInterval)).stringValue()
+        let tenantId = "12345"
+        let token = generatable.getUUID(string: time + tenantId + response.refID!)
+        return token
+        
+    }
 }

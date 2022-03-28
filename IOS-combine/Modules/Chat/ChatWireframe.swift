@@ -18,17 +18,20 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
     var interactor: ChatInteractor?
 
     private let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+    var callingManager: CallingManager
+    var streamingManager: StreamingMananger?
     
 
     // MARK: - Module setup -
 
-    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil) {
+    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], streamingManager: StreamingMananger? = nil, callingManager: CallingManager) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
+        self.callingManager = callingManager
+        self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
 
         self.interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
-//        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
-        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self, sdk: vtokSDK, streamingManager: streamingManager!)
+        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self, streamingManager: streamingManager!, callingManager: callingManager)
         moduleViewController.presenter = presenter
         presenter.interactor?.presenter = presenter
     }
@@ -64,6 +67,13 @@ extension ChatWireframe: BroadcastOverlayDelegate {
         interactor?.broadcastData = broadcastData
         interactor?.moveToCallingView(broadcastData: broadcastData)
     }
+    
+    func moveToAudio() {
+        guard let group = callingManager.group else {return}
+        let frame = CallingWireframe(vtokSdk: callingManager.vtokSdk!, participants: group.participants, screenType: .audioView, contact: callingManager.contacts, streamingManager: streamingManager!, sessionDirection: .outgoing)
+        navigationController?.presentWireframe(frame)
+    }
+    
     
     
 }

@@ -16,6 +16,7 @@ typealias ChatOutput = (ChatPresenter.Output) -> Void
 
 protocol ChatWireframeInterface: WireframeInterface {
     func moveToBroadcastOverlay()
+    func moveToAudio()
 }
 
 protocol ChatViewInterface: ViewInterface {
@@ -37,6 +38,7 @@ protocol ChatPresenterInterface: PresenterInterface {
     func receivedMessage(userInfo: [String: AnyObject])
     func sendSeenMessage(message: ChatMessage, row: Int)
     func moveToBroadcast()
+    func moveToAudio()
     func publish(file data: Data, with ext: String, type: Int)
 }
 

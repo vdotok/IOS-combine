@@ -35,9 +35,8 @@ final class ChannelPresenter {
     var streamingManager: StreamingMananger
     var deleteStore: DeleteStoreable = DeleteService(service: NetworkService())
     var editStore: EditGroupStoreable = EditGroupService(service: NetworkService())
+    var callingManager: CallingManager?
   
-    
-    
 
     // MARK: - Lifecycle -
 
@@ -45,13 +44,15 @@ final class ChannelPresenter {
         view: ChannelViewInterface,
         interactor: ChannelInteractorInterface,
         wireframe: ChannelWireframeInterface,
-        streamingManager: StreamingMananger
+        streamingManager: StreamingMananger,
+        callingManager: CallingManager
    
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
         self.streamingManager = streamingManager
+        self.callingManager = callingManager
     }
     
     enum Output {
@@ -204,8 +205,7 @@ extension ChannelPresenter: SDKConnectionDelegate {
         case .disconnected(_):
             self.channelOutput?(.disconnected(.stream))
         case .sessionRequest(let sessionRequest):
-            guard let sdk = vtokSDK else {return}
-            wireframe.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: contacts, sessionDirection: .incoming)
+            wireframe.moveToIncomingCall(callingManager: callingManager!, users: contacts, sessionDirection: .incoming)
          
         }
     }
@@ -320,8 +320,7 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
         case .disconnected:
             channelOutput?(.disconnected(.stream))
         case .request(let session, let sdk):
-            
-            wireframe.moveToIncomingCall(sdk: sdk, baseSession: session, users: contacts, sessionDirection: .incoming)
+            wireframe.moveToIncomingCall(callingManager: callingManager ,users: contacts, sessionDirection: .incoming)
         
         }
     }

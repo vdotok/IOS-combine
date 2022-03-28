@@ -33,9 +33,9 @@ struct Constants {
 }
 
 struct AuthenticationConstants {
-    static let PROJECTID = "1PHN0E"
-    static let AUTHTOKEN = "3d9686b635b15b5bc2d19800407609fa"
-    static let HOST = "d-tenant.vdotok.dev"
+    static let PROJECTID = "245V0IN"
+    static let AUTHTOKEN = "d6b649546c867e9ab2b1d998d02d7736"
+    static let HOST = "q-tenant.vdotok.dev"
 }
 
 struct AppsGroup {

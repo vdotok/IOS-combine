@@ -70,10 +70,7 @@ final class ChatViewController: UIViewController {
         bindPresenter()
         notificationsListners()
         titleLabel.text = presenter.group?.groupTitle
-       
         listenForHangup()
-    
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -510,10 +507,15 @@ extension ChatViewController {
     }
     
     @objc func audioCallAction(_ sender: UIView) {
-        let groupId = presenter.group?.id
-        let userInfo: [String: Any] = ["callType": NotifyCallType.audio.callType,
-                                       "groupId": groupId ?? 0]
-        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
+        presenter.moveToAudio()
+//        let groupId = presenter.group?.id
+//        let userInfo: [String: Any] = ["callType": NotifyCallType.audio.callType,
+//                                       "groupId": groupId ?? 0]
+//        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
+        
+        
+        
+        
     }
     
     @objc func videoCallAction(_ sender: UIView) {
