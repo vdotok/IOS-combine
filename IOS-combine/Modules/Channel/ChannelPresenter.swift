@@ -313,15 +313,16 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
         }
     }
     
-    func streaming(connectionStats: StreamConnectionStatus, sdk: VTokSDK?) {
+    func streaming(connectionStats: StreamConnectionStatus, callingManager: CallingManager) {
         switch connectionStats {
         case .connected:
             channelOutput?(.connected(.stream))
         case .disconnected:
             channelOutput?(.disconnected(.stream))
         case .request(let session, let sdk):
-            wireframe.moveToIncomingCall(sdk: sdk, baseSession: session, users: contacts, sessionDirection: .incoming)
             
+            wireframe.moveToIncomingCall(sdk: sdk, baseSession: session, users: contacts, sessionDirection: .incoming)
+        
         }
     }
     

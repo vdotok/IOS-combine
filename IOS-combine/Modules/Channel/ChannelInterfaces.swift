@@ -93,7 +93,7 @@ protocol ChannelInteractorToPresenter: AnyObject {
     func usersFetched(with user: [User])
     func usersFetchedFailded(with error: String)
     var streamingManager: StreamingMananger {get set}
-    func streaming(connectionStats: StreamConnectionStatus, sdk: VTokSDK?)
+    func streaming(connectionStats: StreamConnectionStatus, callingManager: CallingManager)
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
     func updatePresence(with presence: [String: [String]])
     func hideProgress()

@@ -9,11 +9,18 @@
 import Foundation
 import iOSSDKStreaming
 
+protocol CallingManagerDelegate: AnyObject {
+    func didGenerate(output: SDKOutPut)
+}
+
 
 class CallingManager {
     var vtokSdk: VTokSDK?
+    weak var delegate: CallingManagerDelegate?
+    var vtokBaseSession: VTokBaseSession?
     
-    init() {
+    init(delegate: CallingManagerDelegate) {
+        self.delegate = delegate
         guard let user = VDOTOKObject<UserResponse>().getData(), let url = user.mediaServerMap?.completeAddress else {return}
         let request = RegisterRequest(type: Constants.Request,
                                       requestType: Constants.Register,
@@ -39,15 +46,15 @@ class CallingManager {
 
 extension CallingManager: SDKConnectionDelegate {
     func didGenerate(output: SDKOutPut) {
-     
         switch output {
         case .registered:
-            print("registered")
-        case .disconnected(let string):
-            print("disconnected")
+            break
+        case .disconnected(_):
+            break
         case .sessionRequest(let vTokBaseSession):
-            print(vTokBaseSession)
+            self.vtokBaseSession = vTokBaseSession
         }
+        delegate?.didGenerate(output: output)
     }
     
     

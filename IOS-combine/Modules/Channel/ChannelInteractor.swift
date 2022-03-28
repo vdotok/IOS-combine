@@ -25,6 +25,7 @@ final class ChannelInteractor {
     var messages: [String: [ChatMessage]] = [:]
     var unreadMessages:[String:[ChatMessage]] = [:]
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
+    var callingManager: CallingManager?
     var broadCastData: BroadcastData?
     init(broadCastData: BroadcastData? = nil) {
         self.broadCastData = broadCastData
@@ -42,7 +43,6 @@ final class ChannelInteractor {
 
 extension ChannelInteractor: ChannelInteractorInterface {
     func removeUnreadMessages(with channelName: String) {
-      //  messages[channelName] = chats
         unreadMessages[channelName]?.removeAll()
     }
     
@@ -87,43 +87,23 @@ extension ChannelInteractor: ChannelInteractorInterface {
 // MARK: Streaming
 extension ChannelInteractor {
     func connectVdoTok() {
-        guard let user = VDOTOKObject<UserResponse>().getData(), let url = user.mediaServerMap?.completeAddress else {return}
-        let request = RegisterRequest(type: Constants.Request,
-                                      requestType: Constants.Register,
-                                      referenceID: user.refID!,
-                                      authorizationToken: user.authorizationToken!,
-                                      requestID: getRequestId(),
-                                    projectID: AuthenticationConstants.PROJECTID)
-        self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
-    }
-    
-    private func getRequestId() -> String {
-        let generatable = IdGenerator()
-        guard let response = VDOTOKObject<UserResponse>().getData() else {return ""}
-        let timestamp = NSDate().timeIntervalSince1970
-        let myTimeInterval = TimeInterval(timestamp)
-        let time = Date(timeIntervalSince1970: TimeInterval(myTimeInterval)).stringValue()
-        let tenantId = "12345"
-        let token = generatable.getUUID(string: time + tenantId + response.refID!)
-        return token
-        
+        self.callingManager = CallingManager(delegate: self)
     }
 }
 
-extension ChannelInteractor: SDKConnectionDelegate {
+extension ChannelInteractor: CallingManagerDelegate {
     func didGenerate(output: SDKOutPut) {
         switch output {
         case .registered:
-            guard let sdk = vtokSdk else {return}
+            guard let sdk = callingManager?.vtokSdk else {return}
             presenter?.vtokSDK = sdk
             presenter?.streamingManager.vtokSDK = sdk
-            presenter?.streaming(connectionStats: .connected, sdk: sdk)
+            presenter?.streaming(connectionStats: .connected, callingManager: callingManager!)
         case .disconnected(_):
-            guard let sdk = vtokSdk else {return}
-            presenter?.streaming(connectionStats: .disconnected, sdk: sdk)
+            presenter?.streaming(connectionStats: .disconnected, callingManager: callingManager!)
         case .sessionRequest(let sessionRequest):
             guard let sdk = vtokSdk else {return}
-            presenter?.streaming(connectionStats: .request(session: sessionRequest, sdk: sdk), sdk: nil)
+            presenter?.streaming(connectionStats: .request(session: sessionRequest, sdk: sdk), callingManager: callingManager!)
         }
     }
     
