@@ -320,9 +320,8 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
         case .disconnected:
             channelOutput?(.disconnected(.stream))
         case .request(let session, let sdk):
-            
             wireframe.moveToIncomingCall(sdk: sdk, baseSession: session, users: contacts, sessionDirection: .incoming)
-        
+            
         }
     }
     

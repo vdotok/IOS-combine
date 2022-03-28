@@ -19,21 +19,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let streamingManager = StreamingMananger()
-        
-        
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
    
         let navigationControlr = UINavigationController()
-        guard let user =  VDOTOKObject<UserResponse>().getData() else {
-            let controller = LoginWireframe(streamingManager: streamingManager).viewController
+        guard let _ =  VDOTOKObject<UserResponse>().getData() else {
+            let controller = LoginWireframe().viewController
             self.window?.rootViewController = controller
             window?.makeKeyAndVisible()
             return
         }
-        navigationControlr.setRootWireframe(ChannelWireframe( streamingManager: streamingManager))
+        navigationControlr.setRootWireframe(ChannelWireframe())
         self.window?.rootViewController = navigationControlr
         window?.makeKeyAndVisible()
         

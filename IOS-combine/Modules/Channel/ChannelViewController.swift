@@ -172,7 +172,7 @@ final class ChannelViewController: UIViewController {
         defaults.removeObject(forKey: "UserResponse")
         defaults.synchronize()
         presenter.logout()
-        navigationController?.presentWireframe(LoginWireframe(streamingManager: self.presenter.streamingManager))
+        navigationController?.presentWireframe(LoginWireframe())
 
     }
     

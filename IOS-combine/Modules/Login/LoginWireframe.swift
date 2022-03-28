@@ -15,15 +15,12 @@ final class LoginWireframe: BaseWireframe<LoginViewController> {
     // MARK: - Private properties -
 
     private let storyboard = UIStoryboard(name: "Login", bundle: nil)
-    var streamingManager: StreamingMananger
 
     // MARK: - Module setup -
 
-    init(streamingManager: StreamingMananger) {
+    init() {
         let moduleViewController = storyboard.instantiateViewController(ofType: LoginViewController.self)
-        self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
-        self.streamingManager = streamingManager
 
         let interactor = LoginInteractor()
         let presenter = LoginPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
@@ -42,7 +39,7 @@ extension LoginWireframe: LoginWireframeInterface {
         case .channel:
             let navigationControlr = UINavigationController()
             navigationControlr.modalPresentationStyle = .fullScreen
-            let viewController = ChannelWireframe(streamingManager: streamingManager).viewController
+            let viewController = ChannelWireframe().viewController
             viewController.modalPresentationStyle = .fullScreen
             navigationControlr.setViewControllers([viewController], animated: true)
             self.viewController.present(navigationControlr, animated: true, completion: nil)
@@ -50,7 +47,7 @@ extension LoginWireframe: LoginWireframeInterface {
             
             
         case .signup:
-            self.viewController.presentWireframe(SignupWireframe(streamingManager: streamingManager))
+            self.viewController.presentWireframe(SignupWireframe())
         }
     }
     
