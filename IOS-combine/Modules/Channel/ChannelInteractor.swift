@@ -54,6 +54,7 @@ extension ChannelInteractor: ChannelInteractorInterface {
                 switch response.status {
                 case 200:
                     self.presenter?.usersFetched(with: response.users)
+                    self.callingManager?.contacts = response.users
                 default:
                     self.presenter?.usersFetchedFailded(with: response.message)
                 }

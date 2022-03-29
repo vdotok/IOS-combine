@@ -54,10 +54,6 @@ extension ChatWireframe: ChatWireframeInterface {
 
 extension ChatWireframe: BroadcastOverlayDelegate {
     func didUpdate(broadcastData: BroadcastData) {
-//        let groupId = presenter.group?.id
-//        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
-//                                       "groupId": groupId]
-//        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
         interactor?.moveToSSView(broadcastData: broadcastData)
     }
     
@@ -69,14 +65,12 @@ extension ChatWireframe: BroadcastOverlayDelegate {
     }
     
     func moveToAudio() {
-        guard let group = callingManager.group else {return}
-        let frame = CallingWireframe(vtokSdk: callingManager.vtokSdk!, participants: group.participants, screenType: .audioView, contact: callingManager.contacts, streamingManager: streamingManager!, sessionDirection: .outgoing)
+        let frame = CallingWireframe(screenType: .audioView,streamingManager: streamingManager!, sessionDirection: .outgoing, callingManager: callingManager)
         navigationController?.presentWireframe(frame)
     }
     
     func moveToVideo() {
-        guard let group = callingManager.group else {return}
-        let frame = CallingWireframe(vtokSdk: callingManager.vtokSdk!, participants: group.participants, screenType: .videoView, session: nil,contact: callingManager.contacts, broadCastData: nil, streamingManager: streamingManager!, sessionDirection: .outgoing)
+        let frame = CallingWireframe(screenType: .videoView, session: nil, broadCastData: nil, streamingManager: streamingManager!, sessionDirection: .outgoing, callingManager: callingManager)
         navigationController?.viewControllers.last?.presentWireframe(frame)
         
     }

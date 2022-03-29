@@ -64,7 +64,7 @@ extension ContactWireframe: ContactWireframeInterface {
     
     private func moveToCallingView(with sdk: VTokSDK,user: User?, callType: SessionMediaType ) {
        
-        let callingWireFrame = CallingWireframe(vtokSdk: sdk , participants: nil, screenType: callType == .audioCall ? .oneToOneAudio : .oneToOneVideo, session: nil, contact: [user!], broadCastData: nil, streamingManager: streamingManager, sessionDirection: .outgoing)
+        let callingWireFrame = CallingWireframe(screenType: callType == .audioCall ? .oneToOneAudio : .oneToOneVideo, session: nil, broadCastData: nil, streamingManager: streamingManager, sessionDirection: .outgoing, callingManager: callingManager)
         navigationController?.viewControllers.last?.presentWireframe(callingWireFrame)
     }
     

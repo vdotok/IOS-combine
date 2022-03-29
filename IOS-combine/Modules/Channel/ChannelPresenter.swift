@@ -223,15 +223,7 @@ extension ChannelPresenter {
               let groupId = info["groupId"] as? Int
                else {return}
         
-        if callType == NotifyCallType.audio.callType {
-           guard let group = groups.first(where: { $0.id == groupId }) else
-           {return}
-             moveToAudio(users: group.participants)
-        } else if callType == NotifyCallType.video.callType {
-            guard let group = groups.first(where: { $0.id == groupId }) else
-            {return}
-              moveToVideo(users: group.participants)
-        } else if callType == NotifyCallType.broadcast.callType {
+      if callType == NotifyCallType.broadcast.callType {
             let broadcastdata = info["broadcastData"] as? BroadcastData
             interactor?.broadCastData = broadcastdata
             particinpants = info["participants"] as? [Participant]
@@ -277,20 +269,7 @@ extension ChannelPresenter {
         guard let sdk = vtokSDK else {return}
         wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType, session: session, sessionDirection: .outgoing)
     }
-    
-    func moveToVideo(users: [Participant]) {
-         guard let sdk = vtokSDK else {return}
-//        wireframe.moveToCalling(sdk: sdk, particinats: users, users: contacts, broadCastData: nil)
-        wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: .videoView, session: nil, sessionDirection: .outgoing)
-    }
-    
-    func moveToAudio(users: [Participant]) {
-        guard let sdk = vtokSDK else {return}
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.wireframe.moveToAudio(sdk: sdk, participants: users, users: self.contacts, sessionDirection: .outgoing)
-        }
-    }
+
 }
 
 

@@ -33,6 +33,7 @@ final class CallingPresenter: NSObject {
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     var streamingManager: StreamingMananger?
+    var callingManager: CallingManager
     var sessionDirection: SessionDirection
     var url: String? = nil
     var isBusy: Bool = false
@@ -43,26 +44,25 @@ final class CallingPresenter: NSObject {
     init(
         view: CallingViewInterface,
         interactor: CallingInteractorInterface,
-        wireframe: CallingWireframeInterface,vtokSdk: VideoTalkSDK,
-        participants: [Participant]? = nil,
+        wireframe: CallingWireframeInterface,
         screenType: ScreenType,
         session: VTokBaseSession? = nil,
-        users: [User]? = nil,
         broadCastData: BroadcastData? = nil,
         streamingManager: StreamingMananger? = nil,
-        sessionDirection: SessionDirection
+        sessionDirection: SessionDirection,
+        callingManager: CallingManager
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
-        self.vtokSdk = vtokSdk
-        self.participants = participants
         self.screenType = screenType
         self.session = session
-        self.users = users
         self.broadcastData = broadCastData
         self.streamingManager = streamingManager
         self.sessionDirection = sessionDirection
+        self.callingManager = callingManager
+        self.vtokSdk = callingManager.vtokSdk
+        self.users = callingManager.contacts
         super.init()
         self.streamingManager?.delegate = self
     }
@@ -137,7 +137,7 @@ extension CallingPresenter {
             makeSession(with: .videoCall)
         case .incomingCall:
             guard let session = session else {return}
-            guard let selectedUser =  users?.filter({$0.refID == session.to.first}).first else {return}
+            guard let selectedUser =  callingManager.contacts.filter({$0.refID == session.to.first}).first else {return}
            
             playSound()
             output?(.loadIncomingCallView(session: session, user: selectedUser))
@@ -160,16 +160,14 @@ extension CallingPresenter {
             
             
                 guard let user = VDOTOKObject<UserResponse>().getData(), let refID = user.refID else {return}
-                guard let users = users else {return}
-                let refIds = users.map({$0.refID})
+            let refIds = callingManager.contacts.map({$0.refID})
                 let requestID = getRequestId()
             let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .audioCall ,callType: .onetoone, connectedUsers: [])
             vtokSdk?.initiate(session: session, sessionDelegate: streamingManager)
             break
         case .oneToOneVideo:
             guard let user = VDOTOKObject<UserResponse>().getData(), let refID = user.refID else {return}
-            guard let users = users else {return}
-            let refIds = users.map({$0.refID})
+            let refIds = callingManager.contacts.map({$0.refID})
             let requestID = getRequestId()
         let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .videoCall ,callType: .onetoone, connectedUsers: [])
         vtokSdk?.initiate(session: session, sessionDelegate: streamingManager)
@@ -207,7 +205,7 @@ extension CallingPresenter {
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let refID = user.refID
         else {return}
-        guard let participents = participants else {return}
+        guard let participents = callingManager.group?.participants else {return}
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         let requestId = getRequestId()
         let baseSession = VTokBaseSessionInit(from: refID,
@@ -226,7 +224,7 @@ extension CallingPresenter {
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let refID = user.refID
         else {return nil}
-        guard let participents = participants, let broadcast = broadcastData else {return nil}
+        guard let participents = callingManager.group?.participants, let broadcast = broadcastData else {return nil}
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         
         let requestId = sessionUUID
@@ -556,7 +554,7 @@ extension CallingPresenter {
               let refID = user.refID,
               let broadcastData = broadcastData
         else {return nil}
-        guard let participents = participants else {return nil}
+        guard let participents = callingManager.group?.participants else {return nil}
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,

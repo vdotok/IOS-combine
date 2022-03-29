@@ -90,8 +90,6 @@ final class ChatViewController: UIViewController {
             AppDelegate.appDelegate.smallCallingView.removeFromSuperview()
             AppDelegate.appDelegate.smallCallingView = nil
         }
-        
-//        NotificationCenter.default.post(name: Notification.Name.hangup, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didTapHangup), name: Notification.Name.hangup, object: nil)
         
     }

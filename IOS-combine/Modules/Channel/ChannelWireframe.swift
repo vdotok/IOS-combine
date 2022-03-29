@@ -44,17 +44,19 @@ extension ChannelWireframe: ChannelWireframeInterface {
     
     
     func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType, session: VTokBaseSession?, sessionDirection: SessionDirection) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: screenType, session: session,contact: users, broadCastData: broadCastData, streamingManager: streamingManager, sessionDirection: sessionDirection)
+//        let frame = CallingWireframe(vtokSdk: sdk, participants: particinats, screenType: screenType, session: session,contact: users, broadCastData: broadCastData, streamingManager: streamingManager, sessionDirection: sessionDirection)
+        let frame = CallingWireframe(screenType: screenType, session: session, broadCastData: broadCastData, streamingManager: streamingManager, sessionDirection: sessionDirection, callingManager: callingManager)
         navigationController?.viewControllers.last?.presentWireframe(frame)
     }
     
     func moveToIncomingCall(callingManager: CallingManager, users: [User],sessionDirection: SessionDirection) {
-        let frame = CallingWireframe(vtokSdk: callingManager.vtokSdk!, participants: nil, screenType: .incomingCall, session: callingManager.vtokBaseSession, contact: users, streamingManager: streamingManager, sessionDirection: sessionDirection)
+//        let frame = CallingWireframe(vtokSdk: callingManager.vtokSdk!, participants: nil, screenType: .incomingCall, session: callingManager.vtokBaseSession, contact: users, streamingManager: streamingManager, sessionDirection: sessionDirection)
+        let frame = CallingWireframe(screenType: .incomingCall, session: callingManager.vtokBaseSession, streamingManager: streamingManager, sessionDirection: sessionDirection, callingManager: callingManager)
         navigationController?.presentWireframe(frame)
     }
     
     func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User], sessionDirection: SessionDirection) {
-        let frame = CallingWireframe(vtokSdk: sdk, participants: participants, screenType: .audioView, contact: users, streamingManager: streamingManager, sessionDirection: sessionDirection)
+        let frame = CallingWireframe(screenType: .audioView, streamingManager: streamingManager, sessionDirection: sessionDirection, callingManager: callingManager)
         navigationController?.presentWireframe(frame)
     }
     
