@@ -79,7 +79,6 @@ protocol ChannelPresenterInterface: PresenterInterface {
 protocol ChannelInteractorInterface: InteractorInterface {
     var broadCastData: BroadcastData? {get set}
     var presenter: ChannelInteractorToPresenter? {get set}
-    var vtokSdk: VTokSDK? {get set}
     func fetchGroups()
     func fetchUsers()
     func connectVdoTok()

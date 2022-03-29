@@ -18,7 +18,6 @@ final class ChannelInteractor {
     weak var presenter: ChannelInteractorToPresenter?
     let service = ChannelService(service: NetworkService())
     let contactService = ContactService(service: NetworkService())
-    var vtokSdk: VTokSDK?
     private var mqttClient: ChatClient?
     private var groups: [Group] = []
     var presentCandidates: [String: [String]] = [:]
@@ -419,7 +418,7 @@ extension ChannelInteractor {
         wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in
             guard let self = self else {return}
             if let message = messageObject as? String, message == "StartScreenSharing"  {
-                guard let sdk = self.vtokSdk, let broadcastData = self.broadCastData else {return }
+                guard let sdk = self.callingManager?.vtokSdk, let broadcastData = self.broadCastData else {return }
                 self.presenter?.dismissView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData)
                 print("screen share start")
             }
@@ -428,7 +427,7 @@ extension ChannelInteractor {
     
     func moveToCallingView(broadcastData: BroadcastData) {
         
-        guard let sdk = self.vtokSdk else {return }
+        guard let sdk = callingManager?.vtokSdk else {return }
         presenter?.moveToCallingView(sdk: sdk, screenType: .videoAndScreenShare, broadCastData: broadcastData,participant: [], user: [])
     }
 }
