@@ -162,7 +162,8 @@ extension CallingPresenter {
                 guard let user = VDOTOKObject<UserResponse>().getData(), let refID = user.refID else {return}
             let refIds = callingManager.contacts.map({$0.refID})
                 let requestID = getRequestId()
-            let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .audioCall ,callType: .onetoone, connectedUsers: [])
+            
+            let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .audioCall ,callType: .onetoone)
             vtokSdk?.initiate(session: session, sessionDelegate: streamingManager)
             break
         case .oneToOneVideo:
@@ -205,15 +206,17 @@ extension CallingPresenter {
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let refID = user.refID
         else {return}
-        guard let participents = callingManager.group?.participants else {return}
+        guard let participents = callingManager.group?.participants, let group = callingManager.group else {return}
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         let requestId = getRequestId()
+        let sessionCustomData = SessionCustomData(calleName: user.fullName , groupName: group.groupTitle, groupAutoCreatedValue: "\(group.autoCreated)")
         let baseSession = VTokBaseSessionInit(from: refID,
                                               to: participantsRefIds,
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
-                                              callType: .manytomany)
+                                              callType: .manytomany,
+                                                data: sessionCustomData)
         output?(.loadView(mediaType: sessionMediaType))
         vtokSdk?.initiate(session: baseSession, sessionDelegate: streamingManager)
         callHangupHandling()
@@ -228,6 +231,7 @@ extension CallingPresenter {
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         
         let requestId = sessionUUID
+        let sessionCustomData = SessionCustomData(calleName: user.fullName , groupName: callingManager.group?.groupTitle, groupAutoCreatedValue: "\(callingManager.group?.autoCreated)")
         let baseSession = VTokBaseSessionInit(from: refID,
                                               to: broadcast.broadcastType == .group ? participantsRefIds : [],
                                               requestID: requestId,
@@ -235,7 +239,8 @@ extension CallingPresenter {
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
                                               sessionType: .call,
-                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions, connectedUsers: [])
+                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions,
+                                                data: sessionCustomData)
         session = baseSession
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))

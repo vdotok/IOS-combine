@@ -136,7 +136,7 @@ class GroupCallingUpdatedView: UIView {
                 guard let users = users, let user = users.first, session.sessionDirection == .outgoing else {return}
                 groupName.text = user.fullName
             default:
-                groupName.text = "Group"
+                groupName.text = session.data?.groupName
                 break
             }
             titleLable.text = "You are audio calling with"
@@ -150,7 +150,7 @@ class GroupCallingUpdatedView: UIView {
                 groupName.text = user.fullName
                 
             default:
-                groupName.text = "Group"
+                groupName.text = session.data?.groupName
                 break
             }
             cameraButton.isHidden = false
@@ -267,7 +267,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
             groupName.text = name
            
         default:
-            groupName.text = "Group"
+            groupName.text = session?.data?.groupName
         }
        
     }
