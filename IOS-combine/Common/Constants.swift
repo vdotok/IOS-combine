@@ -33,7 +33,7 @@ struct Constants {
 }
 
 struct AuthenticationConstants {
-    static let PROJECTID = "741S88M"
+    static let PROJECTID = "115G1WZI"
     static let AUTHTOKEN = "53fd514fe5356b103c2c126e6a041466"
     static let HOST = "q-tenant.vdotok.dev"
 }

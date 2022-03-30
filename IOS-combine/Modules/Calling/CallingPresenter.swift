@@ -160,7 +160,8 @@ extension CallingPresenter {
             
             
                 guard let user = VDOTOKObject<UserResponse>().getData(), let refID = user.refID else {return}
-            let refIds = callingManager.contacts.map({$0.refID})
+            guard let users = users else {return}
+            let refIds = users.map({$0.refID})
                 let requestID = getRequestId()
             
             let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .audioCall ,callType: .onetoone)
@@ -168,7 +169,8 @@ extension CallingPresenter {
             break
         case .oneToOneVideo:
             guard let user = VDOTOKObject<UserResponse>().getData(), let refID = user.refID else {return}
-            let refIds = callingManager.contacts.map({$0.refID})
+            guard let users = users else {return}
+            let refIds = users.map({$0.refID})
             let requestID = getRequestId()
         let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .videoCall ,callType: .onetoone, connectedUsers: [])
         vtokSdk?.initiate(session: session, sessionDelegate: streamingManager)
