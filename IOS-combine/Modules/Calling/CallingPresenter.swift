@@ -69,7 +69,7 @@ final class CallingPresenter: NSObject {
     
     enum Output {
         case loadView(mediaType: SessionMediaType)
-        case loadIncomingCallView(session: VTokBaseSession, user: User)
+        case loadIncomingCallView(session: VTokBaseSession)
         case configureLocal(stream: UserStream, session: VTokBaseSession)
         case configureRemote(streams: [UserStream], session: VTokBaseSession)
         case updateVideoView(session: VTokBaseSession)
@@ -137,10 +137,8 @@ extension CallingPresenter {
             makeSession(with: .videoCall)
         case .incomingCall:
             guard let session = session else {return}
-            guard let selectedUser =  callingManager.contacts.filter({$0.refID == session.to.first}).first else {return}
-           
             playSound()
-            output?(.loadIncomingCallView(session: session, user: selectedUser))
+            output?(.loadIncomingCallView(session: session))
             self.session = session
             callHangupHandling()
         case .videoAndScreenShare:
@@ -157,8 +155,6 @@ extension CallingPresenter {
             guard let session = session else {return}
             output?(.update(session: session))
         case .oneToOneAudio:
-            
-            
                 guard let user = VDOTOKObject<UserResponse>().getData(), let refID = user.refID else {return}
             guard let users = users else {return}
             let refIds = users.map({$0.refID})
@@ -227,15 +223,20 @@ extension CallingPresenter {
     @discardableResult
     private func makeSession(with sessionMediaType: SessionMediaType,sessionUUID: String, associatedSessionUUID: String? ) -> String? {
         guard let user = VDOTOKObject<UserResponse>().getData(),
-              let refID = user.refID
+              let refID = user.refID,
+              let broadcast = broadcastData
         else {return nil}
-        guard let participents = callingManager.group?.participants, let broadcast = broadcastData else {return nil}
-        let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        var participantsRefIds: [String] = []
         
+        if broadcastData?.broadcastType == .group {
+            guard let participents = callingManager.group?.participants else {return nil}
+            participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        }
+
         let requestId = sessionUUID
         let sessionCustomData = SessionCustomData(calleName: user.fullName , groupName: callingManager.group?.groupTitle, groupAutoCreatedValue: "\(callingManager.group?.autoCreated)")
         let baseSession = VTokBaseSessionInit(from: refID,
-                                              to: broadcast.broadcastType == .group ? participantsRefIds : [],
+                                              to: participantsRefIds,
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
@@ -556,13 +557,18 @@ extension CallingPresenter {
     }
     
     func getScreenShareDataString(for sessionUUID: String, with associatedSessionUUID: String?) -> NSString? {
+        
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let token = user.authorizationToken,
               let refID = user.refID,
               let broadcastData = broadcastData
         else {return nil}
-        guard let participents = callingManager.group?.participants else {return nil}
-        let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        var participantsRefIds: [String] = []
+        if broadcastData.broadcastType == .group {
+            guard let participents = callingManager.group?.participants else {return nil}
+            participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        }
+        
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,
                                           requestID: sessionUUID,
@@ -577,7 +583,7 @@ extension CallingPresenter {
         let data = ScreenShareAppData(url: user.mediaServerMap!.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
-        self.ssSession = session 
+        self.ssSession = session
         output?(.loadBroadcastView(session: session))
         let jsonData = try! JSONEncoder().encode(data)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString

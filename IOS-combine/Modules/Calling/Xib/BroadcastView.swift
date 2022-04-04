@@ -354,6 +354,10 @@ class BroadcastView: UIView {
             delegate?.didTapDismiss()
         case .rejected:
             delegate?.didTapDismiss()
+        case .suspendedByProvider:
+            delegate?.didTapDismiss()
+        case .insufficientBalance:
+            delegate?.didTapDismiss()
         default:
             break
             

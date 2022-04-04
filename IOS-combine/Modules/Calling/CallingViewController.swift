@@ -68,8 +68,8 @@ final class CallingViewController: UIViewController {
            
             case .configureRemote(let streams, let session):
                 self.configureRemote(streams: streams, session: session)
-            case .loadIncomingCallView(let session, let user):
-                self.loadIncomingCallView(session: session, contact: user)
+            case .loadIncomingCallView(let session):
+                self.loadIncomingCallView(session: session)
             case .loadBroadcastView(let session):
                 guard self.broadcastView != nil else {
                     self.loadBroadcastView(session: session)
@@ -184,13 +184,13 @@ final class CallingViewController: UIViewController {
         ])
     }
     
-    private func loadIncomingCallView(session: VTokBaseSession, contact: User) {
+    private func loadIncomingCallView(session: VTokBaseSession) {
         let view = IncomingCall.loadView()
         incomingCallingView = view
-        remoteUserName = contact.fullName
+        remoteUserName = session.data?.calleName ?? ""
         
         guard let incomingCallingView = self.incomingCallingView else {return}
-        view.configureView(baseSession: session, user: contact)
+        view.configureView(baseSession: session)
         view.session = session
         incomingCallingView.delegate = self
         incomingCallingView.translatesAutoresizingMaskIntoConstraints = false

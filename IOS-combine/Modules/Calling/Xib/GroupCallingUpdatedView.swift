@@ -208,6 +208,13 @@ class GroupCallingUpdatedView: UIView {
            delegate?.didTapDismiss()
        case .hangup:
            delegate?.didTapDismiss()
+       case .suspendedByProvider:
+           delegate?.didTapDismiss()
+       case .insufficientBalance:
+           callStatus.text = "Insufficient fund.."
+           DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+               self?.delegate?.didTapDismiss()
+           }
        default:
            break
        }
