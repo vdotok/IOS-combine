@@ -284,6 +284,12 @@ extension SampleHandler: SessionDelegate {
             break
         case .updateParticipent:
             break
+        case .insufficientBalance:
+            wormhole.passMessageObject(nil, identifier: "sessionHangup")
+            self.finishBroadcastWithError(SessionHangup.forceStop)
+        case .suspendedByProvider:
+            wormhole.passMessageObject(nil, identifier: "sessionHangup")
+            self.finishBroadcastWithError(SessionHangup.forceStop)
         }
         
         let message = String(session.connectedUsers.count) as NSString

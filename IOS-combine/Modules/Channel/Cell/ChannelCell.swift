@@ -14,7 +14,7 @@ class ChannelCell: UITableViewCell {
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var participentsCount: UILabel!
     @IBOutlet weak var messageCountLabel: UILabel!
-    @IBOutlet weak var messageCountView: UIView!
+    @IBOutlet weak var messageCountView: UIStackView!
     
     var onlineParticipent: Int = 0
 
@@ -69,9 +69,9 @@ class ChannelCell: UITableViewCell {
         groupNameLabel.font = UIFont(name: "Manrope-Medium", size: 20)
         lastMessageLabel.font = UIFont(name: "Inter-Regular", size: 14)
         participentsCount.font = UIFont(name: "Poppins-Regular", size: 10)
-        messageCountView.backgroundColor = .appRedColor
-        messageCountView.layer.cornerRadius = 10
-        messageCountView.layer.masksToBounds = true
+        messageCountView?.backgroundColor = .appRedColor
+        messageCountView?.layer.cornerRadius = 10
+        messageCountView?.layer.masksToBounds = true
         messageCountLabel.textColor = .white
         messageCountLabel.font = UIFont(name: "Inter-ExtraBold", size: 12)
        

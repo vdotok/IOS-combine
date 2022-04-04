@@ -22,7 +22,10 @@ class ProgressHud {
     }
     
     static func hide() {
-        KRProgressHUD.dismiss()
+        DispatchQueue.main.async {
+            KRProgressHUD.dismiss()
+        }
+       
     }
     
     static func showMessage(text: String) {

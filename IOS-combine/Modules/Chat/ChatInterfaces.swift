@@ -16,6 +16,8 @@ typealias ChatOutput = (ChatPresenter.Output) -> Void
 
 protocol ChatWireframeInterface: WireframeInterface {
     func moveToBroadcastOverlay()
+    func moveToAudio()
+    func moveToVideo()
 }
 
 protocol ChatViewInterface: ViewInterface {
@@ -30,6 +32,7 @@ protocol ChatPresenterInterface: PresenterInterface {
     var chatOutput: ChatOutput? {get set}
     var sdk: VTokSDK? {get set}
     var streamingManager: StreamingMananger? {get set}
+    var callingManager: CallingManager {get set}
     func dispatchPackage(start: Bool)
     func sendMessage(text: String)
     func messageCount() -> Int
@@ -37,6 +40,8 @@ protocol ChatPresenterInterface: PresenterInterface {
     func receivedMessage(userInfo: [String: AnyObject])
     func sendSeenMessage(message: ChatMessage, row: Int)
     func moveToBroadcast()
+    func moveToAudio()
+    func moveToVideo()
     func publish(file data: Data, with ext: String, type: Int)
 }
 

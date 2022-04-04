@@ -25,7 +25,7 @@ final class ContactPresenter {
     var output: ContactOutput?
     var client: ChatClient?
     var streamingManager: StreamingMananger
-    var vtokSdk: VTokSDK
+    var callingManager: CallingManager
     // MARK: - Lifecycle -
 
     init(
@@ -34,14 +34,14 @@ final class ContactPresenter {
         wireframe: ContactWireframeInterface,
         client: ChatClient,
         streamingManager: StreamingMananger,
-        vtokSdk: VTokSDK
+        callingManager: CallingManager
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
         self.client = client
         self.streamingManager = streamingManager
-        self.vtokSdk = vtokSdk
+        self.callingManager = callingManager
     }
     
     func viewModelDidLoad() {
@@ -69,9 +69,11 @@ extension ContactPresenter: ContactPresenterInterface {
     func makeCall(mediaType: SessionMediaType, user: User) {
         switch mediaType {
         case .audioCall:
-            wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+            callingManager.contacts = [user]
+            wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: callingManager.vtokSdk)
         case .videoCall:
-            wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: vtokSdk)
+            callingManager.contacts = [user]
+            wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: callingManager.vtokSdk)
         }
     }
     

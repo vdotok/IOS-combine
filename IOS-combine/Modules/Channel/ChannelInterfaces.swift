@@ -43,7 +43,7 @@ protocol ChannelWireframeInterface: WireframeInterface {
     func move(to: ChannelNavigationOptions,client: ChatClient, group: Group?, user: User, messages: [ChatMessage],sdk: VTokSDK?, streamingManager: StreamingMananger)
     func moveToCreateGroup(client: ChatClient, sdk: VTokSDK)
     func moveToCalling(particinats: [Participant], users: [User], sdk: VTokSDK, broadCastData: BroadcastData?, screenType: ScreenType, session: VTokBaseSession?, sessionDirection: SessionDirection)
-    func moveToIncomingCall(sdk: VTokSDK, baseSession: VTokBaseSession, users: [User], sessionDirection: SessionDirection)
+    func moveToIncomingCall(callingManager: CallingManager, users: [User], sessionDirection: SessionDirection)
     func moveToAudio(sdk: VTokSDK, participants: [Participant], users: [User], sessionDirection: SessionDirection)
     func dismissView(sdk: VTokSDK, screenType: ScreenType, broadCastData: BroadcastData,participant: [Participant], user: [User])
 }
@@ -59,6 +59,8 @@ protocol ChannelPresenterInterface: PresenterInterface {
     var unreadMessages:[String:[ChatMessage]] {get set}
     var streamingManager: StreamingMananger {get set}
     var vtokSDK: VTokSDK? {get set}
+    var callingManager: CallingManager? {get set}
+    var contacts: [User] {get set}
     func subscribe(group: Group) 
     func fetchGroups()
     func viewDidLoad()
@@ -77,7 +79,6 @@ protocol ChannelPresenterInterface: PresenterInterface {
 protocol ChannelInteractorInterface: InteractorInterface {
     var broadCastData: BroadcastData? {get set}
     var presenter: ChannelInteractorToPresenter? {get set}
-    var vtokSdk: VTokSDK? {get set}
     func fetchGroups()
     func fetchUsers()
     func connectVdoTok()
@@ -93,7 +94,8 @@ protocol ChannelInteractorToPresenter: AnyObject {
     func usersFetched(with user: [User])
     func usersFetchedFailded(with error: String)
     var streamingManager: StreamingMananger {get set}
-    func streaming(connectionStats: StreamConnectionStatus, sdk: VTokSDK?)
+    var callingManager: CallingManager? {get set}
+    func streaming(connectionStats: StreamConnectionStatus, callingManager: CallingManager)
     func connect(status: ConnectConnectionStatus, sdk: ChatClient?)
     func updatePresence(with presence: [String: [String]])
     func hideProgress()

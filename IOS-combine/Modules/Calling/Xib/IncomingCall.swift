@@ -24,8 +24,8 @@ class IncomingCall: UIView {
     var session: VTokBaseSession?
     var participants: [Participant]?
     
-    func configureView(baseSession: VTokBaseSession, user: User) {
-        userName.text = user.fullName
+    func configureView(baseSession: VTokBaseSession) {
+        userName.text = baseSession.data?.calleName
         self.session = baseSession
         switch baseSession.sessionMediaType {
         case .audioCall:

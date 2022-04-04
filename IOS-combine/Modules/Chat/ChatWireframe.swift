@@ -18,17 +18,20 @@ final class ChatWireframe: BaseWireframe<ChatViewController> {
     var interactor: ChatInteractor?
 
     private let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+    var callingManager: CallingManager
+    var streamingManager: StreamingMananger?
     
 
     // MARK: - Module setup -
 
-    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], vtokSDK: VTokSDK?, streamingManager: StreamingMananger? = nil) {
+    init(client: ChatClient, group: Group, user: User, messages: [ChatMessage], streamingManager: StreamingMananger? = nil, callingManager: CallingManager) {
         let moduleViewController = storyboard.instantiateViewController(ofType: ChatViewController.self)
+        self.callingManager = callingManager
+        self.streamingManager = streamingManager
         super.init(viewController: moduleViewController)
 
         self.interactor = ChatInteractor(mqttClient: client, user: user, group: group, messages: messages)
-//        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
-        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self, sdk: vtokSDK, streamingManager: streamingManager!)
+        let presenter = ChatPresenter(view: moduleViewController, interactor: interactor!, wireframe: self, streamingManager: streamingManager!, callingManager: callingManager)
         moduleViewController.presenter = presenter
         presenter.interactor?.presenter = presenter
     }
@@ -51,10 +54,6 @@ extension ChatWireframe: ChatWireframeInterface {
 
 extension ChatWireframe: BroadcastOverlayDelegate {
     func didUpdate(broadcastData: BroadcastData) {
-//        let groupId = presenter.group?.id
-//        let userInfo: [AnyHashable: Any]? = ["callType": NotifyCallType.video.callType,
-//                                       "groupId": groupId]
-//        NotificationCenter.default.post(name: NotifyCallType.notificationName, object: userInfo)
         interactor?.moveToSSView(broadcastData: broadcastData)
     }
     
@@ -64,6 +63,18 @@ extension ChatWireframe: BroadcastOverlayDelegate {
         interactor?.broadcastData = broadcastData
         interactor?.moveToCallingView(broadcastData: broadcastData)
     }
+    
+    func moveToAudio() {
+        let frame = CallingWireframe(screenType: .audioView,streamingManager: streamingManager!, sessionDirection: .outgoing, callingManager: callingManager)
+        navigationController?.presentWireframe(frame)
+    }
+    
+    func moveToVideo() {
+        let frame = CallingWireframe(screenType: .videoView, session: nil, broadCastData: nil, streamingManager: streamingManager!, sessionDirection: .outgoing, callingManager: callingManager)
+        navigationController?.viewControllers.last?.presentWireframe(frame)
+        
+    }
+    
     
     
 }

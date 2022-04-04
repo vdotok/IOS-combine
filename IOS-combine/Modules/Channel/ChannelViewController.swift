@@ -172,7 +172,7 @@ final class ChannelViewController: UIViewController {
         defaults.removeObject(forKey: "UserResponse")
         defaults.synchronize()
         presenter.logout()
-        navigationController?.presentWireframe(LoginWireframe(streamingManager: self.presenter.streamingManager))
+        navigationController?.presentWireframe(LoginWireframe())
 
     }
     
@@ -198,7 +198,11 @@ final class ChannelViewController: UIViewController {
                     ProgressHud.show(viewController: self)
                 }
             case .hideProgress:
-                ProgressHud.hide()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    ProgressHud.hide()
+                }
+                
+                
             case .failure(message: let message):
                 DispatchQueue.main.async {
                     ProgressHud.showError(message: message, viewController: self)
@@ -325,6 +329,9 @@ extension ChannelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = presenter.groups[indexPath.row].channelName
         let topic =  presenter.messages[channel]
+        let selectedGroup = presenter.groups[indexPath.row]
+        presenter.callingManager?.contacts = presenter.contacts
+        presenter.callingManager?.group = selectedGroup
         presenter.navigation(to: .chat, messages: topic ?? [], group: presenter.groups[indexPath.row])
     }
     

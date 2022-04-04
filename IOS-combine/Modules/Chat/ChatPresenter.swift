@@ -26,6 +26,7 @@ final class ChatPresenter {
     var chatOutput: ChatOutput?
     var sdk: VTokSDK?
     var streamingManager: StreamingMananger?
+    var callingManager: CallingManager
 
     // MARK: - Lifecycle -
 
@@ -34,13 +35,14 @@ final class ChatPresenter {
         interactor: ChatInteractorInterface,
         wireframe: ChatWireframeInterface,
         sdk: VTokSDK? = nil,
-        streamingManager: StreamingMananger
+        streamingManager: StreamingMananger,
+        callingManager: CallingManager
     ) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
-        self.sdk = sdk
         self.streamingManager = streamingManager
+        self.callingManager = callingManager
     }
     
     enum Output {
@@ -107,6 +109,13 @@ extension ChatPresenter: ChatInteractorToPresenter {
         wireframe.moveToBroadcastOverlay()
     }
     
+    func moveToAudio() {
+        wireframe.moveToAudio()
+    }
+    
+    func moveToVideo() {
+        wireframe.moveToVideo()
+    }
     func reloadCell(with indexPath: IndexPath) {
         chatOutput?(.reloadCell(indexPath: indexPath))
     }
