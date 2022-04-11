@@ -11,6 +11,7 @@
 import UIKit
 import iOSSDKConnect
 import iOSSDKStreaming
+import MultipeerConnectivity
 
 enum ChannelNavigationOptions {
     case chat
@@ -73,6 +74,7 @@ protocol ChannelPresenterInterface: PresenterInterface {
     func deleteGroup(with id: Int)
     func editGroup(with title: String, id: Int)
     func removeMessages(with channelName: String)
+    func fetchPeers() -> [MCPeerID]
 
 }
 

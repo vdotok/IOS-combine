@@ -11,6 +11,7 @@
 import Foundation
 import iOSSDKConnect
 import iOSSDKStreaming
+import MultipeerConnectivity
 
 
 
@@ -205,7 +206,12 @@ extension ChannelPresenter: SDKConnectionDelegate {
         case .disconnected(_):
             self.channelOutput?(.disconnected(.stream))
         case .sessionRequest(let sessionRequest):
-            wireframe.moveToIncomingCall(callingManager: callingManager!, users: contacts, sessionDirection: .incoming)
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else
+                {return}
+                self.wireframe.moveToIncomingCall(callingManager: self.callingManager!, users: self.contacts, sessionDirection: .incoming)
+            }
+           
          
         }
     }
@@ -372,6 +378,10 @@ extension ChannelPresenter: ChannelInteractorToPresenter {
     func hideProgress() {
         channelOutput?(.hideProgress)
         channelOutput?(.reload)
+    }
+    
+    func fetchPeers() -> [MCPeerID] {
+        return vtokSDK?.getPeers() ?? []
     }
     
     func moveToBroadcastOnly(session: VTokBaseSession) {

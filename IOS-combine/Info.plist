@@ -32,6 +32,12 @@
 	<string>This app wants to record audio</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app wants to use your photos.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This app needs to use your phone’s data to discover devices nearby</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_network-stream._tcp</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

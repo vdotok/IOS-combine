@@ -34,7 +34,7 @@ class CallingManager {
                                       authorizationToken: user.authorizationToken!,
                                       requestID: getRequestId(),
                                     projectID: AuthenticationConstants.PROJECTID)
-        self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
+        self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self, peerName: user.fullName!)
     }
     
     func makeCall() {
@@ -53,7 +53,11 @@ extension CallingManager: SDKConnectionDelegate {
         case .sessionRequest(let vTokBaseSession):
             self.vtokBaseSession = vTokBaseSession
         }
-        delegate?.didGenerate(output: output)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {return}
+            self.delegate?.didGenerate(output: output)
+        }
+        
     }
     
     

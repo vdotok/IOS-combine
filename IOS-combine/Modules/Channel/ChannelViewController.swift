@@ -10,6 +10,8 @@
 
 import UIKit
 import MMWormhole
+import iOSSDKStreaming
+import MultipeerConnectivity
 
 final class ChannelViewController: UIViewController {
     
@@ -56,7 +58,6 @@ final class ChannelViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(removeCount(notification:)), name: .removeCount, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didSubscribe(notification:)), name: .didGroupCreated, object: nil)
         
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -242,7 +243,11 @@ final class ChannelViewController: UIViewController {
         let image = UIImage(named: "plus")?.withRenderingMode(.alwaysOriginal)
         let addButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(didTappedAdd))
         
-        navigationItem.rightBarButtonItems = [addButton,broadCastBarButton ]
+        let locationImage = UIImage(systemName: "location")?.withRenderingMode(.alwaysOriginal)
+        let locationButton = UIBarButtonItem(image: locationImage, style: .plain, target: self, action: #selector(locationButtonTapped))
+        
+        
+        navigationItem.rightBarButtonItems = [addButton,broadCastBarButton,locationButton ]
         
         if presenter.streamingManager.activeSession() != 0 {
             broadCast.tintColor = .appGreyColor
@@ -252,6 +257,16 @@ final class ChannelViewController: UIViewController {
             broadCast.isEnabled = true
         }
         
+    }
+    
+    @objc func locationButtonTapped() {
+        let vc = AvailableDevicesController()
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+    //    vc.peerID = sameNetworkConnectionManager?.devices ?? []
+        vc.peerID = presenter.fetchPeers()
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -388,5 +403,15 @@ extension ChannelViewController: PopupDelegate {
         presenter.editGroup(with: name, id: id)
     }
     
+    
+}
+
+extension ChannelViewController: AvailableDeviceDelegate {
+    func didSelect(peer: MCPeerID) {
+        guard let user = VDOTOKObject<UserResponse>().getData(),
+              let sdk = presenter.vtokSDK
+        else {return}
+        sdk.invitePeer(peer: peer, refID: user.refID!)
+    }
     
 }

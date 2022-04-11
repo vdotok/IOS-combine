@@ -206,7 +206,7 @@ extension SampleHandler: SDKConnectionDelegate {
             print("==== screeen share registerd ====")
             guard let sdk = vtokSdk, let session = screenShareData else {return}
             self.screenShareData = session
-            sdk.initiate(session: session.baseSession, sessionDelegate: self)
+            sdk.initiate(session: session.baseSession, sessionDelegate: self, sessionServerType: .localServer)
             callHangupHandling()
         case .disconnected(_):
             print("==== screeen failed to registerd ====")
