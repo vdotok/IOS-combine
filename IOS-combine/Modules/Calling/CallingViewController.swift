@@ -63,7 +63,10 @@ final class CallingViewController: UIViewController {
                         self.loadGroupCallingView(session: session)
                         return
                     }
-                    self.groupCallingView?.updateView(for: session)
+                    DispatchQueue.main.async {
+                        self.groupCallingView?.updateView(for: session)
+                    }
+                   
                 }
            
             case .configureRemote(let streams, let session):
@@ -126,8 +129,12 @@ final class CallingViewController: UIViewController {
     private func configureView(for session: VTokBaseSession) {
         switch session.callType {
         case .onetoone, .manytomany:
-            guard let groupCallingView = groupCallingView else {return}
-            groupCallingView.updateView(for: session)
+           
+            DispatchQueue.main.async {
+                guard let groupCallingView = self.groupCallingView else {return}
+                groupCallingView.updateView(for: session)
+            }
+            
         case .onetomany:
           break
             
@@ -171,7 +178,10 @@ final class CallingViewController: UIViewController {
         groupCallingView?.users = presenter.users
         guard let groupCallingView = self.groupCallingView else {return}
         groupCallingView.session = presenter.session
-        groupCallingView.updateView(for: session)
+        DispatchQueue.main.async {
+            groupCallingView.updateView(for: session)
+        }
+      
         groupCallingView.delegate = self
         groupCallingView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(groupCallingView)

@@ -134,6 +134,7 @@ class GroupCallingUpdatedView: UIView {
             switch session.callType {
             case .onetoone:
                 guard let users = users, let user = users.first, session.sessionDirection == .outgoing else {return}
+                
                 groupName.text = user.fullName
             default:
                 groupName.text = session.data?.groupName
@@ -162,7 +163,10 @@ class GroupCallingUpdatedView: UIView {
    private func setViewsForIncoming(session: VTokBaseSession) {
        switch session.state {
        case .connected:
-           connectedState(session: session)
+           DispatchQueue.main.async {
+               self.connectedState(session: session)
+           }
+          
        case .hangup:
            delegate?.didTapDismiss()
        case .rejected:
@@ -191,7 +195,10 @@ class GroupCallingUpdatedView: UIView {
            cameraButton.isEnabled = false
            setNames()
        case .connected:
-           connectedState(session: session)
+           DispatchQueue.main.async {
+               self.connectedState(session: session)
+           }
+           
        case .failed:
            delegate?.didTapDismiss()
        case .rejected:
