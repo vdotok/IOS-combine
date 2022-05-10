@@ -10,7 +10,6 @@ target 'IOS-combine' do
     pod 'IQKeyboardManagerSwift'
     pod 'VdoTokConnect' , :git => 'https://github.com/vdotok/VdoTokConnect.git'
     pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
-    #pod 'InternalStrategy', :path => '../internal_strategy'
     pod "VisualEffectView"
     pod 'MMWormhole'
 
@@ -22,7 +21,6 @@ target 'ScreenShare' do
   # Pods for screen share
     use_frameworks!
     pod 'MMWormhole'
-pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
-# pod 'InternalStrategy', :path => '../internal_strategy'
+    pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
     
 end
