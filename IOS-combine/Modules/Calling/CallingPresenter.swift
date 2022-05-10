@@ -159,8 +159,9 @@ extension CallingPresenter {
             guard let users = users else {return}
             let refIds = users.map({$0.refID})
                 let requestID = getRequestId()
+            let sessionCustomData = SessionCustomData(calleName: user.fullName , groupName: callingManager.group?.groupTitle, groupAutoCreatedValue: "\(callingManager.group?.autoCreated)")
             
-            let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .audioCall ,callType: .onetoone)
+            let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .audioCall ,callType: .onetoone, data: sessionCustomData)
             vtokSdk?.initiate(session: session, sessionDelegate: streamingManager)
             break
         case .oneToOneVideo:
@@ -168,7 +169,8 @@ extension CallingPresenter {
             guard let users = users else {return}
             let refIds = users.map({$0.refID})
             let requestID = getRequestId()
-        let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .videoCall ,callType: .onetoone, connectedUsers: [])
+            let sessionCustomData = SessionCustomData(calleName: user.fullName , groupName: callingManager.group?.groupTitle, groupAutoCreatedValue: "\(callingManager.group?.autoCreated)")
+        let session = VTokBaseSessionInit(from: refID, to: refIds, sessionUUID: requestID, sessionMediaType: .videoCall ,callType: .onetoone,data: sessionCustomData)
         vtokSdk?.initiate(session: session, sessionDelegate: streamingManager)
             
         }
