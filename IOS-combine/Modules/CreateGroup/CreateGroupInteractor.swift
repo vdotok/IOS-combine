@@ -30,7 +30,8 @@ extension CreateGroupInteractor: CreateGroupInteractorInterface {
                 case .success(let response):
                     switch response.status {
                     case 200:
-                        self.presenter?.didFetchContacts(users: response.users)
+                        guard let users = response.users else {return}
+                        self.presenter?.didFetchContacts(users: users)
                     default:
                         self.presenter?.didFailedToFetch(with: response.message)
                     }
