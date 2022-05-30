@@ -52,8 +52,9 @@ extension ChannelInteractor: ChannelInteractorInterface {
             case .success(let response):
                 switch response.status {
                 case 200:
-                    self.presenter?.usersFetched(with: response.users)
-                    self.callingManager?.contacts = response.users
+                    guard let users = response.users else {return}
+                    self.presenter?.usersFetched(with: users)
+                    self.callingManager?.contacts = users
                 default:
                     self.presenter?.usersFetchedFailded(with: response.message)
                 }

@@ -18,7 +18,7 @@ enum ContactNavigationOptions {
 struct AllUsersResponse: Codable {
     let message: String
     let processTime, status: Int
-    let users: [User]
+    let users: [User]?
 
     enum CodingKeys: String, CodingKey {
         case message
