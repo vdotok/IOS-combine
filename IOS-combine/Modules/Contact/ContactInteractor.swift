@@ -31,9 +31,14 @@ extension ContactInteractor: ContactInteractorInterface {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                self.users = response.users
-                guard let users = self.users else {return}
-                self.presenter?.fetchUserSuccess(with: users)
+                switch response.status {
+                case 200:
+                    self.users = response.users
+                    guard let users = self.users else {return}
+                    self.presenter?.fetchUserSuccess(with: users)
+                default:
+                    self.presenter?.fetchUserFailure(with: response.message)
+                }
             case .failure(let error):
                 self.presenter?.fetchUserFailure(with: error.localizedDescription)
                 
