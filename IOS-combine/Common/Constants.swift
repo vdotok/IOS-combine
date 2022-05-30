@@ -9,11 +9,6 @@
 import Foundation
 
 struct Constants {
-    static let host =  "vte2.vdotok.com"
-    static let toTopic = "AACO5B_L67HeJxw7InqZzyiGyb92KyJQ/NorgicStagingChannel/?me=0"
-    static let topic = "AACO5B_L67HeJxw7InqZzyiGyb92KyJQ/NorgicStagingChannel/?last=20"
-    static let channel = "NorgicStagingChannel/"
-    static let key = "AACO5B_L67HeJxw7InqZzyiGyb92KyJQ"
     static let presence = "emitter/presence/"
     
     //MARK: Key Constants
@@ -28,17 +23,15 @@ struct Constants {
     //MARK: VDOtok Constants
     static let Request = "request"
     static let Register = "register"
-    static let TenantId = "U6WM5"
     static let Wormhole = "wormhole"
 }
 
 struct AuthenticationConstants {
-    static let PROJECTID = "115G1WZI"
-    static let AUTHTOKEN = "53fd514fe5356b103c2c126e6a041466"
-    static let HOST = "q-tenant.vdotok.dev"
+    static let PROJECTID = ""
+    static let HOST = ""
 }
 
 struct AppsGroup {
-    static let  APP_GROUP = "group.com.norgic.combined.broadcast"
-    static let SCREEN_SHARE_PREFERED_EXTENSION = "com.norgic.ios-combinedapp.ScreenShare"
+    static let  APP_GROUP = ""
+    static let SCREEN_SHARE_PREFERED_EXTENSION = ""
 }
