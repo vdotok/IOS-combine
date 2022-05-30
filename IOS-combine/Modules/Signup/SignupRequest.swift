@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct SignupRequest: Codable, APIRequest {
     func getMethod() -> RequestType {
@@ -20,10 +21,10 @@ struct SignupRequest: Codable, APIRequest {
     let fullName: String
     let email, password: String
     let projectID: String = AuthenticationConstants.PROJECTID
-    let deviceType: String = "ios"
-    let deviceModel: String = "iPhone 8"
-    let deviceOSVer: String = "13.3"
-    let appVersion: String = "1.1.5 (269)"
+    let deviceType: String = UIDevice.current.systemName
+    let deviceModel: String = UIDevice.current.model
+    let deviceOSVer: String = UIDevice.current.systemVersion
+    let appVersion: String = Bundle.main.buildVersionNumber!
     
     enum CodingKeys: String, CodingKey {
         case fullName = "full_name"
@@ -34,6 +35,5 @@ struct SignupRequest: Codable, APIRequest {
         case deviceOSVer = "device_os_ver"
         case appVersion = "app_version"
     }
-    
     
 }

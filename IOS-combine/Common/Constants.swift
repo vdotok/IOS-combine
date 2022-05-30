@@ -9,11 +9,6 @@
 import Foundation
 
 struct Constants {
-    static let host =  "vte2.vdotok.com"
-    static let toTopic = "AACO5B_L67HeJxw7InqZzyiGyb92KyJQ/NorgicStagingChannel/?me=0"
-    static let topic = "AACO5B_L67HeJxw7InqZzyiGyb92KyJQ/NorgicStagingChannel/?last=20"
-    static let channel = "NorgicStagingChannel/"
-    static let key = "AACO5B_L67HeJxw7InqZzyiGyb92KyJQ"
     static let presence = "emitter/presence/"
     
     //MARK: Key Constants
@@ -28,13 +23,11 @@ struct Constants {
     //MARK: VDOtok Constants
     static let Request = "request"
     static let Register = "register"
-    static let TenantId = "U6WM5"
     static let Wormhole = "wormhole"
 }
 
 struct AuthenticationConstants {
     static let PROJECTID = ""
-    static let AUTHTOKEN = ""
     static let HOST = ""
 }
 
