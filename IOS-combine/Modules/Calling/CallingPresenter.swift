@@ -570,6 +570,7 @@ extension CallingPresenter {
             guard let participents = callingManager.group?.participants else {return nil}
             participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         }
+        let sessionCustomData = SessionCustomData(calleName: user.fullName , groupName: callingManager.group?.groupTitle, groupAutoCreatedValue: "\(callingManager.group?.autoCreated)")
         
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,
@@ -580,7 +581,8 @@ extension CallingPresenter {
                                           sessionType: .screenshare,
                                           associatedSessionUUID: associatedSessionUUID,
                                           broadcastType: broadcastData.broadcastType,
-                                          broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
+                                          broadcastOption: broadcastData.broadcastOptions, connectedUsers: [],
+        data: sessionCustomData)
         
         let data = ScreenShareAppData(url: user.mediaServerMap!.completeAddress,
                                       authenticationToken: token,
