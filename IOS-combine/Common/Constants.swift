@@ -27,7 +27,7 @@ struct Constants {
 }
 
 struct AuthenticationConstants {
-    static let PROJECTID = "245V0IN"
+    static let PROJECTID = "115G1WZI"
     static let HOST = "q-tenant.vdotok.dev"
 }
 

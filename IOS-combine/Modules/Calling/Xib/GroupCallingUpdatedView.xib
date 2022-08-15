@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -172,6 +172,7 @@
                 <outlet property="cameraSwitch" destination="7UX-Fq-ifd" id="pyZ-BN-K0r"/>
                 <outlet property="collectionView" destination="Uwm-xl-oEZ" id="o00-OE-cA9"/>
                 <outlet property="groupName" destination="L5z-Po-KXn" id="Tpp-NF-f9Z"/>
+                <outlet property="hangupButton" destination="XbX-Hg-sz4" id="ghk-nK-Hib"/>
                 <outlet property="remoteView" destination="Grk-4v-CLc" id="Wii-pQ-O3g"/>
                 <outlet property="speakerButton" destination="Xh7-nN-2ad" id="wkP-QU-8Xr"/>
                 <outlet property="titleLable" destination="cAr-Vs-nPM" id="1pJ-2t-hBe"/>

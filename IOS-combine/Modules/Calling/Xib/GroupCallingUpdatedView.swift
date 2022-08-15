@@ -33,6 +33,7 @@ class GroupCallingUpdatedView: UIView {
     @IBOutlet weak var callingStackView: UIStackView!
     @IBOutlet weak var groupName: UILabel!
     @IBOutlet weak var connectedUser: UILabel!
+    @IBOutlet weak var hangupButton: UIButton!
 
     var viewModel: GroGroupCallingUpdatedViewModel?
     var session: VTokBaseSession? {
@@ -58,7 +59,7 @@ class GroupCallingUpdatedView: UIView {
         case .audioCall:
             delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
         case .videoCall:
-            delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
+            delegate?.didTapSpeaker(baseSession: session , state: sender.isSelected ? .onSpeaker : .onEarPiece)
            
         }
         
@@ -121,6 +122,7 @@ class GroupCallingUpdatedView: UIView {
     
     
     func updateView(for session: VTokBaseSession) {
+       
         switch session.sessionDirection {
         case .outgoing:
            viewsForOutGoing(session: session)
@@ -160,8 +162,10 @@ class GroupCallingUpdatedView: UIView {
     }
     
    private func setViewsForIncoming(session: VTokBaseSession) {
+       hangupButton.isUserInteractionEnabled = false
        switch session.state {
        case .connected:
+           hangupButton.isUserInteractionEnabled = true
            connectedState(session: session)
        case .hangup:
            delegate?.didTapDismiss()
@@ -223,6 +227,7 @@ class GroupCallingUpdatedView: UIView {
     
     
     func connectedState(session: VTokBaseSession) {
+        hangupButton.isUserInteractionEnabled = true
         backbutton.isHidden = false
         callStatus.isHidden = true
         userNames.isHidden = true
@@ -329,7 +334,7 @@ extension GroupCallingUpdatedView: UICollectionViewDelegate, UICollectionViewDat
         
         selectedStream = userStreams[indexPath.row]
         userStreams =  userStreams.filter({$0.referenceID != selectedStream?.referenceID})
-       
+
         for remoteView in remoteView.subviews {
             remoteView.removeFromSuperview()
         }

@@ -245,7 +245,7 @@ extension CallingPresenter {
                                               callType: .onetomany,
                                               sessionType: .call,
                                               associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions,
-                                                data: sessionCustomData)
+                                              data: sessionCustomData, sessionServerType: .SFU)
         session = baseSession
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
@@ -310,7 +310,7 @@ extension CallingPresenter {
 
 extension CallingPresenter: StreamingDelegate {
     func sessionTimeDidUpdate(with value: String) {
-        print(value)
+       // print(value)
         output?(.updateTime(value: value))
     }
 

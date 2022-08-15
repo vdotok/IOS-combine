@@ -219,7 +219,7 @@ class BroadcastView: UIView {
             case .audioCall:
                 delegate?.didTapSpeaker(for: session , state: sender.isSelected ? .onSpeaker : .onEarPiece)
             case .videoCall:
-                delegate?.didTapSpeaker(for: session , state: sender.isSelected ? .onEarPiece : .onSpeaker)
+                delegate?.didTapSpeaker(for: session , state: sender.isSelected ? .onSpeaker : .onEarPiece)
                
             }
         }
@@ -365,6 +365,7 @@ class BroadcastView: UIView {
     }
     
     func setIncomingViews(for session: VTokBaseSession) {
+        hangupBtn.isUserInteractionEnabled = false
         webView.isHidden = true
         cameraButton.isHidden = true
         muteButton.isHidden = true
@@ -489,6 +490,7 @@ class BroadcastView: UIView {
         
         private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
         
+            hangupBtn.isUserInteractionEnabled = true
             switch session.sessionType {
             case .call:
                 if session.associatedSessionUUID != nil {
@@ -561,6 +563,7 @@ class BroadcastView: UIView {
 
         private func setIncomingView(for session: VTokBaseSession) {
             copyURL.isHidden = true
+           
      
             if let _ = session.associatedSessionUUID {
                 screenShareBtn.isHidden = true

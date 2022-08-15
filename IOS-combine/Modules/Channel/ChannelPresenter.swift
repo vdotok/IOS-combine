@@ -252,19 +252,6 @@ extension ChannelPresenter {
             moveToBroadcastOnly(session: data.baseSession)
         }
     }
-    
-    func convertArray<T, U>(array: [T]) -> [U] {
-        var newArray = [U]()
-        for element in array {
-            guard let newElement = element as? U else {
-                print("downcast failed!")
-                return []
-            }
-            newArray.append(newElement)
-        }
-        return newArray
-    }
-    
     func moveToVideo(users: [Participant], screenType: ScreenType, session: VTokBaseSession) {
         guard let sdk = vtokSDK else {return}
         wireframe.moveToCalling(particinats: users, users: contacts, sdk: sdk, broadCastData: nil, screenType: screenType, session: session, sessionDirection: .outgoing)
