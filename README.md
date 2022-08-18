@@ -38,7 +38,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 *    Type command `pod install` hit **Enter** wait until the process is complete
 *    Once the process is completed it should look like following
 
-   <img width="572" alt="Screenshot 2022-08-16 at 12 11 20 PM" src="https://user-images.githubusercontent.com/111276411/184857546-2740e1e4-b041-450e-a0f3-ae759c270053.png">
+   <img width="500" alt="Screenshot 2022-08-16 at 12 11 20 PM" src="https://user-images.githubusercontent.com/111276411/184857546-2740e1e4-b041-450e-a0f3-ae759c270053.png">
 
 
 ### Updating  Project ID and Authentication Token
