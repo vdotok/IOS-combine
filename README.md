@@ -48,7 +48,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 ### Updating  Project ID and Authentication Token
 
 *  Get **Project ID** and **TENANT TESTING SERVER** from [Admin Panel](https://userpanel.vdotok.com/login) 
-*  Double-click to open **.xcworkspace file** in Xcode
+*  In cloned directory,Double-click to open **.xcworkspace file** in Xcode
 *  In struct AuthenticationConstants (iOS-combine -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** ( without `https://` ) with your values
 
 ### Set up Bundle identifier & App groups
@@ -74,7 +74,8 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 To run on a real device:
 
    *    Connect your device with MacBook pro
-   *    Select your device from the dropdown menu in Xcode, click on play button on xcode toolbar
+   *    Select your device from the run destination menu in toolbar
+   *    Click on play button on xcode toolbar
    *    For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
 
