@@ -6,7 +6,7 @@ VDOTOK-IOS-combine Chat/Audio/Video/Broadcast
 ## Requirements
 
 ##### System Requirements
-* OS X 11.0 or later
+* MacOS as compatible with xcode version
 * 8GB of RAM memory
    
 ##### Development Requirements
@@ -27,7 +27,7 @@ If command is not found then you don’t have Cocoapods installed on your system
 Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER** and **Project ID**
 
 ### Code Setup
-*    Click on **Code** button 
+*    On VdoTok Github repo,click on **Code** button 
 *    From HTTPS section, copy **repo URL** 
 *    Open **Terminal**
 *    Go to Desktop **Directory** by typing `cd Desktop` and hit **Enter**
@@ -39,6 +39,10 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 *    Once the process is completed it should look like following
 
    <img width="500" alt="Screenshot 2022-08-16 at 12 11 20 PM" src="https://user-images.githubusercontent.com/111276411/184857546-2740e1e4-b041-450e-a0f3-ae759c270053.png">
+   
+*    If you face issue below,execute this command in terminal `gem install --user-install ffi -- --enable-libffi-alloc` ,then run `pod intall` 
+      
+<img width="500" alt="Screen Shot 2022-08-22 at 5 10 37 PM" src="https://user-images.githubusercontent.com/111276411/186087301-81952093-eabf-4c3a-85f9-21f34dbd9b3f.png">
 
 
 ### Updating  Project ID and Authentication Token
@@ -47,9 +51,14 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 *  Double-click to open **.xcworkspace file** in Xcode
 *  In struct AuthenticationConstants (iOS-combine -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** ( without `https://` ) with your values
 
-### Set up App groups
+### Set up Bundle identifier & App groups
+* Select your Team and setup your bundle identifier like `com.company.appname` for all the targets
+* Bundle identifier should b unique for all targets for example.
+   `com.company.appname`
+   `com.company.appname.ScreenShare`
+   `com.company.appname.ScreenShareSetupUI`
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
-* Go to your **Main Target->Signing and Capabilities->Capabilities**
+* Go to your **Main Target->Signing and Capabilities->Capabilities(+ icon)**
 * Tap on the **App groups Icon** and create your **Group ID**
 <img width="500" alt="Screenshot 2022-08-16 at 12 12 05 PM" src="https://user-images.githubusercontent.com/111276411/184847078-269d6e1d-e5c7-4ac8-8ea5-38c880a3305e.png">
 
@@ -64,8 +73,8 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 To run on a real device:
 
    *    Connect your device with MacBook pro
-   *    Select your device from the dropdown menu in Xcode
-For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
+   *    Select your device from the dropdown menu in Xcode, click on play button on xcode toolbar
+   *    For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
 
 
