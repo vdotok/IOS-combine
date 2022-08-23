@@ -52,7 +52,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 *  In struct AuthenticationConstants (iOS-combine -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** ( without `https://` ) with your values
 
 ### Set up Bundle identifier & App groups
-* Go to your **Main Target->Signing and Capabilities
+* Go to your **Main Target->Signing and Capabilities**
 * Select your Team and setup your bundle identifier like `com.company.appname` for all the targets
 * Bundle identifier should b unique for all targets for example.
    `com.company.appname`
