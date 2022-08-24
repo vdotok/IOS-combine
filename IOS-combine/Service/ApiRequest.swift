@@ -54,7 +54,7 @@ extension APIRequest {
     
     private func getBaseUrl() -> URL {
         let fakeUrl = URL(fileURLWithPath: "")
-        guard let baseUrl = URL(string: CpassApi.scheme + "://" + AuthenticationConstants.HOST + "/" +  CpassApi.apiVersion),
+        guard let baseUrl = URL(string: CpassApi.scheme + "://" + AuthenticationConstants.TENANTSERVER + "/" +  CpassApi.apiVersion),
               let component = URLComponents(url: baseUrl.appendingPathComponent(getPath()), resolvingAgainstBaseURL: false), var url = component.url else {
             print("Unable to create URL components")
             return fakeUrl
