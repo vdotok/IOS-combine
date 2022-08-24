@@ -11,7 +11,7 @@ VDOTOK-IOS-combine Chat/Audio/Video/Broadcast
    
 ##### Development Requirements
 * Xcode 13.4.1 or latest version
-* [Click here](https://developer.apple.com/xcode/resources/) to download Xcode on your macbook. 
+* [Click here](https://developer.apple.com/xcode/resources/) to download Xcode on your Macbook. 
  
 
 ## Installation
@@ -48,7 +48,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 ### Updating  Project ID and Authentication Token
 
 *  Get **Project ID** and **TENANT TESTING SERVER** from [Admin Panel](https://console.vdotok.com/login) 
-*  In cloned directory,Double-click to open **.xcworkspace file** in Xcode
+*  In cloned directory, double-click to open **.xcworkspace file** in Xcode
 *  In struct AuthenticationConstants (iOS-combine -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** ( without `https://` ) with your values
 
 ### Set up Bundle identifier & App groups
