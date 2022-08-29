@@ -245,7 +245,7 @@ extension CallingPresenter {
                                               callType: .onetomany,
                                               sessionType: .call,
                                               associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions,
-                                              data: sessionCustomData, sessionServerType: .SFU)
+                                              data: sessionCustomData)
         session = baseSession
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))

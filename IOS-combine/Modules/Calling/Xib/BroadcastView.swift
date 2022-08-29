@@ -745,9 +745,6 @@ extension BroadcastView {
            // let viewcontroller = TVBroadCastBuilder().build(with: nil, userStreams: streams)
         self.externalWindow.rootViewController = UIViewController()
         
-        
-        
-        
         //tell the window which screen to use
         self.externalWindow?.screen = screen
         guard let firstStream = streams.first else {return}
@@ -792,3 +789,4 @@ extension BroadcastView {
 extension BroadcastView: WKNavigationDelegate {
     
 }
+
