@@ -284,6 +284,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let item = presenter.itemAt(row: indexPath.row)
         if item.1 == .incomingImage || item.1 == .outGoingImage {
             if (tableView.cellForRow(at: indexPath) as? IncomingImageCell) != nil || (tableView.cellForRow(at: indexPath) as? outgoingImageCell) != nil {
@@ -429,15 +430,44 @@ extension ChatViewController: UITextViewDelegate {
 
 extension ChatViewController: AttachmentPickerDelegate {
     func didSelectImage(data: Data) {
-        
+        presentedViewController?.dismiss(animated: true, completion: nil)
+        UIView.transition(with: blurView, duration: 0.4,
+                          options: .curveEaseOut,
+                          animations: {
+                            self.blurView.isHidden = true
+                          })
+        presenter.publish(file: data, with: "PNG", type: MediaType.image.rawValue)
     }
     
     func didSelectDocument(data: Data, fileExtension: String) {
+        UIView.transition(with: blurView, duration: 0.4,
+                          options: .curveEaseOut,
+                          animations: {
+                            self.blurView.isHidden = true
+                          })
+        presentedViewController?.dismiss(animated: true, completion: nil)
+
+        var mediaType: MediaType = .file
+        if fileExtension == "MP4" {
+            mediaType = .video
+        }
+        else if fileExtension == "PNG" {
+            mediaType = .image
+        }
+        else {
+            mediaType = .file
+        }
         
+        
+        presenter.publish(file: data, with: fileExtension, type: mediaType.rawValue)
     }
     
     func didCancel() {
-        
+        UIView.transition(with: blurView, duration: 0.4,
+                          options: .curveEaseOut,
+                          animations: {
+                            self.blurView.isHidden = true
+                          })
     }
     
     
