@@ -59,6 +59,7 @@ final class ContactPresenter {
         case failure(message: String)
         case groupCreated(group: Group, isExit: Bool)
         case alreadyCreated(message : String)
+        case authFailure
     }
 }
 
@@ -67,13 +68,19 @@ final class ContactPresenter {
 extension ContactPresenter: ContactPresenterInterface {
     
     func makeCall(mediaType: SessionMediaType, user: User) {
-        switch mediaType {
-        case .audioCall:
-            callingManager.contacts = [user]
-            wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: callingManager.vtokSdk)
-        case .videoCall:
-            callingManager.contacts = [user]
-            wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: callingManager.vtokSdk)
+        Common.isAuthorized { status in
+            if status {
+                switch mediaType {
+                case .audioCall:
+                    callingManager.contacts = [user]
+                    wireframe.navigate(to: .audioCall, client: client!, group: nil, user: user, vtokSdk: callingManager.vtokSdk)
+                case .videoCall:
+                    callingManager.contacts = [user]
+                    wireframe.navigate(to: .videoCall, client: client!, group: nil, user: user, vtokSdk: callingManager.vtokSdk)
+                }
+                return
+            }
+            output?(.authFailure)
         }
     }
     

@@ -29,6 +29,8 @@ final class ChannelInteractor {
     init(broadCastData: BroadcastData? = nil) {
         self.broadCastData = broadCastData
         registerForCommand()
+        AVCaptureDevice.requestAccess(for: .audio) { _ in return }
+        AVCaptureDevice.requestAccess(for: .video) { _ in return }
     }
     
     deinit {

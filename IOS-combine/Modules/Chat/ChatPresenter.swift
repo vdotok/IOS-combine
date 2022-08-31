@@ -12,6 +12,12 @@ import Foundation
 import iOSSDKConnect
 import iOSSDKStreaming
 
+enum CallView {
+    case audio
+    case video
+    case broadCast
+}
+
 final class ChatPresenter {
 
     // MARK: - Private properties -
@@ -48,6 +54,7 @@ final class ChatPresenter {
     enum Output {
         case reload
         case reloadCell(indexPath: IndexPath)
+        case authFailure
     }
     
 }
@@ -106,18 +113,36 @@ extension ChatPresenter: ChatInteractorToPresenter {
     }
     
     func moveToBroadcast() {
-        wireframe.moveToBroadcastOverlay()
+        moveTo(view: .broadCast)
     }
     
     func moveToAudio() {
-        wireframe.moveToAudio()
+        moveTo(view: .audio)
     }
     
     func moveToVideo() {
-        wireframe.moveToVideo()
+        moveTo(view: .video)
     }
+    
     func reloadCell(with indexPath: IndexPath) {
         chatOutput?(.reloadCell(indexPath: indexPath))
+    }
+
+    func moveTo(view: CallView) {
+        Common.isAuthorized { status in
+            if status {
+                switch view {
+                case .audio:
+                    wireframe.moveToAudio()
+                case .video:
+                    wireframe.moveToVideo()
+                case .broadCast:
+                    wireframe.moveToBroadcastOverlay()
+                }
+            } else {
+                self.chatOutput?(.authFailure)
+            }
+        }
     }
     
     

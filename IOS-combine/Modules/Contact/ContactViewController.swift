@@ -54,6 +54,8 @@ final class ContactViewController: UIViewController {
                 moveToChat(group: group, isExist: isExit)
             case .alreadyCreated(_):
                 break
+            case .authFailure:
+                ProgressHud.shared.alertForPermission()
             }
         }
     }

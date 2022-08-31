@@ -85,6 +85,7 @@ final class CallingPresenter: NSObject {
         case update(session: VTokBaseSession)
         case configureSSButtonStates(videoState: Int, audioState: Int)
         case updateTime(value: String)
+        case authFailure
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -297,15 +298,10 @@ extension CallingPresenter {
                     self.vtokSdk?.hangup(session: session)
                     
                 }
-                
-               
             }
         }
-      
-        
     }
-    
-   
+
 }
 
 extension CallingPresenter: StreamingDelegate {
@@ -417,18 +413,29 @@ extension CallingPresenter: CallingPresenterInterface {
     // MARK:- Key-Value Observer callback
 
     func acceptCall(session: VTokBaseSession) {
-        stopSound()
-        switch session.callType {
-        case .manytomany, .onetoone:
-            output?(.update(session: session))
-        case .onetomany:
-            output?(.loadBroadcastView(session: session))
-            output?(.updateVideoView(session: session))
+        
+        Common.isAuthorized { status in
+            if status {
+                stopSound()
+                switch session.callType {
+                case .manytomany, .onetoone:
+                    output?(.update(session: session))
+                case .onetomany:
+                    output?(.loadBroadcastView(session: session))
+                    output?(.updateVideoView(session: session))
+                }
+                output?(.updateHangupButton(status: false))
+                vtokSdk?.accept(session: session)
+                timer.invalidate()
+                counter = 0
+                return
+            }
+            rejectCall(session: session)
+            output?(.authFailure)
         }
-        output?(.updateHangupButton(status: false))
-        vtokSdk?.accept(session: session)
-        timer.invalidate()
-        counter = 0
+        
+        
+    
     }
     
     func rejectCall(session: VTokBaseSession) {

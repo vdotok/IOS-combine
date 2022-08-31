@@ -62,6 +62,7 @@ final class ChannelPresenter {
         case connected(_ sdkType: SDKType)
         case disconnected(_ sdkType: SDKType)
         case failure(message: String)
+        case authFailure
     }
     
     deinit {
@@ -159,7 +160,15 @@ extension ChannelPresenter: ChannelPresenterInterface {
            guard let group = group else {return}
             wireframe.move(to: .chat, client: client, group: group, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
         case .broadcastOverlay:
-            wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
+            Common.isAuthorized { status in
+                if status {
+                    wireframe.move(to: .broadcastOverlay, client: client, group: nil, user: tempUser, messages: messages, sdk: vtokSDK, streamingManager: streamingManager)
+                    return
+                }
+             
+                channelOutput?(.authFailure)
+            }
+          
         }
     }
     

@@ -138,6 +138,7 @@
 		5DA4FA3426E64D43006EC78E /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3326E64D43006EC78E /* ContactService.swift */; };
 		5DA4FA3926E78F15006EC78E /* CreateGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */; };
 		5DA4FA3C26E88E9A006EC78E /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */; };
+		5DBDDE1928BF367500C06BCC /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDDE1828BF367500C06BCC /* Common.swift */; };
 		5DC75A212726C47900334269 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC75A202726C47900334269 /* CustomButton.swift */; };
 		5DD5758828449B5D0098040B /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD5758728449B5D0098040B /* Bundle+Extension.swift */; };
 		5DE40469271DC092005EA0DF /* GroupCallingUpdatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */; };
@@ -363,6 +364,7 @@
 		5DA4FA3326E64D43006EC78E /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		5DA4FA3826E78F15006EC78E /* CreateGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupService.swift; sourceTree = "<group>"; };
 		5DA4FA3B26E88E9A006EC78E /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
+		5DBDDE1828BF367500C06BCC /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		5DC75A202726C47900334269 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		5DD5758728449B5D0098040B /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		5DE40467271DC092005EA0DF /* GroupCallingUpdatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCallingUpdatedView.swift; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 				5D8199D626DCC34B00B37B72 /* UserDefaults */,
 				5D4B579726DE45F8005185AE /* ProgressHud.swift */,
 				5D4B579926DE5F5E005185AE /* Constants.swift */,
+				5DBDDE1828BF367500C06BCC /* Common.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1169,6 +1172,7 @@
 				5D8199D826DCC35500B37B72 /* VDOTOKObject.swift in Sources */,
 				5D4B57F426DF93A6005185AE /* ContactPresenter.swift in Sources */,
 				5D4B57E026DF6F7E005185AE /* OutgoingAudioCell.swift in Sources */,
+				5DBDDE1928BF367500C06BCC /* Common.swift in Sources */,
 				5D4B57D426DF6F7E005185AE /* OutgoingAttachementCell.swift in Sources */,
 				5D4B580A26E0AB1D005185AE /* CreateGroupPresenter.swift in Sources */,
 				5D8199E126DCC3B900B37B72 /* LoginInterfaces.swift in Sources */,

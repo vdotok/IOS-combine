@@ -224,19 +224,21 @@ final class ChatViewController: UIViewController {
             case .reload:
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
                     let reloadIndexPath = IndexPath(item: (self.presenter.messages?.count ?? 0) - 1, section: 0)
-                        self.tableView.beginUpdates()
-                        self.tableView.insertRows(at:[reloadIndexPath], with: .fade)
-                        self.tableView.endUpdates()
-                        self.tableView.scrollToRow(at: reloadIndexPath, at: .bottom, animated: false)
-
-                    }, completion: nil)
-            
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at:[reloadIndexPath], with: .fade)
+                    self.tableView.endUpdates()
+                    self.tableView.scrollToRow(at: reloadIndexPath, at: .bottom, animated: false)
+                    
+                }, completion: nil)
+                
             case .reloadCell(let indexPath):
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                     guard let self = self else {return}
                     self.tableView.reloadRows(at: [indexPath], with: .none)
                 }
-            
+            case .authFailure:
+                ProgressHud.shared.alertForPermission()
+                
             }
         }
     }

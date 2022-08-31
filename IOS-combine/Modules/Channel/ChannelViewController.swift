@@ -219,7 +219,10 @@ final class ChannelViewController: UIViewController {
                 } else if sdkType == .stream {
                     viewStatusVideoStream.backgroundColor = .red
                 }
+            case .authFailure:
+                ProgressHud.shared.alertForPermission()
             }
+            
         }
     }
     

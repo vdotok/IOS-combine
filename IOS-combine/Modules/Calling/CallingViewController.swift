@@ -105,8 +105,8 @@ final class CallingViewController: UIViewController {
                     return
                 }
                 broadcastView.updateUser(count: count)
-
-                
+            case .authFailure:
+                ProgressHud.shared.alertForPermission()
             default:
                 break
             }
